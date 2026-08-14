@@ -312,6 +312,44 @@ button{-webkit-tap-highlight-color:transparent}
   .selected-level{width:100%;justify-content:space-between}
 }
 
+
+/* Report question */
+.report-question-btn{margin-top:12px;border:0;background:transparent;color:#6b7f96;font-size:12px;font-weight:800;cursor:pointer;padding:6px 0;text-decoration:underline;text-underline-offset:3px}
+.report-question-btn:hover{color:#1f5f99}
+.report-modal .modal-card{max-width:440px}
+.report-options{display:grid;gap:8px;margin:16px 0}
+.report-option{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:11px 12px;cursor:pointer;background:#fff}
+.report-option:hover{background:#f8fbff}
+.report-option input{width:auto;margin:0}
+.report-note{width:100%;min-height:84px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
+.report-success{display:none;background:#eefaf3;border:1px solid #cfead9;color:#2f6b45;border-radius:10px;padding:11px 12px;margin-top:12px;font-size:12px}
+.report-success.show{display:block}
+
+
+.modal-card{position:relative}
+.modal-x{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:34px;
+  height:34px;
+  border:0;
+  background:transparent;
+  border-radius:9px;
+  color:#506176;
+  font-size:24px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:5;
+}
+.modal-x:hover{background:#f1f5f9;color:#0f172a}
+@media(max-width:700px){
+  .modal-x{top:10px;right:10px;width:38px;height:38px;font-size:26px}
+}
+
 </style>
 </head>
 <body>
@@ -549,7 +587,7 @@ Prototype only. Questions shown here are original sample questions for demonstra
 
 </main>
 
-<div class="modal" id="profileModal"><div class="modal-card"><div id="loggedOut"><div class="profile-mascot"><img src="assets/checkpoint-mascot.png" alt=""><div><strong>Checkpoint</strong><span class="muted" style="font-size:12px">Your learning companion</span></div></div><h2>Profile</h2><p class="muted">Log in to save your progress, streak, points and mistakes.</p><div class="modal-actions"><button class="btn" onclick="openSignup()">Sign up</button><button class="btn primary" onclick="openLogin()">Log in</button></div></div><div id="loggedIn" class="hidden"><h2>Emma</h2><p class="muted">Stage 9 · Student Plus</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0"><div class="hero-stat" style="min-width:0;text-align:center"><strong>12</strong><div class="muted" style="font-size:11px">streak</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>2,120</strong><div class="muted" style="font-size:11px">points</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>72%</strong><div class="muted" style="font-size:11px">progress</div></div></div><button class="btn primary" style="width:100%;margin-bottom:8px" onclick="closeModal();showView('profileView')">View full profile</button><button class="btn" style="width:100%;margin-bottom:8px" onclick="closeModal();showReview()">Review mistakes</button><button class="btn" style="width:100%" onclick="closeModal();demoLogout()">Log out</button></div><div class="modal-actions"></div></div></div>
+<div class="modal" id="profileModal"><div class="modal-card"><button type="button" class="modal-x" aria-label="Close profile" onclick="closeModal()">×</button><div id="loggedOut"><div class="profile-mascot"><img src="assets/checkpoint-mascot.png" alt=""><div><strong>Checkpoint</strong><span class="muted" style="font-size:12px">Your learning companion</span></div></div><h2>Profile</h2><p class="muted">Log in to save your progress, streak, points and mistakes.</p><div class="modal-actions"><button class="btn" onclick="openSignup()">Sign up</button><button class="btn primary" onclick="openLogin()">Log in</button></div></div><div id="loggedIn" class="hidden"><h2>Emma</h2><p class="muted">Stage 9 · Student Plus</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0"><div class="hero-stat" style="min-width:0;text-align:center"><strong>12</strong><div class="muted" style="font-size:11px">streak</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>2,120</strong><div class="muted" style="font-size:11px">points</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>72%</strong><div class="muted" style="font-size:11px">progress</div></div></div><button class="btn primary" style="width:100%;margin-bottom:8px" onclick="closeModal();showView('profileView')">View full profile</button><button class="btn" style="width:100%;margin-bottom:8px" onclick="closeModal();showReview()">Review mistakes</button><button class="btn" style="width:100%" onclick="closeModal();demoLogout()">Log out</button></div><div class="modal-actions"></div></div></div>
 <div class="modal" id="loginModal"><div class="modal-card"><button class="modal-x" aria-label="Close login" onclick="closeLogin()">×</button><h2>Welcome back</h2><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div><div class="modal-actions"><button class="btn" onclick="closeLogin()">Cancel</button><button class="btn primary" onclick="demoLogin()">Log in</button></div></div></div>
 <div class="modal" id="signupModal"><div class="modal-card"><button class="modal-x" aria-label="Close sign up" onclick="closeSignup()">×</button><h2>Create account</h2><div class="field"><label>Student name</label><input placeholder="Your name"></div><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="Create password"></div><div class="modal-actions"><button class="btn" onclick="closeSignup()">Cancel</button><button class="btn primary" onclick="closeSignup();openLogin()">Sign up</button></div></div></div>
 
@@ -615,6 +653,7 @@ const topicQuestions={
 
 let currentSubject='Science',currentCategory='Biology',currentCode='',currentTopic='',qIndex=0,mastery=40,answered=false,loggedIn=false,correctCount=0,wrongCount=0;
 let currentLevel='Stage 9', currentProgram='Cambridge Lower Secondary';
+let reportedQuestions=[];
 function chooseLevel(level,program){
   currentLevel=level;
   currentProgram=program;
@@ -705,7 +744,40 @@ function startQuiz(code,name){currentCode=code;currentTopic=name;qIndex=0;master
 function quickQuiz(subject,category,code,name){currentSubject=subject;currentCategory=category;startQuiz(code,name)}
 function getQs(){return topicQuestions[currentTopic]||genericQuestions(currentTopic)}
 function renderQuestion(){answered=false;const qs=getQs(),x=qs[qIndex];document.getElementById('quizTitle').textContent=currentTopic;document.getElementById('quizCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('mastery').textContent='Mastery '+mastery;document.getElementById('questionNo').textContent=`QUESTION ${qIndex+1} OF ${qs.length}`;document.getElementById('questionText').textContent=x.q;const ans=document.getElementById('answers');ans.innerHTML='';x.a.forEach((t,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+i)+'. '+t;b.onclick=()=>chooseAnswer(i,b);ans.appendChild(b)});const f=document.getElementById('feedback');f.className='feedback';f.innerHTML='';const nextBtn=document.querySelector('#quizView .btn.primary');if(nextBtn)nextBtn.textContent=qIndex===qs.length-1?'View summary':'Next question'}
-function chooseAnswer(i,b){if(answered)return;answered=true;const x=getQs()[qIndex];[...document.querySelectorAll('.answer')].forEach((el,j)=>{if(j===x.c)el.classList.add('correct')});const f=document.getElementById('feedback');if(i===x.c){correctCount++;mastery=Math.min(100,mastery+8);f.className='feedback show good';f.innerHTML='<strong>Correct!</strong><br>'+x.e}else{wrongCount++;b.classList.add('wrong');mastery=Math.max(0,mastery-3);f.className='feedback show bad';f.innerHTML='<strong>Not quite.</strong><br>'+x.e}document.getElementById('mastery').textContent='Mastery '+mastery}
+function chooseAnswer(i,b){if(answered)return;answered=true;const x=getQs()[qIndex];[...document.querySelectorAll('.answer')].forEach((el,j)=>{if(j===x.c)el.classList.add('correct')});const f=document.getElementById('feedback');if(i===x.c){correctCount++;mastery=Math.min(100,mastery+8);f.className='feedback show good';f.innerHTML='<strong>Correct!</strong><br>'+x.e}else{wrongCount++;b.classList.add('wrong');mastery=Math.max(0,mastery-3);f.className='feedback show bad';f.innerHTML='<strong>Not quite.</strong><br>'+x.e+'<br><button type="button" class="report-question-btn" onclick="openReport()">⚑ Report this question</button>'}document.getElementById('mastery').textContent='Mastery '+mastery}
+function openReport(){
+  const qs=getQs();
+  const item=qs[qIndex];
+  const label=document.getElementById('reportQuestionLabel');
+  if(label) label.textContent=`${currentSubject} · ${currentTopic} · Question ${qIndex+1}: ${item.q}`;
+  document.querySelectorAll('input[name="reportReason"]').forEach(r=>r.checked=false);
+  const note=document.getElementById('reportNote');
+  if(note)note.value='';
+  const success=document.getElementById('reportSuccess');
+  if(success)success.classList.remove('show');
+  document.getElementById('reportModal').classList.add('show');
+}
+function closeReport(){document.getElementById('reportModal').classList.remove('show')}
+function submitReport(){
+  const selected=document.querySelector('input[name="reportReason"]:checked');
+  if(!selected){alert('Please choose a reason for the report.');return}
+  const qs=getQs();
+  const item=qs[qIndex];
+  reportedQuestions.push({
+    level:currentLevel,
+    subject:currentSubject,
+    category:currentCategory,
+    topic:currentTopic,
+    code:currentCode,
+    questionNumber:qIndex+1,
+    question:item.q,
+    reason:selected.value,
+    note:(document.getElementById('reportNote')||{}).value||''
+  });
+  const success=document.getElementById('reportSuccess');
+  if(success)success.classList.add('show');
+  setTimeout(closeReport,1000);
+}
 function nextQuestion(){const qs=getQs();if(!answered)return;if(qIndex>=qs.length-1){showSummary();return}qIndex++;renderQuestion()}
 function showSummary(){const total=getQs().length;const pct=Math.round(correctCount/total*100);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Great work!</strong><br>You showed a strong understanding of this topic.':pct>=60?'<strong>Good progress.</strong><br>Review your mistakes, then try again to improve your mastery.':'<strong>Keep practising.</strong><br>Review the questions you missed and try the topic again.';showView('summaryView')}
 function restartQuiz(){startQuiz(currentCode,currentTopic)}
@@ -775,6 +847,28 @@ refreshAccountUI();
   <strong>Advertisement</strong>
   <span>Google Ads space</span>
   <small style="display:block;margin-top:4px">Responsive mobile ad</small>
+</div>
+
+
+<div class="modal report-modal" id="reportModal">
+  <div class="modal-card">
+    <button class="modal-x" aria-label="Close report" onclick="closeReport()">×</button>
+    <div class="eyebrow">REPORT QUESTION</div>
+    <h2 style="margin:5px 0 6px">What seems wrong?</h2>
+    <p class="muted" id="reportQuestionLabel" style="margin:0">Help us improve this question.</p>
+
+    <div class="report-options">
+      <label class="report-option"><input type="radio" name="reportReason" value="Wrong answer"><span>Wrong answer or answer key</span></label>
+      <label class="report-option"><input type="radio" name="reportReason" value="Unclear question"><span>Question is unclear</span></label>
+      <label class="report-option"><input type="radio" name="reportReason" value="Typo"><span>Spelling or typo</span></label>
+      <label class="report-option"><input type="radio" name="reportReason" value="Explanation issue"><span>Explanation is incorrect or confusing</span></label>
+      <label class="report-option"><input type="radio" name="reportReason" value="Other"><span>Other issue</span></label>
+    </div>
+
+    <textarea class="report-note" id="reportNote" placeholder="Optional: tell us more"></textarea>
+    <button type="button" class="btn primary" style="width:100%;margin-top:12px" onclick="submitReport()">Submit report</button>
+    <div class="report-success" id="reportSuccess">✓ Thank you. This question has been marked for review.</div>
+  </div>
 </div>
 
 </body>
