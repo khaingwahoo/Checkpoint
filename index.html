@@ -279,6 +279,39 @@ button{-webkit-tap-highlight-color:transparent}
   .ad-mobile-banner{display:none!important}
 }
 
+
+/* Cambridge stage/year chooser */
+.level-chooser{max-width:980px;margin:0 auto}
+.level-intro{text-align:center;max-width:680px;margin:12px auto 28px}
+.level-intro h1{font-size:34px;margin:0 0 8px;color:var(--navy)}
+.level-intro p{margin:0;color:var(--muted);line-height:1.6}
+.level-group{margin:22px 0}
+.level-group-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:10px}
+.level-group-head h2{font-size:18px;margin:0;color:var(--navy)}
+.level-group-head span{font-size:12px;color:var(--muted);font-weight:700}
+.level-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.level-grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.level-grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.level-card{border:1px solid var(--line);background:#fff;border-radius:14px;min-height:86px;padding:15px 12px;text-align:left;cursor:pointer;box-shadow:0 4px 14px rgba(27,66,105,.03);transition:.16s;position:relative}
+.level-card:hover{transform:translateY(-2px);border-color:#9fc2e7;box-shadow:var(--shadow)}
+.level-card strong{display:block;font-size:16px;color:var(--navy);margin-bottom:4px}
+.level-card small{display:block;color:var(--muted);font-size:11px;line-height:1.35}
+.level-card:after{content:"›";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#8da1b6;font-size:20px}
+.selected-level{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.selected-level .current-level{background:#eef5ff;border:1px solid #cfe0f3;color:#1f527f;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:900}
+.change-level{border:0;background:transparent;color:var(--blue);font-size:12px;font-weight:900;cursor:pointer;padding:8px}
+@media(max-width:800px){.level-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:520px){
+  .level-intro{text-align:left;margin:4px 0 22px}
+  .level-intro h1{font-size:27px}
+  .level-group{margin:20px 0}
+  .level-group-head{align-items:flex-start;flex-direction:column;gap:3px}
+  .level-grid,.level-grid.cols-3,.level-grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .level-card{min-height:82px;padding:13px 11px}
+  .level-card strong{font-size:15px}
+  .selected-level{width:100%;justify-content:space-between}
+}
+
 </style>
 </head>
 <body>
@@ -292,10 +325,65 @@ button{-webkit-tap-highlight-color:transparent}
 </header>
 
 <main class="page">
-  <section class="view active" id="homeView">
+
+  <section class="view active" id="levelView">
+    <div class="level-chooser">
+      <div class="level-intro">
+        <div class="eyebrow">CAMBRIDGE PATHWAY</div>
+        <h1>Choose your stage or year</h1>
+        <p>Select your current Cambridge level first. You can change it anytime.</p>
+      </div>
+
+      <div class="level-group">
+        <div class="level-group-head"><h2>Cambridge Primary</h2><span>6 years · Stages 1–6</span></div>
+        <div class="level-grid">
+          <button type="button" class="level-card" onclick="chooseLevel('Stage 1','Cambridge Primary')"><strong>Stage 1</strong><small>Primary</small></button>
+          <button type="button" class="level-card" onclick="chooseLevel('Stage 2','Cambridge Primary')"><strong>Stage 2</strong><small>Primary</small></button>
+          <button type="button" class="level-card" onclick="chooseLevel('Stage 3','Cambridge Primary')"><strong>Stage 3</strong><small>Primary</small></button>
+          <button type="button" class="level-card" onclick="chooseLevel('Stage 4','Cambridge Primary')"><strong>Stage 4</strong><small>Primary</small></button>
+          <button type="button" class="level-card" onclick="chooseLevel('Stage 5','Cambridge Primary')"><strong>Stage 5</strong><small>Primary</small></button>
+          <button type="button" class="level-card" onclick="chooseLevel('Stage 6','Cambridge Primary')"><strong>Stage 6</strong><small>Primary</small></button>
+        </div>
+      </div>
+
+      <div class="level-group">
+        <div class="level-group-head"><h2>Cambridge Lower Secondary</h2><span>3 years · Stages 7–9</span></div>
+        <div class="level-grid cols-3">
+          <button type="button" class="level-card" onclick="chooseLevel('Stage 7','Cambridge Lower Secondary')"><strong>Stage 7</strong><small>Lower Secondary</small></button>
+          <button type="button" class="level-card" onclick="chooseLevel('Stage 8','Cambridge Lower Secondary')"><strong>Stage 8</strong><small>Lower Secondary</small></button>
+          <button type="button" class="level-card" onclick="chooseLevel('Stage 9','Cambridge Lower Secondary')"><strong>Stage 9</strong><small>Lower Secondary</small></button>
+        </div>
+      </div>
+
+      <div class="level-group">
+        <div class="level-group-head"><h2>Cambridge IGCSE</h2><span>2 years · usually Years 10–11</span></div>
+        <div class="level-grid cols-2">
+          <button type="button" class="level-card" onclick="chooseLevel('Year 10','Cambridge IGCSE')"><strong>Year 10</strong><small>IGCSE</small></button>
+          <button type="button" class="level-card" onclick="chooseLevel('Year 11','Cambridge IGCSE')"><strong>Year 11</strong><small>IGCSE</small></button>
+        </div>
+      </div>
+
+      <div class="level-group">
+        <div class="level-group-head"><h2>Cambridge International AS &amp; A Level</h2><span>2 years · usually Years 12–13</span></div>
+        <div class="level-grid cols-2">
+          <button type="button" class="level-card" onclick="chooseLevel('Year 12','Cambridge International AS & A Level')"><strong>Year 12</strong><small>AS Level</small></button>
+          <button type="button" class="level-card" onclick="chooseLevel('Year 13','Cambridge International AS & A Level')"><strong>Year 13</strong><small>A Level</small></button>
+        </div>
+      </div>
+
+      <div class="ad-slot ad-banner" aria-label="Google advertisement placeholder">
+        <div class="ad-label">Advertisement</div><span>Google Ads space</span>
+      </div>
+      <div class="ad-slot ad-mobile-banner" aria-label="Google advertisement placeholder">
+        <div class="ad-label">Advertisement</div><span>Google Ads space</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="homeView">
     <div class="toolbar">
-      <div><div class="eyebrow">CAMBRIDGE LOWER SECONDARY</div><h1 class="h1">Choose a subject</h1></div>
-      <div class="stage-tabs"><button class="stage">Stage 7</button><button class="stage">Stage 8</button><button type="button" class="stage active">Stage 9</button></div>
+      <div><div class="eyebrow" id="programLabel">CAMBRIDGE LOWER SECONDARY</div><h1 class="h1">Choose a subject</h1></div>
+      <div class="selected-level"><span class="current-level" id="currentLevelLabel">Stage 9</span><button type="button" class="change-level" onclick="showView('levelView')">Change stage/year</button></div>
     </div>
     <section class="hero mascot-hero">
       <div class="hero-copy">
@@ -526,6 +614,16 @@ const topicQuestions={
  ]};
 
 let currentSubject='Science',currentCategory='Biology',currentCode='',currentTopic='',qIndex=0,mastery=40,answered=false,loggedIn=false,correctCount=0,wrongCount=0;
+let currentLevel='Stage 9', currentProgram='Cambridge Lower Secondary';
+function chooseLevel(level,program){
+  currentLevel=level;
+  currentProgram=program;
+  const levelLabel=document.getElementById('currentLevelLabel');
+  const programLabel=document.getElementById('programLabel');
+  if(levelLabel)levelLabel.textContent=level;
+  if(programLabel)programLabel.textContent=program.toUpperCase();
+  showView('homeView');
+}
 function showView(id){
   const target=document.getElementById(id);
   if(!target){console.error('Missing view:',id);return}
@@ -645,7 +743,7 @@ console.info('Checkpoint navigation ready: Subject → Section → Topic → Qui
 function demoLogout(){
   loggedIn=false;
   refreshAccountUI();
-  showView('homeView');
+  showView('levelView');
 }
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
 
