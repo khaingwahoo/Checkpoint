@@ -23,6 +23,7 @@
 .modal-x{position:absolute;top:14px;right:16px;border:0;background:transparent;color:#41546d;font-size:25px;line-height:1;width:34px;height:34px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .modal-x:hover{background:#f2f6fb}
 
+
 #profileModal .modal-card,#profileModal .modalbox{padding:24px 26px 22px;max-width:390px}
 #profileModal h2{margin:0 42px 10px 0}
 #profileModal p{margin:0 0 18px}
@@ -35,7 +36,9 @@
 .mobile-support{display:none}
 @media(max-width:820px){.desktop-ad{display:none}.mobile-support{display:block}}
 
+
 .logged-out-note{display:flex;align-items:center;gap:8px;background:#eef5ff;border:1px solid #d5e5fb;color:#48627f;border-radius:10px;padding:10px 13px;font-size:12px;margin:0 0 16px}
+
 
 :root{--navy:#0F172A;--yellow:#FFC400}
 body,button,input{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
@@ -61,6 +64,7 @@ body,button,input{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,Blin
 @media(max-width:860px){.hero.mascot-hero{min-height:0}.hero-mascot{width:170px;height:170px}.mascot-tip{display:none}}
 @media(max-width:620px){.hero.mascot-hero{padding-bottom:0}.hero-copy h2{font-size:26px}.hero-mascot{width:155px;height:155px;align-self:center;margin:0 auto -15px}.mascot-helper{width:52px;height:52px;right:12px;bottom:12px}.mascot-helper img{width:50px;height:50px}}
 
+
 /* Clickability fix */
 .subject-card,.category-card,.unit-head,.lesson,.answer,.btn,.back,.stage,.profile,.practice-strip button{
   position:relative;
@@ -77,12 +81,14 @@ body,button,input{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,Blin
   z-index:1;
 }
 
+
 .lesson:focus-visible,.subject-card:focus-visible,.category-card:focus-visible{
   outline:3px solid rgba(37,99,235,.22);
   outline-offset:2px;
 }
 .lesson .arrow{transition:transform .15s ease}
 .lesson:hover .arrow{transform:translateX(3px)}
+
 
 /* Logged-in profile dashboard */
 .profile-page{max-width:980px;margin:0 auto}
@@ -124,6 +130,7 @@ body,button,input{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,Blin
 @media(max-width:820px){.stat-grid-profile{grid-template-columns:repeat(2,1fr)}.profile-two-col{grid-template-columns:1fr}.profile-identity{align-items:flex-start}.profile-avatar-large{width:92px;height:92px}.profile-avatar-large img{width:90px;height:90px}}
 @media(max-width:520px){.profile-hero-card{padding:20px 16px}.profile-identity{flex-direction:column}.profile-edit{right:14px;top:14px}.profile-name{font-size:23px}.stat-grid-profile{grid-template-columns:1fr 1fr}.stat-tile{min-height:98px;padding:14px}.progress-row{grid-template-columns:92px 1fr 40px}.profile-actions-row .btn{width:100%}}
 
+
 /* Navigation reliability */
 .view{display:none;pointer-events:none}
 .view.active{display:block;pointer-events:auto}
@@ -133,6 +140,7 @@ body,button,input{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,Blin
 .progress-subject-btn:hover strong{color:var(--blue)}
 .progress-subject-btn:focus-visible{outline:3px solid rgba(37,99,235,.20);outline-offset:4px;border-radius:8px}
 @media(max-width:520px){.progress-subject-btn{grid-template-columns:92px 1fr 40px}}
+
 
 /* Strong mobile layout */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -254,6 +262,7 @@ button{-webkit-tap-highlight-color:transparent}
   .summary-stat:last-child{grid-column:auto}
 }
 
+
 /* Additional Google Ads inventory */
 .ad-banner{min-height:90px}
 .ad-rectangle{min-height:250px}
@@ -269,6 +278,7 @@ button{-webkit-tap-highlight-color:transparent}
 @media(min-width:701px){
   .ad-mobile-banner{display:none!important}
 }
+
 
 /* Cambridge stage/year chooser */
 .level-chooser{max-width:980px;margin:0 auto}
@@ -302,6 +312,7 @@ button{-webkit-tap-highlight-color:transparent}
   .selected-level{width:100%;justify-content:space-between}
 }
 
+
 /* Report question */
 .report-question-btn{margin-top:12px;border:0;background:transparent;color:#6b7f96;font-size:12px;font-weight:800;cursor:pointer;padding:6px 0;text-decoration:underline;text-underline-offset:3px}
 .report-question-btn:hover{color:#1f5f99}
@@ -314,6 +325,7 @@ button{-webkit-tap-highlight-color:transparent}
 .report-success{display:none;background:#eefaf3;border:1px solid #cfead9;color:#2f6b45;border-radius:10px;padding:11px 12px;margin-top:12px;font-size:12px}
 .report-success.show{display:block}
 
+
 .modal-card{position:relative}
 .modal-x{
   position:absolute;
@@ -323,7 +335,7 @@ button{-webkit-tap-highlight-color:transparent}
   height:34px;
   border:0;
   background:transparent;
-  border-radius:99px;
+  border-radius:9px;
   color:#506176;
   font-size:24px;
   line-height:1;
@@ -337,6 +349,26 @@ button{-webkit-tap-highlight-color:transparent}
 @media(max-width:700px){
   .modal-x{top:10px;right:10px;width:38px;height:38px;font-size:26px}
 }
+
+
+/* One-word fill-in-the-blank quiz */
+.fill-answer-wrap{display:flex;gap:10px;align-items:stretch;margin-top:18px}
+.fill-answer-input{flex:1;min-width:0;border:1px solid #c9d8e8;border-radius:11px;padding:13px 14px;font:600 16px Inter,system-ui,sans-serif;color:#102d4f;outline:none}
+.fill-answer-input:focus{border-color:#3478f6;box-shadow:0 0 0 3px rgba(52,120,246,.12)}
+.fill-answer-input::placeholder{font-weight:500;color:#91a0b2}
+.fill-check-btn{white-space:nowrap}
+.fill-hint{font-size:11px;color:#71839a;margin-top:7px}
+.fill-correct{border-color:#45a96b;background:#f2fbf5}
+.fill-wrong{border-color:#df6b6b;background:#fff5f5}
+@media(max-width:520px){
+  .fill-answer-wrap{flex-direction:column}
+  .fill-check-btn{width:100%}
+}
+
+
+.modal-x{z-index:9999!important;pointer-events:auto!important}
+.modal{z-index:9990}
+
 </style>
 </head>
 <body>
@@ -475,7 +507,7 @@ button{-webkit-tap-highlight-color:transparent}
   <small style="display:block;margin-top:4px">Recommended desktop size: 728 × 90</small>
 </div>
 
-Prototype only. Questions shown here are original sample questions for demonstrating the learning flow.</div>
+Prototype only. Questions shown here are original sample questions. Some questions use a one-word fill-in-the-blank format.</div>
     </div>
   </section>
 
@@ -574,11 +606,19 @@ Prototype only. Questions shown here are original sample questions for demonstra
 
 </main>
 
-<div class="modal" id="profileModal"><div class="modal-card"><button type="button" class="modal-x" aria-label="Close profile" onclick="closeModal()">×</button><div id="loggedOut"><div class="profile-mascot"><img src="assets/checkpoint-mascot.png" alt=""><div><strong>Checkpoint</strong><span class="muted" style="font-size:12px">Your learning companion</span></div></div><h2>Profile</h2><p class="muted">Log in to save your progress, streak, points and mistakes.</p><div class="modal-actions"><button class="btn" onclick="openSignup()">Sign up</button><button class="btn primary" onclick="openLogin()">Log in</button></div></div><div id="loggedIn" class="hidden"><h2>Emma</h2><p class="muted">Stage 9 · Student Plus</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0"><div class="hero-stat" style="min-width:0;text-align:center"><strong>12</strong><div class="muted" style="font-size:11px">streak</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>2,120</strong><div class="muted" style="font-size:11px">points</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>72%</strong><div class="muted" style="font-size:11px">progress</div></div></div><button class="btn primary" style="width:100%;margin-bottom:8px" onclick="closeModal();showView('profileView')">View full profile</button><button class="btn" style="width:100%;margin-bottom:8px" onclick="closeModal();showReview()">Review mistakes</button><button class="btn" style="width:100%" onclick="closeModal();demoLogout()">Log out</button></div><div class="modal-actions"></div></div></div>
-<div class="modal" id="loginModal"><div class="modal-card"><button class="modal-x" aria-label="Close login" onclick="closeLogin()">×</button><h2>Welcome back</h2><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div><div class="modal-actions"><button class="btn" onclick="closeLogin()">Cancel</button><button class="btn primary" onclick="demoLogin()">Log in</button></div></div></div>
-<div class="modal" id="signupModal"><div class="modal-card"><button class="modal-x" aria-label="Close sign up" onclick="closeSignup()">×</button><h2>Create account</h2><div class="field"><label>Student name</label><input placeholder="Your name"></div><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="Create password"></div><div class="modal-actions"><button class="btn" onclick="closeSignup()">Cancel</button><button class="btn primary" onclick="closeSignup();openLogin()">Sign up</button></div></div></div>
+<div class="modal" id="profileModal"><div class="modal-card"><button type="button" class="modal-x" aria-label="Close profile" onclick="closeAnyModal()">×</button><div id="loggedOut"><div class="profile-mascot"><img src="assets/checkpoint-mascot.png" alt=""><div><strong>Checkpoint</strong><span class="muted" style="font-size:12px">Your learning companion</span></div></div><h2>Profile</h2><p class="muted">Log in to save your progress, streak, points and mistakes.</p><div class="modal-actions"><button class="btn" onclick="openSignup()">Sign up</button><button class="btn primary" onclick="openLogin()">Log in</button></div></div><div id="loggedIn" class="hidden"><h2>Emma</h2><p class="muted">Stage 9 · Student Plus</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0"><div class="hero-stat" style="min-width:0;text-align:center"><strong>12</strong><div class="muted" style="font-size:11px">streak</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>2,120</strong><div class="muted" style="font-size:11px">points</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>72%</strong><div class="muted" style="font-size:11px">progress</div></div></div><button class="btn primary" style="width:100%;margin-bottom:8px" onclick="closeModal();showView('profileView')">View full profile</button><button class="btn" style="width:100%;margin-bottom:8px" onclick="closeModal();showReview()">Review mistakes</button><button class="btn" style="width:100%" onclick="closeModal();demoLogout()">Log out</button></div><div class="modal-actions"></div></div></div>
+<div class="modal" id="loginModal"><div class="modal-card"><button class="modal-x" aria-label="Close login" onclick="closeAnyModal()">×</button><h2>Welcome back</h2><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="demoLogin()">Log in</button></div></div></div>
+<div class="modal" id="signupModal"><div class="modal-card"><button class="modal-x" aria-label="Close sign up" onclick="closeAnyModal()">×</button><h2>Create account</h2><div class="field"><label>Student name</label><input placeholder="Your name"></div><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="Create password"></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="closeSignup();openLogin()">Sign up</button></div></div></div>
 
 <script>
+function closeAnyModal(){
+  document.querySelectorAll('.modal.show').forEach(function(modal){
+    modal.classList.remove('show');
+    modal.style.display='';
+  });
+  document.body.classList.remove('modal-open');
+}
+
 const curriculum={
  Science:{
   'Biology':[
@@ -603,21 +643,21 @@ const curriculum={
 const categories={Mathematics:[['➕','Number','Fractions, percentages, ratio and more'],['𝑥','Algebra','Expressions, equations, sequences and graphs']],Science:[['🌿','Biology','Plants, cells, human systems and environment'],['⚗️','Physics & Chemistry','Forces, energy, matter and reactions']],English:[['📖','Reading','Comprehension, inference and vocabulary'],['✍️','Writing','Grammar, structure and composition']]};
 const topicQuestions={
  'Joints':[
-  {q:'Which type of joint is found at the shoulder?',a:['Hinge joint','Ball-and-socket joint','Fixed joint','Pivot joint'],c:1,e:'The shoulder is a ball-and-socket joint, allowing movement in many directions.'},
+  {type:'fill',q:'The shoulder has a ______ joint, allowing movement in many directions.',answer:'ball-and-socket',e:'The shoulder is a ball-and-socket joint, allowing movement in many directions.'},
   {q:'What is the main role of ligaments at a joint?',a:['Join muscle to bone','Join bone to bone','Produce blood cells','Store minerals'],c:1,e:'Ligaments connect bone to bone and help stabilise joints.'},
   {q:'Which joint mainly allows bending and straightening in one plane?',a:['Ball-and-socket','Hinge','Fixed','Gliding only'],c:1,e:'A hinge joint, such as the elbow, mainly allows bending and straightening.'},
   {q:'Which tissue reduces friction between the ends of bones at a joint?',a:['Cartilage','Skin','Nerve tissue','Bone marrow'],c:0,e:'Cartilage covers the ends of bones and helps them move smoothly.'},
   {q:'Which structure joins a muscle to a bone?',a:['Ligament','Tendon','Cartilage','Joint capsule'],c:1,e:'A tendon connects muscle to bone.'}
  ],
  'Plant organs':[
-  {q:'Which plant organ mainly absorbs water and mineral ions from the soil?',a:['Flower','Leaf','Root','Fruit'],c:2,e:'Roots absorb water and mineral ions from the soil.'},
+  {type:'fill',q:'The plant organ that mainly absorbs water and mineral ions from the soil is the ______.',answer:'root',e:'Roots absorb water and mineral ions from the soil.'},
   {q:'Which organ is the main site of photosynthesis?',a:['Leaf','Root','Flower','Seed'],c:0,e:'Leaves contain chloroplast-rich cells and are the main site of photosynthesis.'},
   {q:'What is one important function of the stem?',a:['Absorb light only','Support the plant and transport substances','Make seeds only','Take in carbon dioxide from soil'],c:1,e:'The stem supports leaves and flowers and contains transport tissues.'},
   {q:'Which plant organ is mainly involved in sexual reproduction?',a:['Root','Flower','Stem','Leaf'],c:1,e:'Flowers contain the reproductive structures of flowering plants.'},
   {q:'Which tissue carries water from the roots towards the leaves?',a:['Phloem','Xylem','Epidermis','Pollen'],c:1,e:'Xylem transports water and mineral ions upward through the plant.'}
  ],
  'Heart':[
-  {q:'What is the main function of the heart?',a:['Digest food','Pump blood','Exchange gases directly','Produce hormones only'],c:1,e:'The heart pumps blood around the body.'},
+  {type:'fill',q:'The main function of the heart is to ______ blood around the body.',answer:'pump',e:'The heart pumps blood around the body.'},
   {q:'Which chamber pumps oxygenated blood to the body?',a:['Right atrium','Right ventricle','Left atrium','Left ventricle'],c:3,e:'The left ventricle pumps oxygenated blood through the aorta to the body.'},
   {q:'Which blood vessel carries blood away from the heart?',a:['Artery','Vein','Capillary','Valve'],c:0,e:'Arteries carry blood away from the heart.'},
   {q:'What prevents blood from flowing backwards inside the heart?',a:['Alveoli','Valves','Platelets','Ribs'],c:1,e:'Heart valves help maintain one-way blood flow.'},
@@ -641,7 +681,6 @@ const topicQuestions={
 let currentSubject='Science',currentCategory='Biology',currentCode='',currentTopic='',qIndex=0,mastery=40,answered=false,loggedIn=false,correctCount=0,wrongCount=0;
 let currentLevel='Stage 9', currentProgram='Cambridge Lower Secondary';
 let reportedQuestions=[];
-
 function chooseLevel(level,program){
   currentLevel=level;
   currentProgram=program;
@@ -651,7 +690,6 @@ function chooseLevel(level,program){
   if(programLabel)programLabel.textContent=program.toUpperCase();
   showView('homeView');
 }
-
 function showView(id){
   const target=document.getElementById(id);
   if(!target){console.error('Missing view:',id);return}
@@ -659,7 +697,6 @@ function showView(id){
   target.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
 function openSubject(subject){
   if(!categories[subject]){console.error('Unknown subject:',subject);return}
   currentSubject=subject;
@@ -673,14 +710,14 @@ function openSubject(subject){
     b.className='category-card';
     b.dataset.category=name;
     b.innerHTML=`<span class="icon">${icon}</span><strong>${name}</strong><small>${desc}</small>`;
-    b.onclick=()=>openCurriculum(name);
+    const goCategory=()=>openCurriculum(name);
+    b.addEventListener('click',goCategory);
+    b.addEventListener('touchend',(e)=>{e.preventDefault();goCategory()},{passive:false});
     grid.appendChild(b);
   });
   showView('subjectView');
 }
-
 function backToSubject(){openSubject(currentSubject)}
-
 function openCurriculum(category){
   currentCategory=category;
   const subjectData=curriculum[currentSubject]||{};
@@ -707,36 +744,99 @@ function openCurriculum(category){
       lesson.type='button';
       lesson.className='lesson';
       lesson.innerHTML=`<span class="lesson-label"><span class="num">${code}</span><span>${name}</span></span><span class="arrow">›</span>`;
-      lesson.onclick=()=>startQuiz(code,name);
+      const goLesson=()=>startQuiz(code,name);
+      lesson.addEventListener('click',goLesson);
+      lesson.addEventListener('touchend',(e)=>{e.preventDefault();goLesson()},{passive:false});
       body.appendChild(lesson);
     });
-    head.onclick=()=>{
+    head.addEventListener('click',()=>{
       wrap.classList.toggle('collapsed');
       head.querySelector('span:last-child').textContent=wrap.classList.contains('collapsed')?'⌄':'⌃';
-    };
+    });
     wrap.appendChild(head);
     wrap.appendChild(body);
     box.appendChild(wrap);
   });
   showView('curriculumView');
 }
-
 function backToCurriculum(){openCurriculum(currentCategory)}
-
 function genericQuestions(name){return [
  {q:`Which statement best matches the topic “${name}”?`,a:[`A key idea related to ${name}`,'An unrelated statement','A random calculation','None of the above'],c:0,e:`This is a sample placeholder question for ${name}. Your real question bank can replace it.`},
  {q:`Choose the best answer for this ${name} practice item.`,a:['Option A','Option B','Option C','Option D'],c:1,e:'This sample demonstrates the quiz flow and instant explanation.'},
  {q:`Which option is most closely connected to ${name}?`,a:['Option A','Option B','Option C','Option D'],c:2,e:`This is another sample placeholder for ${name}.`},
  {q:`Select the correct response for this ${name} question.`,a:['Option A','Option B','Option C','Option D'],c:3,e:'This question can later be replaced by curriculum-specific content.'},
- {q:`Final check: which answer best demonstrates understanding of ${name}?`,a:['Option A','Option B','Option C','Option D'],c:0,e:`You have reached the fifth sample question for ${name}.`}
+ {type:'fill',q:`One key word connected with ${name} is ______.`,answer:'answer',e:`This is a sample one-word fill-in-the-blank question for ${name}. Replace the answer with a curriculum-specific one-word answer in your real question bank.`}
 ]}
-
 function startQuiz(code,name){currentCode=code;currentTopic=name;qIndex=0;mastery=40;correctCount=0;wrongCount=0;showView('quizView');renderQuestion()}
 function quickQuiz(subject,category,code,name){currentSubject=subject;currentCategory=category;startQuiz(code,name)}
 function getQs(){return topicQuestions[currentTopic]||genericQuestions(currentTopic)}
-function renderQuestion(){answered=false;const qs=getQs(),x=qs[qIndex];document.getElementById('quizTitle').textContent=currentTopic;document.getElementById('quizCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('mastery').textContent='Mastery '+mastery;document.getElementById('questionNo').textContent=`QUESTION ${qIndex+1} OF ${qs.length}`;document.getElementById('questionText').textContent=x.q;const ans=document.getElementById('answers');ans.innerHTML='';x.a.forEach((t,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=String.fromCharCode(65+i)+'. '+t;b.onclick=()=>chooseAnswer(i,b);ans.appendChild(b)});const f=document.getElementById('feedback');f.className='feedback';f.innerHTML='';const nextBtn=document.querySelector('#quizView .btn.primary');if(nextBtn)nextBtn.textContent=qIndex===qs.length-1?'View summary':'Next question'}
+function renderQuestion(){
+  answered=false;
+  const qs=getQs(),x=qs[qIndex];
+  document.getElementById('quizTitle').textContent=currentTopic;
+  document.getElementById('quizCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;
+  document.getElementById('mastery').textContent='Mastery '+mastery;
+  document.getElementById('questionNo').textContent=`QUESTION ${qIndex+1} OF ${qs.length}`;
+  document.getElementById('questionText').textContent=x.q;
+  const ans=document.getElementById('answers');
+  ans.innerHTML='';
+  if(x.type==='fill'){
+    ans.innerHTML=`<div class="fill-answer-wrap">
+      <input id="fillAnswer" class="fill-answer-input" type="text" inputmode="text" autocomplete="off" maxlength="40" placeholder="Type one word" aria-label="One-word answer">
+      <button type="button" class="btn primary fill-check-btn" onclick="checkFillAnswer()">Check answer</button>
+    </div>
+    <div class="fill-hint">Enter one word only.</div>`;
+    const input=document.getElementById('fillAnswer');
+    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkFillAnswer()}});
+    setTimeout(()=>input.focus(),50);
+  }else{
+    x.a.forEach((t,i)=>{
+      const b=document.createElement('button');
+      b.className='answer';
+      b.textContent=String.fromCharCode(65+i)+'. '+t;
+      b.onclick=()=>chooseAnswer(i,b);
+      ans.appendChild(b);
+    });
+  }
+  const f=document.getElementById('feedback');
+  f.className='feedback';
+  f.innerHTML='';
+  const nextBtn=document.querySelector('#quizView .quiz-actions .btn.primary');
+  if(nextBtn)nextBtn.textContent=qIndex===qs.length-1?'View summary':'Next question';
+}
 function chooseAnswer(i,b){if(answered)return;answered=true;const x=getQs()[qIndex];[...document.querySelectorAll('.answer')].forEach((el,j)=>{if(j===x.c)el.classList.add('correct')});const f=document.getElementById('feedback');if(i===x.c){correctCount++;mastery=Math.min(100,mastery+8);f.className='feedback show good';f.innerHTML='<strong>Correct!</strong><br>'+x.e}else{wrongCount++;b.classList.add('wrong');mastery=Math.max(0,mastery-3);f.className='feedback show bad';f.innerHTML='<strong>Not quite.</strong><br>'+x.e+'<br><button type="button" class="report-question-btn" onclick="openReport()">⚑ Report this question</button>'}document.getElementById('mastery').textContent='Mastery '+mastery}
-
+function checkFillAnswer(){
+  if(answered)return;
+  const input=document.getElementById('fillAnswer');
+  if(!input)return;
+  const typed=input.value.trim();
+  if(!typed){
+    input.focus();
+    return;
+  }
+  const x=getQs()[qIndex];
+  const expected=String(x.answer||'').trim().toLowerCase();
+  const actual=typed.toLowerCase().replace(/\s+/g,' ');
+  answered=true;
+  input.disabled=true;
+  const checkBtn=document.querySelector('.fill-check-btn');
+  if(checkBtn)checkBtn.disabled=true;
+  const f=document.getElementById('feedback');
+  if(actual===expected){
+    correctCount++;
+    mastery=Math.min(100,mastery+8);
+    input.classList.add('fill-correct');
+    f.className='feedback show good';
+    f.innerHTML='<strong>Correct!</strong><br>'+x.e;
+  }else{
+    wrongCount++;
+    mastery=Math.max(0,mastery-3);
+    input.classList.add('fill-wrong');
+    f.className='feedback show bad';
+    f.innerHTML='<strong>Not quite.</strong><br>The answer is <strong>'+x.answer+'</strong>.<br>'+x.e+'<br><button type="button" class="report-question-btn" onclick="openReport()">⚑ Report this question</button>';
+  }
+  document.getElementById('mastery').textContent='Mastery '+mastery;
+}
 function openReport(){
   const qs=getQs();
   const item=qs[qIndex];
@@ -792,16 +892,16 @@ function openProfile(){
   document.getElementById('loggedIn').classList.toggle('hidden',!loggedIn);
   document.getElementById('profileModal').classList.add('show')
 }
-function closeModal(){document.getElementById('profileModal').classList.remove('show')}
+function closeModal(){closeAnyModal()}
 function openLogin(){closeModal();document.getElementById('loginModal').classList.add('show')}
-function closeLogin(){document.getElementById('loginModal').classList.remove('show')}
+function closeLogin(){closeAnyModal()}
 function openSignup(){closeModal();document.getElementById('signupModal').classList.add('show')}
-function closeSignup(){document.getElementById('signupModal').classList.remove('show')}
+function closeSignup(){closeAnyModal()}
 function demoLogin(){
   loggedIn=true;
   closeLogin();
   refreshAccountUI();
-  console.info('Checkpoint navigation ready: Subject → Section → Topic → Quiz');
+console.info('Checkpoint navigation ready: Subject → Section → Topic → Quiz');
   showView('profileView');
 }
 function demoLogout(){
@@ -834,15 +934,17 @@ refreshAccountUI();
   <img src="assets/checkpoint-mascot.png" alt="Checkpoint mascot">
 </div>
 
+
 <div class="ad-slot mobile-support" aria-label="Google advertisement placeholder">
   <strong>Advertisement</strong>
   <span>Google Ads space</span>
   <small style="display:block;margin-top:4px">Responsive mobile ad</small>
 </div>
 
+
 <div class="modal report-modal" id="reportModal">
   <div class="modal-card">
-    <button class="modal-x" aria-label="Close report" onclick="closeReport()">×</button>
+    <button class="modal-x" aria-label="Close report" onclick="closeAnyModal()">×</button>
     <div class="eyebrow">REPORT QUESTION</div>
     <h2 style="margin:5px 0 6px">What seems wrong?</h2>
     <p class="muted" id="reportQuestionLabel" style="margin:0">Help us improve this question.</p>
