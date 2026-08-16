@@ -1,967 +1,235 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Checkpoint Skills</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f5f9fd;--card:#fff;--ink:#123456;--muted:#718399;--line:#dbe6f0;--blue:#2f6fed;--blue2:#edf4ff;--green:#e8f6df;--greenInk:#39751f;--shadow:0 8px 30px rgba(27,66,105,.07)}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}button,input{font:inherit}.top{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10}.brand{font-size:21px;font-weight:900;color:var(--blue);line-height:1.1}.brand small{display:block;color:#8093a7;font-size:11px;font-weight:600;margin-top:4px}.account{display:flex;align-items:center;gap:10px}.pill{border:1px solid var(--line);background:#f9fcff;border-radius:999px;padding:8px 12px;font-size:12px;white-space:nowrap}.profile{display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:5px 11px 5px 5px;font-weight:800;cursor:pointer}.avatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:white}.page{max-width:1180px;margin:0 auto;padding:24px 22px 64px}.view{display:none}.view.active{display:block}.eyebrow{font-size:12px;font-weight:900;color:#7890a5;letter-spacing:.02em;margin-bottom:6px}.h1{font-size:30px;margin:0}.toolbar{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px}.back{border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 14px;font-weight:800;color:#244963;cursor:pointer}.back:hover{border-color:#9cbfe4}.back-left{margin-bottom:14px}.stage-tabs{display:flex;gap:8px}.stage{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 14px;font-weight:800;color:#4e6680;cursor:pointer}.stage.active{background:var(--blue);border-color:var(--blue);color:#fff}.hero{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:var(--shadow);margin:18px 0}.hero h2{font-size:26px;margin:0 0 8px}.hero p{margin:0;color:var(--muted);line-height:1.6}.hero-stat{min-width:220px;border:1px solid var(--line);border-radius:12px;padding:15px;background:#f9fcff}.bar{height:9px;background:#e9eff5;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;background:#4eb477}.subject-grid,.category-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.subject-card,.category-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;text-align:left;cursor:pointer;min-height:140px;transition:.16s;box-shadow:0 4px 14px rgba(27,66,105,.03)}.subject-card:hover,.category-card:hover{transform:translateY(-2px);border-color:#9fc2e7;box-shadow:var(--shadow)}.icon{font-size:28px;margin-bottom:12px;display:block}.subject-card strong,.category-card strong{font-size:17px;display:block;margin-bottom:6px}.subject-card small,.category-card small{color:var(--muted);line-height:1.45}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow)}.card h2{margin:0 0 6px;font-size:22px}.card>p{margin:0 0 18px;color:var(--muted)}.topic-list{display:grid;gap:10px}.unit{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}.unit-head{width:100%;border:0;background:var(--green);color:var(--greenInk);padding:12px 16px;text-align:left;font-weight:900;display:flex;justify-content:space-between;gap:12px;cursor:pointer}.unit-title{display:flex;gap:12px;align-items:center}.unit-title span:first-child{min-width:52px}.unit-body{display:block}.unit.collapsed .unit-body{display:none}.lesson{width:100%;border:0;border-top:1px solid #edf1f5;background:#fff;padding:12px 17px;display:flex;align-items:center;justify-content:space-between;text-align:left;cursor:pointer;color:#243f57}.lesson:hover{background:#f7fbff}.lesson-label{display:flex;align-items:center;gap:16px}.num{min-width:38px;color:#496078}.arrow{font-size:20px;color:#698198}.quiz-shell{max-width:880px;margin:0 auto}.quiz-card{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.quiz-head{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.quiz-head strong{font-size:18px}.crumb{font-size:12px;color:var(--muted);font-weight:700;margin-top:4px}.quiz-body{padding:30px 26px}.qmeta{font-size:12px;color:#7890a5;font-weight:900}.question{font-size:23px;font-weight:800;line-height:1.45;margin:12px 0 22px}.answers{display:grid;gap:10px}.answer{border:1px solid #ccdbe8;background:#fff;border-radius:11px;padding:14px 16px;text-align:left;font-weight:700;cursor:pointer}.answer:hover{background:#f7fbff;border-color:#8eb9e3}.answer.correct{background:#eefaf1;border-color:#69bf86}.answer.wrong{background:#fff2f2;border-color:#e49898}.feedback{display:none;margin-top:16px;border-radius:11px;padding:14px 16px;line-height:1.5}.feedback.show{display:block}.feedback.good{background:#eefaf1;color:#23653a}.feedback.bad{background:#fff5e9;color:#7d4c17}.quiz-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.btn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:10px 14px;font-weight:800;cursor:pointer}.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.practice-strip{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding:16px 18px;background:#fff;border:1px solid var(--line);border-radius:13px}.practice-strip button{border:0;background:transparent;color:var(--blue);font-weight:900;cursor:pointer}.note{color:var(--muted);font-size:12px;line-height:1.5;margin-top:14px}.modal{display:none;position:fixed;inset:0;background:rgba(9,28,44,.45);z-index:30;padding:18px;align-items:center;justify-content:center}.modal.show{display:flex}.modal-card{width:min(440px,100%);background:#fff;border-radius:16px;padding:22px;box-shadow:0 28px 70px rgba(0,0,0,.2)}.modal-card h2{margin:0 0 8px}.muted{color:var(--muted)}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:900;margin-bottom:6px}.field input{width:100%;border:1px solid var(--line);border-radius:9px;padding:11px 12px}.modal-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:16px}.hidden{display:none!important}.review-list{display:grid;gap:10px;margin-top:16px}.review-item{border:1px solid var(--line);background:#fff;border-radius:11px;padding:14px 16px;text-align:left;cursor:pointer}.review-item strong{display:block;margin-bottom:4px}.review-item small{color:var(--muted)}
-@media(max-width:860px){.subject-grid,.category-grid{grid-template-columns:repeat(2,1fr)}.hero{align-items:flex-start}.account .pill span{display:none}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Responsive Landing Page</title>
+  <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      color: #333;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-.summary-card{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:28px}
-.summary-score{text-align:center;padding:12px 0 24px}.summary-score .big{font-size:54px;font-weight:900;color:var(--blue);line-height:1}
-.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 24px}.summary-stat{border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center;background:#f9fcff}.summary-stat strong{display:block;font-size:24px;margin-bottom:4px}.summary-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-@media(max-width:620px){.summary-grid{grid-template-columns:1fr}.summary-card{padding:20px}.summary-score .big{font-size:44px}}
+    /* Navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e293b;
+      color: #fff;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #38bdf8;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+    .nav-links a:hover {
+      color: #38bdf8;
+    }
 
-@media(max-width:620px){.top{height:64px;padding:0 14px}.brand{font-size:18px}.brand small{font-size:10px}.page{padding:18px 12px 44px}.account{gap:6px}.pill{padding:7px 9px}.profile{padding-right:8px}.profile>span:last-child{display:none}.toolbar{flex-direction:column}.h1{font-size:25px}.stage-tabs{width:100%;overflow:auto}.stage{flex:1;white-space:nowrap}.hero{padding:18px;flex-direction:column}.hero h2{font-size:21px}.hero-stat{width:100%;min-width:0}.subject-grid,.category-grid{grid-template-columns:1fr}.subject-card,.category-card{min-height:110px;padding:16px}.card{padding:16px}.card h2{font-size:20px}.lesson{padding:12px}.lesson-label{gap:8px}.num{min-width:34px}.quiz-head{padding:16px}.quiz-body{padding:22px 16px}.question{font-size:20px}.quiz-actions{flex-direction:column-reverse}.quiz-actions .btn{width:100%}.practice-strip{align-items:flex-start;gap:10px;flex-direction:column}.back-left{width:100%;text-align:left}}
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fff;
+      text-align: center;
+      padding: 5rem 1rem;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .btn {
+      display: inline-block;
+      background: #0284c7;
+      color: #fff;
+      padding: 0.75rem 1.75rem;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #0369a1;
+    }
 
-.modal-card{position:relative}
-.modal-x{position:absolute;top:14px;right:16px;border:0;background:transparent;color:#41546d;font-size:25px;line-height:1;width:34px;height:34px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.modal-x:hover{background:#f2f6fb}
+    /* Features Section */
+    .features {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .features h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 2.5rem;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .feature-card {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      border-top: 4px solid #0284c7;
+    }
+    .feature-card h3 {
+      margin-bottom: 0.75rem;
+      color: #0f172a;
+    }
 
+    /* Contact Form */
+    .contact {
+      background: #e2e8f0;
+      padding: 4rem 2rem;
+    }
+    .contact-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    .contact h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+    }
+    .form-group button {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+    }
 
-#profileModal .modal-card,#profileModal .modalbox{padding:24px 26px 22px;max-width:390px}
-#profileModal h2{margin:0 42px 10px 0}
-#profileModal p{margin:0 0 18px}
-#profileModal .actions,#profileModal .modal-actions{margin-top:0;gap:10px}
-@media(max-width:520px){#profileModal .modal-card,#profileModal .modalbox{margin:16px;padding:22px 20px 20px}}
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #64748b;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+    }
 
-/* Monetization */
-.ad-slot{border:1px dashed #cbd8e8;background:#f8fbff;border-radius:12px;padding:14px 16px;text-align:center;color:#73839a;font-size:12px;margin:18px 0;min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.ad-slot strong{display:block;color:#5f7087;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
-.mobile-support{display:none}
-@media(max-width:820px){.desktop-ad{display:none}.mobile-support{display:block}}
-
-
-.logged-out-note{display:flex;align-items:center;gap:8px;background:#eef5ff;border:1px solid #d5e5fb;color:#48627f;border-radius:10px;padding:10px 13px;font-size:12px;margin:0 0 16px}
-
-
-:root{--navy:#0F172A;--yellow:#FFC400}
-body,button,input{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-.brand{color:var(--navy)}
-.brand-accent{color:var(--yellow)}
-.hero.mascot-hero{position:relative;min-height:230px;overflow:hidden;background:linear-gradient(120deg,#ffffff 0%,#f7faff 62%,#fff9e7 100%)}
-.hero-copy{max-width:560px;position:relative;z-index:2}
-.hero-copy .kicker{font-size:12px;font-weight:900;letter-spacing:.08em;color:#74859a;margin-bottom:8px}
-.hero-copy h2{font-size:32px;line-height:1.12;color:var(--navy);margin-bottom:10px}
-.hero-copy h2 span{color:#e6aa00}
-.hero-mascot{align-self:flex-end;width:210px;height:210px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 14px 16px rgba(15,23,42,.10));margin:-8px 18px -24px 8px}
-.hero-stat{position:relative;z-index:2}
-.avatar.mascot-avatar{overflow:hidden;background:var(--navy);padding:2px}
-.avatar.mascot-avatar img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;transform:scale(1.4)}
-.mascot-helper{position:fixed;right:18px;bottom:18px;width:64px;height:64px;border:1px solid #d9e2ed;border-radius:50%;background:#fff;box-shadow:0 12px 30px rgba(15,23,42,.16);display:grid;place-items:center;z-index:8;overflow:hidden}
-.mascot-helper img{width:62px;height:62px;object-fit:contain;transform:scale(1.15) translateY(4px)}
-.mascot-tip{position:fixed;right:92px;bottom:28px;background:var(--navy);color:#fff;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:700;box-shadow:0 8px 22px rgba(15,23,42,.16);z-index:8}
-.subject-card{position:relative}
-.subject-card:after{content:'→';position:absolute;right:18px;bottom:18px;color:#9aaabd;font-weight:900}
-.profile-mascot{display:flex;align-items:center;gap:12px;margin:0 0 14px}
-.profile-mascot img{width:54px;height:54px;object-fit:contain;background:#f8fbff;border-radius:14px;border:1px solid var(--line);padding:3px}
-.profile-mascot strong{display:block;color:var(--navy)}
-@media(max-width:860px){.hero.mascot-hero{min-height:0}.hero-mascot{width:170px;height:170px}.mascot-tip{display:none}}
-@media(max-width:620px){.hero.mascot-hero{padding-bottom:0}.hero-copy h2{font-size:26px}.hero-mascot{width:155px;height:155px;align-self:center;margin:0 auto -15px}.mascot-helper{width:52px;height:52px;right:12px;bottom:12px}.mascot-helper img{width:50px;height:50px}}
-
-
-/* Clickability fix */
-.subject-card,.category-card,.unit-head,.lesson,.answer,.btn,.back,.stage,.profile,.practice-strip button{
-  position:relative;
-  z-index:2;
-  pointer-events:auto;
-}
-.ad-slot,.mascot-tip,.mascot-helper{
-  pointer-events:none;
-}
-.topic-list,.unit,.unit-body,.card,.view{
-  position:relative;
-}
-#curriculumView,#subjectView,#quizView{
-  z-index:1;
-}
-
-
-.lesson:focus-visible,.subject-card:focus-visible,.category-card:focus-visible{
-  outline:3px solid rgba(37,99,235,.22);
-  outline-offset:2px;
-}
-.lesson .arrow{transition:transform .15s ease}
-.lesson:hover .arrow{transform:translateX(3px)}
-
-
-/* Logged-in profile dashboard */
-.profile-page{max-width:980px;margin:0 auto}
-.profile-back{margin-bottom:16px}
-.profile-hero-card{background:linear-gradient(135deg,#0f172a 0%,#18263c 100%);border-radius:20px;padding:26px;color:#fff;position:relative;overflow:hidden;box-shadow:0 16px 34px rgba(15,23,42,.14)}
-.profile-hero-card:after{content:"";position:absolute;right:-70px;top:-90px;width:260px;height:260px;border-radius:50%;background:rgba(255,196,0,.10)}
-.profile-identity{display:flex;align-items:center;gap:18px;position:relative;z-index:1}
-.profile-avatar-large{width:112px;height:112px;border-radius:24px;background:#fff;border:4px solid rgba(255,255,255,.18);display:grid;place-items:center;overflow:hidden;flex:0 0 auto}
-.profile-avatar-large img{width:110px;height:110px;object-fit:contain;transform:scale(1.08) translateY(4px)}
-.profile-name{font-size:27px;font-weight:900;margin:0 0 5px}
-.profile-handle{font-size:13px;color:#c9d4e3;margin-bottom:10px}
-.profile-meta{display:flex;flex-wrap:wrap;gap:8px}
-.profile-meta span{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.13);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700}
-.profile-edit{position:absolute;right:20px;top:20px;z-index:2;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);color:#fff;width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:16px}
-.profile-section-title{font-size:20px;margin:26px 0 12px;color:var(--navy)}
-.stat-grid-profile{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.stat-tile{border:1px solid var(--line);background:#fff;border-radius:15px;padding:17px;min-height:108px;box-shadow:0 5px 16px rgba(15,23,42,.04)}
-.stat-icon{font-size:21px;margin-bottom:10px}
-.stat-value{font-size:24px;font-weight:900;color:var(--navy);line-height:1}
-.stat-label{font-size:12px;color:var(--muted);margin-top:7px;font-weight:600}
-.stat-tile.streak{background:linear-gradient(135deg,#fff8dd,#fff1af);border-color:#f1d35c}
-.profile-two-col{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:16px}
-.profile-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 16px rgba(15,23,42,.04)}
-.progress-row{display:grid;grid-template-columns:120px 1fr 46px;gap:12px;align-items:center;margin:16px 0}
-.progress-row:first-of-type{margin-top:12px}
-.progress-row strong{font-size:13px}
-.progress-track{height:9px;border-radius:999px;background:#edf2f7;overflow:hidden}
-.progress-track span{display:block;height:100%;border-radius:inherit;background:#ffc400}
-.progress-pct{text-align:right;font-size:12px;font-weight:800;color:#52647b}
-.achievement{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #edf1f6}
-.achievement:last-child{border-bottom:0}
-.achievement-badge{width:42px;height:42px;border-radius:12px;background:#fff7d6;display:grid;place-items:center;font-size:20px}
-.achievement strong{display:block;font-size:13px}
-.achievement small{color:var(--muted);font-size:11px}
-.profile-actions-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.profile-actions-row .btn{min-width:150px}
-.profile-ad{margin-top:20px}
-.logged-in-pill{display:none}
-@media(max-width:820px){.stat-grid-profile{grid-template-columns:repeat(2,1fr)}.profile-two-col{grid-template-columns:1fr}.profile-identity{align-items:flex-start}.profile-avatar-large{width:92px;height:92px}.profile-avatar-large img{width:90px;height:90px}}
-@media(max-width:520px){.profile-hero-card{padding:20px 16px}.profile-identity{flex-direction:column}.profile-edit{right:14px;top:14px}.profile-name{font-size:23px}.stat-grid-profile{grid-template-columns:1fr 1fr}.stat-tile{min-height:98px;padding:14px}.progress-row{grid-template-columns:92px 1fr 40px}.profile-actions-row .btn{width:100%}}
-
-
-/* Navigation reliability */
-.view{display:none;pointer-events:none}
-.view.active{display:block;pointer-events:auto}
-#subjectView,#curriculumView,#quizView,#profileView{isolation:isolate}
-.category-card,.lesson,.subject-card{touch-action:manipulation}
-.progress-subject-btn{width:100%;display:grid;grid-template-columns:120px 1fr 46px;gap:12px;align-items:center;border:0;background:transparent;padding:0;margin:16px 0;text-align:left;cursor:pointer;color:inherit}
-.progress-subject-btn:hover strong{color:var(--blue)}
-.progress-subject-btn:focus-visible{outline:3px solid rgba(37,99,235,.20);outline-offset:4px;border-radius:8px}
-@media(max-width:520px){.progress-subject-btn{grid-template-columns:92px 1fr 40px}}
-
-
-/* Strong mobile layout */
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
-body{min-width:0;overflow-x:hidden}
-button{-webkit-tap-highlight-color:transparent}
-@media(max-width:700px){
-  .top{
-    position:sticky;
-    top:0;
-    height:auto;
-    min-height:62px;
-    padding:9px 12px;
-    gap:8px;
-    align-items:center;
-  }
-  .brand{font-size:17px;min-width:0}
-  .brand small{display:none}
-  .account{margin-left:auto;gap:5px;min-width:0}
-  .account .pill{font-size:11px;padding:7px 8px}
-  .account .pill span{display:none}
-  .profile{min-width:40px;height:40px;padding:4px;border-radius:12px;justify-content:center}
-  .profile>span:last-child{display:none}
-  .avatar{width:31px;height:31px}
-  .page{width:100%;max-width:none;padding:14px 10px calc(84px + env(safe-area-inset-bottom))}
-  .toolbar{display:block;margin-bottom:14px}
-  .toolbar .back,.back-left{width:auto;min-height:44px;margin-bottom:12px}
-  .h1{font-size:24px;line-height:1.2}
-  .eyebrow{font-size:10px}
-  .stage-tabs{display:flex;width:100%;gap:6px;overflow-x:auto;padding-bottom:3px;scrollbar-width:none}
-  .stage-tabs::-webkit-scrollbar{display:none}
-  .stage{flex:0 0 auto;min-height:44px;padding:9px 16px}
-  .hero.mascot-hero{display:block;padding:18px 16px 0;margin:12px 0}
-  .hero-copy{max-width:none}
-  .hero-copy h2{font-size:25px}
-  .hero-copy p{font-size:14px;line-height:1.55}
-  .hero-mascot{display:block;width:145px;height:145px;margin:8px auto -10px}
-  .hero-stat{width:100%;margin-bottom:16px}
-  .subject-grid,.category-grid{display:grid;grid-template-columns:1fr;gap:10px}
-  .subject-card,.category-card{
-    width:100%;
-    min-height:96px;
-    padding:15px 16px;
-    border-radius:13px;
-    transform:none!important;
-  }
-  .subject-card strong,.category-card strong{font-size:16px}
-  .subject-card small,.category-card small{font-size:12px}
-  .card{padding:14px;border-radius:13px}
-  .unit{border-radius:11px}
-  .unit-head{min-height:48px;padding:12px 13px;align-items:center}
-  .unit-title{gap:7px;font-size:13px}
-  .unit-title span:first-child{min-width:auto}
-  .lesson{
-    min-height:52px;
-    padding:12px 13px;
-    align-items:center;
-  }
-  .lesson-label{gap:8px;font-size:14px;min-width:0}
-  .lesson-label span:last-child{overflow-wrap:anywhere}
-  .num{min-width:30px;font-size:12px}
-  .arrow{flex:0 0 auto}
-  .quiz-shell{max-width:none;width:100%}
-  .quiz-card{border-radius:13px}
-  .quiz-head{padding:14px;align-items:center}
-  .quiz-head strong{font-size:16px}
-  .quiz-body{padding:18px 14px}
-  .question{font-size:19px;line-height:1.38;margin:10px 0 17px}
-  .answer{min-height:50px;padding:13px 14px;font-size:14px}
-  .quiz-actions{display:block;margin-top:14px}
-  .quiz-actions .btn{width:100%;min-height:48px}
-  .btn,.back,.practice-strip button{min-height:44px}
-  .practice-strip{padding:13px;gap:8px}
-  .summary-card{padding:17px 14px;border-radius:13px}
-  .summary-grid{grid-template-columns:1fr 1fr}
-  .summary-stat:last-child{grid-column:1/-1}
-  .profile-page{max-width:none}
-  .profile-hero-card{padding:18px 14px;border-radius:15px}
-  .profile-identity{display:flex;flex-direction:row;align-items:center;gap:12px;padding-right:34px}
-  .profile-avatar-large{width:72px;height:72px;border-radius:18px}
-  .profile-avatar-large img{width:70px;height:70px}
-  .profile-name{font-size:21px}
-  .profile-handle{margin-bottom:7px}
-  .profile-meta{gap:5px}
-  .profile-meta span{font-size:10px;padding:5px 7px}
-  .stat-grid-profile{grid-template-columns:1fr 1fr;gap:8px}
-  .stat-tile{min-height:92px;padding:13px}
-  .stat-value{font-size:20px}
-  .profile-two-col{grid-template-columns:1fr;gap:4px}
-  .profile-panel{padding:14px}
-  .progress-subject-btn{grid-template-columns:86px 1fr 38px;min-height:46px;margin:10px 0}
-  .profile-section-title{font-size:18px;margin:20px 0 10px}
-  .modal{padding:10px;align-items:flex-end}
-  .modal-card{
-    width:100%;
-    max-width:none;
-    max-height:88vh;
-    overflow-y:auto;
-    border-radius:18px 18px 8px 8px;
-    padding:22px 18px calc(18px + env(safe-area-inset-bottom));
-  }
-  .modal-actions{display:grid;grid-template-columns:1fr 1fr}
-  .modal-actions .btn{width:100%}
-  .mascot-helper,.mascot-tip{display:none!important}
-  .desktop-ad{display:none!important}
-  .mobile-support{
-    display:flex!important;
-    width:calc(100% - 20px);
-    margin:14px 10px;
-    min-height:80px;
-  }
-}
-@media(max-width:380px){
-  .account .pill{padding:6px 7px}
-  .profile-identity{align-items:flex-start}
-  .profile-avatar-large{width:62px;height:62px}
-  .profile-avatar-large img{width:60px;height:60px}
-  .stat-grid-profile{grid-template-columns:1fr}
-  .summary-grid{grid-template-columns:1fr}
-  .summary-stat:last-child{grid-column:auto}
-}
-
-
-/* Additional Google Ads inventory */
-.ad-banner{min-height:90px}
-.ad-rectangle{min-height:250px}
-.ad-mobile-banner{min-height:70px}
-.ad-label{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8795a8;margin-bottom:5px}
-.ad-home-mid{margin:18px 0}
-.ad-topic-bottom{margin:18px 0 4px}
-.ad-summary{margin-top:18px}
-@media(max-width:700px){
-  .ad-banner,.ad-rectangle{display:none!important}
-  .ad-mobile-banner{display:flex!important;margin:14px 0;min-height:70px}
-}
-@media(min-width:701px){
-  .ad-mobile-banner{display:none!important}
-}
-
-
-/* Cambridge stage/year chooser */
-.level-chooser{max-width:980px;margin:0 auto}
-.level-intro{text-align:center;max-width:680px;margin:12px auto 28px}
-.level-intro h1{font-size:34px;margin:0 0 8px;color:var(--navy)}
-.level-intro p{margin:0;color:var(--muted);line-height:1.6}
-.level-group{margin:22px 0}
-.level-group-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:10px}
-.level-group-head h2{font-size:18px;margin:0;color:var(--navy)}
-.level-group-head span{font-size:12px;color:var(--muted);font-weight:700}
-.level-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
-.level-grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.level-grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.level-card{border:1px solid var(--line);background:#fff;border-radius:14px;min-height:86px;padding:15px 12px;text-align:left;cursor:pointer;box-shadow:0 4px 14px rgba(27,66,105,.03);transition:.16s;position:relative}
-.level-card:hover{transform:translateY(-2px);border-color:#9fc2e7;box-shadow:var(--shadow)}
-.level-card strong{display:block;font-size:16px;color:var(--navy);margin-bottom:4px}
-.level-card small{display:block;color:var(--muted);font-size:11px;line-height:1.35}
-.level-card:after{content:"›";position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#8da1b6;font-size:20px}
-.selected-level{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.selected-level .current-level{background:#eef5ff;border:1px solid #cfe0f3;color:#1f527f;border-radius:999px;padding:9px 13px;font-size:12px;font-weight:900}
-.change-level{border:0;background:transparent;color:var(--blue);font-size:12px;font-weight:900;cursor:pointer;padding:8px}
-@media(max-width:800px){.level-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:520px){
-  .level-intro{text-align:left;margin:4px 0 22px}
-  .level-intro h1{font-size:27px}
-  .level-group{margin:20px 0}
-  .level-group-head{align-items:flex-start;flex-direction:column;gap:3px}
-  .level-grid,.level-grid.cols-3,.level-grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-  .level-card{min-height:82px;padding:13px 11px}
-  .level-card strong{font-size:15px}
-  .selected-level{width:100%;justify-content:space-between}
-}
-
-
-/* Report question */
-.report-question-btn{margin-top:12px;border:0;background:transparent;color:#6b7f96;font-size:12px;font-weight:800;cursor:pointer;padding:6px 0;text-decoration:underline;text-underline-offset:3px}
-.report-question-btn:hover{color:#1f5f99}
-.report-modal .modal-card{max-width:440px}
-.report-options{display:grid;gap:8px;margin:16px 0}
-.report-option{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:11px 12px;cursor:pointer;background:#fff}
-.report-option:hover{background:#f8fbff}
-.report-option input{width:auto;margin:0}
-.report-note{width:100%;min-height:84px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
-.report-success{display:none;background:#eefaf3;border:1px solid #cfead9;color:#2f6b45;border-radius:10px;padding:11px 12px;margin-top:12px;font-size:12px}
-.report-success.show{display:block}
-
-
-.modal-card{position:relative}
-.modal-x{
-  position:absolute;
-  top:12px;
-  right:12px;
-  width:34px;
-  height:34px;
-  border:0;
-  background:transparent;
-  border-radius:9px;
-  color:#506176;
-  font-size:24px;
-  line-height:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  z-index:5;
-}
-.modal-x:hover{background:#f1f5f9;color:#0f172a}
-@media(max-width:700px){
-  .modal-x{top:10px;right:10px;width:38px;height:38px;font-size:26px}
-}
-
-
-/* One-word fill-in-the-blank quiz */
-.fill-answer-wrap{display:flex;gap:10px;align-items:stretch;margin-top:18px}
-.fill-answer-input{flex:1;min-width:0;border:1px solid #c9d8e8;border-radius:11px;padding:13px 14px;font:600 16px Inter,system-ui,sans-serif;color:#102d4f;outline:none}
-.fill-answer-input:focus{border-color:#3478f6;box-shadow:0 0 0 3px rgba(52,120,246,.12)}
-.fill-answer-input::placeholder{font-weight:500;color:#91a0b2}
-.fill-check-btn{white-space:nowrap}
-.fill-hint{font-size:11px;color:#71839a;margin-top:7px}
-.fill-correct{border-color:#45a96b;background:#f2fbf5}
-.fill-wrong{border-color:#df6b6b;background:#fff5f5}
-@media(max-width:520px){
-  .fill-answer-wrap{flex-direction:column}
-  .fill-check-btn{width:100%}
-}
-
-
-.modal-x{z-index:9999!important;pointer-events:auto!important}
-.modal{z-index:9990}
-
-</style>
+    /* Mobile Responsive Setup */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-<header class="top">
-  <div class="brand">Checkp<span class="brand-accent">o</span>int Skills<small>Cambridge Checkpoint practice</small></div>
-  <div class="account">
-    <div class="pill">🔥 <strong id="streakTop">0</strong> <span>day streak</span></div>
-    <div class="pill">⭐ <strong id="pointsTop">0</strong> <span>pts</span></div>
-    <button type="button" class="profile" onclick="openProfileSmart()"><span class="avatar mascot-avatar"><img src="assets/checkpoint-mascot.png" alt=""></span><span id="profileTopLabel">Profile</span></button>
-  </div>
-</header>
 
-<main class="page">
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">BrandName</div>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-  <section class="view active" id="levelView">
-    <div class="level-chooser">
-      <div class="level-intro">
-        <div class="eyebrow">CAMBRIDGE PATHWAY</div>
-        <h1>Choose your stage or year</h1>
-        <p>Select your current Cambridge level first. You can change it anytime.</p>
+  <!-- Hero Section -->
+  <header id="hero" class="hero">
+    <h1>Build Your Online Presence</h1>
+    <p>A clean, responsive HTML/CSS template designed to jumpstart your next project quickly and efficiently.</p>
+    <a href="#contact" class="btn">Get Started</a>
+  </header>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <h2>Our Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Fully Responsive</h3>
+        <p>Adapts seamlessly to mobile phones, tablets, and desktop devices out of the box.</p>
       </div>
+      <div class="feature-card">
+        <h3>Fast Performance</h3>
+        <p>Lightweight structure without unnecessary dependencies to keep load times minimal.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Easy Customization</h3>
+        <p>Well-organized CSS structure allowing you to tweak colors, fonts, and layouts in minutes.</p>
+      </div>
+    </div>
+  </section>
 
-      <div class="level-group">
-        <div class="level-group-head"><h2>Cambridge Primary</h2><span>6 years · Stages 1–6</span></div>
-        <div class="level-grid">
-          <button type="button" class="level-card" onclick="chooseLevel('Stage 1','Cambridge Primary')"><strong>Stage 1</strong><small>Primary</small></button>
-          <button type="button" class="level-card" onclick="chooseLevel('Stage 2','Cambridge Primary')"><strong>Stage 2</strong><small>Primary</small></button>
-          <button type="button" class="level-card" onclick="chooseLevel('Stage 3','Cambridge Primary')"><strong>Stage 3</strong><small>Primary</small></button>
-          <button type="button" class="level-card" onclick="chooseLevel('Stage 4','Cambridge Primary')"><strong>Stage 4</strong><small>Primary</small></button>
-          <button type="button" class="level-card" onclick="chooseLevel('Stage 5','Cambridge Primary')"><strong>Stage 5</strong><small>Primary</small></button>
-          <button type="button" class="level-card" onclick="chooseLevel('Stage 6','Cambridge Primary')"><strong>Stage 6</strong><small>Primary</small></button>
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <div class="contact-container">
+      <h2>Send a Message</h2>
+      <form action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required placeholder="Your name">
         </div>
-      </div>
-
-      <div class="level-group">
-        <div class="level-group-head"><h2>Cambridge Lower Secondary</h2><span>3 years · Stages 7–9</span></div>
-        <div class="level-grid cols-3">
-          <button type="button" class="level-card" onclick="chooseLevel('Stage 7','Cambridge Lower Secondary')"><strong>Stage 7</strong><small>Lower Secondary</small></button>
-          <button type="button" class="level-card" onclick="chooseLevel('Stage 8','Cambridge Lower Secondary')"><strong>Stage 8</strong><small>Lower Secondary</small></button>
-          <button type="button" class="level-card" onclick="chooseLevel('Stage 9','Cambridge Lower Secondary')"><strong>Stage 9</strong><small>Lower Secondary</small></button>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="Your email address">
         </div>
-      </div>
-
-      <div class="level-group">
-        <div class="level-group-head"><h2>Cambridge IGCSE</h2><span>2 years · usually Years 10–11</span></div>
-        <div class="level-grid cols-2">
-          <button type="button" class="level-card" onclick="chooseLevel('Year 10','Cambridge IGCSE')"><strong>Year 10</strong><small>IGCSE</small></button>
-          <button type="button" class="level-card" onclick="chooseLevel('Year 11','Cambridge IGCSE')"><strong>Year 11</strong><small>IGCSE</small></button>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="4" required placeholder="How can we help?"></textarea>
         </div>
-      </div>
-
-      <div class="level-group">
-        <div class="level-group-head"><h2>Cambridge International AS &amp; A Level</h2><span>2 years · usually Years 12–13</span></div>
-        <div class="level-grid cols-2">
-          <button type="button" class="level-card" onclick="chooseLevel('Year 12','Cambridge International AS & A Level')"><strong>Year 12</strong><small>AS Level</small></button>
-          <button type="button" class="level-card" onclick="chooseLevel('Year 13','Cambridge International AS & A Level')"><strong>Year 13</strong><small>A Level</small></button>
+        <div class="form-group">
+          <button type="submit" class="btn">Send Message</button>
         </div>
-      </div>
-
-      <div class="ad-slot ad-banner" aria-label="Google advertisement placeholder">
-        <div class="ad-label">Advertisement</div><span>Google Ads space</span>
-      </div>
-      <div class="ad-slot ad-mobile-banner" aria-label="Google advertisement placeholder">
-        <div class="ad-label">Advertisement</div><span>Google Ads space</span>
-      </div>
+      </form>
     </div>
   </section>
 
-  <section class="view" id="homeView">
-    <div class="toolbar">
-      <div><div class="eyebrow" id="programLabel">CAMBRIDGE LOWER SECONDARY</div><h1 class="h1">Choose a subject</h1></div>
-      <div class="selected-level"><span class="current-level" id="currentLevelLabel">Stage 9</span><button type="button" class="change-level" onclick="showView('levelView')">Change stage/year</button></div>
-    </div>
-    <section class="hero mascot-hero">
-      <div class="hero-copy">
-        <div class="kicker">PRACTICE • LEARN • IMPROVE</div>
-        <h2>Learn. Practice.<br><span>Improve every day.</span></h2>
-        <p>Choose a subject, pick a curriculum topic, and practise with focused Cambridge Checkpoint-style questions.</p>
-      </div>
-      <img class="hero-mascot" src="assets/checkpoint-mascot.png" alt="Checkpoint learning mascot">
-      <div class="hero-stat"><div style="display:flex;justify-content:space-between;margin-bottom:9px"><span class="muted">Weekly goal</span><strong>62%</strong></div><div class="bar"><span style="width:62%"></span></div></div>
-    </section>
-
-<div class="ad-slot ad-banner ad-home-mid" aria-label="Google advertisement placeholder">
-  <div class="ad-label">Advertisement</div>
-  <span>Google Ads space</span>
-  <small style="display:block;margin-top:4px">Responsive banner</small>
-</div>
-<div class="ad-slot ad-mobile-banner" aria-label="Google advertisement placeholder">
-  <div class="ad-label">Advertisement</div>
-  <span>Google Ads space</span>
-</div>
-
-    <div class="subject-grid">
-      <button type="button" class="subject-card" onclick="openSubject('Mathematics')"><span class="icon">➗</span><strong>Mathematics</strong><small>Number, Algebra, Geometry and more</small></button>
-      <button type="button" class="subject-card" onclick="openSubject('Science')"><span class="icon">🔬</span><strong>Science</strong><small>Biology, Physics & Chemistry</small></button>
-      <button type="button" class="subject-card" onclick="openSubject('English')"><span class="icon">📘</span><strong>English</strong><small>Reading and Writing</small></button>
-    </div>
-    <div class="practice-strip"><div><strong>Practice</strong><div class="muted" style="font-size:13px;margin-top:3px">Retry questions you answered incorrectly.</div></div><button onclick="openReviewMistakes()">Review mistakes →</button></div>
-  </section>
-
-  <section class="view" id="subjectView">
-    <button type="button" class="back back-left" onclick="showView('homeView')">← Back to subjects</button>
-    <div class="eyebrow">STEP 2</div><h1 class="h1" id="subjectTitle">Choose a Science section</h1>
-    <div class="card" style="margin-top:16px"><h2 id="subjectCardTitle">Science</h2><p>Choose a section to continue.</p><div class="category-grid" id="categoryGrid"></div></div>
-  </section>
-
-  <section class="view" id="curriculumView">
-    <button type="button" class="back back-left" id="backToSubjectBtn" onclick="backToSubject()">← Back to Science</button>
-    <div class="eyebrow">STEP 3</div><h1 class="h1" id="curriculumTitle">Biology — Choose a topic</h1>
-    <div class="card" style="margin-top:16px"><h2 id="curriculumSection">Biology</h2><p>Select a topic below. The quiz will open on a separate page.</p><div class="topic-list" id="unitList"></div></div>
-  
-<div class="ad-slot ad-banner ad-topic-bottom" aria-label="Google advertisement placeholder">
-  <div class="ad-label">Advertisement</div>
-  <span>Google Ads space</span>
-  <small style="display:block;margin-top:4px">Shown between topic browsing and other page content</small>
-</div>
-<div class="ad-slot ad-mobile-banner" aria-label="Google advertisement placeholder">
-  <div class="ad-label">Advertisement</div>
-  <span>Google Ads space</span>
-</div>
-
-</section>
-
-  <section class="view" id="quizView">
-    <div class="quiz-shell">
-      <button type="button" class="back back-left" onclick="backToCurriculum()">← Back to topics</button>
-      <div class="quiz-card">
-        <div class="quiz-head"><div><strong id="quizTitle">Topic quiz</strong><div class="crumb" id="quizCrumb"></div></div><strong id="mastery">Mastery 40</strong></div>
-        <div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
-      </div>
-      <div class="note">
-<div class="ad-slot desktop-ad" aria-label="Google advertisement placeholder">
-  <strong>Advertisement</strong>
-  <span>Google Ads space</span>
-  <small style="display:block;margin-top:4px">Recommended desktop size: 728 × 90</small>
-</div>
-
-Prototype only. Questions shown here are original sample questions. Some questions use a one-word fill-in-the-blank format.</div>
-    </div>
-  </section>
-
-
-  <section class="view" id="summaryView">
-    <div class="summary-card">
-      <div class="eyebrow">QUIZ COMPLETE</div>
-      <div class="summary-score">
-        <div class="big" id="summaryPercent">0%</div>
-        <h1 id="summaryTitle" style="margin:10px 0 6px">Topic summary</h1>
-        <div class="muted" id="summaryCrumb"></div>
-      </div>
-      <div class="summary-grid">
-        <div class="summary-stat"><strong id="summaryCorrect">0/5</strong><span class="muted">Correct</span></div>
-        <div class="summary-stat"><strong id="summaryMastery">40</strong><span class="muted">Mastery</span></div>
-        <div class="summary-stat"><strong id="summaryPoints">0</strong><span class="muted">Points earned</span></div>
-      </div>
-      <div id="summaryMessage" class="feedback show good" style="display:block"></div>
-      <div class="summary-actions" style="margin-top:22px">
-        <button class="btn" onclick="restartQuiz()">Try again</button>
-        <button class="btn" onclick="openReviewMistakes()">Review mistakes</button>
-        <button class="btn primary" onclick="backToCurriculum()">Choose another topic</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="view" id="reviewView">
-    <button type="button" class="back back-left" onclick="showView('homeView')">← Back</button><div class="eyebrow">PRACTICE</div><h1 class="h1">Review mistakes</h1>
-    <div class="card" style="margin-top:16px"><h2>Questions to retry</h2><p>Choose a previous mistake to practise again.</p><div class="review-list"><button class="review-item" onclick="quickQuiz('Science','Biology','1.4','Joints')"><strong>Joints</strong><small>Science · Biology · Unit 1</small></button><button class="review-item" onclick="quickQuiz('Mathematics','Algebra','A2','Linear equations')"><strong>Linear equations</strong><small>Mathematics · Algebra</small></button><button class="review-item" onclick="quickQuiz('English','Reading','R2','Inference')"><strong>Inference</strong><small>English · Reading</small></button></div></div>
-  </section>
-
-
-  <section class="view" id="profileView">
-    <div class="profile-page">
-      <button type="button" class="back back-left profile-back" onclick="showView('homeView')">← Back to learning</button>
-
-      <section class="profile-hero-card">
-        <button class="profile-edit" type="button" title="Edit profile" onclick="alert('Profile editing can be connected later.')">✎</button>
-        <div class="profile-identity">
-          <div class="profile-avatar-large"><img src="assets/checkpoint-mascot.png" alt="Checkpoint mascot profile avatar"></div>
-          <div>
-            <h1 class="profile-name">Emma</h1>
-            <div class="profile-handle">@emma_stage9</div>
-            <div class="profile-meta">
-              <span>Stage 9</span>
-              <span>Joined Aug 2026</span>
-              <span>Cambridge Checkpoint learner</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <h2 class="profile-section-title">Statistics</h2>
-      <div class="stat-grid-profile">
-        <div class="stat-tile streak"><div class="stat-icon">🔥</div><div class="stat-value">12</div><div class="stat-label">Day streak</div></div>
-        <div class="stat-tile"><div class="stat-icon">⭐</div><div class="stat-value">2,120</div><div class="stat-label">Total points</div></div>
-        <div class="stat-tile"><div class="stat-icon">🎯</div><div class="stat-value">68%</div><div class="stat-label">Overall mastery</div></div>
-        <div class="stat-tile"><div class="stat-icon">✅</div><div class="stat-value">24</div><div class="stat-label">Topics practised</div></div>
-      </div>
-
-      <div class="profile-two-col">
-        <section>
-          <h2 class="profile-section-title">Learning progress</h2>
-          <div class="profile-panel">
-            <button type="button" class="progress-subject-btn" onclick="openSubject('Science')"><strong>Science</strong><div class="progress-track"><span style="width:76%"></span></div><div class="progress-pct">76%</div></button>
-            <button type="button" class="progress-subject-btn" onclick="openSubject('Mathematics')"><strong>Mathematics</strong><div class="progress-track"><span style="width:64%"></span></div><div class="progress-pct">64%</div></button>
-            <button type="button" class="progress-subject-btn" onclick="openSubject('English')"><strong>English</strong><div class="progress-track"><span style="width:58%"></span></div><div class="progress-pct">58%</div></button>
-            <div class="profile-actions-row">
-              <button type="button" class="btn primary" onclick="showView('homeView')">Choose a subject</button>
-              <button type="button" class="btn" onclick="showReview()">Review mistakes</button>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2 class="profile-section-title">Achievements</h2>
-          <div class="profile-panel">
-            <div class="achievement"><div class="achievement-badge">🔥</div><div><strong>10-day streak</strong><small>Practised for 10 days in a row</small></div></div>
-            <div class="achievement"><div class="achievement-badge">⭐</div><div><strong>2,000 points</strong><small>Passed the 2,000 point milestone</small></div></div>
-            <div class="achievement"><div class="achievement-badge">🧪</div><div><strong>Science explorer</strong><small>Completed 10 Science topics</small></div></div>
-          </div>
-        </section>
-      </div>
-
-      <div class="ad-slot desktop-ad profile-ad" aria-label="Google advertisement placeholder">
-        <strong>Advertisement</strong>
-        <span>Google Ads space</span>
-        <small style="display:block;margin-top:4px">Responsive ad placement outside learning activity</small>
-      </div>
-
-      <div class="profile-actions-row">
-        <button type="button" class="btn" onclick="demoLogout()">Log out</button>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<div class="modal" id="profileModal"><div class="modal-card"><button type="button" class="modal-x" aria-label="Close profile" onclick="closeAnyModal()">×</button><div id="loggedOut"><div class="profile-mascot"><img src="assets/checkpoint-mascot.png" alt=""><div><strong>Checkpoint</strong><span class="muted" style="font-size:12px">Your learning companion</span></div></div><h2>Profile</h2><p class="muted">Log in to save your progress, streak, points and mistakes.</p><div class="modal-actions"><button class="btn" onclick="openSignup()">Sign up</button><button class="btn primary" onclick="openLogin()">Log in</button></div></div><div id="loggedIn" class="hidden"><h2>Emma</h2><p class="muted">Stage 9 · Student Plus</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0"><div class="hero-stat" style="min-width:0;text-align:center"><strong>12</strong><div class="muted" style="font-size:11px">streak</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>2,120</strong><div class="muted" style="font-size:11px">points</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>72%</strong><div class="muted" style="font-size:11px">progress</div></div></div><button class="btn primary" style="width:100%;margin-bottom:8px" onclick="closeModal();showView('profileView')">View full profile</button><button class="btn" style="width:100%;margin-bottom:8px" onclick="closeModal();showReview()">Review mistakes</button><button class="btn" style="width:100%" onclick="closeModal();demoLogout()">Log out</button></div><div class="modal-actions"></div></div></div>
-<div class="modal" id="loginModal"><div class="modal-card"><button class="modal-x" aria-label="Close login" onclick="closeAnyModal()">×</button><h2>Welcome back</h2><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="demoLogin()">Log in</button></div></div></div>
-<div class="modal" id="signupModal"><div class="modal-card"><button class="modal-x" aria-label="Close sign up" onclick="closeAnyModal()">×</button><h2>Create account</h2><div class="field"><label>Student name</label><input placeholder="Your name"></div><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="Create password"></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="closeSignup();openLogin()">Sign up</button></div></div></div>
-
-<script>
-function closeAnyModal(){
-  document.querySelectorAll('.modal.show').forEach(function(modal){
-    modal.classList.remove('show');
-    modal.style.display='';
-  });
-  document.body.classList.remove('modal-open');
-}
-
-const curriculum={
- Science:{
-  'Biology':[
-   {unit:'Unit 1',title:'Plants and human as organisms',items:[['1.1','Plant organs'],['1.2','Human organ systems'],['1.3','The human skeleton'],['1.4','Joints'],['1.5','Muscles'],['1.6','Studying of the human body']]},
-   {unit:'Unit 2',title:'Cells and organisms',items:[['2.1','Characteristics of living organisms'],['2.2','Micro-organisms'],['2.3','Micro-organisms and decay'],['2.4','Microorganism and food'],['2.5','Microorganism and disease'],['2.6','Plant Cells'],['2.7','Animal Cells'],['2.8','Cells, Tissues and organs']]},
-   {unit:'Unit 3',title:'Living Things in their environment',items:[['3.1','The human circulatory system'],['3.2','Heart'],['3.3','Blood'],['3.4','Blood vessel'],['3.5','Ozone depletion'],['3.6','Conservation'],['3.7','Energy resources']]}
-  ],
-  'Physics & Chemistry':[
-   {unit:'Unit 1',title:'Forces and energy',items:[['1.1','Forces and motion'],['1.2','Speed and distance'],['1.3','Energy transfers'],['1.4','Pressure']]},
-   {unit:'Unit 2',title:'Matter and reactions',items:[['2.1','Particle model'],['2.2','Elements and compounds'],['2.3','Acids and alkalis'],['2.4','Chemical reactions']]}
-  ]
- },
- Mathematics:{
-  'Number':[{unit:'Unit 1',title:'Number',items:[['N1','Integers'],['N2','Fractions'],['N3','Decimals'],['N4','Percentages'],['N5','Ratio and proportion']]}],
-  'Algebra':[{unit:'Unit 1',title:'Algebra',items:[['A1','Expressions'],['A2','Linear equations'],['A3','Sequences'],['A4','Graphs']]}]
- },
- English:{
-  'Reading':[{unit:'Unit 1',title:'Reading skills',items:[['R1','Main idea'],['R2','Inference'],['R3','Vocabulary in context'],['R4','Writer’s purpose and tone']]}],
-  'Writing':[{unit:'Unit 1',title:'Writing skills',items:[['W1','Sentence structure'],['W2','Punctuation and grammar'],['W3','Organising an argument'],['W4','Clarity and style']]}]
- }
-};
-const categories={Mathematics:[['➕','Number','Fractions, percentages, ratio and more'],['𝑥','Algebra','Expressions, equations, sequences and graphs']],Science:[['🌿','Biology','Plants, cells, human systems and environment'],['⚗️','Physics & Chemistry','Forces, energy, matter and reactions']],English:[['📖','Reading','Comprehension, inference and vocabulary'],['✍️','Writing','Grammar, structure and composition']]};
-const topicQuestions={
- 'Joints':[
-  {type:'fill',q:'The shoulder has a ______ joint, allowing movement in many directions.',answer:'ball-and-socket',e:'The shoulder is a ball-and-socket joint, allowing movement in many directions.'},
-  {q:'What is the main role of ligaments at a joint?',a:['Join muscle to bone','Join bone to bone','Produce blood cells','Store minerals'],c:1,e:'Ligaments connect bone to bone and help stabilise joints.'},
-  {q:'Which joint mainly allows bending and straightening in one plane?',a:['Ball-and-socket','Hinge','Fixed','Gliding only'],c:1,e:'A hinge joint, such as the elbow, mainly allows bending and straightening.'},
-  {q:'Which tissue reduces friction between the ends of bones at a joint?',a:['Cartilage','Skin','Nerve tissue','Bone marrow'],c:0,e:'Cartilage covers the ends of bones and helps them move smoothly.'},
-  {q:'Which structure joins a muscle to a bone?',a:['Ligament','Tendon','Cartilage','Joint capsule'],c:1,e:'A tendon connects muscle to bone.'}
- ],
- 'Plant organs':[
-  {type:'fill',q:'The plant organ that mainly absorbs water and mineral ions from the soil is the ______.',answer:'root',e:'Roots absorb water and mineral ions from the soil.'},
-  {q:'Which organ is the main site of photosynthesis?',a:['Leaf','Root','Flower','Seed'],c:0,e:'Leaves contain chloroplast-rich cells and are the main site of photosynthesis.'},
-  {q:'What is one important function of the stem?',a:['Absorb light only','Support the plant and transport substances','Make seeds only','Take in carbon dioxide from soil'],c:1,e:'The stem supports leaves and flowers and contains transport tissues.'},
-  {q:'Which plant organ is mainly involved in sexual reproduction?',a:['Root','Flower','Stem','Leaf'],c:1,e:'Flowers contain the reproductive structures of flowering plants.'},
-  {q:'Which tissue carries water from the roots towards the leaves?',a:['Phloem','Xylem','Epidermis','Pollen'],c:1,e:'Xylem transports water and mineral ions upward through the plant.'}
- ],
- 'Heart':[
-  {type:'fill',q:'The main function of the heart is to ______ blood around the body.',answer:'pump',e:'The heart pumps blood around the body.'},
-  {q:'Which chamber pumps oxygenated blood to the body?',a:['Right atrium','Right ventricle','Left atrium','Left ventricle'],c:3,e:'The left ventricle pumps oxygenated blood through the aorta to the body.'},
-  {q:'Which blood vessel carries blood away from the heart?',a:['Artery','Vein','Capillary','Valve'],c:0,e:'Arteries carry blood away from the heart.'},
-  {q:'What prevents blood from flowing backwards inside the heart?',a:['Alveoli','Valves','Platelets','Ribs'],c:1,e:'Heart valves help maintain one-way blood flow.'},
-  {q:'Which side of the heart pumps blood to the lungs?',a:['Left side','Right side','Both atria only','Neither side'],c:1,e:'The right side pumps deoxygenated blood to the lungs.'}
- ],
- 'Linear equations':[
-  {q:'Solve 4x + 7 = 31.',a:['x = 4','x = 5','x = 6','x = 8'],c:2,e:'Subtract 7 to get 4x = 24, then divide by 4.'},
-  {q:'Solve x + 9 = 15.',a:['x = 4','x = 6','x = 9','x = 24'],c:1,e:'Subtract 9 from both sides: x = 6.'},
-  {q:'Solve 3x = 21.',a:['x = 6','x = 7','x = 8','x = 18'],c:1,e:'Divide both sides by 3: x = 7.'},
-  {q:'Solve 2x - 5 = 9.',a:['x = 2','x = 5','x = 7','x = 14'],c:2,e:'Add 5 to get 2x = 14, then divide by 2.'},
-  {q:'Solve 5x + 2 = 17.',a:['x = 2','x = 3','x = 4','x = 5'],c:1,e:'Subtract 2 to get 5x = 15, then divide by 5.'}
- ],
- 'Inference':[
-  {q:'A character keeps checking the clock and tapping a foot. What can you infer?',a:['They are probably impatient','They are asleep','They are cooking','They are celebrating'],c:0,e:'Repeatedly checking the clock and tapping a foot suggests impatience or nervous waiting.'},
-  {q:'The pavement is wet and people are closing umbrellas. What is a reasonable inference?',a:['It has recently rained','It is snowing','It is very hot','The road was painted'],c:0,e:'Wet pavement and closing umbrellas suggest that rain has just stopped.'},
-  {q:'Mina whispers and points to a sleeping baby. Why is she probably whispering?',a:['She lost her voice','She does not want to wake the baby','She is angry','She is outdoors'],c:1,e:'The nearby sleeping baby provides evidence that Mina is trying to stay quiet.'},
-  {q:'A student smiles after reading a message saying “Well done!”. How do they probably feel?',a:['Pleased','Confused','Hungry','Tired'],c:0,e:'The positive message and smile suggest the student feels pleased.'},
-  {q:'The lights are off, the door is locked, and the sign says “Back at 9”. What can you infer?',a:['The shop is currently closed','The shop is crowded','The shop sells lights','It is 9 o’clock'],c:0,e:'The locked door, lights off and sign all indicate that the shop is closed for now.'}
- ]};
-
-let currentSubject='Science',currentCategory='Biology',currentCode='',currentTopic='',qIndex=0,mastery=40,answered=false,loggedIn=false,correctCount=0,wrongCount=0;
-let currentLevel='Stage 9', currentProgram='Cambridge Lower Secondary';
-let reportedQuestions=[];
-function chooseLevel(level,program){
-  currentLevel=level;
-  currentProgram=program;
-  const levelLabel=document.getElementById('currentLevelLabel');
-  const programLabel=document.getElementById('programLabel');
-  if(levelLabel)levelLabel.textContent=level;
-  if(programLabel)programLabel.textContent=program.toUpperCase();
-  showView('homeView');
-}
-function showView(id){
-  const target=document.getElementById(id);
-  if(!target){console.error('Missing view:',id);return}
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  target.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function openSubject(subject){
-  if(!categories[subject]){console.error('Unknown subject:',subject);return}
-  currentSubject=subject;
-  document.getElementById('subjectTitle').textContent='Choose a '+subject+' section';
-  document.getElementById('subjectCardTitle').textContent=subject;
-  const grid=document.getElementById('categoryGrid');
-  grid.innerHTML='';
-  categories[subject].forEach(([icon,name,desc])=>{
-    const b=document.createElement('button');
-    b.type='button';
-    b.className='category-card';
-    b.dataset.category=name;
-    b.innerHTML=`<span class="icon">${icon}</span><strong>${name}</strong><small>${desc}</small>`;
-    const goCategory=()=>openCurriculum(name);
-    b.addEventListener('click',goCategory);
-    b.addEventListener('touchend',(e)=>{e.preventDefault();goCategory()},{passive:false});
-    grid.appendChild(b);
-  });
-  showView('subjectView');
-}
-function backToSubject(){openSubject(currentSubject)}
-function openCurriculum(category){
-  currentCategory=category;
-  const subjectData=curriculum[currentSubject]||{};
-  const units=subjectData[category]||[];
-  document.getElementById('backToSubjectBtn').textContent='← Back to '+currentSubject;
-  document.getElementById('curriculumTitle').textContent=category+' — Choose a topic';
-  document.getElementById('curriculumSection').textContent=category;
-  const box=document.getElementById('unitList');
-  box.innerHTML='';
-  if(!units.length){
-    box.innerHTML='<div class="note">Topics for this section are being prepared.</div>';
-  }
-  units.forEach((u)=>{
-    const wrap=document.createElement('div');
-    wrap.className='unit';
-    const head=document.createElement('button');
-    head.type='button';
-    head.className='unit-head';
-    head.innerHTML=`<span class="unit-title"><span>${u.unit}</span><span>${u.title}</span></span><span>⌃</span>`;
-    const body=document.createElement('div');
-    body.className='unit-body';
-    u.items.forEach(([code,name])=>{
-      const lesson=document.createElement('button');
-      lesson.type='button';
-      lesson.className='lesson';
-      lesson.innerHTML=`<span class="lesson-label"><span class="num">${code}</span><span>${name}</span></span><span class="arrow">›</span>`;
-      const goLesson=()=>startQuiz(code,name);
-      lesson.addEventListener('click',goLesson);
-      lesson.addEventListener('touchend',(e)=>{e.preventDefault();goLesson()},{passive:false});
-      body.appendChild(lesson);
-    });
-    head.addEventListener('click',()=>{
-      wrap.classList.toggle('collapsed');
-      head.querySelector('span:last-child').textContent=wrap.classList.contains('collapsed')?'⌄':'⌃';
-    });
-    wrap.appendChild(head);
-    wrap.appendChild(body);
-    box.appendChild(wrap);
-  });
-  showView('curriculumView');
-}
-function backToCurriculum(){openCurriculum(currentCategory)}
-function genericQuestions(name){return [
- {q:`Which statement best matches the topic “${name}”?`,a:[`A key idea related to ${name}`,'An unrelated statement','A random calculation','None of the above'],c:0,e:`This is a sample placeholder question for ${name}. Your real question bank can replace it.`},
- {q:`Choose the best answer for this ${name} practice item.`,a:['Option A','Option B','Option C','Option D'],c:1,e:'This sample demonstrates the quiz flow and instant explanation.'},
- {q:`Which option is most closely connected to ${name}?`,a:['Option A','Option B','Option C','Option D'],c:2,e:`This is another sample placeholder for ${name}.`},
- {q:`Select the correct response for this ${name} question.`,a:['Option A','Option B','Option C','Option D'],c:3,e:'This question can later be replaced by curriculum-specific content.'},
- {type:'fill',q:`One key word connected with ${name} is ______.`,answer:'answer',e:`This is a sample one-word fill-in-the-blank question for ${name}. Replace the answer with a curriculum-specific one-word answer in your real question bank.`}
-]}
-function startQuiz(code,name){currentCode=code;currentTopic=name;qIndex=0;mastery=40;correctCount=0;wrongCount=0;showView('quizView');renderQuestion()}
-function quickQuiz(subject,category,code,name){currentSubject=subject;currentCategory=category;startQuiz(code,name)}
-function getQs(){return topicQuestions[currentTopic]||genericQuestions(currentTopic)}
-function renderQuestion(){
-  answered=false;
-  const qs=getQs(),x=qs[qIndex];
-  document.getElementById('quizTitle').textContent=currentTopic;
-  document.getElementById('quizCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;
-  document.getElementById('mastery').textContent='Mastery '+mastery;
-  document.getElementById('questionNo').textContent=`QUESTION ${qIndex+1} OF ${qs.length}`;
-  document.getElementById('questionText').textContent=x.q;
-  const ans=document.getElementById('answers');
-  ans.innerHTML='';
-  if(x.type==='fill'){
-    ans.innerHTML=`<div class="fill-answer-wrap">
-      <input id="fillAnswer" class="fill-answer-input" type="text" inputmode="text" autocomplete="off" maxlength="40" placeholder="Type one word" aria-label="One-word answer">
-      <button type="button" class="btn primary fill-check-btn" onclick="checkFillAnswer()">Check answer</button>
-    </div>
-    <div class="fill-hint">Enter one word only.</div>`;
-    const input=document.getElementById('fillAnswer');
-    input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkFillAnswer()}});
-    setTimeout(()=>input.focus(),50);
-  }else{
-    x.a.forEach((t,i)=>{
-      const b=document.createElement('button');
-      b.className='answer';
-      b.textContent=String.fromCharCode(65+i)+'. '+t;
-      b.onclick=()=>chooseAnswer(i,b);
-      ans.appendChild(b);
-    });
-  }
-  const f=document.getElementById('feedback');
-  f.className='feedback';
-  f.innerHTML='';
-  const nextBtn=document.querySelector('#quizView .quiz-actions .btn.primary');
-  if(nextBtn)nextBtn.textContent=qIndex===qs.length-1?'View summary':'Next question';
-}
-function chooseAnswer(i,b){if(answered)return;answered=true;const x=getQs()[qIndex];[...document.querySelectorAll('.answer')].forEach((el,j)=>{if(j===x.c)el.classList.add('correct')});const f=document.getElementById('feedback');if(i===x.c){correctCount++;mastery=Math.min(100,mastery+8);f.className='feedback show good';f.innerHTML='<strong>Correct!</strong><br>'+x.e}else{wrongCount++;b.classList.add('wrong');mastery=Math.max(0,mastery-3);f.className='feedback show bad';f.innerHTML='<strong>Not quite.</strong><br>'+x.e+'<br><button type="button" class="report-question-btn" onclick="openReport()">⚑ Report this question</button>'}document.getElementById('mastery').textContent='Mastery '+mastery}
-function checkFillAnswer(){
-  if(answered)return;
-  const input=document.getElementById('fillAnswer');
-  if(!input)return;
-  const typed=input.value.trim();
-  if(!typed){
-    input.focus();
-    return;
-  }
-  const x=getQs()[qIndex];
-  const expected=String(x.answer||'').trim().toLowerCase();
-  const actual=typed.toLowerCase().replace(/\s+/g,' ');
-  answered=true;
-  input.disabled=true;
-  const checkBtn=document.querySelector('.fill-check-btn');
-  if(checkBtn)checkBtn.disabled=true;
-  const f=document.getElementById('feedback');
-  if(actual===expected){
-    correctCount++;
-    mastery=Math.min(100,mastery+8);
-    input.classList.add('fill-correct');
-    f.className='feedback show good';
-    f.innerHTML='<strong>Correct!</strong><br>'+x.e;
-  }else{
-    wrongCount++;
-    mastery=Math.max(0,mastery-3);
-    input.classList.add('fill-wrong');
-    f.className='feedback show bad';
-    f.innerHTML='<strong>Not quite.</strong><br>The answer is <strong>'+x.answer+'</strong>.<br>'+x.e+'<br><button type="button" class="report-question-btn" onclick="openReport()">⚑ Report this question</button>';
-  }
-  document.getElementById('mastery').textContent='Mastery '+mastery;
-}
-function openReport(){
-  const qs=getQs();
-  const item=qs[qIndex];
-  const label=document.getElementById('reportQuestionLabel');
-  if(label) label.textContent=`${currentSubject} · ${currentTopic} · Question ${qIndex+1}: ${item.q}`;
-  document.querySelectorAll('input[name="reportReason"]').forEach(r=>r.checked=false);
-  const note=document.getElementById('reportNote');
-  if(note)note.value='';
-  const success=document.getElementById('reportSuccess');
-  if(success)success.classList.remove('show');
-  document.getElementById('reportModal').classList.add('show');
-}
-function closeReport(){document.getElementById('reportModal').classList.remove('show')}
-function submitReport(){
-  const selected=document.querySelector('input[name="reportReason"]:checked');
-  if(!selected){alert('Please choose a reason for the report.');return}
-  const qs=getQs();
-  const item=qs[qIndex];
-  reportedQuestions.push({
-    level:currentLevel,
-    subject:currentSubject,
-    category:currentCategory,
-    topic:currentTopic,
-    code:currentCode,
-    questionNumber:qIndex+1,
-    question:item.q,
-    reason:selected.value,
-    note:(document.getElementById('reportNote')||{}).value||''
-  });
-  const success=document.getElementById('reportSuccess');
-  if(success)success.classList.add('show');
-  setTimeout(closeReport,1000);
-}
-function nextQuestion(){const qs=getQs();if(!answered)return;if(qIndex>=qs.length-1){showSummary();return}qIndex++;renderQuestion()}
-function showSummary(){const total=getQs().length;const pct=Math.round(correctCount/total*100);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Great work!</strong><br>You showed a strong understanding of this topic.':pct>=60?'<strong>Good progress.</strong><br>Review your mistakes, then try again to improve your mastery.':'<strong>Keep practising.</strong><br>Review the questions you missed and try the topic again.';showView('summaryView')}
-function restartQuiz(){startQuiz(currentCode,currentTopic)}
-function showReview(){showView('reviewView')}
-document.querySelectorAll('.stage').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stage').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
-function refreshAccountUI(){
-  const streak=document.getElementById('streakTop');
-  const pts=document.getElementById('pointsTop');
-  const label=document.getElementById('profileTopLabel');
-  if(streak)streak.textContent=loggedIn?'12':'0';
-  if(pts)pts.textContent=loggedIn?'2,120':'0';
-  if(label)label.textContent=loggedIn?'Emma':'Profile';
-}
-function openProfileSmart(){
-  if(loggedIn){showView('profileView');return}
-  openProfile();
-}
-function openProfile(){
-  document.getElementById('loggedOut').classList.toggle('hidden',loggedIn);
-  document.getElementById('loggedIn').classList.toggle('hidden',!loggedIn);
-  document.getElementById('profileModal').classList.add('show')
-}
-function closeModal(){closeAnyModal()}
-function openLogin(){closeModal();document.getElementById('loginModal').classList.add('show')}
-function closeLogin(){closeAnyModal()}
-function openSignup(){closeModal();document.getElementById('signupModal').classList.add('show')}
-function closeSignup(){closeAnyModal()}
-function demoLogin(){
-  loggedIn=true;
-  closeLogin();
-  refreshAccountUI();
-console.info('Checkpoint navigation ready: Subject → Section → Topic → Quiz');
-  showView('profileView');
-}
-function demoLogout(){
-  loggedIn=false;
-  refreshAccountUI();
-  showView('levelView');
-}
-document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')}));
-
-function openReviewMistakes(){
-  if(typeof loggedIn !== 'undefined' && loggedIn){ showReview(); return; }
-  const profileModal = document.getElementById('profileModal');
-  if(profileModal){
-    const note = profileModal.querySelector('p');
-    if(note) note.textContent='Log in to save your progress, streak, points and mistakes.';
-    profileModal.classList.add('show');
-    profileModal.style.display='flex';
-  } else if(typeof openProfile === 'function'){
-    openProfile();
-  } else {
-    alert('Log in to save your progress, streak, points and mistakes.');
-  }
-}
-
-refreshAccountUI();
-</script>
-
-<div class="mascot-tip">Need help choosing a topic?</div>
-<div class="mascot-helper" title="Checkpoint mascot">
-  <img src="assets/checkpoint-mascot.png" alt="Checkpoint mascot">
-</div>
-
-
-<div class="ad-slot mobile-support" aria-label="Google advertisement placeholder">
-  <strong>Advertisement</strong>
-  <span>Google Ads space</span>
-  <small style="display:block;margin-top:4px">Responsive mobile ad</small>
-</div>
-
-
-<div class="modal report-modal" id="reportModal">
-  <div class="modal-card">
-    <button class="modal-x" aria-label="Close report" onclick="closeAnyModal()">×</button>
-    <div class="eyebrow">REPORT QUESTION</div>
-    <h2 style="margin:5px 0 6px">What seems wrong?</h2>
-    <p class="muted" id="reportQuestionLabel" style="margin:0">Help us improve this question.</p>
-
-    <div class="report-options">
-      <label class="report-option"><input type="radio" name="reportReason" value="Wrong answer"><span>Wrong answer or answer key</span></label>
-      <label class="report-option"><input type="radio" name="reportReason" value="Unclear question"><span>Question is unclear</span></label>
-      <label class="report-option"><input type="radio" name="reportReason" value="Typo"><span>Spelling or typo</span></label>
-      <label class="report-option"><input type="radio" name="reportReason" value="Explanation issue"><span>Explanation is incorrect or confusing</span></label>
-      <label class="report-option"><input type="radio" name="reportReason" value="Other"><span>Other issue</span></label>
-    </div>
-
-    <textarea class="report-note" id="reportNote" placeholder="Optional: tell us more"></textarea>
-    <button type="button" class="btn primary" style="width:100%;margin-top:12px" onclick="submitReport()">Submit report</button>
-    <div class="report-success" id="reportSuccess">✓ Thank you. This question has been marked for review.</div>
-  </div>
-</div>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 BrandName. All rights reserved.</p>
+  </footer>
 
 </body>
 </html>
