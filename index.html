@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Checkpoint Skills</title>
+<title>EduBridge</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -41,6 +41,10 @@
 body,button,input{font-family:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 .brand{color:var(--navy)}
 .brand-accent{color:var(--yellow)}
+.edubridge-brand{display:flex;align-items:center;gap:10px;color:var(--navy)}
+.brand-mark{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--navy);color:var(--yellow);font-size:13px;font-weight:900;letter-spacing:-.02em;box-shadow:0 5px 14px rgba(15,23,42,.12);flex:0 0 auto}
+.brand-word{display:block;font-size:21px;font-weight:900;line-height:1.05;letter-spacing:-.03em}
+.brand-word small{display:block;color:#8093a7;font-size:10px;font-weight:600;letter-spacing:0;margin-top:4px}
 .hero.mascot-hero{position:relative;min-height:230px;overflow:hidden;background:linear-gradient(120deg,#ffffff 0%,#f7faff 62%,#fff9e7 100%)}
 .hero-copy{max-width:560px;position:relative;z-index:2}
 .hero-copy .kicker{font-size:12px;font-weight:900;letter-spacing:.08em;color:#74859a;margin-bottom:8px}
@@ -139,6 +143,8 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{min-width:0;overflow-x:hidden}
 button{-webkit-tap-highlight-color:transparent}
 @media(max-width:700px){
+  .brand-mark{width:34px;height:34px;border-radius:10px;font-size:12px}
+  .brand-word{font-size:18px}
   .top{
     position:sticky;
     top:0;
@@ -356,11 +362,24 @@ button{-webkit-tap-highlight-color:transparent}
 .modal{z-index:9990}
 
 .summary-activity{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}.summary-activity .activity-card{border:1px solid var(--line);border-radius:12px;background:#fff;padding:13px}.summary-activity .activity-label{font-size:10px;color:var(--muted);font-weight:800}.summary-activity .activity-value{font-size:19px;font-weight:900;color:var(--navy);margin-top:5px}.summary-share{margin-top:14px}.integrity-note{margin-top:12px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#f8fbff;color:var(--muted);font-size:11px;line-height:1.45}@media(max-width:650px){.summary-activity{grid-template-columns:repeat(2,1fr)}.summary-share{width:100%}}
+
+
+/* Photo quiz */
+.question-media{display:none;margin:14px 0 20px}
+.question-media.show{display:block}
+.question-photo-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#eef3f8;aspect-ratio:1/1;box-shadow:0 5px 16px rgba(15,23,42,.05)}
+.question-photo-card img{display:block;width:100%;height:100%;object-fit:cover}
+.question-photo-badge{position:absolute;left:12px;top:12px;background:rgba(15,23,42,.88);color:#fff;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:900;letter-spacing:.02em;backdrop-filter:blur(4px)}
+.question-photo-credit{margin-top:7px;color:var(--muted);font-size:10px;line-height:1.35}
+.question-photo-fallback{width:100%;height:100%;display:grid;place-items:center;text-align:center;padding:24px;background:linear-gradient(135deg,#eef5ff,#fff7d6);color:var(--navy);font-weight:900}
+.photo-topic-badge{margin-left:8px;display:inline-flex;align-items:center;gap:4px;background:#eef5ff;border:1px solid #d3e3f5;color:#315f8d;border-radius:999px;padding:3px 7px;font-size:10px;font-weight:900;white-space:nowrap}
+@media(max-width:700px){.question-media{margin:10px 0 16px}.question-photo-card{border-radius:11px}.question-photo-badge{left:9px;top:9px;padding:6px 8px;font-size:10px}.photo-topic-badge{padding:2px 6px}}
+
 </style>
 </head>
 <body>
 <header class="top">
-  <div class="brand">Checkp<span class="brand-accent">o</span>int Skills<small>Cambridge Checkpoint practice</small></div>
+  <div class="brand edubridge-brand"><span class="brand-mark" aria-hidden="true">EB</span><span class="brand-word">Edu<span class="brand-accent">Bridge</span><small>Cambridge learning &amp; practice</small></span></div>
   <div class="account">
     <div class="pill">🔥 <strong id="streakTop">0</strong> <span>day streak</span></div>
     <div class="pill">⭐ <strong id="pointsTop">0</strong> <span>pts</span></div>
@@ -435,7 +454,7 @@ button{-webkit-tap-highlight-color:transparent}
         <h2>Learn. Practice.<br><span>Improve every day.</span></h2>
         <p>Choose a subject, pick a curriculum topic, and practise with focused Cambridge Checkpoint-style questions.</p>
       </div>
-      <img class="hero-mascot" src="assets/checkpoint-mascot.png" alt="Checkpoint learning mascot">
+      <img class="hero-mascot" src="assets/checkpoint-mascot.png" alt="EduBridge learning mascot">
       <div class="hero-stat"><div style="display:flex;justify-content:space-between;margin-bottom:9px"><span class="muted">Weekly goal</span><strong>62%</strong></div><div class="bar"><span style="width:62%"></span></div></div>
     </section>
 
@@ -485,7 +504,7 @@ button{-webkit-tap-highlight-color:transparent}
       <button type="button" class="back back-left" onclick="backToCurriculum()">← Back to topics</button>
       <div class="quiz-card">
         <div class="quiz-head"><div><strong id="quizTitle">Topic quiz</strong><div class="crumb" id="quizCrumb"></div></div><strong id="mastery">Mastery 40</strong></div>
-        <div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
+        <div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="question-media" id="questionMedia" aria-live="polite"></div><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
       </div>
       <div class="note">
 <div class="ad-slot desktop-ad" aria-label="Google advertisement placeholder">
@@ -494,7 +513,7 @@ button{-webkit-tap-highlight-color:transparent}
   <small style="display:block;margin-top:4px">Recommended desktop size: 728 × 90</small>
 </div>
 
-Prototype only. Questions shown here are original sample questions. Some questions use a one-word fill-in-the-blank format.</div>
+Prototype only. Questions shown here are original sample questions. Each topic includes a photo-enhanced question, and some questions use a one-word fill-in-the-blank format.</div>
     </div>
   </section>
 
@@ -540,7 +559,7 @@ Prototype only. Questions shown here are original sample questions. Some questio
       <section class="profile-hero-card">
         <button class="profile-edit" type="button" title="Edit profile" onclick="alert('Profile editing can be connected later.')">✎</button>
         <div class="profile-identity">
-          <div class="profile-avatar-large"><img src="assets/checkpoint-mascot.png" alt="Checkpoint mascot profile avatar"></div>
+          <div class="profile-avatar-large"><img src="assets/checkpoint-mascot.png" alt="EduBridge mascot profile avatar"></div>
           <div>
             <h1 class="profile-name">Emma</h1>
             <div class="profile-handle">@emma_stage9</div>
@@ -599,7 +618,7 @@ Prototype only. Questions shown here are original sample questions. Some questio
 
 </main>
 
-<div class="modal" id="profileModal"><div class="modal-card"><button type="button" class="modal-x" aria-label="Close profile" onclick="closeAnyModal()">×</button><div id="loggedOut"><div class="profile-mascot"><img src="assets/checkpoint-mascot.png" alt=""><div><strong>Checkpoint</strong><span class="muted" style="font-size:12px">Your learning companion</span></div></div><h2>Profile</h2><p class="muted">Log in to save your progress, streak, points and mistakes.</p><div class="modal-actions"><button class="btn" onclick="openSignup()">Sign up</button><button class="btn primary" onclick="openLogin()">Log in</button></div></div><div id="loggedIn" class="hidden"><h2>Emma</h2><p class="muted">Stage 9 · Student Plus</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0"><div class="hero-stat" style="min-width:0;text-align:center"><strong>12</strong><div class="muted" style="font-size:11px">streak</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>2,120</strong><div class="muted" style="font-size:11px">points</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>72%</strong><div class="muted" style="font-size:11px">progress</div></div></div><button class="btn primary" style="width:100%;margin-bottom:8px" onclick="closeModal();showView('profileView')">View full profile</button><button class="btn" style="width:100%;margin-bottom:8px" onclick="closeModal();showReview()">Review mistakes</button><button class="btn" style="width:100%" onclick="closeModal();demoLogout()">Log out</button></div><div class="modal-actions"></div></div></div>
+<div class="modal" id="profileModal"><div class="modal-card"><button type="button" class="modal-x" aria-label="Close profile" onclick="closeAnyModal()">×</button><div id="loggedOut"><div class="profile-mascot"><img src="assets/checkpoint-mascot.png" alt=""><div><strong>EduBridge</strong><span class="muted" style="font-size:12px">Your learning companion</span></div></div><h2>Profile</h2><p class="muted">Log in to save your progress, streak, points and mistakes.</p><div class="modal-actions"><button class="btn" onclick="openSignup()">Sign up</button><button class="btn primary" onclick="openLogin()">Log in</button></div></div><div id="loggedIn" class="hidden"><h2>Emma</h2><p class="muted">Stage 9 · Student Plus</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0"><div class="hero-stat" style="min-width:0;text-align:center"><strong>12</strong><div class="muted" style="font-size:11px">streak</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>2,120</strong><div class="muted" style="font-size:11px">points</div></div><div class="hero-stat" style="min-width:0;text-align:center"><strong>72%</strong><div class="muted" style="font-size:11px">progress</div></div></div><button class="btn primary" style="width:100%;margin-bottom:8px" onclick="closeModal();showView('profileView')">View full profile</button><button class="btn" style="width:100%;margin-bottom:8px" onclick="closeModal();showReview()">Review mistakes</button><button class="btn" style="width:100%" onclick="closeModal();demoLogout()">Log out</button></div><div class="modal-actions"></div></div></div>
 <div class="modal" id="loginModal"><div class="modal-card"><button class="modal-x" aria-label="Close login" onclick="closeAnyModal()">×</button><h2>Welcome back</h2><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="demoLogin()">Log in</button></div></div></div>
 <div class="modal" id="signupModal"><div class="modal-card"><button class="modal-x" aria-label="Close sign up" onclick="closeAnyModal()">×</button><h2>Create account</h2><div class="field"><label>Student name</label><input placeholder="Your name"></div><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="Create password"></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="closeSignup();openLogin()">Sign up</button></div></div></div>
 
@@ -737,7 +756,7 @@ function openCurriculum(category){
       const lesson=document.createElement('button');
       lesson.type='button';
       lesson.className='lesson';
-      lesson.innerHTML=`<span class="lesson-label"><span class="num">${code}</span><span>${name}</span></span><span class="arrow">›</span>`;
+      lesson.innerHTML=`<span class="lesson-label"><span class="num">${code}</span><span>${name}<span class="photo-topic-badge">📷 Photo quiz</span></span></span><span class="arrow">›</span>`;
       const goLesson=()=>startQuiz(code,name);
       lesson.addEventListener('click',goLesson);
       lesson.addEventListener('touchend',(e)=>{e.preventDefault();goLesson()},{passive:false});
@@ -754,6 +773,101 @@ function openCurriculum(category){
   showView('curriculumView');
 }
 function backToCurriculum(){openCurriculum(currentCategory)}
+const topicPhotoKeywords={
+  'Plant organs':'plant,roots,leaves,botany',
+  'Human organ systems':'human,anatomy,medical',
+  'The human skeleton':'skeleton,anatomy,bones',
+  'Joints':'knee,joint,anatomy',
+  'Muscles':'muscle,anatomy,fitness',
+  'Studying of the human body':'human,anatomy,science',
+  'Characteristics of living organisms':'organism,nature,biology',
+  'Micro-organisms':'microorganism,microscope,biology',
+  'Micro-organisms and decay':'decay,fungi,biology',
+  'Microorganism and food':'fermentation,food,microbiology',
+  'Microorganism and disease':'microbiology,laboratory,health',
+  'Plant Cells':'plant,microscope,biology',
+  'Animal Cells':'cells,microscope,biology',
+  'Cells, Tissues and organs':'anatomy,tissue,biology',
+  'The human circulatory system':'circulation,anatomy,heart',
+  'Heart':'heart,anatomy,medical',
+  'Blood':'blood,laboratory,medical',
+  'Blood vessel':'blood,vessel,anatomy',
+  'Ozone depletion':'atmosphere,earth,sky',
+  'Conservation':'conservation,nature,wildlife',
+  'Energy resources':'energy,solar,wind',
+  'Forces and motion':'motion,physics,experiment',
+  'Speed and distance':'speed,road,measurement',
+  'Energy transfers':'energy,physics,experiment',
+  'Pressure':'pressure,physics,experiment',
+  'Particle model':'particles,science,laboratory',
+  'Elements and compounds':'chemistry,laboratory,elements',
+  'Acids and alkalis':'chemistry,laboratory,acid',
+  'Chemical reactions':'chemistry,laboratory,reaction',
+  'Integers':'mathematics,numbers,school',
+  'Fractions':'mathematics,fractions,school',
+  'Decimals':'mathematics,numbers,school',
+  'Percentages':'mathematics,percentage,school',
+  'Ratio and proportion':'mathematics,ratio,school',
+  'Expressions':'algebra,mathematics,school',
+  'Linear equations':'algebra,equation,mathematics',
+  'Sequences':'mathematics,pattern,numbers',
+  'Graphs':'graph,mathematics,data',
+  'Main idea':'reading,book,study',
+  'Inference':'reading,book,thinking',
+  'Vocabulary in context':'vocabulary,reading,book',
+  'Writer’s purpose and tone':'writing,book,reading',
+  'Sentence structure':'writing,notebook,grammar',
+  'Punctuation and grammar':'writing,grammar,notebook',
+  'Organising an argument':'writing,essay,study',
+  'Clarity and style':'writing,essay,notebook'
+};
+function photoLockForTopic(name){
+  let h=0;
+  for(let i=0;i<name.length;i++) h=(h*31+name.charCodeAt(i))%90000;
+  return h+1000;
+}
+function getTopicPhoto(name){
+  const tags=(topicPhotoKeywords[name]||name||'education').replace(/[^a-zA-Z0-9, ]/g,'').trim().replace(/\s+/g,',');
+  return `https://loremflickr.com/800/800/${encodeURIComponent(tags)}?lock=${photoLockForTopic(name)}`;
+}
+function addPhotoToQuestions(qs,name){
+  const copy=qs.map(q=>Object.assign({},q));
+  if(copy.length){
+    copy[0].image=getTopicPhoto(name);
+    copy[0].imageAlt=`Photo prompt related to ${name}`;
+    copy[0].photoQuiz=true;
+  }
+  return copy;
+}
+function renderQuestionPhoto(x){
+  const media=document.getElementById('questionMedia');
+  if(!media)return;
+  media.innerHTML='';
+  media.classList.remove('show');
+  if(!x||!x.image)return;
+  media.classList.add('show');
+  const card=document.createElement('div');
+  card.className='question-photo-card';
+  const img=document.createElement('img');
+  img.src=x.image;
+  img.alt=x.imageAlt||'Quiz photo';
+  img.loading='eager';
+  img.referrerPolicy='no-referrer';
+  img.onerror=function(){
+    card.innerHTML=`<div class="question-photo-fallback"><div><div style="font-size:34px;margin-bottom:8px">📷</div>Photo prompt for ${currentTopic}</div></div>`;
+  };
+  const badge=document.createElement('div');
+  badge.className='question-photo-badge';
+  badge.textContent='📷 Photo question';
+  card.appendChild(img);
+  card.appendChild(badge);
+  media.appendChild(card);
+  const credit=document.createElement('div');
+  credit.className='question-photo-credit';
+  credit.textContent='Prototype image supplied dynamically from Flickr via LoremFlickr. Replace with your own licensed curriculum images before production.';
+  media.appendChild(credit);
+}
+
 function genericQuestions(name){return [
  {q:`Which statement best matches the topic “${name}”?`,a:[`A key idea related to ${name}`,'An unrelated statement','A random calculation','None of the above'],c:0,e:`This is a sample placeholder question for ${name}. Your real question bank can replace it.`},
  {q:`Choose the best answer for this ${name} practice item.`,a:['Option A','Option B','Option C','Option D'],c:1,e:'This sample demonstrates the quiz flow and instant explanation.'},
@@ -763,14 +877,15 @@ function genericQuestions(name){return [
 ]}
 function startQuiz(code,name){currentCode=code;currentTopic=name;qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizElapsedSeconds=0;tabSwitchCount=0;if(!quizTrackingReady){document.addEventListener('visibilitychange',function(){if(document.getElementById('quizView')&&document.getElementById('quizView').classList.contains('active')&&document.hidden){tabSwitchCount++}});quizTrackingReady=true}showView('quizView');renderQuestion()}
 function quickQuiz(subject,category,code,name){currentSubject=subject;currentCategory=category;startQuiz(code,name)}
-function getQs(){return topicQuestions[currentTopic]||genericQuestions(currentTopic)}
+function getQs(){const base=topicQuestions[currentTopic]||genericQuestions(currentTopic);return addPhotoToQuestions(base,currentTopic)}
 function renderQuestion(){
   answered=false;
   const qs=getQs(),x=qs[qIndex];
   document.getElementById('quizTitle').textContent=currentTopic;
   document.getElementById('quizCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;
   document.getElementById('mastery').textContent='Mastery '+mastery;
-  document.getElementById('questionNo').textContent=`QUESTION ${qIndex+1} OF ${qs.length}`;
+  document.getElementById('questionNo').textContent=(x.photoQuiz?'PHOTO QUESTION • ':'')+`QUESTION ${qIndex+1} OF ${qs.length}`;
+  renderQuestionPhoto(x);
   document.getElementById('questionText').textContent=x.q;
   const ans=document.getElementById('answers');
   ans.innerHTML='';
@@ -866,7 +981,7 @@ function submitReport(){
 }
 function nextQuestion(){const qs=getQs();if(!answered)return;if(qIndex>=qs.length-1){showSummary();return}qIndex++;renderQuestion()}
 function formatQuizTime(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+'m '+String(s%60).padStart(2,'0')+'s'}
-function shareSummary(){const total=getQs().length,pct=Math.round(correctCount/total*100),text='Checkpoint Skills — '+currentTopic+'\n'+currentLevel+'\nScore: '+correctCount+'/'+total+' ('+pct+'%)\nTime spent: '+formatQuizTime(quizElapsedSeconds);if(navigator.share){navigator.share({title:'My Checkpoint Skills result',text:text}).catch(()=>{})}else if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Summary copied. You can paste it into WhatsApp, Messenger, or another app.'))}else{alert(text)}}
+function shareSummary(){const total=getQs().length,pct=Math.round(correctCount/total*100),text='EduBridge — '+currentTopic+'\n'+currentLevel+'\nScore: '+correctCount+'/'+total+' ('+pct+'%)\nTime spent: '+formatQuizTime(quizElapsedSeconds);if(navigator.share){navigator.share({title:'My EduBridge result',text:text}).catch(()=>{})}else if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Summary copied. You can paste it into WhatsApp, Messenger, or another app.'))}else{alert(text)}}
 function showSummary(){const total=getQs().length;quizElapsedSeconds=Math.max(0,Math.round((Date.now()-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Great work!</strong><br>You showed a strong understanding of this topic.':pct>=60?'<strong>Good progress.</strong><br>Review your mistakes, then try again to improve your mastery.':'<strong>Keep practising.</strong><br>Review the questions you missed and try the topic again.';showView('summaryView')}
 function restartQuiz(){startQuiz(currentCode,currentTopic)}
 function showReview(){showView('reviewView')}
@@ -897,7 +1012,7 @@ function demoLogin(){
   loggedIn=true;
   closeLogin();
   refreshAccountUI();
-console.info('Checkpoint navigation ready: Subject → Section → Topic → Quiz');
+console.info('EduBridge navigation ready: Subject → Section → Topic → Quiz');
   showView('profileView');
 }
 function demoLogout(){
@@ -926,8 +1041,8 @@ refreshAccountUI();
 </script>
 
 <div class="mascot-tip">Need help choosing a topic?</div>
-<div class="mascot-helper" title="Checkpoint mascot">
-  <img src="assets/checkpoint-mascot.png" alt="Checkpoint mascot">
+<div class="mascot-helper" title="EduBridge mascot">
+  <img src="assets/checkpoint-mascot.png" alt="EduBridge mascot">
 </div>
 
 <div class="ad-slot mobile-support" aria-label="Google advertisement placeholder">
