@@ -265,6 +265,7 @@ button{-webkit-tap-highlight-color:transparent}
 .ad-rectangle{min-height:250px}
 .ad-mobile-banner{min-height:70px}
 .ad-label{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8795a8;margin-bottom:5px}
+.ad-home-top{margin:14px 0 20px}
 .ad-home-mid{margin:18px 0}
 .ad-topic-bottom{margin:18px 0 4px}
 .ad-summary{margin-top:18px}
@@ -459,18 +460,15 @@ button{-webkit-tap-highlight-color:transparent}
       <div class="selected-level"><span class="current-level" id="currentLevelLabel">Stage 7</span><button type="button" class="change-level" onclick="showView('levelView')">Change stage/year</button></div>
     </div>
 
-    <section class="hero mascot-hero">
-      <div class="hero-copy">
-        <div class="kicker">PRACTICE → FIND WEAK TOPICS → FIX THEM → IMPROVE</div>
-        <h2>Know what you know.<br><span>Master what comes next.</span></h2>
-        <p>Original Stage 7 Science practice that turns every answer into a clearer picture of what to practise next.</p>
-        <div class="product-loop">
-          <div class="loop-step"><span>🧪</span>Practice</div><div class="loop-step"><span>🎯</span>Find gaps</div><div class="loop-step"><span>📕</span>Fix mistakes</div><div class="loop-step"><span>📈</span>See growth</div>
-        </div>
-        <button type="button" class="btn primary" onclick="openSubject('Science')">Browse all Science topics →</button>
-      </div>
-      <img class="hero-mascot" src="assets/checkpoint-mascot.png" alt="EduBridge learning mascot">
-    </section>
+    <div class="ad-slot ad-rectangle ad-home-top" aria-label="Google advertisement placeholder">
+      <div class="ad-label">Advertisement</div>
+      <span>Google Ads space</span>
+      <small style="display:block;margin-top:5px">Responsive display ad · desktop</small>
+    </div>
+    <div class="ad-slot ad-mobile-banner ad-home-top" aria-label="Google advertisement placeholder">
+      <div class="ad-label">Advertisement</div>
+      <span>Google Ads space</span>
+    </div>
 
     <div class="dashboard-grid">
       <section class="dashboard-card daily-card">
@@ -1089,7 +1087,7 @@ function renderDashboard(){
 }
 function renderFocusList(p){const el=document.getElementById('focusList');if(!el)return;const ranked=chapterGroups().map(g=>({g,st:aggregateTopicList(g.topics,p)})).sort((a,b)=>(a.st.attempts?a.st.pct:-1)-(b.st.attempts?b.st.pct:-1)).slice(0,3);el.innerHTML=ranked.map((x,i)=>{const t=x.g.topics[0],label=x.st.attempts?`${x.st.pct}% accuracy`:'Not practised yet';return `<div class="focus-item"><div class="focus-rank">${i+1}</div><div><strong>${x.g.title}</strong><small>${label} · ${x.g.category}</small></div><button onclick="openTopicFromDashboard('${encodeURIComponent(t.category)}','${encodeURIComponent(t.code)}','${encodeURIComponent(t.topic)}','${encodeURIComponent(t.key)}')">Practise</button></div>`}).join('')}
 function renderMistakePreview(p=loadProgress()){const el=document.getElementById('mistakePreview');if(!el)return;const arr=(p.mistakes||[]).slice(0,3);if(!arr.length){el.innerHTML='<div class="empty-state">No mistakes saved yet. Start a quiz and EduBridge will build this automatically.</div>';return}el.innerHTML=arr.map(m=>`<div class="mistake-preview-item ${m.status==='fixed'?'fixed':''}"><span class="mistake-dot"></span><div><strong>${m.meta.topic}</strong><small>${m.status==='fixed'?'Fixed ✓':m.meta.category+' · Review needed'}</small></div></div>`).join('')}
-function renderMistakeBook(p=loadProgress()){const el=document.getElementById('mistakeBookGrid');if(!el)return;const arr=p.mistakes||[];if(!arr.length){el.innerHTML='<div class="empty-state"><strong>Your Mistake Book is empty.</strong><br>Questions you answer incorrectly will appear here automatically.</div>';return}el.innerHTML=arr.map(m=>`<div class="mistake-card ${m.status==='fixed'?'fixed':''}"><div class="mistake-top"><div><strong>${m.meta.topic}</strong><div class="muted" style="font-size:11px">${m.meta.category} · ${m.meta.code}</div></div><span class="mistake-status">${m.status==='fixed'?'FIXED ✓':'REVIEW'}</span></div><div class="mistake-question">${escapeHtml(m.question)}</div><div class="mistake-answer">Correct answer: <strong>${escapeHtml(m.correctAnswer)}</strong>${m.status!=='fixed'?` · Recovery ${m.recoveryCorrect||0}/2`:''}</div>${m.status!=='fixed'?`<div class="mistake-actions"><button class="btn primary" onclick="startMistakeReview('${encodeURIComponent(m.id)}')">Try again</button></div>`:''}</div>`).join('')}
+function renderMistakeBook(p=loadProgress()){const el=document.getElementById('mistakeBookGrid');if(!el)return;const arr=p.mistakes||[];if(!arr.length){el.innerHTML='<div class="empty-state"><strong>Your Mistake Book is empty.</strong><br>Questions you answer incorrectly will appear here automatically.</div>';return}el.innerHTML=arr.map(m=>`<div class="mistake-card ${m.status==='fixed'?'fixed':''}"><div class="mistake-top"><div><strong>${m.meta.topic}</strong><div class="muted" style="font-size:11px">${m.meta.category} · ${m.meta.code}</div></div><span class="mistake-status">${m.status==='fixed'?'FIXED ✓':'REVIEW'}</span></div><div class="mistake-question">${escapeHtml(m.question)}</div>${m.status!=='fixed'?`<div class="mistake-answer">Recovery ${m.recoveryCorrect||0}/2</div>`:''}${m.status!=='fixed'?`<div class="mistake-actions"><button class="btn primary" onclick="startMistakeReview('${encodeURIComponent(m.id)}')">Try again</button></div>`:''}</div>`).join('')}
 function renderProfileStats(p,rd){const map={profileStreak:getStreak(p),profilePoints:(p.points||0).toLocaleString(),profileAccuracy:(p.answered?Math.round(p.correct/p.answered*100):0)+'%',profileTopics:Object.values(p.topicStats||{}).filter(x=>x.attempts>0).length};Object.entries(map).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.textContent=v});const pr=document.getElementById('profileReadiness');if(pr)pr.innerHTML=`<div style="font-size:42px;font-weight:900;color:var(--navy)">${rd.score}<span style="font-size:16px;color:var(--muted)"> / 100</span></div><div class="muted" style="font-size:12px;margin:5px 0 14px">${rd.practised} topics practised · ${rd.coverage}% coverage target</div><div class="mini-track"><span style="width:${rd.score}%"></span></div>`;const pm=document.getElementById('profileMistakes');if(pm){const open=(p.mistakes||[]).filter(m=>m.status!=='fixed').length,fixed=(p.mistakes||[]).filter(m=>m.status==='fixed').length;pm.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="summary-stat"><strong>${open}</strong><span class="muted">To review</span></div><div class="summary-stat"><strong>${fixed}</strong><span class="muted">Fixed ✓</span></div></div><button class="btn" style="width:100%;margin-top:12px" onclick="openReviewMistakes()">Open Mistake Book</button>`}}
 function escapeHtml(v){return String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
 function openTopicFromDashboard(category,code,topic,key){currentLevel='Stage 7';currentProgram='Cambridge Lower Secondary';currentSubject='Science';currentCategory=decodeURIComponent(category);startQuiz(decodeURIComponent(code),decodeURIComponent(topic),decodeURIComponent(key))}
