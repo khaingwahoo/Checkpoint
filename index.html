@@ -406,6 +406,32 @@ button{-webkit-tap-highlight-color:transparent}
 @media(max-width:900px){.dashboard-grid{grid-template-columns:1fr}.skill-map-grid{grid-template-columns:repeat(2,1fr)}.product-loop{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.readiness-layout{grid-template-columns:1fr}.readiness-ring{margin:0 auto}.skill-map-grid,.assessment-grid{grid-template-columns:1fr}.daily-row,.premium-card{align-items:flex-start;flex-direction:column}.product-loop{grid-template-columns:1fr 1fr}.focus-item{grid-template-columns:32px 1fr}.focus-item button{grid-column:2}.section-head{align-items:flex-start;flex-direction:column}.dashboard-card{padding:16px}}
 
+
+/* Verified Study Report */
+.verified-share-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.verified-share-row .btn{min-width:190px}
+.verify-modal .modal-card{max-width:600px;padding:0;overflow:hidden;border-radius:20px}
+.study-report{background:#fff}
+.study-report-head{padding:22px 24px;background:linear-gradient(135deg,#0f172a,#1d2d48);color:#fff;position:relative}
+.study-report-head .eyebrow{color:#d8e2ef}
+.study-report-title{margin:4px 0 5px;font-size:24px}
+.study-report-sub{font-size:12px;color:#cbd6e4;line-height:1.5}
+.verified-badge{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:rgba(255,196,0,.14);border:1px solid rgba(255,196,0,.32);color:#ffe074;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:900}
+.study-report-body{padding:22px 24px}
+.report-student{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.report-student strong{font-size:18px;color:var(--navy)}
+.report-id{font-size:11px;color:var(--muted);font-weight:800;text-align:right;overflow-wrap:anywhere}
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.report-data{border:1px solid var(--line);border-radius:12px;padding:13px;background:#f9fcff}
+.report-data span{display:block;font-size:10px;color:var(--muted);font-weight:900;letter-spacing:.04em;text-transform:uppercase;margin-bottom:5px}
+.report-data strong{display:block;color:var(--navy);font-size:15px;line-height:1.35}
+.report-highlight{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:16px 0}
+.report-highlight .summary-stat{padding:13px 8px}
+.report-highlight .summary-stat strong{font-size:21px}
+.report-verify-note{font-size:10px;line-height:1.5;color:var(--muted);padding:11px 12px;background:#f8fbff;border:1px solid var(--line);border-radius:10px;margin-top:14px}
+.report-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+.report-actions .btn{flex:1;min-width:150px}
+@media(max-width:560px){.report-grid{grid-template-columns:1fr}.report-highlight{grid-template-columns:1fr 1fr}.report-highlight .summary-stat:last-child{grid-column:1/-1}.study-report-head,.study-report-body{padding-left:18px;padding-right:18px}.report-student{display:block}.report-id{text-align:left;margin-top:8px}.verified-share-row{display:block}.verified-share-row .btn{width:100%;margin-top:8px}}
 </style>
 </head>
 <body>
@@ -580,7 +606,10 @@ Prototype only. Stage 7 Science questions are loaded from the attached Year 7 wo
         <div class="activity-card"><div class="activity-label">TAB SWITCHES</div><div class="activity-value" id="summaryTabSwitches">0</div></div>
         <div class="activity-card"><div class="activity-label">QUESTIONS</div><div class="activity-value" id="summaryQuestionCount">5</div></div>
       </div>
-      <button type="button" class="btn primary summary-share" onclick="shareSummary()">↗ Share my summary</button>
+      <div class="verified-share-row">
+        <button type="button" class="btn primary summary-share" onclick="openVerifiedStudyReport()">🔐 Share verified study report</button>
+        <button type="button" class="btn" onclick="openVerifiedStudyReport()">View study report</button>
+      </div>
       <div class="integrity-note"><strong>Activity note:</strong> Tab switches counts when the quiz page becomes hidden, such as switching tabs or apps. This cannot prove that a student used AI or another device; it is only an activity signal.</div>
       <div id="summaryMessage" class="feedback show good" style="display:block"></div>
       <div class="summary-actions" style="margin-top:22px">
@@ -621,7 +650,7 @@ Prototype only. Stage 7 Science questions are loaded from the attached Year 7 wo
 
 <div class="modal" id="profileModal"><div class="modal-card"><button type="button" class="modal-x" aria-label="Close profile" onclick="closeAnyModal()">×</button><div class="profile-mascot"><img src="assets/checkpoint-mascot.png" alt=""><div><strong>EduBridge</strong><span class="muted" style="font-size:12px">Save your learning progress</span></div></div><h2>Student account</h2><p class="muted">This prototype saves progress in this browser. A real account can later sync your Skill Map, Mistake Book and streak across devices.</p><div class="modal-actions"><button class="btn" onclick="closeAnyModal();showView('profileView');renderDashboard()">View local progress</button><button class="btn primary" onclick="openLogin()">Demo log in</button></div></div></div>
 <div class="modal" id="loginModal"><div class="modal-card"><button class="modal-x" aria-label="Close login" onclick="closeAnyModal()">×</button><h2>Welcome back</h2><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="demoLogin()">Log in</button></div></div></div>
-<div class="modal" id="signupModal"><div class="modal-card"><button class="modal-x" aria-label="Close sign up" onclick="closeAnyModal()">×</button><h2>Create account</h2><div class="field"><label>Student name</label><input placeholder="Your name"></div><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="Create password"></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="closeSignup();openLogin()">Sign up</button></div></div></div>
+<div class="modal" id="signupModal"><div class="modal-card"><button class="modal-x" aria-label="Close sign up" onclick="closeAnyModal()">×</button><h2>Create account</h2><div class="field"><label>Student name</label><input id="studentNameInput" placeholder="Your name"></div><div class="field"><label>Email</label><input type="email" placeholder="student@example.com"></div><div class="field"><label>Password</label><input type="password" placeholder="Create password"></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="demoSignup()">Sign up</button></div></div></div>
 
 <script>
 function closeAnyModal(){
@@ -705,7 +734,8 @@ const topicQuestions={
 let currentSubject='Science',currentCategory='Biology',currentCode='',currentTopic='',currentTopicKey='',qIndex=0,mastery=40,answered=false,loggedIn=false,correctCount=0,wrongCount=0;
 let currentLevel='Stage 7', currentProgram='Cambridge Lower Secondary';
 let reportedQuestions=[];
-let quizStartedAt=0,quizElapsedSeconds=0,tabSwitchCount=0,quizTrackingReady=false;
+let quizStartedAt=0,quizEndedAt=0,quizElapsedSeconds=0,tabSwitchCount=0,quizTrackingReady=false;
+let sessionWrongIds=new Set(),sessionReviewedIds=new Set(),sessionMistakesFixed=0,sessionTopicMasteryBefore=null,lastAnswerWasWrong=false,lastStudyReport=null;
 let quizOverride=null,quizMode='topic';
 function chooseLevel(level,program){
   currentLevel=level;
@@ -891,7 +921,7 @@ function genericQuestions(name){return [
  {type:'fill',q:`One key word connected with ${name} is ______.`,answer:'answer',e:`This is a sample one-word fill-in-the-blank question for ${name}. Replace the answer with a curriculum-specific one-word answer in your real question bank.`}
 ]}
 function startQuiz(code,name,key){quizOverride=null;quizMode='topic';currentCode=code;currentTopic=name;currentTopicKey=key||name;resetQuizSession();}
-function resetQuizSession(){qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizElapsedSeconds=0;tabSwitchCount=0;if(!quizTrackingReady){document.addEventListener('visibilitychange',function(){if(document.getElementById('quizView')&&document.getElementById('quizView').classList.contains('active')&&document.hidden){tabSwitchCount++}});quizTrackingReady=true}showView('quizView');renderQuestion()}
+function resetQuizSession(){qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;const beforeStat=(currentTopicKey&&currentTopicKey!=='daily')?getTopicStat(currentTopicKey):{attempts:0,correct:0};sessionTopicMasteryBefore=beforeStat.attempts?Math.round(beforeStat.correct/beforeStat.attempts*100):null;if(!quizTrackingReady){document.addEventListener('visibilitychange',function(){if(document.getElementById('quizView')&&document.getElementById('quizView').classList.contains('active')&&document.hidden){tabSwitchCount++}});quizTrackingReady=true}showView('quizView');renderQuestion()}
 function quickQuiz(subject,category,code,name){currentSubject=subject;currentCategory=category;startQuiz(code,name)}
 function getQs(){if(quizOverride)return quizOverride;const base=(currentLevel==='Stage 7'&&currentSubject==='Science'&&stage7ScienceQuestions[currentTopicKey])?stage7ScienceQuestions[currentTopicKey]:(topicQuestions[currentTopic]||genericQuestions(currentTopic));return addPhotoToQuestions(base,currentTopic)}
 function renderQuestion(){
@@ -936,8 +966,8 @@ function chooseAnswer(i,b){
   const x=getQs()[qIndex],isCorrect=i===x.c;
   [...document.querySelectorAll('.answer')].forEach((el,j)=>{if(j===x.c)el.classList.add('correct')});
   const f=document.getElementById('feedback');
-  if(isCorrect){correctCount++;mastery=Math.min(100,mastery+8);f.className='feedback show good';f.innerHTML='<strong>Correct!</strong><br>'+x.e}
-  else{wrongCount++;b.classList.add('wrong');mastery=Math.max(0,mastery-3);f.className='feedback show bad';f.innerHTML='<strong>Not quite.</strong><br>'+x.e+'<br><button type="button" class="report-question-btn" onclick="openReport()">⚑ Report this question</button>'}
+  if(isCorrect){correctCount++;mastery=Math.min(100,mastery+8);f.className='feedback show good';f.innerHTML='<strong>Correct!</strong><br>'+x.e;lastAnswerWasWrong=false}
+  else{wrongCount++;b.classList.add('wrong');mastery=Math.max(0,mastery-3);f.className='feedback show bad';f.innerHTML='<strong>Not quite.</strong><br>'+x.e+'<br><button type="button" class="report-question-btn" onclick="openReport()">⚑ Report this question</button>';lastAnswerWasWrong=true;sessionWrongIds.add(questionIdentity(x))}
   recordQuestionResult(x,isCorrect,(x.a||[])[i]||'');
   document.getElementById('mastery').textContent='Mastery '+mastery;
 }
@@ -965,12 +995,14 @@ function checkFillAnswer(){
     input.classList.add('fill-correct');
     f.className='feedback show good';
     f.innerHTML='<strong>Correct!</strong><br>'+x.e;
+    lastAnswerWasWrong=false;
   }else{
     wrongCount++;
     mastery=Math.max(0,mastery-3);
     input.classList.add('fill-wrong');
     f.className='feedback show bad';
     f.innerHTML='<strong>Not quite.</strong><br>The answer is <strong>'+x.answer+'</strong>.<br>'+x.e+'<br><button type="button" class="report-question-btn" onclick="openReport()">⚑ Report this question</button>';
+    lastAnswerWasWrong=true;sessionWrongIds.add(questionIdentity(x));
   }
   recordQuestionResult(x,isCorrect,typed);
   document.getElementById('mastery').textContent='Mastery '+mastery;
@@ -1008,11 +1040,39 @@ function submitReport(){
   if(success)success.classList.add('show');
   setTimeout(closeReport,1000);
 }
-function nextQuestion(){const qs=getQs();if(!answered)return;if(qIndex>=qs.length-1){showSummary();return}qIndex++;renderQuestion()}
+function nextQuestion(){const qs=getQs();if(!answered)return;if(lastAnswerWasWrong){sessionReviewedIds.add(questionIdentity(qs[qIndex]));lastAnswerWasWrong=false}if(qIndex>=qs.length-1){showSummary();return}qIndex++;renderQuestion()}
 function formatQuizTime(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+'m '+String(s%60).padStart(2,'0')+'s'}
-function shareSummary(){const total=getQs().length,pct=Math.round(correctCount/total*100),text='EduBridge — '+currentTopic+'\n'+currentLevel+'\nScore: '+correctCount+'/'+total+' ('+pct+'%)\nTime spent: '+formatQuizTime(quizElapsedSeconds);if(navigator.share){navigator.share({title:'My EduBridge result',text:text}).catch(()=>{})}else if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Summary copied. You can paste it into WhatsApp, Messenger, or another app.'))}else{alert(text)}}
-function showSummary(){const total=getQs().length;quizElapsedSeconds=Math.max(0,Math.round((Date.now()-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';showView('summaryView')}
-function restartQuiz(){if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizElapsedSeconds=0;tabSwitchCount=0;showView('quizView');renderQuestion()}}
+function formatClockTime(ms){if(!ms)return '—';return new Date(ms).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}
+function currentStudentName(){try{return localStorage.getItem('edubridgeStudentName')||'Emma'}catch(e){return 'Emma'}}
+function demoSignup(){const input=document.getElementById('studentNameInput');const name=(input&&input.value||'').trim();if(name){try{localStorage.setItem('edubridgeStudentName',name)}catch(e){}}closeSignup();openLogin()}
+function generateReportId(){const stamp=localDateKey().replace(/-/g,'').slice(2);const rand=Math.random().toString(36).slice(2,7).toUpperCase();return `EB-${stamp}-${rand}`}
+function topicMasteryNow(){if(!currentTopicKey||currentTopicKey==='daily')return null;const st=getTopicStat(currentTopicKey);return st.attempts?Math.round(st.correct/st.attempts*100):null}
+function saveStudyReport(report){try{const key='edubridgeStudyReportsV1',all=JSON.parse(localStorage.getItem(key)||'{}');all[report.id]=report;localStorage.setItem(key,JSON.stringify(all))}catch(e){}}
+function loadStudyReport(id){try{return JSON.parse(localStorage.getItem('edubridgeStudyReportsV1')||'{}')[id]||null}catch(e){return null}}
+function buildStudyReport(){
+  const total=getQs().length,pct=total?Math.round(correctCount/total*100):0;
+  const report={id:generateReportId(),student:currentStudentName(),level:currentLevel,program:currentProgram,subject:currentSubject,category:currentCategory,topic:currentTopic,code:currentCode,startAt:quizStartedAt,endAt:quizEndedAt||Date.now(),seconds:quizElapsedSeconds,total,correct:correctCount,score:pct,correctionsReviewed:sessionReviewedIds.size,correctionsTotal:sessionWrongIds.size,mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,masteryAfter:topicMasteryNow(),createdAt:Date.now()};
+  saveStudyReport(report);lastStudyReport=report;return report;
+}
+function reportShareText(r){
+  const mastery=(r.masteryAfter===null||r.masteryAfter===undefined)?'—':((r.masteryBefore===null||r.masteryBefore===undefined?'New':r.masteryBefore+'%')+' → '+r.masteryAfter+'%');
+  const lines=[`EduBridge Study Update 🔬`,``,`${r.level} ${r.subject} · ${r.topic}`,``,`⏱ Study time: ${formatQuizTime(r.seconds)} (${formatClockTime(r.startAt)} to ${formatClockTime(r.endAt)})`,``,`✅ Score: ${r.correct}/${r.total} (${r.score}%)`,``,`📖 Corrections reviewed: ${r.correctionsReviewed}/${r.correctionsTotal}`,``,`🎯 Topic mastery: ${mastery}`,``,`💪 Mistakes fixed: ${r.mistakesFixed}`,``,`🔐 EduBridge Study Record`,`Student: ${r.student}`,`Report ID: ${r.id}`];
+  if(location.protocol!=='file:')lines.push(`View record: ${location.href.split('#')[0]}#study-report=${encodeURIComponent(r.id)}`);
+  return lines.join('\n');
+}
+function renderVerifiedStudyReport(r){
+  const mastery=(r.masteryAfter===null||r.masteryAfter===undefined)?'—':((r.masteryBefore===null||r.masteryBefore===undefined?'New':r.masteryBefore+'%')+' → '+r.masteryAfter+'%');
+  const el=document.getElementById('verifiedReportContent');if(!el)return;
+  el.innerHTML=`<div class="study-report"><div class="study-report-head"><div class="eyebrow">EDUBRIDGE STUDY RECORD</div><h2 class="study-report-title">Study Progress</h2><div class="study-report-sub">${escapeHtml(r.level)} ${escapeHtml(r.subject)} · ${escapeHtml(r.topic)}</div><div class="verified-badge">✓ Recorded by EduBridge</div></div><div class="study-report-body"><div class="report-student"><div><div class="muted" style="font-size:10px;font-weight:900">STUDENT</div><strong>${escapeHtml(r.student)}</strong></div><div class="report-id">REPORT ID<br>${escapeHtml(r.id)}</div></div><div class="report-grid"><div class="report-data"><span>Study level</span><strong>${escapeHtml(r.program)} · ${escapeHtml(r.level)}</strong></div><div class="report-data"><span>Subject / Topic</span><strong>${escapeHtml(r.subject)} · ${escapeHtml(r.topic)}</strong></div><div class="report-data"><span>Start time</span><strong>${formatClockTime(r.startAt)}</strong></div><div class="report-data"><span>End time</span><strong>${formatClockTime(r.endAt)}</strong></div><div class="report-data"><span>Total time spent</span><strong>${formatQuizTime(r.seconds)}</strong></div><div class="report-data"><span>Topic mastery</span><strong>${mastery}</strong></div></div><div class="report-highlight"><div class="summary-stat"><strong>${r.correct}/${r.total}</strong><span class="muted">Score · ${r.score}%</span></div><div class="summary-stat"><strong>${r.correctionsReviewed}/${r.correctionsTotal}</strong><span class="muted">Corrections reviewed</span></div><div class="summary-stat"><strong>${r.mistakesFixed}</strong><span class="muted">Mistakes fixed</span></div></div><div class="report-verify-note"><strong>Prototype verification:</strong> this report ID is created from the completed EduBridge session and stored in this browser. When EduBridge is connected to a database, the same report page can become a tamper-resistant link that parents can verify on any device.</div><div class="report-actions"><button class="btn primary" onclick="shareVerifiedReport()">Share with Parent</button><button class="btn" onclick="copyVerifiedReport()">Copy summary</button></div></div></div>`;
+}
+function openVerifiedStudyReport(){const r=lastStudyReport||buildStudyReport();renderVerifiedStudyReport(r);document.getElementById('verifiedStudyReportModal').classList.add('show')}
+function shareVerifiedReport(){const r=lastStudyReport||buildStudyReport(),text=reportShareText(r);if(navigator.share){navigator.share({title:'EduBridge Study Update',text}).catch(()=>{})}else if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Study report copied. You can paste it into WhatsApp, Viber, Telegram or Messages.'))}else{alert(text)}}
+function copyVerifiedReport(){const r=lastStudyReport||buildStudyReport(),text=reportShareText(r);if(navigator.clipboard){navigator.clipboard.writeText(text).then(()=>alert('Study report copied.'))}else{alert(text)}}
+function shareSummary(){openVerifiedStudyReport()}
+function openReportFromHash(){const m=location.hash.match(/^#study-report=([^&]+)/);if(!m)return;const id=decodeURIComponent(m[1]),r=loadStudyReport(id);if(r){lastStudyReport=r;renderVerifiedStudyReport(r);document.getElementById('verifiedStudyReportModal').classList.add('show')}else if(location.protocol!=='file:'){alert('This study record is not available on this device yet. Connect EduBridge to a database for cross-device verification.')}}
+window.addEventListener('hashchange',openReportFromHash);
+function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView')}
+function restartQuiz(){if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;showView('quizView');renderQuestion()}}
 function showReview(){showView('reviewView')}
 document.querySelectorAll('.stage').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stage').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
 function refreshAccountUI(){
@@ -1064,9 +1124,10 @@ function recordQuestionResult(x,isCorrect,userAnswer){
   p.skillStats[skill]=p.skillStats[skill]||{attempts:0,correct:0};p.skillStats[skill].attempts++;if(isCorrect)p.skillStats[skill].correct++;
   p.answered++;if(isCorrect){p.correct++;p.points=(p.points||0)+10}
   const today=localDateKey();p.practiceDays=p.practiceDays||[];if(!p.practiceDays.includes(today))p.practiceDays.push(today);
-  p.mistakes=p.mistakes||[];let mistake=p.mistakes.find(v=>v.id===id);
+  p.mistakes=p.mistakes||[];let mistake=p.mistakes.find(v=>v.id===id);const wasFixed=mistake&&mistake.status==='fixed';
   if(!isCorrect){if(!mistake){mistake={id,question:x.q,correctAnswer:getCorrectAnswer(x),userAnswer,meta:m,status:'review',recoveryCorrect:0,misses:1};p.mistakes.unshift(mistake)}else{mistake.status='review';mistake.recoveryCorrect=0;mistake.misses=(mistake.misses||0)+1;mistake.userAnswer=userAnswer}}
   else if(mistake&&mistake.status!=='fixed'){mistake.recoveryCorrect=(mistake.recoveryCorrect||0)+1;if(mistake.recoveryCorrect>=2)mistake.status='fixed'}
+  if(!wasFixed&&mistake&&mistake.status==='fixed')sessionMistakesFixed++;
   saveProgress(p);renderDashboard();
 }
 function allStage7Topics(){const out=[];Object.entries(stage7ScienceCurriculum).forEach(([category,units])=>units.forEach(u=>u.items.forEach(([code,topic,key])=>out.push({category,unit:u.unit,chapter:u.title,code,topic,key}))));return out}
@@ -1133,5 +1194,13 @@ refreshAccountUI();
   </div>
 </div>
 
+<div class="modal verify-modal" id="verifiedStudyReportModal">
+  <div class="modal-card">
+    <button class="modal-x" aria-label="Close study report" onclick="closeAnyModal()">×</button>
+    <div id="verifiedReportContent"></div>
+  </div>
+</div>
+
+<script>setTimeout(openReportFromHash,0);</script>
 </body>
 </html>
