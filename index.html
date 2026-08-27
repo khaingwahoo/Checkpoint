@@ -431,7 +431,51 @@ button{-webkit-tap-highlight-color:transparent}
 .report-verify-note{font-size:10px;line-height:1.5;color:var(--muted);padding:11px 12px;background:#f8fbff;border:1px solid var(--line);border-radius:10px;margin-top:14px}
 .report-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
 .report-actions .btn{flex:1;min-width:150px}
-@media(max-width:560px){.report-grid{grid-template-columns:1fr}.report-highlight{grid-template-columns:1fr 1fr}.report-highlight .summary-stat:last-child{grid-column:1/-1}.study-report-head,.study-report-body{padding-left:18px;padding-right:18px}.report-student{display:block}.report-id{text-align:left;margin-top:8px}.verified-share-row{display:block}.verified-share-row .btn{width:100%;margin-top:8px}}
+/* Keep the verified report fully usable on phones and small tablets */
+.verify-modal{overflow:hidden}
+.verify-modal .modal-card{
+  width:min(600px,calc(100vw - 24px));
+  max-height:min(92dvh,820px);
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+.verify-modal .modal-x{position:sticky;top:8px;float:right;margin:8px 8px -42px 0;background:rgba(255,255,255,.96);box-shadow:0 2px 10px rgba(15,23,42,.10)}
+@media(max-width:560px){
+  .verify-modal{padding:0;align-items:flex-end}
+  .verify-modal .modal-card{
+    width:100%;
+    max-width:none;
+    max-height:94dvh;
+    border-radius:20px 20px 0 0;
+  }
+  .study-report-head{padding:20px 52px 16px 16px}
+  .study-report-body{padding:16px}
+  .study-report-title{font-size:21px}
+  .study-report-sub{font-size:11px}
+  .report-grid{grid-template-columns:1fr;gap:8px;margin-top:12px}
+  .report-data{padding:11px 12px}
+  .report-data strong{font-size:14px}
+  .report-highlight{grid-template-columns:1fr;gap:8px;margin:12px 0}
+  .report-highlight .summary-stat:last-child{grid-column:auto}
+  .report-highlight .summary-stat{padding:11px}
+  .report-highlight .summary-stat strong{font-size:19px}
+  .report-student{display:block;padding-bottom:12px}
+  .report-student strong{font-size:16px}
+  .report-id{text-align:left;margin-top:7px;font-size:10px}
+  .report-verify-note{font-size:9px;margin-top:10px}
+  .report-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:12px}
+  .report-actions .btn{width:100%;min-width:0}
+  .verified-share-row{display:block}
+  .verified-share-row .btn{width:100%;min-width:0;margin-top:8px;white-space:normal}
+}
+@media(max-width:360px){
+  .study-report-head{padding-left:14px;padding-right:48px}
+  .study-report-body{padding:14px}
+  .study-report-title{font-size:19px}
+  .verified-badge{font-size:10px;padding:6px 8px}
+}
 </style>
 </head>
 <body>
@@ -607,8 +651,7 @@ Prototype only. Stage 7 Science questions are loaded from the attached Year 7 wo
         <div class="activity-card"><div class="activity-label">QUESTIONS</div><div class="activity-value" id="summaryQuestionCount">5</div></div>
       </div>
       <div class="verified-share-row">
-        <button type="button" class="btn primary summary-share" onclick="openVerifiedStudyReport()">🔐 Share verified study report</button>
-        <button type="button" class="btn" onclick="openVerifiedStudyReport()">View study report</button>
+        <button type="button" class="btn primary summary-share" onclick="openVerifiedStudyReport()">🔐 View and share study report</button>
       </div>
       <div class="integrity-note"><strong>Activity note:</strong> Tab switches counts when the quiz page becomes hidden, such as switching tabs or apps. This cannot prove that a student used AI or another device; it is only an activity signal.</div>
       <div id="summaryMessage" class="feedback show good" style="display:block"></div>
