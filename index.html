@@ -564,6 +564,80 @@ button{-webkit-tap-highlight-color:transparent}
 .topicalexamquiz-wordmark{display:inline-flex;align-items:baseline;font-weight:900;font-size:25px;letter-spacing:-.8px;white-space:nowrap;color:#183153}.topicalexamquiz-wordmark span:nth-child(2){color:#f0ad00}.topicalexamquiz-wordmark span:nth-child(3){color:#ef6461}@media(max-width:480px){.topicalexamquiz-wordmark{font-size:21px}}
 
 .teacher-detail-tabs{display:flex;gap:8px;margin:18px 0 12px;border-bottom:1px solid #dbe6f0;padding-bottom:8px}.teacher-detail-tab{border:0;background:#eef3f8;color:#61758b;border-radius:999px;padding:8px 14px;font-weight:900;font-size:11px;cursor:pointer}.teacher-detail-tab.active{background:var(--navy);color:#fff}.teacher-tab-panel{display:none}.teacher-tab-panel.active{display:block}.teacher-tab-panel h4{margin:8px 0 10px;color:var(--navy);font-size:14px}.teacher-mini-table{min-width:640px}.teacher-mini-table th,.teacher-mini-table td{font-size:11px}
+
+/* Topic parts: 3 x 20-question learning sessions */
+.topic-part-page{max-width:820px;margin:0 auto}.topic-part-hero{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:var(--shadow);margin-bottom:16px}.topic-part-hero h1{margin:3px 0 7px;font-size:27px;color:var(--navy)}.topic-part-hero p{margin:0;color:var(--muted);line-height:1.5}.topic-overall{margin-top:18px}.topic-overall-row{display:flex;justify-content:space-between;gap:15px;font-size:12px;font-weight:800;color:#526b84;margin-bottom:7px}.topic-overall .bar{height:10px}.topic-parts{display:grid;gap:11px}.topic-part-card{border:1px solid var(--line);background:#fff;border-radius:14px;padding:17px 18px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:14px;text-align:left;cursor:pointer;box-shadow:0 4px 14px rgba(27,66,105,.03)}.topic-part-card:hover{border-color:#9fc2e7;background:#fbfdff}.topic-part-card strong{display:block;color:var(--navy);font-size:15px}.topic-part-card small{display:block;color:var(--muted);margin-top:4px}.topic-part-status{font-size:11px;font-weight:900;color:#58718a;white-space:nowrap}.topic-part-status.done{color:#2e7b49}.topic-review-card{margin-top:14px;background:#fff8dc;border:1px solid #eadfae;border-radius:14px;padding:17px 18px;display:flex;justify-content:space-between;align-items:center;gap:15px}.topic-review-card strong{display:block;color:var(--navy)}.topic-review-card small{display:block;color:var(--muted);margin-top:4px}.topic-review-card.locked{opacity:.65}.topic-review-card .btn:disabled{cursor:not-allowed;opacity:.55}.quiz-session-progress{height:6px;background:#e9eff5;border-radius:999px;overflow:hidden;margin-top:10px}.quiz-session-progress span{display:block;height:100%;background:#4eb477;transition:width .2s}.part-mini{font-size:10px;color:#7890a5;font-weight:900;margin-left:6px}@media(max-width:620px){.topic-part-card{grid-template-columns:1fr}.topic-part-status{justify-self:start}.topic-review-card{align-items:flex-start;flex-direction:column}.topic-review-card .btn{width:100%}}
+
+/* Pricing / access */
+.access-pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.access-plan{background:#fff;border:1px solid var(--line);border-radius:17px;padding:22px;box-shadow:0 5px 15px rgba(15,23,42,.04)}
+.access-plan.featured{border-color:#e7c65b;background:linear-gradient(145deg,#fff,#fffaf0)}
+.access-plan .plan-label{display:inline-flex;align-items:center;border-radius:999px;padding:5px 9px;font-size:9px;font-weight:900;letter-spacing:.03em;background:#eef5ff;color:#315f92;margin-bottom:12px}
+.access-plan.featured .plan-label{background:#fff1b8;color:#7c5c00}
+.access-plan h3{margin:0;color:var(--navy);font-size:19px}
+.access-plan p{margin:7px 0 0;color:var(--muted);font-size:12px;line-height:1.55}
+.access-price{display:flex;align-items:baseline;gap:7px;margin:17px 0 5px}
+.access-price strong{font-size:29px;color:var(--navy);letter-spacing:-.5px}
+.access-price span{font-size:11px;color:var(--muted);font-weight:800}
+.access-note{font-size:10px;color:#71869a;line-height:1.5;margin-top:10px}
+.free-badge{display:inline-flex;margin-top:12px;border-radius:999px;padding:5px 9px;font-size:9px;font-weight:900;background:#eaf7ef;color:#2f7447}
+@media(max-width:700px){.access-pricing-grid{grid-template-columns:1fr}}
+
+
+/* Programme > year/stage > subject navigation */
+.selector-shell{max-width:980px;margin:0 auto}
+.selector-head{margin-bottom:20px}
+.selector-head h1{margin:4px 0 8px;color:var(--navy);font-size:30px}
+.selector-head p{margin:0;color:var(--muted);line-height:1.6}
+.year-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.year-card,.subject-choice-card{border:1px solid var(--line);background:#fff;border-radius:15px;padding:18px;text-align:left;cursor:pointer;box-shadow:0 4px 14px rgba(27,66,105,.03);transition:.16s}
+.year-card:hover,.subject-choice-card:hover{transform:translateY(-2px);border-color:#9fc2e7;box-shadow:var(--shadow)}
+.year-card strong,.subject-choice-card strong{display:block;color:var(--navy);font-size:16px;margin-bottom:5px}
+.year-card small,.subject-choice-card small{display:block;color:var(--muted);line-height:1.45}
+.subject-choice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.subject-choice-card.live{border-color:#a8c9ef;background:#f5f9ff}
+.subject-choice-card .status{display:inline-flex;margin-top:12px;border-radius:999px;padding:5px 8px;font-size:9px;font-weight:900;background:#f3f6fa;color:#6f8195}
+.subject-choice-card.live .status{background:#eaf7ef;color:#2f7447}
+.selector-price-note{margin:14px 0 0;border:1px solid #ead89a;background:#fffaf0;border-radius:13px;padding:14px;color:#665214;font-size:12px;line-height:1.55}
+@media(max-width:760px){.year-grid{grid-template-columns:repeat(2,1fr)}.subject-choice-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.year-grid,.subject-choice-grid{grid-template-columns:1fr}.selector-head h1{font-size:25px}}
+
+
+/* Myanmar curriculum mockup */
+.myanmar-summary-bar{display:grid;grid-template-columns:1fr;gap:14px;margin:18px 0}
+.summary-pill{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px 16px}
+.summary-pill strong{display:block;color:var(--navy);font-size:16px;margin-bottom:6px}
+.summary-pill small{display:block;color:var(--muted);line-height:1.5}
+.summary-pill.premium{border-color:#e7c65b;background:#fffaf0}
+.myanmar-access-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.access-panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 4px 14px rgba(27,66,105,.03)}
+.access-panel.free{border-color:#cfdbe7;background:linear-gradient(180deg,#fff,#fcfdff)}
+.access-panel.premium{border-color:#ead089;background:linear-gradient(180deg,#fff,#fffaf1)}
+.plan-chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;letter-spacing:.03em;margin-bottom:12px}
+.access-panel.free .plan-chip{background:#eaf7ef;color:#2f7447}
+.access-panel.premium .plan-chip{background:#fff1b8;color:#7c5c00}
+.access-panel h3{margin:0 0 8px;color:var(--navy);font-size:23px}
+.access-panel p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.55}
+.myanmar-list{display:grid;gap:10px}
+.myanmar-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#fff}
+.myanmar-item strong{display:block;color:var(--navy);font-size:14px;margin-bottom:3px}
+.myanmar-item small{display:block;color:var(--muted);font-size:11px;line-height:1.4}
+.item-tag{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:900;white-space:nowrap}
+.item-tag.open{background:#eaf7ef;color:#2f7447}
+.item-tag.locked{background:#f3f6fa;color:#6f8195}
+.myanmar-premium-note{margin-top:14px;border:1px dashed #e5c66e;border-radius:14px;padding:12px 14px;color:#7c5c00;background:#fffdf6;font-size:12px;line-height:1.55}
+.subject-choice-card.myanmar-open{border-color:#bfd8c6;background:#fcfffd}
+.subject-choice-card.myanmar-open .status{background:#eaf7ef;color:#2f7447}
+@media(max-width:760px){.myanmar-summary-bar,.myanmar-access-grid{grid-template-columns:1fr}}
+
+
+.myanmar-combined-legend{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.legend-pill{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:900;white-space:nowrap}
+.legend-pill.free{background:#eaf7ef;color:#2f7447}
+.legend-pill.premium{background:#fff1b8;color:#7c5c00}
+.myanmar-item.locked-row{border-style:dashed;background:#fffdf8}
+.myanmar-item.locked-row strong{color:#4b5563}
+
 </style>
 </head>
 <body>
@@ -578,8 +652,8 @@ button{-webkit-tap-highlight-color:transparent}
           <button type="button" onclick="openProgrammeFromMenu('lowerSecondary')"><span>Lower Secondary</span><small>Stages 7–9</small></button>
           <button type="button" onclick="openProgrammeFromMenu('igcse')"><span>IGCSE</span><small>Explore subjects · Coming later</small></button>
         </div>
-        <div class="learn-group"><strong>COMING SOON</strong>
-          <button type="button" onclick="showComingSoon('Coming Soon');closeLearnMenu()"><span>More programmes</span><small>More learning programmes are being prepared</small></button>
+        <div class="learn-group"><strong>MYANMAR CURRICULUM</strong>
+          <button type="button" onclick="openMyanmarYears();closeLearnMenu()"><span>Myanmar Curriculum</span><small>Choose a year level · 20,000 MMK/month</small></button>
         </div>
       </div>
     </div>
@@ -601,7 +675,7 @@ button{-webkit-tap-highlight-color:transparent}
         <div class="platform-hero-copy">
           <div class="eyebrow">TOPICALEXAMQUIZ LEARNING PLATFORM</div>
           <h1>Practice smarter.<br><span>Know what to improve next.</span></h1>
-          <p>Original exam-style practice with progress tracking, mistake review and clear study guidance for school learners.</p>
+          <p>Exam-style practice with progress tracking and mistake review.</p>
           
           <div class="platform-proof"><span>✓ Practice by topic</span><span>✓ Fix mistakes</span><span>✓ Track improvement</span></div>
         </div>
@@ -618,12 +692,13 @@ button{-webkit-tap-highlight-color:transparent}
       <section class="platform-section">
         <div class="platform-section-heading"><div><div class="eyebrow">LEARN</div><h2>What are you studying?</h2><p>Choose a learning path. Stage 7 Science is available now; the other programmes show where TopicalExamQuiz is growing next.</p></div></div>
         <div class="programme-card-grid">
-          <button type="button" class="programme-card" onclick="showComingSoon('Primary — Stage 6')"><span class="programme-icon">🎒</span><strong>Primary</strong><small>Cambridge-aligned · Stage 6</small><span class="programme-status soon">Coming soon</span></button>
-          <button type="button" class="programme-card available" onclick="openProgrammeChooser()"><span class="programme-icon">🔬</span><strong>Lower Secondary</strong><small>Cambridge-aligned · Stages 7–9</small><span class="programme-status live">Stage 7 live →</span></button>
-          <button type="button" class="programme-card" onclick="showComingSoon('IGCSE')"><span class="programme-icon">🎓</span><strong>IGCSE</strong><small>Exam preparation by subject</small><span class="programme-status soon">Coming later</span></button>
+          <button type="button" class="programme-card" onclick="openCambridgeSubjects('Stage 6','Primary')"><span class="programme-icon">🎒</span><strong>Primary</strong><small>Cambridge-aligned · Stage 6 · Free</small><span class="programme-status soon">Coming soon</span></button>
+          <button type="button" class="programme-card available" onclick="openProgrammeChooser()"><span class="programme-icon">🔬</span><strong>Lower Secondary</strong><small>Cambridge-aligned · Stages 7–9 · Free</small><span class="programme-status live">Stage 7 live →</span></button>
+          <button type="button" class="programme-card" onclick="openCambridgeSubjects('IGCSE','IGCSE')"><span class="programme-icon">🎓</span><strong>IGCSE</strong><small>Exam preparation by subject · Free</small><span class="programme-status soon">Coming later</span></button>
         </div>
-        <button type="button" class="myanmar-coming" onclick="showComingSoon('Coming Soon')"><span>✨</span><span><strong>Coming Soon</strong><small>More learning programmes are being prepared</small></span><span aria-hidden="true">→</span></button>
+        <button type="button" class="myanmar-coming" onclick="openMyanmarYears()"><span>🇲🇲</span><span><strong>Myanmar Curriculum</strong><small>Choose a year level · 20,000 MMK/month</small></span><span aria-hidden="true">→</span></button>
       </section>
+
 
       <section class="platform-section expert-section">
         <div class="expert-copy"><div class="eyebrow">CONTENT TRUST</div><h2>Expert-created. Expert-reviewed.</h2><p>TopicalExamQuiz is being structured so each subject can have named content leads, reviewers and versioned questions rather than an anonymous question bank.</p></div>
@@ -642,19 +717,75 @@ button{-webkit-tap-highlight-color:transparent}
       </div>
       <div class="level-group">
         <div class="level-group-head"><h2>Primary</h2><span>Stage 6</span></div>
-        <div class="level-grid cols-2"><button type="button" class="level-card coming" onclick="showComingSoon('Primary — Stage 6')"><strong>Stage 6</strong><small>Primary · Coming soon</small></button></div>
+        <div class="level-grid cols-2"><button type="button" class="level-card coming" onclick="openCambridgeSubjects('Stage 6','Primary')"><strong>Stage 6</strong><small>Choose subjects →</small></button></div>
       </div>
       <div class="level-group">
         <div class="level-group-head"><h2>Lower Secondary</h2><span>Stages 7–9</span></div>
         <div class="level-grid cols-3">
-          <button type="button" class="level-card live-level" onclick="startStage7Science()"><strong>Stage 7</strong><small>Science · Available now</small></button>
-          <button type="button" class="level-card coming" onclick="showComingSoon('Lower Secondary — Stage 8')"><strong>Stage 8</strong><small>Coming soon</small></button>
-          <button type="button" class="level-card coming" onclick="showComingSoon('Lower Secondary — Stage 9')"><strong>Stage 9</strong><small>Coming soon</small></button>
+          <button type="button" class="level-card live-level" onclick="openCambridgeSubjects('Stage 7','Lower Secondary')"><strong>Stage 7</strong><small>Choose subjects →</small></button>
+          <button type="button" class="level-card coming" onclick="openCambridgeSubjects('Stage 8','Lower Secondary')"><strong>Stage 8</strong><small>Choose subjects →</small></button>
+          <button type="button" class="level-card coming" onclick="openCambridgeSubjects('Stage 9','Lower Secondary')"><strong>Stage 9</strong><small>Choose subjects →</small></button>
         </div>
       </div>
       <div class="level-group">
         <div class="level-group-head"><h2>IGCSE</h2><span>By subject · Coming later</span></div>
-        <div class="level-grid cols-2"><button type="button" class="level-card coming" onclick="showComingSoon('IGCSE')"><strong>Explore IGCSE</strong><small>Biology, Chemistry, Physics, Maths and more</small></button></div>
+        <div class="level-grid cols-2"><button type="button" class="level-card coming" onclick="openCambridgeSubjects('IGCSE','IGCSE')"><strong>Explore IGCSE</strong><small>Choose a subject →</small></button></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="view" id="myanmarYearView">
+    <div class="selector-shell">
+      <button type="button" class="back back-left" onclick="goToTopicalExamQuizHome()">← Back to TopicalExamQuiz</button>
+      <div class="selector-head">
+        <div class="eyebrow">MYANMAR CURRICULUM</div>
+        <h1>Choose a year</h1>
+        <p>Each year level is a separate subscription.</p>
+        <div class="selector-price-note"><strong>20,000 MMK/month per year level.</strong> For example, Year 1 and Year 2 are separate plans. Payment is not active in this prototype.</div>
+      </div>
+      <div class="year-grid" id="myanmarYearGrid"></div>
+    </div>
+  </section>
+
+  <section class="view" id="programmeSubjectView">
+    <div class="selector-shell">
+      <button type="button" class="back back-left" id="subjectChooserBack" onclick="openProgrammeChooser()">← Back</button>
+      <div class="selector-head">
+        <div class="eyebrow" id="subjectChooserEyebrow">CHOOSE SUBJECT</div>
+        <h1 id="subjectChooserTitle">Choose a subject</h1>
+        <p id="subjectChooserDescription">Select a subject to continue.</p>
+        <div class="selector-price-note" id="subjectChooserPrice" style="display:none"></div>
+      </div>
+      <div class="subject-choice-grid" id="programmeSubjectGrid"></div>
+    </div>
+  </section>
+
+
+  <section class="view" id="myanmarMockupView">
+    <div class="selector-shell">
+      <button type="button" class="back back-left" id="myanmarMockupBack" onclick="openMyanmarYears()">← Back</button>
+      <div class="selector-head">
+        <div class="eyebrow">MYANMAR CURRICULUM</div>
+        <h1 id="myanmarMockupTitle">Year 1 — Myanmar</h1>
+        <p id="myanmarMockupDescription">Example layout showing what is free and what becomes available after premium is unlocked.</p>
+      </div>
+      <div class="myanmar-summary-bar">
+        <div class="summary-pill"><strong>Free preview</strong><small>Students can try selected lessons, topic previews and sample review activities before subscribing.</small></div>
+        <div class="summary-pill premium"><strong>Premium unlock</strong><small id="myanmarPremiumPriceText">20,000 MMK/month for this year level unlocks the full subject.</small></div>
+      </div>
+      <div class="myanmar-access-grid">
+        <div class="access-panel free">
+          <span class="plan-chip">📚 SUBJECT CONTENT</span>
+          <h3>Free and premium lessons</h3>
+          <p>Students can see sample free items first, while the rest of the subject stays locked until premium is unlocked.</p>
+          <div class="myanmar-combined-legend">
+            <span class="legend-pill free">FREE OPEN</span>
+            <span class="legend-pill premium">🔒 PREMIUM UNLOCK</span>
+          </div>
+          <div class="myanmar-list" id="myanmarCombinedList"></div>
+          <div class="myanmar-premium-note">Premium is charged by year level. Example: Year 1 and Year 2 are separate 20,000 MMK/month plans.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -746,12 +877,32 @@ button{-webkit-tap-highlight-color:transparent}
 
 </section>
 
-  <section class="view" id="quizView">
+  <section class="view" id="topicPartsView">
+  <div class="topic-part-page">
+    <button type="button" class="back back-left" onclick="backFromTopicParts()">← Back to chapter</button>
+    <div class="topic-part-hero">
+      <div class="eyebrow" id="topicPartEyebrow">CHAPTER 1 · TOPIC 1.1</div>
+      <h1 id="topicPartTitle">Plant Cells</h1>
+      <p>Complete this subtopic in three shorter practice sessions.</p>
+      <div class="topic-overall">
+        <div class="topic-overall-row"><span>Subtopic progress</span><span id="topicPartProgressText">0 / 60 questions completed</span></div>
+        <div class="bar"><span id="topicPartProgressBar" style="width:0%"></span></div>
+      </div>
+    </div>
+    <div class="topic-parts" id="topicPartsList"></div>
+    <div class="topic-review-card" id="topicReviewCard">
+      <div><strong id="topicReviewTitle">Review this topic</strong><small>Mixed practice from all three parts.</small></div>
+      <button type="button" class="btn primary" id="topicReviewBtn">Review topic</button>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="quizView">
     <div class="quiz-shell">
       <button type="button" class="back back-left" onclick="backToCurriculum()">← Back to topics</button>
       <div class="quiz-card">
         <div class="quiz-head"><div><strong id="quizTitle">Topic quiz</strong><div class="crumb" id="quizCrumb"></div><span class="q-skill-badge" id="qSkillBadge">Knowledge</span></div><strong id="mastery">Mastery 40</strong></div>
-        <div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="question-media" id="questionMedia" aria-live="polite"></div><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
+        <div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="quiz-session-progress"><span id="quizSessionProgressBar" style="width:0%"></span></div><div class="question-media" id="questionMedia" aria-live="polite"></div><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
       </div>
       <div class="note">
 <div class="ad-slot desktop-ad" aria-label="Google advertisement placeholder">
@@ -848,7 +999,7 @@ TopicalExamQuiz provides original practice activities designed to support Stage 
         <h1>One place to practise. One clear path to improve.</h1>
         <p>TopicalExamQuiz is an independent learning platform built around a simple improvement loop: practise, identify weak topics, correct mistakes and see progress over time.</p>
         <h2>Learning paths</h2>
-        <p>Stage 7 Science is the first live school programme. TopicalExamQuiz is structured to expand into Primary Stage 6, Lower Secondary Stages 8–9, IGCSE and more learning programmes over time without creating separate learning systems for each area.</p>
+        <p>Stage 7 Science is the first live school programme. TopicalExamQuiz is structured to expand into Primary Stage 6, Lower Secondary Stages 8–9, IGCSE and Myanmar Curriculum over time. Cambridge-aligned practice is planned to remain free, while Myanmar Curriculum will use a separate paid plan for each year level.</p>
         <h2>What makes TopicalExamQuiz different</h2>
         <ul><li>Topic-based original exam-style practice.</li><li>A Mistake Book that turns wrong answers into recovery practice.</li><li>Skill Map and TopicalExamQuiz Readiness indicators based on real activity.</li><li>Study reports that make progress visible.</li><li>An expert review process designed for high-quality, carefully maintained content.</li></ul>
         <div class="info-highlight"><strong>Independent platform:</strong> TopicalExamQuiz is not affiliated with, endorsed by, or an official product of Cambridge International Education. Curriculum references are used descriptively to explain learning alignment.</div>
@@ -892,9 +1043,9 @@ TopicalExamQuiz provides original practice activities designed to support Stage 
         <p>These Terms of Use govern your use of TopicalExamQuiz and its practice quizzes, progress tools, study reports and related learning features.</p>
         <h2>Educational use</h2>
         <p>TopicalExamQuiz provides practice and progress tools for educational purposes. Scores, mastery percentages and TopicalExamQuiz Readiness are learning indicators only and are not official grades, certificates or guaranteed exam predictions.</p>
-        <h2>Free access and future paid plans</h2>
-        <p>TopicalExamQuiz currently provides its available learning features free of charge and may support the Service through advertising. We may introduce optional paid plans, subscriptions, packages or premium features in the future.</p>
-        <p>If paid services are introduced, the applicable price, access period, payment terms, cancellation terms and refund policy will be clearly presented before purchase. TopicalExamQuiz will not charge a user for a paid service without the user's confirmation.</p>
+        <h2>Free access and paid learning plans</h2>
+        <p>TopicalExamQuiz currently provides its available Cambridge-aligned learning features free of charge and may support those features through advertising.</p>
+        <p>The planned Myanmar Curriculum is priced at 20,000 MMK per month for each year level. Each year level, such as Year 1 or Year 2, is a separate plan. Payment is not active in this prototype. Before paid access is launched, the applicable access period, payment method, cancellation terms and refund policy will be clearly presented before purchase. TopicalExamQuiz will not charge a user without confirmation.</p>
         <h2>Accounts and progress</h2>
         <p>Users should provide accurate information when creating an account and keep their login details secure. In the current version, some learning progress may be stored in the browser, so clearing browser data can remove locally saved progress.</p>
         <h2>Content and intellectual property</h2>
@@ -982,7 +1133,7 @@ const programmeCatalog={
   stage8:{curriculum:'Cambridge-aligned',programme:'Lower Secondary',stage:'Stage 8',status:'coming-soon'},
   stage9:{curriculum:'Cambridge-aligned',programme:'Lower Secondary',stage:'Stage 9',status:'coming-soon'},
   igcse:{curriculum:'Cambridge-aligned',programme:'IGCSE',status:'coming-later'},
-  comingSoon:{curriculum:'TopicalExamQuiz',programme:'Coming Soon',status:'coming-later'}
+  myanmar:{curriculum:'Myanmar Curriculum',programme:'School Learning',price:'20000 MMK/month',billing:'per-year-level',status:'coming-soon'}
 };
 let currentProgrammeKey='stage7';
 function openProgrammeChooser(){closeLearnMenu();showView('programmeView')}
@@ -990,9 +1141,160 @@ function startStage7Science(){currentProgrammeKey='stage7';chooseLevel('Stage 7'
 function openProgrammeFromMenu(key){
   closeLearnMenu();
   if(key==='lowerSecondary'){openProgrammeChooser();return}
-  if(key==='stage6'){showComingSoon('Primary — Stage 6');return}
-  if(key==='igcse'){showComingSoon('IGCSE');return}
+  if(key==='stage6'){openCambridgeSubjects('Stage 6','Primary');return}
+  if(key==='igcse'){openCambridgeSubjects('IGCSE','IGCSE');return}
 }
+
+const myanmarYears=Array.from({length:12},(_,i)=>`Year ${i+1}`);
+const myanmarSubjects=['Myanmar','English','Mathematics','Science'];
+
+const myanmarMockupTemplates={
+  'Myanmar':{
+    free:[
+      {title:'Chapter 1 · Reading basics', note:'Sample lesson · free preview'},
+      {title:'Chapter 1 Review', note:'Short practice activity'},
+      {title:'Vocabulary starter', note:'Intro exercise'}
+    ],
+    premium:[
+      {title:'Chapter 2 · Guided writing', note:'Full chapter access'},
+      {title:'Chapter 3 · Grammar practice', note:'Topic exercises and mastery'},
+      {title:'Chapter Review Pack', note:'Mixed questions and revision'},
+      {title:'Progress tracking', note:'Scores, weak topics and reports'}
+    ]
+  },
+  'English':{
+    free:[
+      {title:'Unit 1 · Alphabet and phonics', note:'Sample lesson · free preview'},
+      {title:'Basic vocabulary set', note:'Starter practice'},
+      {title:'Mini review', note:'Quick check activity'}
+    ],
+    premium:[
+      {title:'Reading comprehension units', note:'Full chapter access'},
+      {title:'Grammar and sentence building', note:'Topic exercises and review'},
+      {title:'Writing practice', note:'Structured activities'},
+      {title:'Progress tracking', note:'Scores, weak topics and reports'}
+    ]
+  },
+  'Mathematics':{
+    free:[
+      {title:'Chapter 1 · Number basics', note:'Sample lesson · free preview'},
+      {title:'Practice set A', note:'Starter questions'},
+      {title:'Mini review', note:'Quick check activity'}
+    ],
+    premium:[
+      {title:'Full chapter worksheets', note:'All lessons unlocked'},
+      {title:'Word problems', note:'Mixed practice and revision'},
+      {title:'Chapter review', note:'Checkpoint-style questions'},
+      {title:'Progress tracking', note:'Scores, weak topics and reports'}
+    ]
+  },
+  'Science':{
+    free:[
+      {title:'Chapter 1 · Intro to science', note:'Sample lesson · free preview'},
+      {title:'Observation activity', note:'Starter practice'},
+      {title:'Mini review', note:'Quick check activity'}
+    ],
+    premium:[
+      {title:'Full topic lessons', note:'All lessons unlocked'},
+      {title:'Experiments and questions', note:'Topic exercises and review'},
+      {title:'Chapter review', note:'Mixed questions and revision'},
+      {title:'Progress tracking', note:'Scores, weak topics and reports'}
+    ]
+  }
+};
+function openMyanmarSubjectMockup(year,subject){
+  currentLevel=year;
+  currentProgram='Myanmar Curriculum';
+  currentSubject=subject;
+  const data=myanmarMockupTemplates[subject]||myanmarMockupTemplates['Myanmar'];
+  const title=document.getElementById('myanmarMockupTitle');
+  const desc=document.getElementById('myanmarMockupDescription');
+  const back=document.getElementById('myanmarMockupBack');
+  const priceText=document.getElementById('myanmarPremiumPriceText');
+  const combinedList=document.getElementById('myanmarCombinedList');
+  if(title) title.textContent=`${year} — ${subject}`;
+  if(desc) desc.textContent=`Example mockup for ${year} ${subject}. Free items are open; the rest are shown as premium locked content.`;
+  if(back){back.textContent='← Back to subjects';back.setAttribute('onclick',`openMyanmarSubjects('${year}')`)}
+  if(priceText) priceText.textContent=`20,000 MMK/month for ${year} unlocks the full ${subject} subject content.`;
+  if(combinedList){
+    const freeRows=data.free.map(item=>`<div class="myanmar-item"><div><strong>${item.title}</strong><small>${item.note}</small></div><span class="item-tag open">FREE OPEN</span></div>`);
+    const premiumRows=data.premium.map(item=>`<div class="myanmar-item locked-row"><div><strong>${item.title}</strong><small>${item.note}</small></div><span class="item-tag locked">🔒 PREMIUM</span></div>`);
+    combinedList.innerHTML=[...freeRows,...premiumRows].join('');
+  }
+  showView('myanmarMockupView');
+}
+
+const cambridgeSubjectSets={
+  'Stage 6':['Science','Mathematics','English'],
+  'Stage 7':['Science','Mathematics','English'],
+  'Stage 8':['Science','Mathematics','English'],
+  'Stage 9':['Science','Mathematics','English'],
+  'IGCSE':['Biology','Chemistry','Physics','Mathematics','English']
+};
+function openMyanmarYears(){
+  closeLearnMenu();
+  const grid=document.getElementById('myanmarYearGrid');
+  if(grid){
+    grid.innerHTML=myanmarYears.map(y=>`<button type="button" class="year-card" onclick="openMyanmarSubjects('${y}')"><strong>${y}</strong><small>20,000 MMK/month · Choose subjects →</small></button>`).join('');
+  }
+  showView('myanmarYearView');
+}
+function openMyanmarSubjects(year){
+  currentLevel=year;
+  currentProgram='Myanmar Curriculum';
+  const title=document.getElementById('subjectChooserTitle');
+  const eyebrow=document.getElementById('subjectChooserEyebrow');
+  const desc=document.getElementById('subjectChooserDescription');
+  const price=document.getElementById('subjectChooserPrice');
+  const back=document.getElementById('subjectChooserBack');
+  if(title)title.textContent=`${year} — Choose a subject`;
+  if(eyebrow)eyebrow.textContent='MYANMAR CURRICULUM';
+  if(desc)desc.textContent='Choose a subject for this year level.';
+  if(price){price.style.display='block';price.innerHTML='<strong>20,000 MMK/month for this year level.</strong> Choose a subject below. Free preview items can be shown first, with the rest marked as premium locked.'}
+  if(back){back.textContent='← Back to years';back.setAttribute('onclick',"openMyanmarYears()")}
+  renderProgrammeSubjects(myanmarSubjects,{programme:'Myanmar Curriculum',level:year,mode:'myanmar'});
+}
+function openCambridgeSubjects(level,programme){
+  closeLearnMenu();
+  currentLevel=level;
+  currentProgram=programme;
+  const subjects=cambridgeSubjectSets[level]||[];
+  const title=document.getElementById('subjectChooserTitle');
+  const eyebrow=document.getElementById('subjectChooserEyebrow');
+  const desc=document.getElementById('subjectChooserDescription');
+  const price=document.getElementById('subjectChooserPrice');
+  const back=document.getElementById('subjectChooserBack');
+  if(title)title.textContent=`${level} — Choose a subject`;
+  if(eyebrow)eyebrow.textContent='CAMBRIDGE-ALIGNED · FREE';
+  if(desc)desc.textContent=level==='Stage 7'?'Science is available now. Other subjects are being prepared.':'Choose a subject to see its availability.';
+  if(price)price.style.display='none';
+  if(back){back.textContent='← Back to programmes';back.setAttribute('onclick',"openProgrammeChooser()")}
+  renderProgrammeSubjects(subjects,{programme,level,liveSubject:(level==='Stage 7'?'Science':null)});
+}
+function renderProgrammeSubjects(subjects,options){
+  const grid=document.getElementById('programmeSubjectGrid');
+  if(!grid)return;
+  grid.innerHTML=subjects.map(subject=>{
+    if(options.mode==='myanmar'){
+      return `<button type="button" class="subject-choice-card myanmar-open" onclick="openMyanmarSubjectMockup('${options.level}','${subject}')"><strong>${subject}</strong><small>Open mockup · free preview + premium locked items</small><span class="status">OPEN MOCKUP</span></button>`;
+    }
+    const live=options.liveSubject===subject;
+    const action=live?`startSelectedStage7Science()`:`showSubjectComingSoon('${options.programme}','${options.level}','${subject}')`;
+    return `<button type="button" class="subject-choice-card ${live?'live':''}" onclick="${action}"><strong>${subject}</strong><small>${live?'Question bank available now':'Question bank coming soon'}</small><span class="status">${live?'AVAILABLE NOW':'COMING SOON'}</span></button>`;
+  }).join('');
+  showView('programmeSubjectView');
+}
+function startSelectedStage7Science(){
+  currentProgrammeKey='stage7';
+  currentLevel='Stage 7';
+  currentProgram='Lower Secondary';
+  currentSubject='Science';
+  chooseLevel('Stage 7','Lower Secondary');
+}
+function showSubjectComingSoon(programme,level,subject){
+  alert(`${level} ${subject} is not live yet. You can still browse the year and subject structure; the question bank will be added later.`);
+}
+
 function toggleLearnMenu(event){
   if(event)event.stopPropagation();
   const menu=document.getElementById('learnDropdown'),btn=document.getElementById('learnMenuButton');
@@ -1071,7 +1373,7 @@ let currentLevel='Stage 7', currentProgram='Lower Secondary';
 let reportedQuestions=[];
 let quizStartedAt=0,quizEndedAt=0,quizElapsedSeconds=0,tabSwitchCount=0,quizTrackingReady=false;
 let sessionWrongIds=new Set(),sessionReviewedIds=new Set(),sessionMistakesFixed=0,sessionTopicMasteryBefore=null,lastAnswerWasWrong=false,lastStudyReport=null;
-let quizOverride=null,quizMode='topic',currentChapterId='';
+let quizOverride=null,quizMode='topic',currentChapterId='',currentPartNumber=0,currentPartTopicKey='',currentPartBaseTopic='',currentPartBaseCode='';
 function chooseLevel(level,program){
   currentLevel=level;
   currentProgram=program;
@@ -1153,7 +1455,7 @@ function openCurriculum(category){
   });
   showView('curriculumView');
 }
-function backToCurriculum(){if(currentChapterId){quizOverride=null;quizMode='topic';openChapterFromSkillMap(encodeURIComponent(currentChapterId));return}if(quizMode!=='topic'){quizOverride=null;quizMode='topic';showView('homeView');return}openCurriculum(currentCategory)}
+function backToCurriculum(){if(quizMode==='part'||quizMode==='topic-review'){quizOverride=null;quizMode='topic';currentPartNumber=0;renderTopicParts();showView('topicPartsView');return}if(currentChapterId){quizOverride=null;quizMode='topic';openChapterFromSkillMap(encodeURIComponent(currentChapterId));return}if(quizMode!=='topic'){quizOverride=null;quizMode='topic';showView('homeView');return}openCurriculum(currentCategory)}
 const topicPhotoKeywords={
   'Plant organs':'plant,roots,leaves,botany',
   'Human organ systems':'human,anatomy,medical',
@@ -1248,19 +1550,51 @@ function genericQuestions(name){return [
  {q:`Select the correct response for this ${name} question.`,a:['Option A','Option B','Option C','Option D'],c:3,e:'This question can later be replaced by curriculum-specific content.'},
  {type:'fill',q:`One key word connected with ${name} is ______.`,answer:'answer',e:`This is a sample one-word fill-in-the-blank question for ${name}. Replace the answer with a curriculum-specific one-word answer in your real question bank.`}
 ]}
-function startQuiz(code,name,key){quizOverride=null;quizMode='topic';currentCode=code;currentTopic=name;currentTopicKey=key||name;resetQuizSession();}
+function partProgressStorageKey(){return 'topicalExamQuizPartProgressV1'}
+function loadPartProgress(){try{return JSON.parse(localStorage.getItem(partProgressStorageKey())||'{}')}catch(e){return{}}}
+function savePartCompletion(topicKey,part,total,correct){try{const all=loadPartProgress();all[topicKey]=all[topicKey]||{};all[topicKey]['part'+part]={completed:true,total:total,correct:correct,score:total?Math.round(correct/total*100):0,updatedAt:Date.now()};localStorage.setItem(partProgressStorageKey(),JSON.stringify(all))}catch(e){}}
+function getPartStatus(topicKey,part){const all=loadPartProgress();return all[topicKey]&&all[topicKey]['part'+part]?all[topicKey]['part'+part]:null}
+function completedPartQuestionCount(topicKey){let n=0;for(let i=1;i<=3;i++){const s=getPartStatus(topicKey,i);if(s&&s.completed)n+=s.total||20}return n}
+function allThreePartsComplete(topicKey){return [1,2,3].every(i=>{const s=getPartStatus(topicKey,i);return !!(s&&s.completed)})}
+function startQuiz(code,name,key){quizOverride=null;quizMode='topic';currentPartNumber=0;currentPartTopicKey='';currentCode=code;currentTopic=name;currentTopicKey=key||name;resetQuizSession();}
+function openTopicParts(code,name,key){
+  currentPartNumber=0;currentPartTopicKey='';currentPartBaseCode=code;currentPartBaseTopic=name;currentTopicKey=key||name;currentCode=code;currentTopic=name;
+  const meta=allStage7Topics().find(t=>t.key===currentTopicKey);if(meta){currentCategory=meta.category;currentChapterId=String(meta.chapterId||String(code).split('.')[0])}
+  renderTopicParts();showView('topicPartsView');
+}
+function backFromTopicParts(){if(currentChapterId){openChapterFromSkillMap(encodeURIComponent(currentChapterId));return}openCurriculum(currentCategory)}
+function topicPartQuestions(topicKey,part){const base=stage7ScienceQuestions[topicKey]||[];const start=(part-1)*20;return base.slice(start,start+20)}
+function renderTopicParts(){
+  const key=currentTopicKey,base=stage7ScienceQuestions[key]||[],meta=allStage7Topics().find(t=>t.key===key),available=Math.min(60,base.length),completed=Math.min(60,completedPartQuestionCount(key));
+  const title=document.getElementById('topicPartTitle'),eye=document.getElementById('topicPartEyebrow'),txt=document.getElementById('topicPartProgressText'),bar=document.getElementById('topicPartProgressBar'),list=document.getElementById('topicPartsList');
+  if(title)title.textContent=currentPartBaseTopic||currentTopic;if(eye)eye.textContent=`CHAPTER ${meta?meta.chapterId:(currentChapterId||'')} · TOPIC ${currentPartBaseCode||currentCode}`;
+  if(txt)txt.textContent=`${completed} / 60 questions completed`;if(bar)bar.style.width=Math.min(100,Math.round(completed/60*100))+'%';
+  if(list)list.innerHTML=[1,2,3].map(part=>{const qs=topicPartQuestions(key,part),st=getPartStatus(key,part),from=(part-1)*20+1,to=part*20,label=qs.length?`Questions ${from}–${from+qs.length-1}`:`Questions ${from}–${to} · being prepared`,status=st&&st.completed?`✓ Completed · ${st.correct}/${st.total}`:(qs.length?`${qs.length} questions`:'Coming soon');return `<button type="button" class="topic-part-card" onclick="startTopicPart(${part})" ${qs.length?'':'disabled'}><span><strong>Part ${part}</strong><small>${label}</small></span><span class="topic-part-status ${st&&st.completed?'done':''}">${status} ›</span></button>`}).join('');
+  const reviewBtn=document.getElementById('topicReviewBtn'),reviewCard=document.getElementById('topicReviewCard'),reviewTitle=document.getElementById('topicReviewTitle'),unlocked=allThreePartsComplete(key);
+  if(reviewTitle)reviewTitle.textContent=`Review ${currentPartBaseCode||currentCode} ${currentPartBaseTopic||currentTopic}`;
+  if(reviewBtn){reviewBtn.disabled=!unlocked;reviewBtn.textContent=unlocked?'Review topic':'Complete Parts 1–3';reviewBtn.onclick=startTopicReview}
+  if(reviewCard)reviewCard.classList.toggle('locked',!unlocked);
+}
+function startTopicPart(part){
+  const key=currentTopicKey,qs=topicPartQuestions(key,part);if(!qs.length){alert('Questions for this part are being prepared.');return}
+  currentPartNumber=part;currentPartTopicKey=key;currentCode=currentPartBaseCode||currentCode;currentTopic=currentPartBaseTopic||currentTopic;quizMode='part';quizOverride=qs;resetQuizSession();
+}
+function startTopicReview(){
+  const key=currentTopicKey;if(!allThreePartsComplete(key)){alert('Complete Parts 1, 2 and 3 first.');return}
+  const base=(stage7ScienceQuestions[key]||[]).slice(0,60);if(!base.length)return;currentPartNumber=0;currentPartTopicKey=key;currentCode=currentPartBaseCode||currentCode;currentTopic=currentPartBaseTopic||currentTopic;quizMode='topic-review';quizOverride=base.slice().sort(()=>Math.random()-.5).slice(0,Math.min(20,base.length));resetQuizSession();
+}
 function resetQuizSession(){qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;const beforeStat=(currentTopicKey&&currentTopicKey!=='daily')?getTopicStat(currentTopicKey):{attempts:0,correct:0};sessionTopicMasteryBefore=beforeStat.attempts?Math.round(beforeStat.correct/beforeStat.attempts*100):null;if(!quizTrackingReady){document.addEventListener('visibilitychange',function(){if(document.getElementById('quizView')&&document.getElementById('quizView').classList.contains('active')&&document.hidden){tabSwitchCount++}});quizTrackingReady=true}showView('quizView');renderQuestion()}
 function quickQuiz(subject,category,code,name){currentSubject=subject;currentCategory=category;startQuiz(code,name)}
 function getQs(){if(quizOverride)return quizOverride;const base=(currentLevel==='Stage 7'&&currentSubject==='Science'&&stage7ScienceQuestions[currentTopicKey])?stage7ScienceQuestions[currentTopicKey]:(topicQuestions[currentTopic]||genericQuestions(currentTopic));return addPhotoToQuestions(base,currentTopic)}
 function renderQuestion(){
   answered=false;
   const qs=getQs(),x=qs[qIndex];
-  document.getElementById('quizTitle').textContent=currentTopic;
+  document.getElementById('quizTitle').textContent=currentTopic+(quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':'');
   const meta=getQuestionMeta(x);
-  document.getElementById('quizCrumb').textContent=quizMode==='topic'?`${currentSubject} · ${currentCategory} · ${currentCode}`:`${meta.category} · ${meta.topic}`;
+  document.getElementById('quizCrumb').textContent=(quizMode==='topic'||quizMode==='part'||quizMode==='topic-review')?`${currentSubject} · ${currentCategory} · ${currentCode}${quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':''}`:`${meta.category} · ${meta.topic}`;
   const skill=classifyQuestionSkill(x); const skillBadge=document.getElementById('qSkillBadge'); if(skillBadge)skillBadge.textContent=skill;
   document.getElementById('mastery').textContent='Mastery '+mastery;
-  document.getElementById('questionNo').textContent=(x.photoQuiz?'PHOTO QUESTION • ':'')+`QUESTION ${qIndex+1} OF ${qs.length}`;
+  document.getElementById('questionNo').textContent=(x.photoQuiz?'PHOTO QUESTION • ':'')+`QUESTION ${qIndex+1} OF ${qs.length}`;const qp=document.getElementById('quizSessionProgressBar');if(qp)qp.style.width=Math.round(((qIndex+1)/Math.max(1,qs.length))*100)+'%';
   renderQuestionPhoto(x);
   document.getElementById('questionText').textContent=x.q;
   const ans=document.getElementById('answers');
@@ -1385,7 +1719,7 @@ function saveStudentActivity(report){
 }
 function buildStudyReport(){
   const total=getQs().length,pct=total?Math.round(correctCount/total*100):0;
-  const grp=chapterGroups().find(g=>String(g.id)===String(currentChapterId||String(currentCode||'').split('.')[0]));const report={id:generateReportId(),student:currentStudentName(),studentId:ensureStudentId(),level:currentLevel,program:currentProgram,subject:currentSubject,category:currentCategory,chapterId:grp?String(grp.id):String(currentChapterId||String(currentCode||'').split('.')[0]||''),chapter:grp?grp.title:'',activityType:quizMode==='chapter'?'Chapter review':'Topic practice',topic:currentTopic,code:currentCode,startAt:quizStartedAt,endAt:quizEndedAt||Date.now(),seconds:quizElapsedSeconds,total,correct:correctCount,score:pct,correctionsReviewed:sessionReviewedIds.size,correctionsTotal:sessionWrongIds.size,mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,masteryAfter:topicMasteryNow(),createdAt:Date.now()};
+  const grp=chapterGroups().find(g=>String(g.id)===String(currentChapterId||String(currentCode||'').split('.')[0]));const report={id:generateReportId(),student:currentStudentName(),studentId:ensureStudentId(),level:currentLevel,program:currentProgram,subject:currentSubject,category:currentCategory,chapterId:grp?String(grp.id):String(currentChapterId||String(currentCode||'').split('.')[0]||''),chapter:grp?grp.title:'',activityType:quizMode==='chapter'?'Chapter review':quizMode==='part'?`Part ${currentPartNumber}`:quizMode==='topic-review'?'Topic review':'Topic practice',part:quizMode==='part'?currentPartNumber:null,topic:currentTopic,code:currentCode,startAt:quizStartedAt,endAt:quizEndedAt||Date.now(),seconds:quizElapsedSeconds,total,correct:correctCount,score:pct,correctionsReviewed:sessionReviewedIds.size,correctionsTotal:sessionWrongIds.size,mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,masteryAfter:topicMasteryNow(),createdAt:Date.now()};
   saveStudyReport(report);saveStudentActivity(report);lastStudyReport=report;return report;
 }
 function reportShareText(r){
@@ -1405,7 +1739,7 @@ function copyVerifiedReport(){const r=lastStudyReport||buildStudyReport(),text=r
 function shareSummary(){openVerifiedStudyReport()}
 function openReportFromHash(){const m=location.hash.match(/^#study-report=([^&]+)/);if(!m)return;const id=decodeURIComponent(m[1]),r=loadStudyReport(id);if(r){lastStudyReport=r;renderVerifiedStudyReport(r);document.getElementById('verifiedStudyReportModal').classList.add('show')}else if(location.protocol!=='file:'){alert('This study record is not available on this device yet. Connect TopicalExamQuiz to a database for cross-device verification.')}}
 window.addEventListener('hashchange',openReportFromHash);
-function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView')}
+function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);if(quizMode==='part'&&currentPartTopicKey&&currentPartNumber)savePartCompletion(currentPartTopicKey,currentPartNumber,total,correctCount);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+(quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':'')+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView')}
 function restartQuiz(){if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;showView('quizView');renderQuestion()}}
 function showReview(){showView('reviewView')}
 document.querySelectorAll('.stage').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stage').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
@@ -1500,12 +1834,17 @@ function activityRowsFromLive(studentId){
 }
 function chapterProgressFromLive(studentId){
   const logs=loadStudentActivities(studentId),by={};
-  logs.forEach(r=>{const id=r.chapterId||String(r.code||'').split('.')[0]||'—',name=r.chapter||('Chapter '+id);by[id]=by[id]||{title:name,correct:0,total:0,topics:new Set()};by[id].correct+=r.correct||0;by[id].total+=r.total||0;if(r.topic)by[id].topics.add(r.topic)});
-  return Object.entries(by).sort((a,b)=>Number(a[0])-Number(b[0])).map(([id,v])=>[`Chapter ${id}`,v.title,v.total?Math.round(v.correct/v.total*100)+'%':'—',v.topics.size+' topic'+(v.topics.size===1?'':'s')]);
+  logs.forEach(r=>{
+    const id=r.chapterId||String(r.code||'').split('.')[0]||'—',topic=r.topic||'—',k=id+'|'+topic;
+    by[k]=by[k]||{chapter:`Chapter ${id}`,topic:topic,correct:0,total:0,parts:new Set(),reviews:0};
+    by[k].correct+=r.correct||0;by[k].total+=r.total||0;if(/^Part [123]$/.test(r.activityType||''))by[k].parts.add(r.activityType);if(r.activityType==='Topic review')by[k].reviews++;
+  });
+  return Object.values(by).sort((a,b)=>Number(String(a.chapter).replace(/\D/g,''))-Number(String(b.chapter).replace(/\D/g,''))).map(v=>[v.chapter,v.topic,`${v.parts.size}/3 parts`,v.total?Math.round(v.correct/v.total*100)+'%':'—',v.reviews?'Topic review ✓':'—']);
 }
 function teacherProgressTable(rows){
   if(!rows||!rows.length)return '<div class="teacher-empty">No chapter progress has been recorded yet.</div>';
-  return `<div class="teacher-table-wrap"><table class="teacher-table teacher-mini-table"><thead><tr><th>Chapter</th><th>Area</th><th>Accuracy</th><th>Topics practised</th></tr></thead><tbody>${rows.map(r=>`<tr><td><strong>${escapeHtml(r[0])}</strong></td><td>${escapeHtml(r[1])}</td><td>${escapeHtml(r[2])}</td><td>${escapeHtml(r[3])}</td></tr>`).join('')}</tbody></table></div>`;
+  const normalized=rows.map(r=>r.length>=5?r:[r[0],r[1],r[3]||'—',r[2]||'—','—']);
+  return `<div class="teacher-table-wrap"><table class="teacher-table teacher-mini-table"><thead><tr><th>Chapter</th><th>Topic</th><th>Parts</th><th>Accuracy</th><th>Review</th></tr></thead><tbody>${normalized.map(r=>`<tr><td><strong>${escapeHtml(r[0])}</strong></td><td>${escapeHtml(r[1])}</td><td>${escapeHtml(r[2])}</td><td>${escapeHtml(r[3])}</td><td>${escapeHtml(r[4])}</td></tr>`).join('')}</tbody></table></div>`;
 }
 function teacherActivityTable(rows){
   if(!rows||!rows.length)return '<div class="teacher-empty">No practice activity has synced for this student yet.</div>';
@@ -1520,7 +1859,7 @@ function renderTeacherStudentDetail(name,id,summary,progressRows,activityRows){
   const cards=summary?`<div class="teacher-detail-grid"><div class="teacher-detail-card"><strong>${summary.accuracy}</strong><span>Overall accuracy</span></div><div class="teacher-detail-card"><strong>${summary.study}</strong><span>Study time this week</span></div><div class="teacher-detail-card"><strong>${summary.progress}</strong><span>TopicalExamQuiz progress</span></div><div class="teacher-detail-card"><strong>${summary.score}</strong><span>Latest score</span></div><div class="teacher-detail-card"><strong>${summary.corrections}</strong><span>Corrections reviewed</span></div><div class="teacher-detail-card"><strong>${summary.fixed}</strong><span>Mistakes fixed</span></div></div>`:'';
   const weak=summary&&summary.weak?`<strong style="font-size:12px">Areas to support</strong><div>${summary.weak.map(x=>`<span class="weak-chip">${escapeHtml(x)}</span>`).join('')}</div>`:'';
   const share=summary?`<div class="teacher-share-actions"><button class="send-parent" onclick="shareTeacherParentProgress('${escapeHtml(name)}')">Send progress to parent</button><button class="copy-parent" onclick="copyTeacherParentProgress('${escapeHtml(name)}')">Copy summary</button></div>`:'';
-  el.innerHTML=`<div class="teacher-detail-head"><div><div class="eyebrow">STUDENT</div><h3>${escapeHtml(name)}</h3><div class="student-id-cell">${escapeHtml(id)}</div></div><button aria-label="Close student summary" onclick="this.closest('.teacher-detail').classList.remove('show')">×</button></div>${cards}${weak}<div class="teacher-detail-tabs"><button class="teacher-detail-tab active" data-tab="progress" onclick="switchTeacherStudentTab('progress')">Progress</button><button class="teacher-detail-tab" data-tab="activity" onclick="switchTeacherStudentTab('activity')">Activity</button></div><div class="teacher-tab-panel active" data-panel="progress"><h4>Chapter progress</h4>${teacherProgressTable(progressRows)}</div><div class="teacher-tab-panel" data-panel="activity"><h4>Practice activity</h4><p class="muted" style="font-size:11px;margin-top:-4px">See which chapter and topic the student practised, when they did it, and the result.</p>${teacherActivityTable(activityRows)}</div>${share}`;
+  el.innerHTML=`<div class="teacher-detail-head"><div><div class="eyebrow">STUDENT</div><h3>${escapeHtml(name)}</h3><div class="student-id-cell">${escapeHtml(id)}</div></div><button aria-label="Close student summary" onclick="this.closest('.teacher-detail').classList.remove('show')">×</button></div>${cards}${weak}<div class="teacher-detail-tabs"><button class="teacher-detail-tab active" data-tab="progress" onclick="switchTeacherStudentTab('progress')">Progress</button><button class="teacher-detail-tab" data-tab="activity" onclick="switchTeacherStudentTab('activity')">Activity</button></div><div class="teacher-tab-panel active" data-panel="progress"><h4>Topic & part progress</h4>${teacherProgressTable(progressRows)}</div><div class="teacher-tab-panel" data-panel="activity"><h4>Practice activity</h4><p class="muted" style="font-size:11px;margin-top:-4px">See which chapter, topic and Part 1–3 session the student practised, when they did it, and the result.</p>${teacherActivityTable(activityRows)}</div>${share}`;
   el.classList.add('show');
 }
 function showNewTeacherStudent(name,id){
@@ -1621,7 +1960,7 @@ function renderMistakePreview(p=loadProgress()){const el=document.getElementById
 function renderMistakeBook(p=loadProgress()){const el=document.getElementById('mistakeBookGrid');if(!el)return;const arr=p.mistakes||[];if(!arr.length){el.innerHTML='<div class="empty-state"><strong>Your Mistake Book is empty.</strong><br>Questions you answer incorrectly will appear here automatically.</div>';return}el.innerHTML=arr.map(m=>`<div class="mistake-card ${m.status==='fixed'?'fixed':''}"><div class="mistake-top"><div><strong>${m.meta.topic}</strong><div class="muted" style="font-size:11px">${m.meta.category} · ${m.meta.code}</div></div><span class="mistake-status">${m.status==='fixed'?'FIXED ✓':'REVIEW'}</span></div><div class="mistake-question">${escapeHtml(m.question)}</div>${m.status!=='fixed'?`<div class="mistake-answer">Recovery ${m.recoveryCorrect||0}/2</div>`:''}${m.status!=='fixed'?`<div class="mistake-actions"><button class="btn primary" onclick="startMistakeReview('${encodeURIComponent(m.id)}')">Try again</button></div>`:''}</div>`).join('')}
 function renderProfileStats(p,rd){const map={profileStreak:getStreak(p),profilePoints:(p.points||0).toLocaleString(),profileAccuracy:(p.answered?Math.round(p.correct/p.answered*100):0)+'%',profileTopics:Object.values(p.topicStats||{}).filter(x=>x.attempts>0).length};Object.entries(map).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.textContent=v});const pr=document.getElementById('profileReadiness');if(pr)pr.innerHTML=`<div style="font-size:42px;font-weight:900;color:var(--navy)">${rd.score}<span style="font-size:16px;color:var(--muted)"> / 100</span></div><div class="muted" style="font-size:12px;margin:5px 0 14px">${rd.practised} topics practised · ${rd.coverage}% coverage target</div><div class="mini-track"><span style="width:${rd.score}%"></span></div>`;const pm=document.getElementById('profileMistakes');if(pm){const open=(p.mistakes||[]).filter(m=>m.status!=='fixed').length,fixed=(p.mistakes||[]).filter(m=>m.status==='fixed').length;pm.innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="summary-stat"><strong>${open}</strong><span class="muted">To review</span></div><div class="summary-stat"><strong>${fixed}</strong><span class="muted">Fixed ✓</span></div></div><button class="btn" style="width:100%;margin-top:12px" onclick="openReviewMistakes()">Open Mistake Book</button>`}}
 function escapeHtml(v){return String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
-function openTopicFromDashboard(category,code,topic,key){currentLevel='Stage 7';currentProgram='Lower Secondary';currentSubject='Science';currentCategory=decodeURIComponent(category);startQuiz(decodeURIComponent(code),decodeURIComponent(topic),decodeURIComponent(key))}
+function openTopicFromDashboard(category,code,topic,key){currentLevel='Stage 7';currentProgram='Lower Secondary';currentSubject='Science';currentCategory=decodeURIComponent(category);openTopicParts(decodeURIComponent(code),decodeURIComponent(topic),decodeURIComponent(key))}
 function openChapterFromSkillMap(encodedChapterId){
   const chapterId=decodeURIComponent(encodedChapterId);
   const group=chapterGroups().find(g=>String(g.id)===String(chapterId));
@@ -1644,7 +1983,7 @@ function openChapterFromSkillMap(encodedChapterId){
 }
 function openChapterTopic(category,code,topic,key){
   currentCategory=decodeURIComponent(category);
-  startQuiz(decodeURIComponent(code),decodeURIComponent(topic),decodeURIComponent(key));
+  openTopicParts(decodeURIComponent(code),decodeURIComponent(topic),decodeURIComponent(key));
 }
 function startChapterReview(chapterId){
   const group=chapterGroups().find(g=>String(g.id)===String(chapterId));
