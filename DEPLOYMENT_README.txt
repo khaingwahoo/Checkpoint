@@ -1,3 +1,8 @@
+UPDATE — 10 NOVEMBER 2026: All currently available Chinese, Myanmar and Stage 7 Science quizzes now open a mixed-question Part 1 / Part 2 / Part 3 page. HSK 3 Lesson 1 has 120 questions split 40/40/40. See HSK3_LESSON1_IMPORT_README.txt.
+
+UPDATE — 10 NOVEMBER 2026: HSK 3 Lesson 1 integration is included.
+Read HSK3_LESSON1_IMPORT_README.txt first for deployment of the 120 questions and 15 photos.
+
 TOPICALEXAMQUIZ — ADSENSE PRE-LAUNCH PACKAGE (5 November 2026)
 
 MAIN FILE: index.html — previous website with quizzes, signup/login demos, HSK chapter pages and Myanmar sample practice retained.
@@ -22,7 +27,7 @@ BEFORE PUBLIC LAUNCH:
 7. Publish accurate privacy/cookie policy for real services, consent management as legally required, and child-directed advertising protections. AdSense does not currently list Burmese as a supported content language: do not automatically load ad code globally across Burmese-majority pages.
 8. Only after you have an approved Google AdSense publisher account and a READY site: add the official AdSense verification / ad script to eligible pages with appropriate consent, age and language checks. DO NOT globally insert auto ads into this SPA without establishing proper content segmentation and child-protection controls. There is deliberately no publisher ID, ads.txt, or live ad code in this package.
 9. After approval, create ads.txt with the exact publisher ID provided by AdSense and add appropriate entries at the website root. Do not invent an ID.
-10. Test all site routes, especially mobile, login/signup, all buttons, and quiz navigation, in a browser. This package passed static validation but not full end-to-end browser testing.
+10. Test all site routes, especially mobile, login/signup, all buttons, and quiz navigation, in a browser. The new three-part flows passed automated local browser interaction tests. Re-test after deploying to production.
 
 Important: This package reduces some approval risks but does not guarantee approval. A single-page app with hidden content states is less ideal for SEO than individually routable lesson pages; a future rebuild can expose each quiz and chapter at its own indexable URL.
 

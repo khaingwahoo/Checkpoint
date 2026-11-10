@@ -807,6 +807,30 @@ input, textarea, select {
 .teacher-answers-count{font-size:12px;color:#697f95;margin:10px 0}
 @media(max-width:620px){.teacher-answer-compare{grid-template-columns:1fr}.teacher-mistake-metrics{grid-template-columns:1fr 1fr}.teacher-mistake-metric:last-child{grid-column:1/-1}.teacher-mistake-tools{flex-direction:column;align-items:stretch}.teacher-mistake-tools select,.teacher-mistake-tools input,.teacher-mistake-tools button{width:100%}.teacher-mistake-card{padding:13px}}
 </style>
+<style>
+/* HSK 3 Lesson 1 import — accessible, responsive exercise chooser */
+.hsk-lesson1-chooser{max-width:960px}
+.hsk-lesson-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0 24px}
+.hsk-lesson-summary>div{padding:16px 12px;border:1px solid #dce6f0;background:#fff;border-radius:15px;text-align:center}
+.hsk-lesson-summary strong{display:block;color:#153a5f;font-size:26px;font-weight:900}
+.hsk-lesson-summary span{display:block;color:#556b80;font-size:12px;margin-top:4px;font-weight:650}
+.hsk-lesson-practice-grid{gap:13px}
+.hsk-practice-card{text-align:left;display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-height:138px;white-space:normal;color:#173955!important;-webkit-text-fill-color:#173955!important;background:#fff!important}
+.hsk-practice-card strong{font-size:17px;color:#173955!important;-webkit-text-fill-color:#173955!important}
+.hsk-practice-card small{font-size:12px;line-height:1.5;color:#5a7187!important;-webkit-text-fill-color:#5a7187!important}
+.hsk-practice-icon{font-size:25px;margin-bottom:4px}
+.hsk-all-btn{margin-top:18px;width:100%;min-height:52px;white-space:normal;text-align:center}
+.hsk-lesson-note{margin-top:20px;line-height:1.65}
+@media(max-width:600px){.hsk-lesson-summary{gap:7px}.hsk-lesson-summary>div{padding:12px 5px}.hsk-lesson-summary strong{font-size:21px}.hsk-lesson-summary span{font-size:11px}.hsk-lesson-practice-grid{grid-template-columns:1fr!important}.hsk-practice-card{min-height:110px}}
+</style>
+<style>
+/* Unified 3-part lesson navigator used by Cambridge, Chinese and Myanmar. */
+.topic-part-hero .eyebrow{color:#70849b}
+.topic-part-card:disabled{opacity:.57;cursor:not-allowed}
+.topic-part-status{white-space:normal;text-align:right}
+.topic-part-card:focus-visible,.topic-review-card button:focus-visible{outline:3px solid #2f70ee;outline-offset:2px}
+@media(max-width:620px){.topic-part-status{text-align:left}.topic-overall-row{flex-wrap:wrap}}
+</style>
 </head>
 <body>
 <header class="top platform-top">
@@ -855,6 +879,7 @@ input, textarea, select {
 
 <button class="demo-quiz-card" onclick="startStage7Science();openSubject('Science');openCurriculum('Biology')" type="button"><span class="demo-quiz-icon">🔬</span><strong>Stage 7 · Science</strong><small>Browse Biology topics and start a practice quiz</small><span class="demo-quiz-action">Explore science quizzes →</span></button>
 <button class="demo-quiz-card" onclick="openHskChapters('HSK 1')" type="button"><span class="demo-quiz-icon">🇨🇳</span><strong>Chinese · HSK 1</strong><small>Choose a chapter for MCQ, fill-in and rearrangement questions</small><span class="demo-quiz-action">Choose a sample chapter →</span></button>
+<button class="demo-quiz-card" onclick="openHsk3Lesson1Practice()" type="button"><span class="demo-quiz-icon">🇨🇳</span><strong>Chinese · HSK 3 Lesson 1</strong><small>120 questions · Parts 1–3 · mixed types and pictures</small><span class="demo-quiz-action">Practise HSK 3 Lesson 1 →</span></button>
 <button class="demo-quiz-card" onclick="openMyanmarSubjectMockup('Year 7','Science')" type="button"><span class="demo-quiz-icon">🇲🇲</span><strong>Myanmar · Year 7 Science</strong><small>Test sample Cells, Matter and Forces quizzes</small><span class="demo-quiz-action">Explore Myanmar quizzes →</span></button>
 </div><p class="demo-quiz-footnote">Demo only · No official exam-board endorsement · Sample questions will be reviewed and replaced before public release.</p></section>
 <section class="platform-section expert-section">
@@ -895,13 +920,13 @@ input, textarea, select {
 <div class="level-intro">
 <div class="eyebrow" id="hskChapterEyebrow">CHINESE LANGUAGE · HSK</div>
 <h1 id="hskChapterTitle">Choose a chapter</h1>
-<p>Select a chapter to practise. These are sample learning chapters, not an official HSK textbook table of contents.</p>
+<p id="hskChapterDescription">Select a chapter to practise. These are sample learning chapters, not an official HSK textbook table of contents.</p>
 </div>
 <div class="level-group">
 <div class="level-group-head"><h2>Chapters</h2><span id="hskChapterCount">6 chapters</span></div>
 <div class="level-grid cols-3" id="hskChapterGrid"></div>
 </div>
-<div class="note">Demo quizzes currently use level-based mixed practice questions. Chapter-specific, syllabus-verified questions can be added next.</div>
+<div class="note" id="hskChapterNote">Demo quizzes currently use level-based mixed practice questions. Chapter-specific, syllabus-verified questions can be added next.</div>
 </div>
 </section>
 <section class="view" id="programmeView">
@@ -1039,20 +1064,20 @@ input, textarea, select {
 </section>
 <section class="view" id="topicPartsView">
 <div class="topic-part-page">
-<button class="back back-left" onclick="backFromTopicParts()" type="button">← Back to chapter</button>
+<button class="back back-left" id="topicPartsBackBtn" onclick="backFromTopicParts()" type="button">← Back to chapter</button>
 <div class="topic-part-hero">
 <div class="eyebrow" id="topicPartEyebrow">CHAPTER 1 · TOPIC 1.1</div>
 <h1 id="topicPartTitle">Plant Cells</h1>
-<p>Complete this subtopic in three shorter practice sessions.</p>
+<p id="topicPartsDescription">Complete this subtopic in three shorter practice sessions. Question types are mixed within each part.</p>
 <div class="topic-overall">
-<div class="topic-overall-row"><span>Subtopic progress</span><span id="topicPartProgressText">0 / 60 questions completed</span></div>
+<div class="topic-overall-row"><span id="topicProgressLabel">Subtopic progress</span><span id="topicPartProgressText">0 / 60 questions completed</span></div>
 <div class="bar"><span id="topicPartProgressBar" style="width:0%"></span></div>
 </div>
 </div>
 <div class="topic-parts" id="topicPartsList"></div>
-<div class="image-quiz-topic-entry"><div><strong>🖼️ Image Quiz Demo · Cells</strong><small>12 interactive picture questions for developer testing (WebP, under 100 KB each).</small></div><button type="button" class="btn primary" onclick="startImageQuizDemo()">Start Image Quiz →</button></div>
+<div class="image-quiz-topic-entry" id="imageQuizTopicEntry"><div><strong>🖼️ Image Quiz Demo · Cells</strong><small>12 interactive picture questions for developer testing (WebP, under 100 KB each).</small></div><button type="button" class="btn primary" onclick="startImageQuizDemo()">Start Image Quiz →</button></div>
 <div class="topic-review-card" id="topicReviewCard">
-<div><strong id="topicReviewTitle">Review this topic</strong><small>Mixed practice from all three parts.</small></div>
+<div><strong id="topicReviewTitle">Review this topic</strong><small id="topicReviewDescription">Mixed practice from all three parts.</small></div>
 <button class="btn primary" id="topicReviewBtn" type="button">Review topic</button>
 </div>
 </div>
@@ -1258,6 +1283,7 @@ TopicalExamQuiz offers original practice activities. Myanmar sample quizzes are 
 <div aria-labelledby="forgotPasswordHeading" aria-modal="true" class="modal" id="forgotPasswordModal" role="dialog"><div class="modal-card auth-card"><button aria-label="Close password help" class="modal-x" onclick="closeAnyModal()" type="button">×</button><h2 id="forgotPasswordHeading">Forgot password?</h2><p class="muted">Password recovery for <strong id="forgotRoleName">student</strong> accounts.</p><div class="field"><label for="forgotEmail">Email address</label><input autocomplete="email" id="forgotEmail" placeholder="Enter your account email" type="email"/></div><div class="auth-demo-notice" style="line-height:1.6">This is a demo website. Passwords are not stored, and password reset emails cannot be sent yet. Real password recovery will require a secure authentication service.</div><p aria-live="polite" class="auth-error" id="forgotMessage" role="status"></p><div class="modal-actions"><button class="btn" onclick="backToForgotLogin()" type="button">Back to login</button><button class="btn primary" onclick="showForgotOptions()" type="button">Continue</button></div><div class="auth-switch">Want a new demo profile? <button class="auth-text-link" onclick="openForgotSignup()" type="button">Sign up</button></div></div></div>
 <div class="modal" id="createClassModal"><div class="modal-card"><button aria-label="Close create class" class="modal-x" onclick="closeAnyModal()">×</button><h2>Create Class</h2><p class="muted">Keep it simple. TopicalExamQuiz will generate the join code.</p><div class="field"><label>Class name</label><input id="newClassName" placeholder="e.g. Class 7A"/></div><div class="field"><label>Stage</label><select id="newClassStage"><option>Stage 7</option><option>Stage 8</option><option>Stage 9</option><option>Stage 6</option><option>IGCSE</option></select></div><div class="field"><label>Subject</label><input id="newClassSubject" placeholder="Science" value="Science"/></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="createTeacherClass()">Create class</button></div></div></div>
 <div class="modal" id="addStudentModal"><div class="modal-card"><button aria-label="Close add student" class="modal-x" onclick="closeAnyModal()">×</button><h2>Add Student</h2><p class="muted">Add an existing TopicalExamQuiz student using their permanent Student ID.</p><div class="field"><label>TopicalExamQuiz Student ID</label><input id="addStudentId" placeholder="TEQ-104582"/></div><div class="field"><label>Student name</label><input id="addStudentName" placeholder="Student name"/></div><div class="modal-actions"><button class="btn" onclick="closeAnyModal()">Cancel</button><button class="btn primary" onclick="addTeacherStudent()">Add student</button></div></div></div>
+<script src="hsk3-lesson1-questions.js"></script>
 <script>
 function closeAnyModal(){
   document.querySelectorAll('.modal.show').forEach(function(modal){
@@ -1315,7 +1341,7 @@ function launchMyanmarQuiz(year,subject,topic){
   activeMyanmarTopic=topic;
   const bank=(year==='Year 7'&&subject==='Science')?myanmarYear7ScienceTopics[topic]:myanmarSampleQuestions[subject]?.[myanmarBand(year)];
   if(!bank||!bank.length){alert('Sample questions are being prepared.');return}
-  quizOverride=bank.map(x=>({...x}));quizMode='myanmar';currentPartNumber=0;resetQuizSession();
+  openMixedPracticeParts(bank,'myanmar',true);
 }
 function returnToMyanmarTopicList(){quizOverride=null;quizMode='topic';openMyanmarSubjectMockup(currentLevel,currentSubject)}
 
@@ -1387,11 +1413,11 @@ function openMyanmarSubjectMockup(year,subject){
   const priceText=document.getElementById('myanmarPremiumPriceText');
   const combinedList=document.getElementById('myanmarCombinedList');
   if(title) title.textContent=`${year} — ${subject}`;
-  if(desc) desc.textContent=`Choose a sample topic and take a 5-question quiz. Official textbook-aligned chapters are being prepared.`;
+  if(desc) desc.textContent=`Choose a sample topic, then practise in Parts 1, 2 and 3. Official textbook-aligned chapters are being prepared.`;
   if(back){back.textContent='← Back to subjects';back.setAttribute('onclick',`openMyanmarSubjects('${year}')`)}
   if(priceText) priceText.textContent=`Premium access unlocks the full ${subject} subject content for ${year}.`;
   if(combinedList){
-    const practiceRows=myanmarPracticeTopics(year,subject).map(topic=>`<button type="button" class="myanmar-item myanmar-quiz-row" onclick="launchMyanmarQuiz('${year}','${subject}','${topic}')"><div><strong>${topic} · 5 Questions</strong><small>Interactive sample practice · answer feedback and score</small></div><span class="item-tag open">START QUIZ →</span></button>`);
+    const practiceRows=myanmarPracticeTopics(year,subject).map(topic=>`<button type="button" class="myanmar-item myanmar-quiz-row" onclick="launchMyanmarQuiz('${year}','${subject}','${topic}')"><div><strong>${topic} · Parts 1–3</strong><small>5 demo questions in 3 short practice sessions · answer feedback and score</small></div><span class="item-tag open">START QUIZ →</span></button>`);
     const premiumRows=data.premium.filter(item=>!item.title.toLowerCase().includes('progress tracking')).map(item=>`<div class="myanmar-item locked-row"><div><strong>${item.title}</strong><small>${item.note} · content being prepared</small></div><span class="item-tag locked">🔒 PREMIUM</span></div>`);
     combinedList.innerHTML=`<p class="myanmar-quiz-disclaimer">Sample questions for demonstration only. These have not yet been matched against official Myanmar school textbooks for ${year}.</p>`+[...practiceRows,...premiumRows].join('');
   }
@@ -1535,7 +1561,7 @@ function openChineseLevels(path){
     if(intro)intro.textContent='Singapore uses Primary and Secondary level names. Choose a level to start mixed Chinese practice.';
     const primary=['Primary 1','Primary 2','Primary 3','Primary 4','Primary 5','Primary 6'];
     const secondary=['Secondary 1','Secondary 2','Secondary 3','Secondary 4'];
-    const makeGroup=(heading,levels)=>{const sec=document.createElement('div');sec.className='level-group';sec.innerHTML=`<div class="level-group-head"><h2>${heading}</h2><span>${levels[0]}–${levels[levels.length-1]}</span></div><div class="level-grid cols-3"></div>`;const grid=sec.querySelector('.level-grid');levels.forEach(lvl=>{const b=document.createElement('button');b.type='button';b.className='level-card';b.innerHTML=`<strong>${lvl}</strong><small>Chinese practice · MCQ · Fill blank · Rearrangement →</small>`;b.onclick=()=>startChineseMixedQuiz('Singapore',lvl);grid.appendChild(b)});host.appendChild(sec)};
+    const makeGroup=(heading,levels)=>{const sec=document.createElement('div');sec.className='level-group';sec.innerHTML=`<div class="level-group-head"><h2>${heading}</h2><span>${levels[0]}–${levels[levels.length-1]}</span></div><div class="level-grid cols-3"></div>`;const grid=sec.querySelector('.level-grid');levels.forEach(lvl=>{const b=document.createElement('button');b.type='button';b.className='level-card';b.innerHTML=`<strong>${lvl}</strong><small>Chinese practice · Parts 1–3 · mixed questions →</small>`;b.onclick=()=>startChineseMixedQuiz('Singapore',lvl);grid.appendChild(b)});host.appendChild(sec)};
     makeGroup('Primary',primary);makeGroup('Secondary',secondary);
   }
   showView('chineseLevelView');
@@ -1545,7 +1571,7 @@ function openChineseLevels(path){
 const hskChapterOutlines={
   'HSK 1':['Greetings & Introductions','People & Family','Numbers & Dates','School & Everyday Objects','Food & Daily Routines','Simple Sentences'],
   'HSK 2':['Everyday Conversations','Time & Schedules','Shopping & Prices','Directions & Transport','Hobbies & Activities','Sentence Patterns'],
-  'HSK 3':['Daily Life & Experiences','Travel & Places','Health & Feelings','Work & Study','Comparisons & Descriptions','Grammar in Context'],
+  'HSK 3':['Lesson 1 · 我们去机场接你们','Daily Life & Experiences','Travel & Places','Health & Feelings','Work & Study','Comparisons & Descriptions','Grammar in Context'],
   'HSK 4':['Education & Communication','Travel & Social Life','Health & Lifestyle','Workplace & Decisions','Opinions & Explanations','Complex Sentences'],
   'HSK 5':['Society & Culture','Education & Careers','Science & Technology','Environment & Nature','Arguments & Opinions','Reading & Expressions'],
   'HSK 6':['Culture & Literature','Economics & Society','Technology & Innovation','Environment & Development','Abstract Ideas','Advanced Sentence Structures'],
@@ -1557,29 +1583,43 @@ function openHskChapters(level){
   const chapters=hskChapterOutlines[level]||hskChapterOutlines['HSK 1'];
   document.getElementById('hskChapterEyebrow').textContent='CHINESE LANGUAGE · '+level.toUpperCase();
   document.getElementById('hskChapterTitle').textContent=level+' · Choose a chapter';
-  document.getElementById('hskChapterCount').textContent=chapters.length+' chapters';
+  document.getElementById('hskChapterCount').textContent=chapters.length+(level==='HSK 3'?' lesson / practice sections':' chapters');
+  document.getElementById('hskChapterDescription').textContent=level==='HSK 3'?'Lesson 1 contains 120 imported practice questions. Other items are clearly labelled sample topics, not official textbook lessons.':'Select a chapter to practise. These are sample learning chapters, not an official HSK textbook table of contents.';
+  document.getElementById('hskChapterNote').textContent=level==='HSK 3'?'Lesson 1 practice is available now. Other HSK 3 topic cards still use demonstration questions while more lessons are developed.':'Demo quizzes currently use level-based mixed practice questions. Chapter-specific, syllabus-verified questions can be added next.';
   const grid=document.getElementById('hskChapterGrid');grid.replaceChildren();
   chapters.forEach((name,index)=>{
     const button=document.createElement('button');button.type='button';button.className='level-card';
-    const title=document.createElement('strong');title.textContent='Chapter '+(index+1)+' · '+name;
-    const hint=document.createElement('small');hint.textContent='Sample mixed practice · MCQ · Fill blank · Rearrangement →';
+    const title=document.createElement('strong');title.textContent=level==='HSK 3'?(index===0?'Lesson 1 · 我们去机场接你们':'Sample topic '+index+' · '+name):'Chapter '+(index+1)+' · '+name;
+    const hint=document.createElement('small');hint.textContent=level==='HSK 3'&&index===0?'120 questions · 3 parts · mixed types + photos →':'Sample topic · 3 parts · mixed question types →';
     button.append(title,hint);
-    button.addEventListener('click',()=>startHskChapterQuiz(level,index));grid.appendChild(button);
+    button.addEventListener('click',()=>level==='HSK 3'&&index===0?openHsk3Lesson1Practice():startHskChapterQuiz(level,index));grid.appendChild(button);
   });
   showView('hskChapterView');
 }
-function startHskChapterQuiz(level,index){
-  activeHskChapter=index;
-  startChineseMixedQuiz('HSK',level);
-  const name=(hskChapterOutlines[level]||[])[index]||'Mixed Practice';
-  currentCode='Chapter '+(index+1);
-  currentCategory=level+' · Demo Chapter';
-  currentTopic='Chapter '+(index+1)+' · '+name+' (Sample Mixed Quiz)';
-  currentTopicKey='chinese-hsk-'+level.toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-chapter-'+(index+1);
-  // Refresh labels now that this is a chapter-level attempt.
-  renderQuestion();
+// Full HSK 3 Lesson 1 import from the supplied workbook; not a server/database import.
+function openHsk3Lesson1Practice(){
+  const all=window.HSK3_LESSON1_QUESTIONS||[];
+  if(all.length!==120){alert('The HSK 3 Lesson 1 question file is missing. Keep hsk3-lesson1-questions.js alongside index.html.');return}
+  chinesePath='HSK';chineseSelectedLevel='HSK 3';activeHskChapter=0;
+  currentProgram='HSK';currentLevel='HSK 3';currentSubject='Chinese Language';
+  currentCategory='New HSK Course 3 · Lesson 1';currentChapterId='';
+  currentCode='Lesson 1';currentTopic='Lesson 1 · 我们去机场接你们';
+  currentTopicKey='chinese-hsk-3-lesson-1';
+  openMixedPracticeParts(all,'hsk-chapters',false);
 }
-
+function isHsk3Lesson1Session(){
+  return currentSubject==='Chinese Language'&&chinesePath==='HSK'&&chineseSelectedLevel==='HSK 3'&&activeHskChapter===0&&String(currentTopicKey||'').startsWith('chinese-hsk-3-lesson-1');
+}
+function startHskChapterQuiz(level,index){
+  chinesePath='HSK';chineseSelectedLevel=level;activeHskChapter=index;
+  const name=(hskChapterOutlines[level]||[])[index]||'Mixed Practice';
+  currentProgram='HSK';currentLevel=level;currentSubject='Chinese Language';
+  currentCategory=level+' · Sample Topics';currentChapterId='';
+  currentCode='Chapter '+(index+1);
+  currentTopic='Chapter '+(index+1)+' · '+name;
+  currentTopicKey='chinese-hsk-'+level.toLowerCase().replace(/[^a-z0-9]+/g,'-')+'-chapter-'+(index+1);
+  openMixedPracticeParts(chineseBankFor('HSK',level),'hsk-chapters',true);
+}
 const chinesePracticeBanks={
   beginner:[
     {q:'“你好”最接近下面哪个意思？',a:['Hello','Goodbye','Thank you','Sorry'],c:0,e:'“你好”是常用的问候语，意思是 Hello。'},
@@ -1636,11 +1676,10 @@ function startChineseMixedQuiz(path,level){
   chinesePath=path;chineseSelectedLevel=level;
   currentProgram=path==='HSK'?'HSK':'Singapore Syllabus';
   currentLevel=level;currentSubject='Chinese Language';
-  currentCategory=path==='HSK'?'HSK Practice':'Singapore Chinese';
-  currentCode=level;currentTopic=`${level} Chinese Practice Quiz`;
+  currentCategory=path==='HSK'?'HSK Sample Practice':'Singapore Chinese Sample Practice';
+  currentCode=level;currentChapterId='';currentTopic=`${level} · Chinese Practice`;
   currentTopicKey=`chinese-${path.toLowerCase()}-${String(level).toLowerCase().replace(/[^a-z0-9]+/g,'-')}`;
-  quizOverride=chineseBankFor(path,level).map(q=>Object.assign({},q));
-  quizMode='topic';resetQuizSession();
+  openMixedPracticeParts(chineseBankFor(path,level),path==='HSK'?'hsk-chapters':'chinese-levels',true);
 }
 function startChineseSentenceRearrangement(){
   chinesePath='HSK';chineseSelectedLevel='HSK 1';
@@ -1648,12 +1687,7 @@ function startChineseSentenceRearrangement(){
   currentCategory='Sentence Rearrangement';currentCode='句子排序';currentTopic='Sentence Rearrangement 句子排序';currentTopicKey='chinese-sentence-rearrangement';
   quizOverride=chineseSentenceRearrangementQuestions.slice();quizMode='topic';resetQuizSession();
 }
-function backFromQuiz(){
-  if(currentProgram==='Myanmar Curriculum'){returnToMyanmarTopicList();return}
-  if(currentSubject==='Chinese Language'){if(chinesePath==='HSK'&&activeHskChapter!==null){openHskChapters(chineseSelectedLevel)}else{openChineseLevels(chinesePath)}return}
-  backToCurriculum();
-}
-
+function backFromQuiz(){backToCurriculum()}
 const topicQuestions={
  'Joints':[
   {type:'fill',q:'The shoulder has a ______ joint, allowing movement in many directions.',answer:'ball-and-socket',e:'The shoulder is a ball-and-socket joint, allowing movement in many directions.'},
@@ -1763,7 +1797,7 @@ function openCurriculum(category){
       lesson.type='button';
       lesson.className='lesson';
       const stat=getTopicStat(key||name); const pct=stat.attempts?Math.round(stat.correct/stat.attempts*100):null; lesson.innerHTML=`<span class="lesson-label"><span class="num">${code}</span><span>${name}${pct===null?'':`<span class="photo-topic-badge">${pct}% mastered</span>`}</span></span><span class="arrow">›</span>`;
-      const goLesson=()=>startQuiz(code,name,key);
+      const goLesson=()=>currentLevel==='Stage 7'&&currentSubject==='Science'&&stage7ScienceQuestions[key]?openTopicParts(code,name,key):startQuiz(code,name,key);
       lesson.addEventListener('click',goLesson);
       lesson.addEventListener('touchend',(e)=>{e.preventDefault();goLesson()},{passive:false});
       body.appendChild(lesson);
@@ -1778,7 +1812,22 @@ function openCurriculum(category){
   });
   showView('curriculumView');
 }
-function backToCurriculum(){if(currentProgram==='Myanmar Curriculum'){returnToMyanmarTopicList();return}if(quizMode==='part'||quizMode==='topic-review'){quizOverride=null;quizMode='topic';currentPartNumber=0;renderTopicParts();showView('topicPartsView');return}if(currentChapterId){quizOverride=null;quizMode='topic';openChapterFromSkillMap(encodeURIComponent(currentChapterId));return}if(quizMode!=='topic'){quizOverride=null;quizMode='topic';showView('homeView');return}openCurriculum(currentCategory)}
+function backToCurriculum(){
+  if((quizMode==='part'||quizMode==='topic-review')&&currentPartTopicKey){
+    quizOverride=null;quizMode='topic';currentPartNumber=0;
+    renderTopicParts();showView('topicPartsView');return;
+  }
+  if(currentSubject==='Chinese Language'){
+    if(isHsk3Lesson1Session())openHsk3Lesson1Practice();
+    else if(chinesePath==='HSK'&&activeHskChapter!==null)openHskChapters(chineseSelectedLevel);
+    else openChineseLevels(chinesePath);
+    return;
+  }
+  if(currentProgram==='Myanmar Curriculum'){returnToMyanmarTopicList();return}
+  if(currentChapterId){quizOverride=null;quizMode='topic';openChapterFromSkillMap(encodeURIComponent(currentChapterId));return}
+  if(quizMode!=='topic'){quizOverride=null;quizMode='topic';showView('homeView');return}
+  openCurriculum(currentCategory);
+}
 const topicPhotoKeywords={
   'Plant organs':'plant,roots,leaves,botany',
   'Human organ systems':'human,anatomy,medical',
@@ -1848,7 +1897,7 @@ function renderQuestionPhoto(x){
   card.className='question-photo-card';
   const img=document.createElement('img');
   img.src=x.image;
-  img.alt=x.imageAlt||'Science quiz illustration';
+  img.alt=x.imageAlt||'Quiz illustration';
   img.loading='eager';
   img.referrerPolicy='no-referrer';
   img.onerror=function(){
@@ -1862,7 +1911,7 @@ function renderQuestionPhoto(x){
   media.appendChild(card);
   const credit=document.createElement('div');
   credit.className='question-photo-credit';
-  credit.textContent='Illustrative demo diagram (locally optimized WebP, under 100 KB).';
+  credit.textContent=x.imageCredit||'Illustrative demo diagram (locally optimized WebP, under 100 KB).';
   media.appendChild(credit);
 }
 
@@ -1891,31 +1940,93 @@ function startImageQuizDemo(){
 }
 
 function startQuiz(code,name,key){quizOverride=null;quizMode='topic';currentPartNumber=0;currentPartTopicKey='';currentCode=code;currentTopic=name;currentTopicKey=key||name;resetQuizSession();}
-function openTopicParts(code,name,key){
-  currentPartNumber=0;currentPartTopicKey='';currentPartBaseCode=code;currentPartBaseTopic=name;currentTopicKey=key||name;currentCode=code;currentTopic=name;
-  const meta=allStage7Topics().find(t=>t.key===currentTopicKey);if(meta){currentCategory=meta.category;currentChapterId=String(meta.chapterId||String(code).split('.')[0])}
-  renderTopicParts();showView('topicPartsView');
+/* One three-part lesson navigator for Cambridge, Chinese and Myanmar.
+   Completion is saved per browser in localStorage; it is not cloud-synced. */
+let currentPracticePool=[],currentPracticeParts=[[],[],[]],currentPracticeKey='',currentPracticeBack='stage7',currentPracticeSample=false;
+function mixQuestionsIntoThreeParts(source,stage7Layout=false){
+ const pools={mcq:[],fill:[],rearrange:[],photo:[],other:[]};
+ (source||[]).forEach(q=>{const type=q.photoQuiz?'photo':q.type==='fill'?'fill':q.type==='rearrange'?'rearrange':Array.isArray(q.a)?'mcq':'other';pools[type].push({...q})});
+ const order=['mcq','fill','rearrange','photo','other'],interleaved=[];
+ while(order.some(type=>pools[type].length))order.forEach(type=>{if(pools[type].length)interleaved.push(pools[type].shift())});
+ const n=interleaved.length,base=Math.floor(n/3),extras=n%3;
+ const sizes=stage7Layout?[Math.min(20,n),Math.min(20,Math.max(0,n-20)),Math.max(0,n-40)]:[0,1,2].map(i=>base+(i<extras?1:0));
+ let offset=0;return sizes.map(size=>{const part=interleaved.slice(offset,offset+size);offset+=size;return part});
 }
-function backFromTopicParts(){if(currentChapterId){openChapterFromSkillMap(encodeURIComponent(currentChapterId));return}openCurriculum(currentCategory)}
-function topicPartQuestions(topicKey,part){const base=stage7ScienceQuestions[topicKey]||[];const start=(part-1)*20;return base.slice(start,start+20)}
+function openMixedPracticeParts(pool,backType,isSample){
+ currentPracticePool=(pool||[]).map(q=>({...q}));currentPracticeParts=mixQuestionsIntoThreeParts(currentPracticePool,backType==='stage7');
+ currentPracticeKey=currentTopicKey;currentPracticeBack=backType;currentPracticeSample=!!isSample;
+ currentPartNumber=0;currentPartTopicKey='';currentPartBaseCode=currentCode;currentPartBaseTopic=currentTopic;
+ quizOverride=null;quizMode='topic';renderTopicParts();showView('topicPartsView');
+}
+function openTopicParts(code,name,key){
+ currentPartBaseCode=code;currentPartBaseTopic=name;currentTopicKey=key||name;currentCode=code;currentTopic=name;
+ const meta=allStage7Topics().find(t=>t.key===currentTopicKey);
+ if(meta){currentCategory=meta.category;currentChapterId=String(meta.chapterId||String(code).split('.')[0])}
+ openMixedPracticeParts(stage7ScienceQuestions[currentTopicKey]||[],'stage7',false);
+}
+function backFromTopicParts(){
+ if(currentPracticeBack==='hsk-chapters'){openHskChapters(chineseSelectedLevel);return}
+ if(currentPracticeBack==='chinese-levels'){openChineseLevels(chinesePath);return}
+ if(currentPracticeBack==='myanmar'){openMyanmarSubjectMockup(currentLevel,currentSubject);return}
+ if(currentChapterId){openChapterFromSkillMap(encodeURIComponent(currentChapterId));return}
+ openCurriculum(currentCategory);
+}
+function topicPartQuestions(topicKey,part){
+ if(topicKey===currentPracticeKey&&currentPracticeParts[part-1])return currentPracticeParts[part-1];
+ return mixQuestionsIntoThreeParts(stage7ScienceQuestions[topicKey]||[],true)[part-1]||[];
+}
 function renderTopicParts(){
-  const key=currentTopicKey,base=stage7ScienceQuestions[key]||[],meta=allStage7Topics().find(t=>t.key===key),available=Math.min(60,base.length),completed=Math.min(60,completedPartQuestionCount(key));
-  const title=document.getElementById('topicPartTitle'),eye=document.getElementById('topicPartEyebrow'),txt=document.getElementById('topicPartProgressText'),bar=document.getElementById('topicPartProgressBar'),list=document.getElementById('topicPartsList');
-  if(title)title.textContent=currentPartBaseTopic||currentTopic;if(eye)eye.textContent=`CHAPTER ${meta?meta.chapterId:(currentChapterId||'')} · TOPIC ${currentPartBaseCode||currentCode}`;
-  if(txt)txt.textContent=`${completed} / 60 questions completed`;if(bar)bar.style.width=Math.min(100,Math.round(completed/60*100))+'%';
-  if(list)list.innerHTML=[1,2,3].map(part=>{const qs=topicPartQuestions(key,part),st=getPartStatus(key,part),from=(part-1)*20+1,to=part*20,label=qs.length?`Questions ${from}–${from+qs.length-1}`:`Questions ${from}–${to} · being prepared`,status=st&&st.completed?`✓ Completed · ${st.correct}/${st.total}`:(qs.length?`${qs.length} questions`:'Coming soon');return `<button type="button" class="topic-part-card" onclick="startTopicPart(${part})" ${qs.length?'':'disabled'}><span><strong>Part ${part}</strong><small>${label}</small></span><span class="topic-part-status ${st&&st.completed?'done':''}">${status} ›</span></button>`}).join('');
-  const reviewBtn=document.getElementById('topicReviewBtn'),reviewCard=document.getElementById('topicReviewCard'),reviewTitle=document.getElementById('topicReviewTitle'),unlocked=allThreePartsComplete(key);
-  if(reviewTitle)reviewTitle.textContent=`Review ${currentPartBaseCode||currentCode} ${currentPartBaseTopic||currentTopic}`;
-  if(reviewBtn){reviewBtn.disabled=!unlocked;reviewBtn.textContent=unlocked?'Review topic':'Complete Parts 1–3';reviewBtn.onclick=startTopicReview}
-  if(reviewCard)reviewCard.classList.toggle('locked',!unlocked);
+ const key=currentTopicKey,base=key===currentPracticeKey?currentPracticePool:(stage7ScienceQuestions[key]||[]);
+ const meta=currentPracticeBack==='stage7'?allStage7Topics().find(t=>t.key===key):null;
+ const total=base.length,donePart=(part)=>{const st=getPartStatus(key,part),qs=topicPartQuestions(key,part);return !!(qs.length&&st&&st.completed&&st.total===qs.length)};
+ const completed=Math.min(total,[1,2,3].reduce((sum,part)=>sum+(donePart(part)?topicPartQuestions(key,part).length:0),0));
+ const title=document.getElementById('topicPartTitle'),eye=document.getElementById('topicPartEyebrow');
+ const desc=document.getElementById('topicPartsDescription'),txt=document.getElementById('topicPartProgressText');
+ const bar=document.getElementById('topicPartProgressBar'),list=document.getElementById('topicPartsList');
+ const back=document.getElementById('topicPartsBackBtn'),progressLabel=document.getElementById('topicProgressLabel');
+ if(back)back.textContent=currentPracticeBack==='myanmar'?'← Back to topics':currentPracticeBack==='hsk-chapters'?'← Back to HSK lessons':currentPracticeBack==='chinese-levels'?'← Back to Chinese levels':'← Back to chapter';
+ if(progressLabel)progressLabel.textContent=currentPracticeBack==='stage7'?'Subtopic progress':currentPracticeBack==='myanmar'?'Topic progress':'Lesson progress';
+ if(title)title.textContent=currentPartBaseTopic||currentTopic;
+ if(eye)eye.textContent=currentPracticeBack==='stage7'?`CHAPTER ${meta?meta.chapterId:(currentChapterId||'')} · TOPIC ${currentPartBaseCode||currentCode}`:
+  currentPracticeBack==='myanmar'?`MYANMAR CURRICULUM · ${currentLevel} · ${currentSubject}`:
+  `CHINESE LANGUAGE · ${currentLevel} · ${currentPartBaseCode||currentCode}`;
+ if(desc)desc.textContent=currentPracticeSample?
+  'Sample question bank: practise in three short sessions with mixed question types. More lesson-specific questions are being prepared.':
+  'Complete this lesson in three shorter practice sessions. Question types are mixed within each part.';
+ if(txt)txt.textContent=`${completed} / ${total} questions completed`;
+ if(bar)bar.style.width=(total?Math.round(completed/total*100):0)+'%';
+ if(list){let offset=0;list.innerHTML=[1,2,3].map(part=>{
+   const qs=topicPartQuestions(key,part),from=offset+1;offset+=qs.length;
+   const st=getPartStatus(key,part),done=donePart(part);
+   const label=qs.length?`Questions ${from}–${offset}`:'Questions being prepared';
+   const status=done?`✓ Completed · ${st.correct}/${st.total}`:(qs.length?`${qs.length} questions`:'Coming soon');
+   return `<button type="button" class="topic-part-card" onclick="startTopicPart(${part})" ${qs.length?'':'disabled'}><span><strong>Part ${part}</strong><small>${label}</small></span><span class="topic-part-status ${done?'done':''}">${status} ›</span></button>`;
+ }).join('')}
+ const demo=document.getElementById('imageQuizTopicEntry');
+ if(demo)demo.style.display=currentPracticeBack==='stage7'&&currentCode==='1.1'?'flex':'none';
+ const btn=document.getElementById('topicReviewBtn'),card=document.getElementById('topicReviewCard');
+ const label=document.getElementById('topicReviewTitle'),sub=document.getElementById('topicReviewDescription');
+ const unlocked=total>0&&[1,2,3].every(donePart);
+ if(label)label.textContent=`Review ${currentPartBaseTopic||currentTopic}`;
+ if(sub)sub.textContent='Mixed practice from all three parts.';
+ if(btn){btn.disabled=!unlocked;btn.textContent=unlocked?'Review lesson':'Complete Parts 1–3';btn.onclick=startTopicReview}
+ if(card)card.classList.toggle('locked',!unlocked);
 }
 function startTopicPart(part){
-  const key=currentTopicKey,qs=topicPartQuestions(key,part);if(!qs.length){alert('Questions for this part are being prepared.');return}
-  currentPartNumber=part;currentPartTopicKey=key;currentCode=currentPartBaseCode||currentCode;currentTopic=currentPartBaseTopic||currentTopic;quizMode='part';quizOverride=qs;resetQuizSession();
+ const key=currentTopicKey,qs=topicPartQuestions(key,part);
+ if(!qs.length){alert('Questions for this part are being prepared.');return}
+ currentPartNumber=part;currentPartTopicKey=key;
+ currentCode=currentPartBaseCode||currentCode;currentTopic=currentPartBaseTopic||currentTopic;
+ quizMode='part';quizOverride=qs.map(q=>({...q}));resetQuizSession();
 }
 function startTopicReview(){
-  const key=currentTopicKey;if(!allThreePartsComplete(key)){alert('Complete Parts 1, 2 and 3 first.');return}
-  const base=(stage7ScienceQuestions[key]||[]).slice(0,60);if(!base.length)return;currentPartNumber=0;currentPartTopicKey=key;currentCode=currentPartBaseCode||currentCode;currentTopic=currentPartBaseTopic||currentTopic;quizMode='topic-review';quizOverride=base.slice().sort(()=>Math.random()-.5).slice(0,Math.min(20,base.length));resetQuizSession();
+ const key=currentTopicKey,parts=[1,2,3].map(part=>topicPartQuestions(key,part));
+ const unlocked=parts.every((qs,i)=>{const st=getPartStatus(key,i+1);return qs.length>0&&!!(st&&st.completed&&st.total===qs.length)});
+ if(!unlocked){alert('Complete Parts 1, 2 and 3 first.');return}
+ const pool=parts.flat();if(!pool.length)return;
+ currentPartNumber=0;currentPartTopicKey=key;currentCode=currentPartBaseCode||currentCode;
+ currentTopic=currentPartBaseTopic||currentTopic;quizMode='topic-review';
+ quizOverride=pool.slice().sort(()=>Math.random()-.5).slice(0,Math.min(20,pool.length));resetQuizSession();
 }
 let sessionQuizAnswers=[];
 function resetQuizSession(){sessionQuizAnswers=[];qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;const beforeStat=(currentTopicKey&&currentTopicKey!=='daily')?getTopicStat(currentTopicKey):{attempts:0,correct:0};sessionTopicMasteryBefore=beforeStat.attempts?Math.round(beforeStat.correct/beforeStat.attempts*100):null;if(!quizTrackingReady){document.addEventListener('visibilitychange',function(){if(document.getElementById('quizView')&&document.getElementById('quizView').classList.contains('active')&&document.hidden){tabSwitchCount++}});quizTrackingReady=true}showView('quizView');renderQuestion()}
@@ -1927,13 +2038,13 @@ function renderQuestion(){
   document.getElementById('quizTitle').textContent=currentTopic+(quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':'');
   const meta=getQuestionMeta(x);
   document.getElementById('quizCrumb').textContent=currentSubject==='Chinese Language'?`${chinesePath==='HSK'?'HSK':'Singapore Syllabus'} · ${currentLevel} · ${activeHskChapter!==null&&chinesePath==='HSK'?currentCode:'Mixed Practice'}`:(quizMode==='topic'||quizMode==='part'||quizMode==='topic-review')?`${currentSubject} · ${currentCategory} · ${currentCode}${quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':''}`:`${meta.category} · ${meta.topic}`;
-  const skill=currentSubject==='Chinese Language'?(x.type==='fill'?'Fill in the Blank':x.type==='rearrange'?'Sentence Rearrangement':'Multiple Choice'):classifyQuestionSkill(x); const skillBadge=document.getElementById('qSkillBadge'); if(skillBadge)skillBadge.textContent=skill;
+  const skill=currentSubject==='Chinese Language'?(x.photoQuiz?'Picture Question':x.type==='fill'?'Fill in the Blank':x.type==='rearrange'?'Sentence Rearrangement':'Multiple Choice'):classifyQuestionSkill(x); const skillBadge=document.getElementById('qSkillBadge'); if(skillBadge)skillBadge.textContent=skill;
   document.getElementById('mastery').textContent='Mastery '+mastery;
   document.getElementById('questionNo').textContent=(x.photoQuiz?'PHOTO QUESTION • ':'')+`QUESTION ${qIndex+1} OF ${qs.length}`;const qp=document.getElementById('quizSessionProgressBar');if(qp)qp.style.width=Math.round(((qIndex+1)/Math.max(1,qs.length))*100)+'%';
   renderQuestionPhoto(x);
   document.getElementById('questionText').textContent=x.q;
   const quizBack=document.getElementById('quizBackBtn');
-  if(quizBack)quizBack.textContent=currentProgram==='Myanmar Curriculum'?'← Back to Myanmar topics':currentSubject==='Chinese Language'?`← Back to ${chinesePath==='HSK'&&activeHskChapter!==null?'HSK chapters':chinesePath==='HSK'?'HSK levels':'Singapore levels'}`:'← Back to topics';
+  if(quizBack)quizBack.textContent=(quizMode==='part'||quizMode==='topic-review')?'← Back to Parts 1–3':currentProgram==='Myanmar Curriculum'?'← Back to Myanmar topics':currentSubject==='Chinese Language'?`← Back to ${chinesePath==='HSK'&&activeHskChapter!==null?'HSK chapters':chinesePath==='HSK'?'HSK levels':'Singapore levels'}`:'← Back to topics';
   const ans=document.getElementById('answers');
   ans.innerHTML='';
   if(x.type==='fill'){
@@ -2156,7 +2267,7 @@ function shareSummary(){openVerifiedStudyReport()}
 function openReportFromHash(){const m=location.hash.match(/^#study-report=([^&]+)/);if(!m)return;const id=decodeURIComponent(m[1]),r=loadStudyReport(id);if(r){lastStudyReport=r;renderVerifiedStudyReport(r);document.getElementById('verifiedStudyReportModal').classList.add('show')}else if(location.protocol!=='file:'){alert('This study record is not available on this device yet. Connect TopicalExamQuiz to a database for cross-device verification.')}}
 window.addEventListener('hashchange',openReportFromHash);
 function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);if(quizMode==='part'&&currentPartTopicKey&&currentPartNumber)savePartCompletion(currentPartTopicKey,currentPartNumber,total,correctCount);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+(quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':'')+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView')}
-function restartQuiz(){if(currentProgram==='Myanmar Curriculum'){launchMyanmarQuiz(currentLevel,currentSubject,activeMyanmarTopic);return}if(currentSubject==='Chinese Language'&&quizOverride){resetQuizSession();return}if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{sessionQuizAnswers=[];qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;showView('quizView');renderQuestion()}}
+function restartQuiz(){if(quizMode==='part'||quizMode==='topic-review'){resetQuizSession();return}if(currentProgram==='Myanmar Curriculum'){launchMyanmarQuiz(currentLevel,currentSubject,activeMyanmarTopic);return}if(currentSubject==='Chinese Language'&&quizOverride){resetQuizSession();return}if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{sessionQuizAnswers=[];qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;showView('quizView');renderQuestion()}}
 function showReview(){showView('reviewView')}
 document.querySelectorAll('.stage').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stage').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
 function refreshAccountUI(){
@@ -2268,6 +2379,7 @@ function teacherActivityTable(rows){
 }
 
 /* Detailed teacher mistake review: browser-only demo, no cross-device sync. */
+function isLocalQuizImagePath(src){return /^quiz-images\/[A-Za-z0-9._-]+\.webp$/.test(src)||/^hsk3-lesson1-images\/HSK3_L1_\d{2}\.jpg$/.test(src)}
 function captureTeacherQuizAnswer(x,isCorrect,userAnswer){
   if(!Array.isArray(sessionQuizAnswers))sessionQuizAnswers=[];
   const image=String(x&&x.image||'');
@@ -2283,7 +2395,7 @@ function captureTeacherQuizAnswer(x,isCorrect,userAnswer){
     subject:currentSubject,
     level:currentLevel,
     code:currentCode,
-    image:/^quiz-images\/[A-Za-z0-9._-]+\.webp$/.test(image)?image:'',
+    image:isLocalQuizImagePath(image)?image:'',
     imageAlt:String(x&&x.imageAlt||'Quiz illustration'),
     at:Date.now()
   });
@@ -2368,7 +2480,7 @@ function renderTeacherMistakeCards(){
     return;
   }
   out.innerHTML=visible.map((m,i)=>{
-    const img=/^quiz-images\/[A-Za-z0-9._-]+\.webp$/.test(String(m.image||''))
+    const img=isLocalQuizImagePath(String(m.image||''))
       ? `<img class="teacher-mistake-image" loading="lazy" src="${escapeHtml(m.image)}" alt="${escapeHtml(m.imageAlt||'Question diagram')}">` : '';
     const when=m.isDemo?'Illustrative sample (not real student work)':m.at?new Date(m.at).toLocaleString():'Recorded attempt';
     const state=m.improved?'Answered correctly later':'Needs review';
@@ -2507,7 +2619,7 @@ function saveProgress(p){try{localStorage.setItem(progressStorageKey,JSON.string
 function normalizeAnswer(v){return String(v||'').trim().toLowerCase().replace(/[.,!?]+$/g,'').replace(/\s+/g,' ')}
 function localDateKey(d=new Date()){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),day=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${day}`}
 function getStreak(p=loadProgress()){const days=[...new Set(p.practiceDays||[])].sort().reverse();if(!days.length)return 0;let streak=0,cursor=new Date();for(let offset=0;offset<2;offset++){const k=localDateKey(cursor);if(days.includes(k))break;cursor.setDate(cursor.getDate()-1)}for(;;){const k=localDateKey(cursor);if(!days.includes(k))break;streak++;cursor.setDate(cursor.getDate()-1)}return streak}
-function getQuestionMeta(x){return x&&x._meta?x._meta:{curriculum:'Cambridge-aligned',programme:currentProgram,stage:currentLevel,subject:currentSubject,category:currentCategory,topic:currentTopic,code:currentCode,key:currentTopicKey||currentTopic}}
+function getQuestionMeta(x){return x&&x._meta?x._meta:{curriculum:currentSubject==='Chinese Language'?'Chinese Language':currentProgram==='Myanmar Curriculum'?'Myanmar Curriculum':'Cambridge-aligned',programme:currentProgram,stage:currentLevel,subject:currentSubject,category:currentCategory,topic:currentTopic,code:currentCode,key:currentTopicKey||currentTopic}}
 function classifyQuestionSkill(x){const q=String((x&&x.q)||'').toLowerCase();if(x&&x.photoQuiz)return 'Exam Style';if(/investigat|variable|hypothesis|fair test|method|experiment|conclusion/.test(q))return 'Scientific Investigation';if(/graph|table|chart|data|calculate|calculation|measure|reading/.test(q))return 'Data Analysis';if(/why|explain|compare|difference|describe how|reason/.test(q))return 'Understanding';if(/if |scenario|predict|most likely|what happens|would happen|use this/.test(q))return 'Application';return 'Knowledge'}
 function questionIdentity(x){const m=getQuestionMeta(x);return `${m.key}|${x.q}`}
 function getCorrectAnswer(x){if(x.type==='fill')return String(x.answer||'');if(x.type==='rearrange')return Array.isArray(x.answer)?x.answer.join(''):String(x.answer||'');return x.a&&x.c>=0?String(x.a[x.c]):''}
