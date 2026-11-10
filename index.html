@@ -776,6 +776,37 @@ input, textarea, select {
 .question-photo-card img{object-fit:contain!important;}
 @media(max-width:600px){.image-quiz-topic-entry{align-items:stretch;flex-direction:column}.image-quiz-topic-entry .btn{width:100%}}
 </style>
+<style>
+/* Teacher answer-level inspection — readable on mobile and desktop */
+.teacher-detail-tabs{flex-wrap:wrap;overflow:visible}
+.teacher-detail-tab{min-height:40px;color:#213e5d!important;background:#e8f0f9!important;border:1px solid #cad9e8!important}
+.teacher-detail-tab.active{background:#0f172a!important;color:#fff!important;border-color:#0f172a!important}
+.teacher-mistakes-note{font-size:12px;line-height:1.6;padding:12px 14px;background:#f0f6ff;border:1px solid #ccdef5;border-radius:11px;color:#345777;margin:12px 0}
+.teacher-mistake-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:13px 0}
+.teacher-mistake-metric{background:#fff;border:1px solid #dbe6f0;border-radius:11px;padding:12px}
+.teacher-mistake-metric strong{display:block;color:#0f172a;font-size:22px}.teacher-mistake-metric small{display:block;color:#62778d;font-size:11px;margin-top:4px}
+.teacher-mistake-tools{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0;align-items:center}
+.teacher-mistake-tools select,.teacher-mistake-tools input{padding:10px 12px;background:#fff;color:#173955;border:1px solid #c5d7e9;border-radius:9px;font:600 12px Inter,system-ui,sans-serif;min-height:42px}
+.teacher-mistake-tools input{flex:1;min-width:150px}
+.teacher-mistake-tools button{background:#fff!important;color:#173955!important;border:1px solid #c5d7e9!important;border-radius:9px;min-height:42px;padding:9px 12px;font-weight:800;cursor:pointer}
+.teacher-mistake-card{background:#fff;border:1px solid #d8e5f0;border-radius:13px;padding:15px;margin:11px 0}
+.teacher-mistake-top{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:9px}
+.teacher-mistake-topic{font-size:11px;font-weight:900;color:#315e8b}
+.teacher-mistake-time{font-size:10px;color:#718399}
+.teacher-mistake-question{font-size:14px;color:#0f172a;line-height:1.5;font-weight:850;margin:6px 0 12px;overflow-wrap:anywhere}
+.teacher-answer-compare{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.teacher-answer-box{border-radius:10px;padding:12px;border:1px solid #f1c4c4;background:#fff5f5;min-width:0}
+.teacher-answer-box.correct{background:#f0fbf3;border-color:#bfe6cb}
+.teacher-answer-box span{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.04em;font-weight:850;color:#63778b;margin-bottom:5px}
+.teacher-answer-box strong{display:block;font-size:13px;color:#142f4a;line-height:1.5;overflow-wrap:anywhere}
+.teacher-mistake-explain{font-size:12px;line-height:1.65;color:#41556b;margin-top:10px;padding:10px 12px;background:#f7fafd;border-radius:9px}
+.teacher-review-state{font-size:10px;font-weight:900;border-radius:99px;background:#fff0e3;border:1px solid #f4d5b5;color:#83551c;padding:6px 9px;white-space:nowrap}
+.teacher-review-state.improved{background:#edf8ee;border-color:#bbe3c1;color:#2f6b41}
+.teacher-mistake-image{display:block;width:120px;max-width:100%;height:auto;object-fit:contain;border-radius:9px;border:1px solid #dce6ef;margin:8px 0 12px}
+.teacher-mistake-empty{padding:22px;border:1px dashed #b9cde0;border-radius:11px;color:#60748d;text-align:center;background:#fff;font-size:12px;line-height:1.6}
+.teacher-answers-count{font-size:12px;color:#697f95;margin:10px 0}
+@media(max-width:620px){.teacher-answer-compare{grid-template-columns:1fr}.teacher-mistake-metrics{grid-template-columns:1fr 1fr}.teacher-mistake-metric:last-child{grid-column:1/-1}.teacher-mistake-tools{flex-direction:column;align-items:stretch}.teacher-mistake-tools select,.teacher-mistake-tools input,.teacher-mistake-tools button{width:100%}.teacher-mistake-card{padding:13px}}
+</style>
 </head>
 <body>
 <header class="top platform-top">
@@ -1102,13 +1133,13 @@ TopicalExamQuiz offers original practice activities. Myanmar sample quizzes are 
 <section class="view" id="teacherView">
 <div class="teacher-page">
 <button class="back back-left" onclick="goToTopicalExamQuizHome()" type="button">← Back to TopicalExamQuiz</button>
-<div class="teacher-topbar"><div><div class="eyebrow">TEACHER ACCOUNT</div><h1>My Classes</h1><div class="teacher-id">TopicalExamQuiz Teacher ID: <strong>TEQ-T-00842</strong></div></div><button class="btn primary" onclick="openCreateClassModal()" type="button">+ Create Class</button></div>
+<div class="teacher-topbar"><div><div class="eyebrow">TEACHER ACCOUNT</div><h1>My Classes</h1><div class="teacher-id">TopicalExamQuiz Teacher ID: <strong>TEQ-T-00842</strong> · Developer preview</div></div><button class="btn primary" onclick="openCreateClassModal()" type="button">+ Create Class</button></div>
 <section class="teacher-panel" id="teacherClassesPanel">
 <h2>Your classes</h2><p>Create a class once, then students join using the class code while keeping their own permanent TopicalExamQuiz Student ID.</p>
 <div class="class-list" id="teacherClassList"></div>
 </section>
 <section class="teacher-class-detail" id="teacherClassDetail"></section>
-<div class="teacher-note"><strong>Prototype:</strong> Class creation and added students are stored only in this browser. In the production version, Student IDs, Teacher IDs, class membership and progress should be stored in the TopicalExamQuiz backend so they work securely across devices.</div>
+<div class="teacher-note"><strong>Prototype:</strong> The four built-in class students and their results are illustrative examples, not real student activity. New quiz answers are stored only after a completed quiz in this browser. Class creation and added students are also stored only in this browser. In the production version, Student IDs, Teacher IDs, class membership and progress should be stored in the TopicalExamQuiz backend so they work securely across devices.</div>
 </div>
 </section>
 <section class="view" id="aboutView">
@@ -1886,7 +1917,8 @@ function startTopicReview(){
   const key=currentTopicKey;if(!allThreePartsComplete(key)){alert('Complete Parts 1, 2 and 3 first.');return}
   const base=(stage7ScienceQuestions[key]||[]).slice(0,60);if(!base.length)return;currentPartNumber=0;currentPartTopicKey=key;currentCode=currentPartBaseCode||currentCode;currentTopic=currentPartBaseTopic||currentTopic;quizMode='topic-review';quizOverride=base.slice().sort(()=>Math.random()-.5).slice(0,Math.min(20,base.length));resetQuizSession();
 }
-function resetQuizSession(){qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;const beforeStat=(currentTopicKey&&currentTopicKey!=='daily')?getTopicStat(currentTopicKey):{attempts:0,correct:0};sessionTopicMasteryBefore=beforeStat.attempts?Math.round(beforeStat.correct/beforeStat.attempts*100):null;if(!quizTrackingReady){document.addEventListener('visibilitychange',function(){if(document.getElementById('quizView')&&document.getElementById('quizView').classList.contains('active')&&document.hidden){tabSwitchCount++}});quizTrackingReady=true}showView('quizView');renderQuestion()}
+let sessionQuizAnswers=[];
+function resetQuizSession(){sessionQuizAnswers=[];qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;const beforeStat=(currentTopicKey&&currentTopicKey!=='daily')?getTopicStat(currentTopicKey):{attempts:0,correct:0};sessionTopicMasteryBefore=beforeStat.attempts?Math.round(beforeStat.correct/beforeStat.attempts*100):null;if(!quizTrackingReady){document.addEventListener('visibilitychange',function(){if(document.getElementById('quizView')&&document.getElementById('quizView').classList.contains('active')&&document.hidden){tabSwitchCount++}});quizTrackingReady=true}showView('quizView');renderQuestion()}
 function quickQuiz(subject,category,code,name){currentSubject=subject;currentCategory=category;startQuiz(code,name)}
 function getQs(){if(quizOverride)return quizOverride;const base=(currentLevel==='Stage 7'&&currentSubject==='Science'&&stage7ScienceQuestions[currentTopicKey])?stage7ScienceQuestions[currentTopicKey]:(topicQuestions[currentTopic]||genericQuestions(currentTopic));return addPhotoToQuestions(base,currentTopic)}
 function renderQuestion(){
@@ -2103,7 +2135,7 @@ function saveStudentActivity(report){
 }
 function buildStudyReport(){
   const total=getQs().length,pct=total?Math.round(correctCount/total*100):0;
-  const grp=chapterGroups().find(g=>String(g.id)===String(currentChapterId||String(currentCode||'').split('.')[0]));const report={id:generateReportId(),student:currentStudentName(),studentId:ensureStudentId(),level:currentLevel,program:currentProgram,subject:currentSubject,category:currentCategory,chapterId:grp?String(grp.id):String(currentChapterId||String(currentCode||'').split('.')[0]||''),chapter:grp?grp.title:'',activityType:quizMode==='chapter'?'Chapter review':quizMode==='part'?`Part ${currentPartNumber}`:quizMode==='topic-review'?'Topic review':'Topic practice',part:quizMode==='part'?currentPartNumber:null,topic:currentTopic,code:currentCode,startAt:quizStartedAt,endAt:quizEndedAt||Date.now(),seconds:quizElapsedSeconds,total,correct:correctCount,score:pct,correctionsReviewed:sessionReviewedIds.size,correctionsTotal:sessionWrongIds.size,mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,masteryAfter:topicMasteryNow(),createdAt:Date.now()};
+  const grp=chapterGroups().find(g=>String(g.id)===String(currentChapterId||String(currentCode||'').split('.')[0]));const report={id:generateReportId(),student:currentStudentName(),studentId:ensureStudentId(),level:currentLevel,program:currentProgram,subject:currentSubject,category:currentCategory,chapterId:grp?String(grp.id):String(currentChapterId||String(currentCode||'').split('.')[0]||''),chapter:grp?grp.title:'',activityType:quizMode==='chapter'?'Chapter review':quizMode==='part'?`Part ${currentPartNumber}`:quizMode==='topic-review'?'Topic review':'Topic practice',part:quizMode==='part'?currentPartNumber:null,topic:currentTopic,code:currentCode,startAt:quizStartedAt,endAt:quizEndedAt||Date.now(),seconds:quizElapsedSeconds,total,correct:correctCount,score:pct,correctionsReviewed:sessionReviewedIds.size,correctionsTotal:sessionWrongIds.size,mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,masteryAfter:topicMasteryNow(),answers:sessionQuizAnswers.map(a=>({...a})),createdAt:Date.now()};
   saveStudyReport(report);saveStudentActivity(report);lastStudyReport=report;return report;
 }
 function reportShareText(r){
@@ -2124,7 +2156,7 @@ function shareSummary(){openVerifiedStudyReport()}
 function openReportFromHash(){const m=location.hash.match(/^#study-report=([^&]+)/);if(!m)return;const id=decodeURIComponent(m[1]),r=loadStudyReport(id);if(r){lastStudyReport=r;renderVerifiedStudyReport(r);document.getElementById('verifiedStudyReportModal').classList.add('show')}else if(location.protocol!=='file:'){alert('This study record is not available on this device yet. Connect TopicalExamQuiz to a database for cross-device verification.')}}
 window.addEventListener('hashchange',openReportFromHash);
 function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);if(quizMode==='part'&&currentPartTopicKey&&currentPartNumber)savePartCompletion(currentPartTopicKey,currentPartNumber,total,correctCount);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+(quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':'')+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView')}
-function restartQuiz(){if(currentProgram==='Myanmar Curriculum'){launchMyanmarQuiz(currentLevel,currentSubject,activeMyanmarTopic);return}if(currentSubject==='Chinese Language'&&quizOverride){resetQuizSession();return}if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;showView('quizView');renderQuestion()}}
+function restartQuiz(){if(currentProgram==='Myanmar Curriculum'){launchMyanmarQuiz(currentLevel,currentSubject,activeMyanmarTopic);return}if(currentSubject==='Chinese Language'&&quizOverride){resetQuizSession();return}if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{sessionQuizAnswers=[];qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;showView('quizView');renderQuestion()}}
 function showReview(){showView('reviewView')}
 document.querySelectorAll('.stage').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stage').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
 function refreshAccountUI(){
@@ -2198,9 +2230,9 @@ function createTeacherClass(){
 function openTeacherClass(id){activeTeacherClassId=id;const c=teacherClassStore().find(x=>x.id===id);const wrap=document.getElementById('teacherClassDetail');if(!c||!wrap)return;
   const extras=classExtraStudents(id);const base=id==='class7a'?Object.values(teacherDemoStudents):[];const count=base.length+extras.length;
   const rows=[];
-  if(id==='class7a') Object.entries(teacherDemoStudents).forEach(([name,s])=>rows.push(`<tr><td><strong>${escapeHtml(name)}</strong><div class="student-id-cell">${s.id}</div></td><td>${s.last}</td><td>${s.accuracy}</td><td>${s.topics}</td><td>${s.review}</td><td>${s.progress}</td><td><button onclick="showTeacherStudent('${escapeHtml(name)}')">View progress</button></td></tr>`));
-  extras.forEach(s=>rows.push(`<tr><td><strong>${escapeHtml(s.name)}</strong><div class="student-id-cell">${escapeHtml(s.id)}</div></td><td>Not yet</td><td>—</td><td>0</td><td>0</td><td>—</td><td><button onclick="showNewTeacherStudent('${escapeHtml(s.name)}','${escapeHtml(s.id)}')">View</button></td></tr>`));
-  wrap.innerHTML=`<section class="teacher-hero"><div><div class="eyebrow" style="color:#9fb2c9">CLASS</div><h1>${escapeHtml(c.stage)} ${escapeHtml(c.subject)} · ${escapeHtml(c.name)}</h1><p>Students keep one permanent TopicalExamQuiz Student ID. They can join this class with the class code below.</p></div><div class="teacher-class-code"><small>CLASS JOIN CODE</small><strong>${escapeHtml(c.code)}</strong><small>Share this with students</small></div></section><div class="teacher-stat-grid"><div class="teacher-stat"><strong>${count}</strong><span>Students</span></div><div class="teacher-stat"><strong>${id==='class7a'?'78%':'—'}</strong><span>Class accuracy</span></div><div class="teacher-stat"><strong>${id==='class7a'?'3':'0'}</strong><span>Active this week</span></div><div class="teacher-stat"><strong>${id==='class7a'?'8':'0'}</strong><span>Corrections reviewed</span></div></div><div class="teacher-class-actions"><button class="btn primary" onclick="openAddStudentModal()">+ Add Student</button><button class="btn" onclick="copyClassCode('${escapeHtml(c.code)}')">Copy Class Code</button><button class="btn" onclick="renderTeacherClasses()">← My Classes</button></div><section class="teacher-panel"><h2>Students</h2><p>Students may join with the class code, or you can add an existing student using their TopicalExamQuiz Student ID.</p>${rows.length?`<div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>Student</th><th>Last activity</th><th>Accuracy</th><th>Topics</th><th>To review</th><th>Progress</th><th></th></tr></thead><tbody>${rows.join('')}</tbody></table></div>`:`<div class="teacher-empty">No students yet. Share the class code or add a student by TopicalExamQuiz Student ID.</div>`}<div class="teacher-detail" id="teacherStudentDetail"></div></section>`;
+  if(id==='class7a') Object.entries(teacherDemoStudents).forEach(([name,s])=>rows.push(`<tr><td><strong>${escapeHtml(name)}</strong><div class="student-id-cell">${s.id}</div></td><td>${s.last}</td><td>${s.accuracy}</td><td>${s.topics}</td><td>${s.review}</td><td>${s.progress}</td><td><button onclick="showTeacherStudent('${escapeHtml(name)}')">View details</button> <button onclick="showTeacherStudent('${escapeHtml(name)}','mistakes')">Wrong answers</button></td></tr>`));
+  extras.forEach(s=>rows.push(`<tr><td><strong>${escapeHtml(s.name)}</strong><div class="student-id-cell">${escapeHtml(s.id)}</div></td><td>Not yet</td><td>—</td><td>0</td><td>0</td><td>—</td><td><button onclick="showNewTeacherStudent('${escapeHtml(s.name)}','${escapeHtml(s.id)}')">View details</button> <button onclick="showNewTeacherStudent('${escapeHtml(s.name)}','${escapeHtml(s.id)}','mistakes')">Wrong answers</button></td></tr>`));
+  wrap.innerHTML=`<section class="teacher-hero"><div><div class="eyebrow" style="color:#9fb2c9">CLASS</div><h1>${escapeHtml(c.stage)} ${escapeHtml(c.subject)} · ${escapeHtml(c.name)}</h1><p>Students keep one permanent TopicalExamQuiz Student ID. They can join this class with the class code below.</p></div><div class="teacher-class-code"><small>CLASS JOIN CODE</small><strong>${escapeHtml(c.code)}</strong><small>Share this with students</small></div></section><div class="teacher-stat-grid"><div class="teacher-stat"><strong>${count}</strong><span>Students</span></div><div class="teacher-stat"><strong>${id==='class7a'?'78%':'—'}</strong><span>Class accuracy</span></div><div class="teacher-stat"><strong>${id==='class7a'?'3':'0'}</strong><span>Active this week</span></div><div class="teacher-stat"><strong>${id==='class7a'?'8':'0'}</strong><span>Corrections reviewed</span></div></div><div class="teacher-class-actions"><button class="btn primary" onclick="openAddStudentModal()">+ Add Student</button><button class="btn" onclick="copyClassCode('${escapeHtml(c.code)}')">Copy Class Code</button><button class="btn" onclick="renderTeacherClasses()">← My Classes</button></div><section class="teacher-panel"><h2>Students</h2><p><strong>Developer mock-up:</strong> Class 7A includes four illustrative students. Their answers are sample data, not verified student work.</p><p>Students may join with the class code, or you can add an existing student using their TopicalExamQuiz Student ID.</p>${rows.length?`<div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>Student</th><th>Last activity</th><th>Accuracy</th><th>Topics</th><th>To review</th><th>Progress</th><th></th></tr></thead><tbody>${rows.join('')}</tbody></table></div>`:`<div class="teacher-empty">No students yet. Share the class code or add a student by TopicalExamQuiz Student ID.</div>`}<div class="teacher-detail" id="teacherStudentDetail"></div></section>`;
   wrap.classList.add('show');wrap.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function openAddStudentModal(){closeAnyModal();document.getElementById('addStudentId').value='';document.getElementById('addStudentName').value='';document.getElementById('addStudentModal').classList.add('show')}
@@ -2234,30 +2266,200 @@ function teacherActivityTable(rows){
   if(!rows||!rows.length)return '<div class="teacher-empty">No practice activity has synced for this student yet.</div>';
   return `<div class="teacher-table-wrap"><table class="teacher-table teacher-mini-table"><thead><tr><th>Date / time</th><th>Chapter</th><th>Activity</th><th>Type</th><th>Score</th><th>Accuracy</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${escapeHtml(r[0])}</td><td>${escapeHtml(r[1])}</td><td><strong>${escapeHtml(r[2])}</strong></td><td>${escapeHtml(r[3])}</td><td>${escapeHtml(r[4])}</td><td>${escapeHtml(r[5])}</td></tr>`).join('')}</tbody></table></div>`;
 }
+
+/* Detailed teacher mistake review: browser-only demo, no cross-device sync. */
+function captureTeacherQuizAnswer(x,isCorrect,userAnswer){
+  if(!Array.isArray(sessionQuizAnswers))sessionQuizAnswers=[];
+  const image=String(x&&x.image||'');
+  sessionQuizAnswers.push({
+    questionNumber:qIndex+1,
+    question:String(x&&x.q||''),
+    studentAnswer:String(userAnswer||''),
+    correctAnswer:getCorrectAnswer(x),
+    explanation:String(x&&x.e||''),
+    type:x&&x.photoQuiz?'Image quiz':x&&x.type==='fill'?'Fill in the blank':x&&x.type==='rearrange'?'Rearrange':'Multiple choice',
+    correct:!!isCorrect,
+    topic:currentTopic,
+    subject:currentSubject,
+    level:currentLevel,
+    code:currentCode,
+    image:/^quiz-images\/[A-Za-z0-9._-]+\.webp$/.test(image)?image:'',
+    imageAlt:String(x&&x.imageAlt||'Quiz illustration'),
+    at:Date.now()
+  });
+}
+const teacherDemoMistakeTopics={
+  Emma:['3 Forces and energy|3.1 gravity, weight and mass','9 Electricity|9.2 electrical circuits','1 Cells|1.1 plant cells'],
+  Daniel:['2 Materials and their structur|2.2 changes of state','3 Forces and energy|3.5 energy','2 Materials and their structur|2.1 solids, liquids and gases'],
+  Mia:['1 Cells|1.3 specialised cells','1 Cells|1.2 animal cells'],
+  Noah:['1 Cells|1.1 plant cells','3 Forces and energy|3.1 gravity, weight and mass','1 Cells|1.2 animal cells']
+};
+function teacherDemoWrongAnswers(name){
+  const keys=teacherDemoMistakeTopics[name]||[];
+  const results=[];
+  keys.forEach((key,index)=>{
+    const pool=stage7ScienceQuestions[key]||[];
+    const q=pool.find(item=>Array.isArray(item.a)&&item.a.length>=3&&typeof item.c==='number');
+    if(!q)return;
+    const correct=Number(q.c),wrong=(correct+1+index)%(q.a.length);
+    results.push({
+      questionNumber:index+1,question:q.q,studentAnswer:q.a[wrong],correctAnswer:q.a[correct],
+      explanation:q.e||'',correct:false,type:q.image?'Image quiz':'Multiple choice',
+      topic:key.split('|').pop(),code:key.split('|').pop().split(' ')[0],level:'Stage 7',subject:'Science',
+      image:q.image||'',imageAlt:q.imageAlt||'Science question image',
+      at:null,attemptId:'demo-'+index,isDemo:true,improved:false
+    });
+  });
+  if(name==='Emma' && typeof imageQuizDemoQuestions!=='undefined'){
+    const q=imageQuizDemoQuestions[2];
+    if(q)results.unshift({questionNumber:1,question:q.q,studentAnswer:q.a[0],correctAnswer:q.a[q.c],
+      explanation:q.e||'',correct:false,type:'Image quiz',topic:'1.1 Plant Cells',code:'1.1',level:'Stage 7',subject:'Science',
+      image:q.image,imageAlt:q.imageAlt,at:null,attemptId:'demo-image',isDemo:true,improved:false});
+  }
+  return results;
+}
+let currentTeacherMistakes=[];
+let teacherMistakeMode='demo';
+let activeTeacherStudentId='';
+let teacherMistakeFilter='all';
+let teacherMistakeSearch='';
+function teacherWrongAnswersForStudent(name,id,demoStudent){
+  const reports=loadStudentActivities(id);
+  const attempts=[];
+  reports.forEach(r=>(Array.isArray(r.answers)?r.answers:[]).forEach((a,index)=>{
+    attempts.push({...a,at:a.at||r.endAt||r.createdAt||0,attemptId:r.id||'',reportId:r.id||'',
+      topic:a.topic||r.topic||'',subject:a.subject||r.subject||'',level:a.level||r.level||'',
+      questionNumber:a.questionNumber||index+1});
+  }));
+  if(attempts.length){
+    teacherMistakeMode='recorded';
+    const byTime=attempts.sort((a,b)=>(a.at||0)-(b.at||0));
+    return byTime.filter(a=>!a.correct).map(a=>{
+      const sameQuestion=b=>b.correct&&b.at>a.at&&b.subject===a.subject&&b.level===a.level&&b.topic===a.topic&&b.question===a.question;
+      return {...a,improved:byTime.some(sameQuestion),isDemo:false};
+    }).reverse();
+  }
+  if(demoStudent){teacherMistakeMode='demo';return teacherDemoWrongAnswers(name)}
+  teacherMistakeMode='empty';return [];
+}
+function teacherFilteredMistakes(){
+  return currentTeacherMistakes.filter(m=>{
+    if(teacherMistakeFilter==='open'&&m.improved)return false;
+    if(teacherMistakeFilter==='improved'&&!m.improved)return false;
+    if(!teacherMistakeSearch)return true;
+    return [m.question,m.topic,m.studentAnswer,m.correctAnswer,m.explanation].some(x=>String(x||'').toLowerCase().includes(teacherMistakeSearch));
+  });
+}
+function filterTeacherMistakes(value){
+  teacherMistakeFilter=value;
+  renderTeacherMistakeCards();
+}
+function searchTeacherMistakes(value){
+  teacherMistakeSearch=String(value||'').trim().toLowerCase();
+  renderTeacherMistakeCards();
+}
+function renderTeacherMistakeCards(){
+  const out=document.getElementById('teacherMistakeCards'),count=document.getElementById('teacherAnswersCount');
+  if(!out)return;
+  const visible=teacherFilteredMistakes();
+  if(count)count.textContent=`Showing ${visible.length} of ${currentTeacherMistakes.length} incorrect answers`;
+  if(!visible.length){
+    out.innerHTML='<div class="teacher-mistake-empty">No incorrect answers match this filter. For real student records, complete a new quiz in this browser to collect question-by-question responses.</div>';
+    return;
+  }
+  out.innerHTML=visible.map((m,i)=>{
+    const img=/^quiz-images\/[A-Za-z0-9._-]+\.webp$/.test(String(m.image||''))
+      ? `<img class="teacher-mistake-image" loading="lazy" src="${escapeHtml(m.image)}" alt="${escapeHtml(m.imageAlt||'Question diagram')}">` : '';
+    const when=m.isDemo?'Illustrative sample (not real student work)':m.at?new Date(m.at).toLocaleString():'Recorded attempt';
+    const state=m.improved?'Answered correctly later':'Needs review';
+    return `<article class="teacher-mistake-card">
+      <div class="teacher-mistake-top"><span class="teacher-mistake-topic">${escapeHtml(m.level||'')} · ${escapeHtml(m.subject||'')} · ${escapeHtml(m.topic||'')}</span><span class="teacher-review-state ${m.improved?'improved':''}">${state}</span></div>
+      <div class="teacher-mistake-time">${escapeHtml(when)} · ${escapeHtml(m.type||'Multiple choice')} · Question ${Number(m.questionNumber)||i+1}</div>
+      <div class="teacher-mistake-question">${escapeHtml(m.question)}</div>${img}
+      <div class="teacher-answer-compare">
+        <div class="teacher-answer-box"><span>Student's answer</span><strong>${escapeHtml(m.studentAnswer||'(No answer)')}</strong></div>
+        <div class="teacher-answer-box correct"><span>Correct answer</span><strong>${escapeHtml(m.correctAnswer||'—')}</strong></div>
+      </div>
+      <div class="teacher-mistake-explain"><strong>Explanation: </strong>${escapeHtml(m.explanation||'Explanation is not available for this question yet.')}</div>
+    </article>`;
+  }).join('');
+}
+function teacherMistakesPanelHTML(){
+  const all=currentTeacherMistakes.length,remaining=currentTeacherMistakes.filter(x=>!x.improved).length,unique=new Set(currentTeacherMistakes.map(x=>`${x.topic}|${x.question}`)).size;
+  const note=teacherMistakeMode==='demo'
+    ? 'DEMO EXAMPLES: These are sample incorrect responses for the developer to test the interface. They are not actual answers by the named students.'
+    : teacherMistakeMode==='empty'
+    ? 'No question-by-question responses are available for this student in this browser. Earlier quiz attempts only stored totals; complete a new quiz here to record detailed answers.'
+    : 'Recorded answers from completed quizzes on this browser only. The live service must use authenticated, permission-checked server storage for teachers to review student work across devices.';
+  return `<h4>Question-by-question mistake review</h4>
+    <div class="teacher-mistakes-note">${escapeHtml(note)}</div>
+    <div class="teacher-mistake-metrics">
+      <div class="teacher-mistake-metric"><strong>${all}</strong><small>Incorrect attempts</small></div>
+      <div class="teacher-mistake-metric"><strong>${remaining}</strong><small>Still need review</small></div>
+      <div class="teacher-mistake-metric"><strong>${unique}</strong><small>Different questions missed</small></div>
+    </div>
+    <div class="teacher-mistake-tools">
+      <select aria-label="Filter by correction status" onchange="filterTeacherMistakes(this.value)">
+        <option value="all">All incorrect answers</option>
+        <option value="open">Needs review</option>
+        <option value="improved">Answered correctly later</option>
+      </select>
+      <input aria-label="Search student wrong answers" placeholder="Search question, topic or answer" oninput="searchTeacherMistakes(this.value)">
+      <button type="button" onclick="exportTeacherMistakesCSV()">Export CSV</button>
+    </div>
+    <div class="teacher-answers-count" id="teacherAnswersCount"></div>
+    <div id="teacherMistakeCards"></div>`;
+}
+function exportTeacherMistakesCSV(){
+  const rows=teacherFilteredMistakes();
+  if(!rows.length){alert('No wrong answers to export with this filter.');return}
+  const fields=['Student ID','Date','Level','Subject','Topic','Question','Question type','Student answer','Correct answer','Explanation','Status','Data source'];
+  const data=rows.map(m=>[activeTeacherStudentId,m.at?new Date(m.at).toISOString():'',m.level,m.subject,m.topic,m.question,m.type,m.studentAnswer,m.correctAnswer,m.explanation,m.improved?'Answered correctly later':'Needs review',m.isDemo?'Illustrative demo':'Browser record']);
+  const cell=x=>'"'+String(x===undefined||x===null?'':x).replace(/^[=+@\-\t\r]/,'\'$&').replace(/"/g,'""')+'"';
+  const csv='\uFEFF'+[fields,...data].map(row=>row.map(cell).join(',')).join('\r\n');
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download=`TopicalExamQuiz_wrong_answers_${activeTeacherStudentId||'student'}.csv`;
+  document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),500);
+}
+
 function switchTeacherStudentTab(tab){
   document.querySelectorAll('#teacherStudentDetail .teacher-detail-tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
   document.querySelectorAll('#teacherStudentDetail .teacher-tab-panel').forEach(p=>p.classList.toggle('active',p.dataset.panel===tab));
 }
-function renderTeacherStudentDetail(name,id,summary,progressRows,activityRows){
+function renderTeacherStudentDetail(name,id,summary,progressRows,activityRows,initialTab='progress'){
   const el=document.getElementById('teacherStudentDetail');if(!el)return;
-  const cards=summary?`<div class="teacher-detail-grid"><div class="teacher-detail-card"><strong>${summary.accuracy}</strong><span>Overall accuracy</span></div><div class="teacher-detail-card"><strong>${summary.study}</strong><span>Study time this week</span></div><div class="teacher-detail-card"><strong>${summary.progress}</strong><span>TopicalExamQuiz progress</span></div><div class="teacher-detail-card"><strong>${summary.score}</strong><span>Latest score</span></div><div class="teacher-detail-card"><strong>${summary.corrections}</strong><span>Corrections reviewed</span></div><div class="teacher-detail-card"><strong>${summary.fixed}</strong><span>Mistakes fixed</span></div></div>`:'';
+  activeTeacherStudentId=id;
+  teacherMistakeFilter='all';teacherMistakeSearch='';
+  const isDemoProfile=!!(teacherDemoStudents[name]&&teacherDemoStudents[name].id===id);
+  currentTeacherMistakes=teacherWrongAnswersForStudent(name,id,isDemoProfile);
+  const cards=summary?`<div class="teacher-detail-grid"><div class="teacher-detail-card"><strong>${escapeHtml(summary.accuracy)}</strong><span>Overall accuracy</span></div><div class="teacher-detail-card"><strong>${escapeHtml(summary.study)}</strong><span>Study time this week</span></div><div class="teacher-detail-card"><strong>${escapeHtml(summary.progress)}</strong><span>TopicalExamQuiz progress</span></div><div class="teacher-detail-card"><strong>${escapeHtml(summary.score)}</strong><span>Latest score</span></div><div class="teacher-detail-card"><strong>${escapeHtml(summary.corrections)}</strong><span>Corrections reviewed</span></div><div class="teacher-detail-card"><strong>${escapeHtml(summary.fixed)}</strong><span>Mistakes fixed</span></div></div>`:'';
   const weak=summary&&summary.weak?`<strong style="font-size:12px">Areas to support</strong><div>${summary.weak.map(x=>`<span class="weak-chip">${escapeHtml(x)}</span>`).join('')}</div>`:'';
-  const share=summary?`<div class="teacher-share-actions"><button class="send-parent" onclick="shareTeacherParentProgress('${escapeHtml(name)}')">Send progress to parent</button><button class="copy-parent" onclick="copyTeacherParentProgress('${escapeHtml(name)}')">Copy summary</button></div>`:'';
-  el.innerHTML=`<div class="teacher-detail-head"><div><div class="eyebrow">STUDENT</div><h3>${escapeHtml(name)}</h3><div class="student-id-cell">${escapeHtml(id)}</div></div><button aria-label="Close student summary" onclick="this.closest('.teacher-detail').classList.remove('show')">×</button></div>${cards}${weak}<div class="teacher-detail-tabs"><button class="teacher-detail-tab active" data-tab="progress" onclick="switchTeacherStudentTab('progress')">Progress</button><button class="teacher-detail-tab" data-tab="activity" onclick="switchTeacherStudentTab('activity')">Activity</button></div><div class="teacher-tab-panel active" data-panel="progress"><h4>Topic & part progress</h4>${teacherProgressTable(progressRows)}</div><div class="teacher-tab-panel" data-panel="activity"><h4>Practice activity</h4><p class="muted" style="font-size:11px;margin-top:-4px">See which chapter, topic and Part 1–3 session the student practised, when they did it, and the result.</p>${teacherActivityTable(activityRows)}</div>${share}`;
+  const share=summary&&isDemoProfile?`<div class="teacher-share-actions"><button class="send-parent" onclick="shareTeacherParentProgress('${escapeHtml(name)}')">Send sample progress summary</button><button class="copy-parent" onclick="copyTeacherParentProgress('${escapeHtml(name)}')">Copy sample summary</button></div>`:'';
+  el.innerHTML=`<div class="teacher-detail-head"><div><div class="eyebrow">STUDENT · ${isDemoProfile?'SAMPLE PROFILE':'LOCAL BROWSER RECORD'}</div><h3>${escapeHtml(name)}</h3><div class="student-id-cell">${escapeHtml(id)}</div></div><button aria-label="Close student summary" onclick="this.closest('.teacher-detail').classList.remove('show')">×</button></div>${cards}${weak}
+    <div class="teacher-detail-tabs">
+      <button class="teacher-detail-tab" data-tab="progress" onclick="switchTeacherStudentTab('progress')">Progress</button>
+      <button class="teacher-detail-tab" data-tab="activity" onclick="switchTeacherStudentTab('activity')">Activity</button>
+      <button class="teacher-detail-tab" data-tab="mistakes" onclick="switchTeacherStudentTab('mistakes')">Wrong answers (${currentTeacherMistakes.length})</button>
+    </div>
+    <div class="teacher-tab-panel" data-panel="progress"><h4>Topic & part progress</h4>${teacherProgressTable(progressRows)}</div>
+    <div class="teacher-tab-panel" data-panel="activity"><h4>Practice activity</h4><p class="muted" style="font-size:11px;margin-top:-4px">See when each student practised, the chapter, topic, activity and score.</p>${teacherActivityTable(activityRows)}</div>
+    <div class="teacher-tab-panel" data-panel="mistakes">${teacherMistakesPanelHTML()}</div>${share}`;
   el.classList.add('show');
+  switchTeacherStudentTab(initialTab);
+  renderTeacherMistakeCards();
 }
-function showNewTeacherStudent(name,id){
+function showNewTeacherStudent(name,id,tab='progress'){
   const live=loadStudentActivities(id),progress=chapterProgressFromLive(id),activities=activityRowsFromLive(id);
-  if(!live.length){renderTeacherStudentDetail(name,id,null,[],[]);return}
+  if(!live.length){renderTeacherStudentDetail(name,id,null,[],[],tab);return}
   const total=live.reduce((s,r)=>s+(r.total||0),0),correct=live.reduce((s,r)=>s+(r.correct||0),0),secs=live.reduce((s,r)=>s+(r.seconds||0),0),latest=live[0]||{};
   const summary={accuracy:total?Math.round(correct/total*100)+'%':'—',study:formatQuizTime(secs),progress:progress.length+' chapters',score:latest.total?`${latest.correct}/${latest.total}`:'—',corrections:'—',fixed:'—',weak:[]};
-  renderTeacherStudentDetail(name,id,summary,progress,activities);
+  renderTeacherStudentDetail(name,id,summary,progress,activities,tab);
 }
-function showTeacherStudent(name){
+function showTeacherStudent(name,tab='progress'){
   const s=teacherDemoStudents[name];if(!s)return;
   const live=activityRowsFromLive(s.id),activities=live.length?live:s.activities;
   const liveProgress=chapterProgressFromLive(s.id),progress=liveProgress.length?liveProgress:s.chapterProgress;
-  renderTeacherStudentDetail(name,s.id,s,progress,activities);
+  renderTeacherStudentDetail(name,s.id,s,progress,activities,tab);
 }
 function teacherParentProgressText(name){
   const s=teacherDemoStudents[name];
@@ -2311,6 +2513,7 @@ function questionIdentity(x){const m=getQuestionMeta(x);return `${m.key}|${x.q}`
 function getCorrectAnswer(x){if(x.type==='fill')return String(x.answer||'');if(x.type==='rearrange')return Array.isArray(x.answer)?x.answer.join(''):String(x.answer||'');return x.a&&x.c>=0?String(x.a[x.c]):''}
 function getTopicStat(key){const p=loadProgress();return p.topicStats[key]||{attempts:0,correct:0}}
 function recordQuestionResult(x,isCorrect,userAnswer){
+  captureTeacherQuizAnswer(x,isCorrect,userAnswer);
   if(currentLevel!=='Stage 7'||currentSubject!=='Science')return;
   const p=loadProgress(),m=getQuestionMeta(x),key=m.key||m.topic,skill=classifyQuestionSkill(x),id=questionIdentity(x);
   p.topicStats[key]=p.topicStats[key]||{attempts:0,correct:0,topic:m.topic,category:m.category,code:m.code};p.topicStats[key].attempts++;if(isCorrect)p.topicStats[key].correct++;
