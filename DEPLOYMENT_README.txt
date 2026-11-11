@@ -1,3 +1,6 @@
+UPDATE — 11 NOVEMBER 2026: HSK 3 Lessons 1–6 integrated into this STATIC website ZIP.
+720 questions, including 180 image-based questions with 90 JPG photo files. Navigate Chinese Language > HSK > HSK 3 > Lesson 1–6. Each lesson uses three mixed Parts of 40 questions. See HSK3_LESSONS_1_TO_6_INTEGRATION_README.txt for the exact new script and image directories. NOTE: This ZIP has not been uploaded to live hosting.
+
 UPDATE — 10 NOVEMBER 2026: All currently available Chinese, Myanmar and Stage 7 Science quizzes now open a mixed-question Part 1 / Part 2 / Part 3 page. HSK 3 Lesson 1 has 120 questions split 40/40/40. See HSK3_LESSON1_IMPORT_README.txt.
 
 UPDATE — 10 NOVEMBER 2026: HSK 3 Lesson 1 integration is included.
