@@ -831,6 +831,17 @@ input, textarea, select {
 .topic-part-card:focus-visible,.topic-review-card button:focus-visible{outline:3px solid #2f70ee;outline-offset:2px}
 @media(max-width:620px){.topic-part-status{text-align:left}.topic-overall-row{flex-wrap:wrap}}
 </style>
+<style>
+/* Continue Learning: remembers the last opened topic and active Part on this device. */
+.continue-learning-card{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:21px 23px;border:1px solid #b9d9f8;background:linear-gradient(110deg,#f5faff,#edf7ff);border-radius:17px;margin:0 0 21px;box-shadow:0 5px 18px rgba(19,83,157,.05)}
+.continue-learning-card[hidden],#continueLearningNav[hidden]{display:none!important}
+.continue-learning-copy{min-width:0}
+.continue-learning-copy .eyebrow{font-size:11px;color:#1f5b9b;letter-spacing:.08em;font-weight:900}
+.continue-learning-copy h2{margin:6px 0 3px;color:#123456;font-size:22px;line-height:1.35}
+.continue-learning-copy p{margin:5px 0 0;font-size:13px;line-height:1.5;color:#516c88}
+.continue-learning-button{flex:0 0 auto;background:#2d6ef0!important;color:#fff!important;padding:13px 19px!important;border-color:#2d6ef0!important;font-size:14px}
+@media(max-width:620px){.continue-learning-card{flex-direction:column;align-items:stretch;padding:17px}.continue-learning-button{width:100%}.continue-learning-copy h2{font-size:19px}}
+</style>
 </head>
 <body>
 <header class="top platform-top">
@@ -852,6 +863,7 @@ input, textarea, select {
 </div>
 </div>
 </div>
+<button class="nav-link" id="continueLearningNav" onclick="continueLearning()" type="button" hidden>▶ Continue Learning</button>
 <button class="nav-link" onclick="openStudentProgress()" type="button">My Progress</button>
 <button class="nav-link" onclick="openInfoView('aboutView')" type="button">About</button>
 </nav>
@@ -864,6 +876,14 @@ input, textarea, select {
 <main class="page">
 <section class="view active" id="platformHomeView">
 <div class="platform-home">
+<section class="continue-learning-card" id="continueLearningCard" aria-labelledby="continueLearningTitle" hidden>
+ <div class="continue-learning-copy">
+  <div class="eyebrow">WELCOME BACK</div>
+  <h2 id="continueLearningTitle">Continue Learning</h2>
+  <p id="continueLearningDetail">Return to your latest lesson or topic.</p>
+ </div>
+ <button type="button" class="btn primary continue-learning-button" onclick="continueLearning()">Continue Learning →</button>
+</section>
 <section class="platform-section">
 <div class="platform-section-heading"><div><div class="eyebrow">LEARN</div><h2>What are you studying?</h2><p>Choose a learning path. Stage 7 Science is available now; the other programmes show where TopicalExamQuiz is growing next.</p></div></div>
 <div class="programme-card-grid">
@@ -1752,6 +1772,7 @@ function chooseLevel(level,program){
   showView('homeView');
 }
 function showView(id){
+  if(id==='platformHomeView')refreshContinueLearningCard();
   const target=document.getElementById(id);
   if(!target){console.error('Missing view:',id);return}
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
@@ -1939,6 +1960,131 @@ function getPartStatus(topicKey,part){const all=loadPartProgress();return all[to
 function completedPartQuestionCount(topicKey){let n=0;for(let i=1;i<=3;i++){const s=getPartStatus(topicKey,i);if(s&&s.completed)n+=s.total||20}return n}
 function allThreePartsComplete(topicKey){return [1,2,3].every(i=>{const s=getPartStatus(topicKey,i);return !!(s&&s.completed)})}
 
+
+/* Continue Learning is a per-browser prototype bookmark, not an authenticated sync service.
+   This is restricted to the existing three-part lesson navigator and never stores a password. */
+const continueLearningKey='topicalExamQuizContinueLearningV1';
+function loadContinueLearning(){
+ try{
+  const v=JSON.parse(localStorage.getItem(continueLearningKey)||'null');
+  return v&&v.version===1&&typeof v.key==='string'&&v.key.length<300&&['stage7','hsk-chapters','myanmar','chinese-levels'].includes(v.back)?v:null;
+ }catch(e){return null}
+}
+function writeContinueLearning(v){
+ try{localStorage.setItem(continueLearningKey,JSON.stringify(v))}catch(e){}
+ refreshContinueLearningCard();
+}
+function nextContinuePart(key,parts){
+ for(let p=1;p<=3;p++){
+  const qs=parts[p-1]||[],s=getPartStatus(key,p);
+  if(qs.length&&!(s&&s.completed&&s.total===qs.length))return p;
+ }
+ return 0; // All Parts completed: show overview/review rather than replay a finished Part.
+}
+function continueQuestionFingerprint(qs){
+ let h=2166136261;
+ (qs||[]).forEach(x=>{const t=String(x.q||'')+'|'+(x.a||[]).join('|')+'|'+(x.words||[]).join('|');for(let i=0;i<t.length;i++){h=Math.imul(h^t.charCodeAt(i),16777619)}});
+ return String(h>>>0);
+}
+function rememberLearningLocation(){
+ if(!currentPracticeKey||!currentPracticeParts.some(arr=>arr.length))return;
+ const prev=loadContinueLearning(),same=prev&&prev.key===currentPracticeKey;
+ const bestPart=nextContinuePart(currentPracticeKey,currentPracticeParts);
+ const data={version:1,back:currentPracticeBack,level:currentLevel,program:currentProgram,
+  subject:currentSubject,category:currentCategory,code:currentPartBaseCode||currentCode,
+  topic:currentPartBaseTopic||currentTopic,key:currentPracticeKey,
+  chapterId:currentChapterId||'',hskIndex:activeHskChapter,
+  part:same&&prev.session?prev.part:bestPart,
+  session:same&&prev.session?prev.session:null,updatedAt:Date.now()};
+ writeContinueLearning(data);
+}
+function saveContinueQuizSnapshot(){
+ if(quizMode!=='part'||!currentPartNumber||currentPartTopicKey!==currentPracticeKey)return;
+ const qs=getQs();if(!qs.length)return;
+ const current=loadContinueLearning();
+ const record={version:1,back:currentPracticeBack,level:currentLevel,program:currentProgram,
+  subject:currentSubject,category:currentCategory,code:currentPartBaseCode||currentCode,
+  topic:currentPartBaseTopic||currentTopic,key:currentPracticeKey,
+  chapterId:currentChapterId||'',hskIndex:activeHskChapter,
+  part:currentPartNumber,updatedAt:Date.now(),
+  session:{part:currentPartNumber,total:qs.length,fingerprint:continueQuestionFingerprint(qs),
+   qIndex,answered:!!answered,correctCount,wrongCount,mastery,elapsedMs:Math.max(0,Date.now()-quizStartedAt),
+   answers:sessionQuizAnswers.slice(),wrongIds:[...sessionWrongIds],reviewedIds:[...sessionReviewedIds],
+   mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,
+   lastAnswerWasWrong:!!lastAnswerWasWrong}};
+ // Avoid accidentally replacing a bookmark to a different quiz due to stale UI events.
+ if(current&&current.key!==currentPracticeKey&&document.getElementById('quizView')?.classList.contains('active')===false)return;
+ writeContinueLearning(record);
+}
+function completeContinueQuizSession(){
+ if(quizMode!=='part'||currentPartTopicKey!==currentPracticeKey)return;
+ const current=loadContinueLearning();if(!current||current.key!==currentPracticeKey)return;
+ current.session=null;
+ current.part=nextContinuePart(currentPracticeKey,currentPracticeParts);
+ current.updatedAt=Date.now();writeContinueLearning(current);
+}
+function refreshContinueLearningCard(){
+ const v=loadContinueLearning();
+ const card=document.getElementById('continueLearningCard'),nav=document.getElementById('continueLearningNav');
+ if(card)card.hidden=!v;
+ if(nav)nav.hidden=!v;
+ if(!v)return;
+ const title=document.getElementById('continueLearningTitle'),detail=document.getElementById('continueLearningDetail');
+ if(title)title.textContent=(v.level||'Learning')+' · '+(v.subject||'')+' · '+(v.topic||'');
+ if(detail){
+  const isPart=Number.isInteger(v.part)&&v.part>0;
+  const partLabel=isPart?'Part '+v.part:'All three Parts completed — revisit your lesson or try Review';
+  const progress=v.session&&v.session.total>0?' · Question '+Math.min(v.session.total,Math.max(1,(v.session.answers||[]).length+1))+'/'+v.session.total:'';
+  detail.textContent=partLabel+progress+' · Continue without selecting your curriculum and grade again.';
+ }
+}
+function continueLearning(){
+ const saved=loadContinueLearning();
+ if(!saved){goToTopicalExamQuizHome();return}
+ if(saved.back==='hsk-chapters'){
+  const lesson=String(saved.key).match(/^chinese-hsk-3-lesson-([1-6])$/);
+  if(lesson)openHsk3LessonPractice(Number(lesson[1]));
+  else if(Number.isInteger(saved.hskIndex)&&Array.isArray(hskChapterOutlines[saved.level]))startHskChapterQuiz(saved.level,saved.hskIndex);
+  else {goToTopicalExamQuizHome();return}
+ }else if(saved.back==='stage7'){
+  if(!stage7ScienceQuestions[saved.key]){goToTopicalExamQuizHome();return}
+  currentProgram='Lower Secondary';currentLevel='Stage 7';currentSubject='Science';currentCategory=saved.category||'Biology';
+  openTopicParts(saved.code,saved.topic,saved.key);
+ }else if(saved.back==='myanmar'){
+  launchMyanmarQuiz(saved.level,saved.subject,saved.topic);
+ }else if(saved.back==='chinese-levels'){
+  goToTopicalExamQuizHome();return;
+ }else{goToTopicalExamQuizHome();return}
+ if(currentPracticeKey!==saved.key)return;
+ let part=Number.isInteger(saved.part)?saved.part:0;
+ const parts=currentPracticeParts;
+ const incomplete=nextContinuePart(saved.key,parts);
+ if(!incomplete){renderTopicParts();showView('topicPartsView');return}
+ if(!part||part<1||part>3||getPartStatus(saved.key,part)?.completed)part=incomplete;
+ const qs=parts[part-1]||[];
+ if(!qs.length){renderTopicParts();showView('topicPartsView');return}
+ const snapshot=saved.session;
+ const valid=snapshot&&snapshot.part===part&&snapshot.total===qs.length&&
+  snapshot.fingerprint===continueQuestionFingerprint(qs)&&Array.isArray(snapshot.answers)&&
+  snapshot.answers.length<=qs.length&&snapshot.answers.every((x,i)=>x&&x.questionNumber===i+1);
+ startTopicPart(part);
+ if(!valid)return;
+ correctCount=Math.max(0,Math.min(snapshot.answers.length,Number(snapshot.correctCount)||0));
+ wrongCount=Math.max(0,Math.min(snapshot.answers.length,Number(snapshot.wrongCount)||0));
+ mastery=Math.max(0,Math.min(100,Number(snapshot.mastery)||40));
+ quizStartedAt=Date.now()-Math.max(0,Number(snapshot.elapsedMs)||0);
+ sessionQuizAnswers=snapshot.answers.map(x=>({...x}));
+ sessionWrongIds=new Set(snapshot.wrongIds||[]);sessionReviewedIds=new Set(snapshot.reviewedIds||[]);
+ sessionMistakesFixed=Number(snapshot.mistakesFixed)||0;
+ sessionTopicMasteryBefore=snapshot.masteryBefore;
+ lastAnswerWasWrong=!!snapshot.lastAnswerWasWrong;
+ // An answered question was already scored. Advance past it rather than score it twice.
+ const completedCount=sessionQuizAnswers.length;
+ if(completedCount>=qs.length){showSummary();return}
+ qIndex=completedCount;
+ answered=false;renderQuestion();saveContinueQuizSnapshot();
+}
+
 /* Self-contained clickable image quiz demo; uses local WebP assets */
 const imageQuizDemoQuestions = [{"q": "Which type of cell is shown in the diagram?", "a": ["Plant cell", "Animal cell", "Red blood cell", "Bacterial cell"], "c": 0, "e": "The diagram shows a rigid cell wall, chloroplasts and a large vacuole, which are typical of a plant cell.", "image": "quiz-images/1_1_PlantCell.webp", "imageAlt": "Educational science diagram: 1 1 PlantCell", "photoQuiz": true}, {"q": "Which type of cell is shown in the diagram?", "a": ["Plant cell", "Animal cell", "Root hair cell", "Bacterial cell"], "c": 1, "e": "This animal cell has a cell membrane and nucleus, but no cell wall or chloroplasts.", "image": "quiz-images/1_2_AnimalCell.webp", "imageAlt": "Educational science diagram: 1 2 AnimalCell", "photoQuiz": true}, {"q": "Which cell structure is marked X?", "a": ["Cell membrane", "Cell wall", "Vacuole", "Cytoplasm"], "c": 1, "e": "The cell wall is the thick rigid outer boundary around a plant cell.", "image": "quiz-images/1_1_PlantCell_CellWall.webp", "imageAlt": "Educational science diagram: 1 1 PlantCell CellWall", "photoQuiz": true}, {"q": "Which structure is marked X?", "a": ["Chloroplast", "Nucleus", "Vacuole", "Mitochondrion"], "c": 1, "e": "The nucleus contains genetic information and helps control cell activities.", "image": "quiz-images/1_1_PlantCell_Nucleus.webp", "imageAlt": "Educational science diagram: 1 1 PlantCell Nucleus", "photoQuiz": true}, {"q": "Which structure is marked X?", "a": ["Mitochondrion", "Vacuole", "Chloroplast", "Cell wall"], "c": 2, "e": "Chloroplasts contain chlorophyll and absorb light for photosynthesis.", "image": "quiz-images/1_1_PlantCell_Choloplast.webp", "imageAlt": "Educational science diagram: 1 1 PlantCell Choloplast", "photoQuiz": true}, {"q": "Which large cell structure is marked X?", "a": ["Nucleus", "Cell wall", "Cell membrane", "Vacuole"], "c": 3, "e": "The large vacuole contains cell sap and supports the plant cell.", "image": "quiz-images/1_1_PlantCell_Vacuole.webp", "imageAlt": "Educational science diagram: 1 1 PlantCell Vacuole", "photoQuiz": true}, {"q": "Which boundary is marked X?", "a": ["Cell membrane", "Cell wall", "Cytoplasm", "Vacuole"], "c": 0, "e": "The cell membrane is the thin boundary just inside the wall and controls substances entering and leaving.", "image": "quiz-images/1_1_PlantCell_Cellmembrane.webp", "imageAlt": "Educational science diagram: 1 1 PlantCell Cellmembrane", "photoQuiz": true}, {"q": "Which cell material is marked X?", "a": ["Nucleus", "Vacuole", "Cytoplasm", "Chloroplast"], "c": 2, "e": "The cytoplasm is the jelly-like material where many chemical reactions take place.", "image": "quiz-images/1_1_PlantCell_Cytoplasm.webp", "imageAlt": "Educational science diagram: 1 1 PlantCell Cytoplasm", "photoQuiz": true}, {"q": "Which organelle is marked X?", "a": ["Chloroplast", "Mitochondrion", "Nucleus", "Vacuole"], "c": 1, "e": "Mitochondria are sites of aerobic respiration in cells.", "image": "quiz-images/1_1_PlantCell_Mitochondrion.webp", "imageAlt": "Educational science diagram: 1 1 PlantCell Mitochondrion", "photoQuiz": true}, {"q": "What is the main advantage of the long projection of this cell?", "a": ["Absorb more water and minerals", "Produce more light", "Move blood through vessels", "Send nerve impulses"], "c": 0, "e": "The long extension increases surface area for absorbing water and mineral ions.", "image": "quiz-images/1_3_RootHairCell.webp", "imageAlt": "Educational science diagram: 1 3 RootHairCell", "photoQuiz": true}, {"q": "What do the tiny hair-like structures on these cells help do?", "a": ["Make food", "Move mucus along", "Store water", "Absorb sunlight"], "c": 1, "e": "Cilia beat to move mucus and trapped particles along airways.", "image": "quiz-images/1_3_CiliatedCell.webp", "imageAlt": "Educational science diagram: 1 3 CiliatedCell", "photoQuiz": true}, {"q": "Which job is this specialised cell adapted to perform?", "a": ["Absorb water", "Transport oxygen", "Carry nerve impulses", "Make food"], "c": 2, "e": "The long shape and branching ends help neurones transmit electrical impulses.", "image": "quiz-images/1_3_Neurones.webp", "imageAlt": "Educational science diagram: 1 3 Neurones", "photoQuiz": true}];
 function startImageQuizDemo(){
@@ -1971,6 +2117,7 @@ function openMixedPracticeParts(pool,backType,isSample){
  currentPracticeKey=currentTopicKey;currentPracticeBack=backType;currentPracticeSample=!!isSample;
  currentPartNumber=0;currentPartTopicKey='';currentPartBaseCode=currentCode;currentPartBaseTopic=currentTopic;
  quizOverride=null;quizMode='topic';renderTopicParts();showView('topicPartsView');
+ rememberLearningLocation();
 }
 function openTopicParts(code,name,key){
  currentPartBaseCode=code;currentPartBaseTopic=name;currentTopicKey=key||name;currentCode=code;currentTopic=name;
@@ -2032,6 +2179,7 @@ function startTopicPart(part){
  currentPartNumber=part;currentPartTopicKey=key;
  currentCode=currentPartBaseCode||currentCode;currentTopic=currentPartBaseTopic||currentTopic;
  quizMode='part';quizOverride=qs.map(q=>({...q}));resetQuizSession();
+ saveContinueQuizSnapshot();
 }
 function startTopicReview(){
  const key=currentTopicKey,parts=[1,2,3].map(part=>topicPartQuestions(key,part));
@@ -2162,6 +2310,7 @@ function checkRearrangeAnswer(){
   }
   recordQuestionResult(x,isCorrect,userWords.join(' / '));
   document.getElementById('mastery').textContent='Mastery '+mastery;
+  saveContinueQuizSnapshot();
 }
 
 function chooseAnswer(i,b){
@@ -2173,6 +2322,7 @@ function chooseAnswer(i,b){
   else{wrongCount++;b.classList.add('wrong');mastery=Math.max(0,mastery-3);f.className='feedback show bad';f.innerHTML='<strong>Not quite.</strong><br>'+x.e+'<br><button type="button" class="report-question-btn" onclick="openReport()">⚑ Report this question</button>';lastAnswerWasWrong=true;sessionWrongIds.add(questionIdentity(x))}
   recordQuestionResult(x,isCorrect,(x.a||[])[i]||'');
   document.getElementById('mastery').textContent='Mastery '+mastery;
+  saveContinueQuizSnapshot();
 }
 function checkFillAnswer(){
   if(answered)return;
@@ -2209,6 +2359,7 @@ function checkFillAnswer(){
   }
   recordQuestionResult(x,isCorrect,typed);
   document.getElementById('mastery').textContent='Mastery '+mastery;
+  saveContinueQuizSnapshot();
 }
 function openReport(){
   const qs=getQs();
@@ -2243,7 +2394,7 @@ function submitReport(){
   if(success)success.classList.add('show');
   setTimeout(closeReport,1000);
 }
-function nextQuestion(){const qs=getQs();if(!answered)return;if(lastAnswerWasWrong){sessionReviewedIds.add(questionIdentity(qs[qIndex]));lastAnswerWasWrong=false}if(qIndex>=qs.length-1){showSummary();return}qIndex++;renderQuestion()}
+function nextQuestion(){const qs=getQs();if(!answered)return;if(lastAnswerWasWrong){sessionReviewedIds.add(questionIdentity(qs[qIndex]));lastAnswerWasWrong=false}if(qIndex>=qs.length-1){showSummary();return}qIndex++;renderQuestion();saveContinueQuizSnapshot()}
 function formatQuizTime(s){s=Math.max(0,Math.round(s||0));return Math.floor(s/60)+'m '+String(s%60).padStart(2,'0')+'s'}
 function formatClockTime(ms){if(!ms)return '—';return new Date(ms).toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})}
 function currentStudentName(){try{return localStorage.getItem('edubridgeStudentName')||'Emma'}catch(e){return 'Emma'}}
@@ -2280,7 +2431,7 @@ function copyVerifiedReport(){const r=lastStudyReport||buildStudyReport(),text=r
 function shareSummary(){openVerifiedStudyReport()}
 function openReportFromHash(){const m=location.hash.match(/^#study-report=([^&]+)/);if(!m)return;const id=decodeURIComponent(m[1]),r=loadStudyReport(id);if(r){lastStudyReport=r;renderVerifiedStudyReport(r);document.getElementById('verifiedStudyReportModal').classList.add('show')}else if(location.protocol!=='file:'){alert('This study record is not available on this device yet. Connect TopicalExamQuiz to a database for cross-device verification.')}}
 window.addEventListener('hashchange',openReportFromHash);
-function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);if(quizMode==='part'&&currentPartTopicKey&&currentPartNumber)savePartCompletion(currentPartTopicKey,currentPartNumber,total,correctCount);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+(quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':'')+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView')}
+function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);if(quizMode==='part'&&currentPartTopicKey&&currentPartNumber)savePartCompletion(currentPartTopicKey,currentPartNumber,total,correctCount);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+(quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':'')+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView');completeContinueQuizSession()}
 function restartQuiz(){if(quizMode==='part'||quizMode==='topic-review'){resetQuizSession();return}if(currentProgram==='Myanmar Curriculum'){launchMyanmarQuiz(currentLevel,currentSubject,activeMyanmarTopic);return}if(currentSubject==='Chinese Language'&&quizOverride){resetQuizSession();return}if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{sessionQuizAnswers=[];qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;showView('quizView');renderQuestion()}}
 function showReview(){showView('reviewView')}
 document.querySelectorAll('.stage').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stage').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
@@ -2717,6 +2868,7 @@ function showComingSoon(level){alert(level+' is coming soon. TopicalExamQuiz is 
 
 renderDashboard();
 refreshAccountUI();
+refreshContinueLearningCard();
 
 // Password help: no false promise of a reset email in the offline demo.
 let forgotPasswordRole='student';
