@@ -885,10 +885,10 @@ input, textarea, select {
  <button type="button" class="btn primary continue-learning-button" onclick="continueLearning()">Continue Learning →</button>
 </section>
 <section class="platform-section">
-<div class="platform-section-heading"><div><div class="eyebrow">LEARN</div><h2>What are you studying?</h2><p>Choose a learning path. Stage 7 Science is available now; the other programmes show where TopicalExamQuiz is growing next.</p></div></div>
+<div class="platform-section-heading"><div><div class="eyebrow">LEARN</div><h2>What are you studying?</h2><p>Choose a learning path. Stage 7 and Stage 9 Science are available now; the other programmes show where TopicalExamQuiz is growing next.</p></div></div>
 <div class="programme-card-grid">
 <button class="programme-card" onclick="openCambridgeSubjects('Stage 6','Primary')" type="button"><span class="programme-icon">🎒</span><strong>Primary</strong><small>Cambridge-aligned · Stage 6 · Free</small><span class="programme-status soon">Coming soon</span></button>
-<button class="programme-card available" onclick="openProgrammeChooser()" type="button"><span class="programme-icon">🔬</span><strong>Lower Secondary</strong><small>Cambridge-aligned · Stages 7–9 · Free</small><span class="programme-status live">Stage 7 live →</span></button>
+<button class="programme-card available" onclick="openProgrammeChooser()" type="button"><span class="programme-icon">🔬</span><strong>Lower Secondary</strong><small>Cambridge-aligned · Stages 7–9 · Free</small><span class="programme-status live">Stages 7 &amp; 9 live →</span></button>
 <button class="programme-card" onclick="openCambridgeSubjects('IGCSE','IGCSE')" type="button"><span class="programme-icon">🎓</span><strong>IGCSE</strong><small>Exam preparation by subject · Free</small><span class="programme-status soon">Coming later</span></button>
 <button class="programme-card" onclick="openChinesePaths()" type="button"><span class="programme-icon">🇨🇳</span><strong>Chinese Language 中文</strong><small>Choose HSK or Singapore Syllabus</small><span class="programme-status live">Explore levels →</span></button>
 <button class="programme-card" onclick="openMyanmarYears()" type="button"><span class="programme-icon">🇲🇲</span><strong>Myanmar Curriculum</strong><small>Choose a year level</small><span class="programme-status live">Explore years →</span></button>
@@ -955,7 +955,7 @@ input, textarea, select {
 <div class="level-intro">
 <div class="eyebrow">CAMBRIDGE-ALIGNED · SCHOOL LEARNING</div>
 <h1>Choose your programme</h1>
-<p>Use stage names so learners can clearly identify the intended curriculum level. Stage 7 Science is available now.</p>
+<p>Use stage names so learners can clearly identify the intended curriculum level. Stage 7 and Stage 9 Science are available now.</p>
 </div>
 <div class="level-group">
 <div class="level-group-head"><h2>Primary</h2><span>Stage 6</span></div>
@@ -966,7 +966,7 @@ input, textarea, select {
 <div class="level-grid cols-3">
 <button class="level-card live-level" onclick="openCambridgeSubjects('Stage 7','Lower Secondary')" type="button"><strong>Stage 7</strong><small>Choose subjects →</small></button>
 <button class="level-card coming" onclick="openCambridgeSubjects('Stage 8','Lower Secondary')" type="button"><strong>Stage 8</strong><small>Choose subjects →</small></button>
-<button class="level-card coming" onclick="openCambridgeSubjects('Stage 9','Lower Secondary')" type="button"><strong>Stage 9</strong><small>Choose subjects →</small></button>
+<button class="level-card live-level" onclick="openCambridgeSubjects('Stage 9','Lower Secondary')" type="button"><strong>Stage 9</strong><small>Choose subjects →</small></button>
 </div>
 </div>
 <div class="level-group">
@@ -1306,6 +1306,7 @@ TopicalExamQuiz offers original practice activities. Myanmar sample quizzes are 
 <script src="hsk3-lesson1-questions.js"></script>
 <script src="hsk3-lessons2-6-questions.js"></script>
 <script src="stage7-science-chapter2-questions.js"></script>
+<script src="stage9-science-unit1-questions.js"></script>
 <script>
 function closeAnyModal(){
   document.querySelectorAll('.modal.show').forEach(function(modal){
@@ -1335,7 +1336,7 @@ const programmeCatalog={
   stage6:{curriculum:'Cambridge-aligned',programme:'Primary',stage:'Stage 6',status:'coming-soon'},
   stage7:{curriculum:'Cambridge-aligned',programme:'Lower Secondary',stage:'Stage 7',subject:'Science',status:'available'},
   stage8:{curriculum:'Cambridge-aligned',programme:'Lower Secondary',stage:'Stage 8',status:'coming-soon'},
-  stage9:{curriculum:'Cambridge-aligned',programme:'Lower Secondary',stage:'Stage 9',status:'coming-soon'},
+  stage9:{curriculum:'Cambridge-aligned',programme:'Lower Secondary',stage:'Stage 9',subject:'Science',status:'available'},
   igcse:{curriculum:'Cambridge-aligned',programme:'IGCSE',status:'coming-later'},
   myanmar:{curriculum:'Myanmar Curriculum',programme:'School Learning',billing:'per-year-level',status:'coming-soon'}
 };
@@ -1488,10 +1489,10 @@ function openCambridgeSubjects(level,programme){
   const back=document.getElementById('subjectChooserBack');
   if(title)title.textContent=`${level} — Choose a subject`;
   if(eyebrow)eyebrow.textContent='CAMBRIDGE-ALIGNED · FREE';
-  if(desc)desc.textContent=level==='Stage 7'?'Science is available now. Other subjects are being prepared.':'Choose a subject to see its availability.';
+  if(desc)desc.textContent=['Stage 7','Stage 9'].includes(level)?'Science is available now. Other subjects are being prepared.':'Choose a subject to see its availability.';
   if(price)price.style.display='none';
   if(back){back.textContent='← Back to programmes';back.setAttribute('onclick',"openProgrammeChooser()")}
-  renderProgrammeSubjects(subjects,{programme,level,liveSubject:(level==='Stage 7'?'Science':null)});
+  renderProgrammeSubjects(subjects,{programme,level,liveSubject:(['Stage 7','Stage 9'].includes(level)?'Science':null)});
 }
 function renderProgrammeSubjects(subjects,options){
   const grid=document.getElementById('programmeSubjectGrid');
@@ -1501,12 +1502,13 @@ function renderProgrammeSubjects(subjects,options){
       return `<button type="button" class="subject-choice-card myanmar-open" onclick="openMyanmarSubjectMockup('${options.level}','${subject}')"><strong>${subject}</strong><small>Sample quizzes + upcoming premium topics</small><span class="status">OPEN MOCKUP</span></button>`;
     }
     const live=options.liveSubject===subject;
-    const action=live?`startSelectedStage7Science()`:`showSubjectComingSoon('${options.programme}','${options.level}','${subject}')`;
+    const action=live?(options.level==='Stage 9'?'openStage9Science()':'startSelectedStage7Science()'):`showSubjectComingSoon('${options.programme}','${options.level}','${subject}')`;
     return `<button type="button" class="subject-choice-card ${live?'live':''}" onclick="${action}"><strong>${subject}</strong><small>${live?'Question bank available now':'Question bank coming soon'}</small><span class="status">${live?'AVAILABLE NOW':'COMING SOON'}</span></button>`;
   }).join('');
   showView('programmeSubjectView');
 }
 function startSelectedStage7Science(){
+  currentChapterId='';
   currentProgrammeKey='stage7';
   currentLevel='Stage 7';
   currentProgram='Lower Secondary';
@@ -1780,6 +1782,24 @@ function showView(id){
   if(id==='homeView'||id==='profileView'||id==='reviewView')setTimeout(renderDashboard,0);
   window.scrollTo({top:0,behavior:'smooth'});
 }
+function getSubjectCategories(subject){return subject==='Science'?stage7ScienceCategories:[]}
+function getSubjectCurriculum(subject){return subject==='Science'?stage7ScienceCurriculum:{}}
+function openStage9Science(){
+ currentProgrammeKey='stage9';currentLevel='Stage 9';currentProgram='Lower Secondary';currentSubject='Science';currentCategory='Biology';currentChapterId='';quizOverride=null;quizMode='topic';
+ document.getElementById('backToSubjectBtn').textContent='← Back to Stage 9 subjects';
+ document.getElementById('curriculumTitle').textContent='Stage 9 Science — Choose a unit';
+ document.getElementById('curriculumSection').textContent='Science · Units 1–9';
+ const box=document.getElementById('unitList');box.innerHTML='';
+ window.STAGE9_UNITS.forEach((title,i)=>{
+  const unit=document.createElement('div');unit.className='unit';
+  const head=document.createElement('button');head.type='button';head.className='unit-head';head.innerHTML=`<span class="unit-title"><span>Unit ${i+1}</span><span>${escapeHtml(title)}</span></span><span>${i===0?'⌃':'Coming soon'}</span>`; unit.appendChild(head);
+  if(i===0){const body=document.createElement('div');body.className='unit-body';Object.entries(window.STAGE9_TOPICS).forEach(([key,[code,name]])=>{const b=document.createElement('button');b.type='button';b.className='lesson';b.innerHTML=`<span class="lesson-label"><span class="num">${code}</span><span>${escapeHtml(name)} · ${window.STAGE9_UNIT1_QUESTIONS[key].length} questions</span></span><span class="arrow">›</span>`;b.onclick=()=>openStage9Topic(code,name,key);body.appendChild(b)});unit.appendChild(body);head.onclick=()=>unit.classList.toggle('collapsed');}else{head.disabled=true;}box.appendChild(unit);
+ });showView('curriculumView');
+}
+function openStage9Topic(code,name,key){
+ currentProgrammeKey='stage9';currentLevel='Stage 9';currentProgram='Lower Secondary';currentSubject='Science';currentCategory='Biology';currentChapterId='1';currentCode=code;currentTopic=name;currentTopicKey=key;
+ openMixedPracticeParts(window.STAGE9_UNIT1_QUESTIONS[key]||[],'stage9',false);
+}
 function openSubject(subject){
   const subjectCategories=getSubjectCategories(subject);
   if(!subjectCategories.length){console.error('Unknown subject:',subject);return}
@@ -1801,7 +1821,7 @@ function openSubject(subject){
   });
   showView('subjectView');
 }
-function backToSubject(){openSubject(currentSubject)}
+function backToSubject(){if(currentLevel==='Stage 9'){openCambridgeSubjects('Stage 9','Lower Secondary');return}openSubject(currentSubject)}
 function openCurriculum(category){
   currentCategory=category;
   const subjectData=getSubjectCurriculum(currentSubject);
@@ -1855,6 +1875,7 @@ function backToCurriculum(){
     return;
   }
   if(currentProgram==='Myanmar Curriculum'){returnToMyanmarTopicList();return}
+  if(currentLevel==='Stage 9'){openStage9Science();return}
   if(currentChapterId){quizOverride=null;quizMode='topic';openChapterFromSkillMap(encodeURIComponent(currentChapterId));return}
   if(quizMode!=='topic'){quizOverride=null;quizMode='topic';showView('homeView');return}
   openCurriculum(currentCategory);
@@ -1967,7 +1988,7 @@ const continueLearningKey='topicalExamQuizContinueLearningV1';
 function loadContinueLearning(){
  try{
   const v=JSON.parse(localStorage.getItem(continueLearningKey)||'null');
-  return v&&v.version===1&&typeof v.key==='string'&&v.key.length<300&&['stage7','hsk-chapters','myanmar','chinese-levels'].includes(v.back)?v:null;
+  return v&&v.version===1&&typeof v.key==='string'&&v.key.length<300&&['stage7','stage9','hsk-chapters','myanmar','chinese-levels'].includes(v.back)?v:null;
  }catch(e){return null}
 }
 function writeContinueLearning(v){
@@ -2046,6 +2067,9 @@ function continueLearning(){
   if(lesson)openHsk3LessonPractice(Number(lesson[1]));
   else if(Number.isInteger(saved.hskIndex)&&Array.isArray(hskChapterOutlines[saved.level]))startHskChapterQuiz(saved.level,saved.hskIndex);
   else {goToTopicalExamQuizHome();return}
+ }else if(saved.back==='stage9'){
+  if(!window.STAGE9_UNIT1_QUESTIONS[saved.key]){goToTopicalExamQuizHome();return}
+  openStage9Topic(saved.code,saved.topic,saved.key);
  }else if(saved.back==='stage7'){
   if(!stage7ScienceQuestions[saved.key]){goToTopicalExamQuizHome();return}
   currentProgram='Lower Secondary';currentLevel='Stage 7';currentSubject='Science';currentCategory=saved.category||'Biology';
@@ -2105,7 +2129,7 @@ function mixQuestionsIntoThreeParts(source,stage7Layout=false){
    return [1,2,3].map(part=>source.filter(q=>q.chapterPart===part).map(q=>({...q})));
  }
  const pools={mcq:[],fill:[],rearrange:[],photo:[],other:[]};
- (source||[]).forEach(q=>{const type=q.photoQuiz?'photo':q.type==='fill'?'fill':q.type==='rearrange'?'rearrange':Array.isArray(q.a)?'mcq':'other';pools[type].push({...q})});
+ (source||[]).forEach(q=>{const type=q.photoQuiz&&q._meta?.stage!=='Stage 9'?'photo':q.type==='fill'?'fill':q.type==='rearrange'?'rearrange':q.photoQuiz?'photo':Array.isArray(q.a)?'mcq':'other';pools[type].push({...q})});
  const order=['mcq','fill','rearrange','photo','other'],interleaved=[];
  while(order.some(type=>pools[type].length))order.forEach(type=>{if(pools[type].length)interleaved.push(pools[type].shift())});
  const n=interleaved.length,base=Math.floor(n/3),extras=n%3;
@@ -2126,6 +2150,7 @@ function openTopicParts(code,name,key){
  openMixedPracticeParts(stage7ScienceQuestions[currentTopicKey]||[],'stage7',false);
 }
 function backFromTopicParts(){
+ if(currentPracticeBack==='stage9'){openStage9Science();return}
  if(currentPracticeBack==='hsk-chapters'){openHskChapters(chineseSelectedLevel);return}
  if(currentPracticeBack==='chinese-levels'){openChineseLevels(chinesePath);return}
  if(currentPracticeBack==='myanmar'){openMyanmarSubjectMockup(currentLevel,currentSubject);return}
@@ -2146,9 +2171,9 @@ function renderTopicParts(){
  const bar=document.getElementById('topicPartProgressBar'),list=document.getElementById('topicPartsList');
  const back=document.getElementById('topicPartsBackBtn'),progressLabel=document.getElementById('topicProgressLabel');
  if(back)back.textContent=currentPracticeBack==='myanmar'?'← Back to topics':currentPracticeBack==='hsk-chapters'?'← Back to HSK lessons':currentPracticeBack==='chinese-levels'?'← Back to Chinese levels':'← Back to chapter';
- if(progressLabel)progressLabel.textContent=currentPracticeBack==='stage7'?'Subtopic progress':currentPracticeBack==='myanmar'?'Topic progress':'Lesson progress';
+ if(progressLabel)progressLabel.textContent=['stage7','stage9'].includes(currentPracticeBack)?'Subtopic progress':currentPracticeBack==='myanmar'?'Topic progress':'Lesson progress';
  if(title)title.textContent=currentPartBaseTopic||currentTopic;
- if(eye)eye.textContent=currentPracticeBack==='stage7'?`CHAPTER ${meta?meta.chapterId:(currentChapterId||'')} · TOPIC ${currentPartBaseCode||currentCode}`:
+ if(eye)eye.textContent=currentPracticeBack==='stage9'?`STAGE 9 · UNIT 1 · TOPIC ${currentPartBaseCode||currentCode}`:currentPracticeBack==='stage7'?`CHAPTER ${meta?meta.chapterId:(currentChapterId||'')} · TOPIC ${currentPartBaseCode||currentCode}`:
   currentPracticeBack==='myanmar'?`MYANMAR CURRICULUM · ${currentLevel} · ${currentSubject}`:
   `CHINESE LANGUAGE · ${currentLevel} · ${currentPartBaseCode||currentCode}`;
  if(desc)desc.textContent=currentPracticeSample?
@@ -2218,6 +2243,8 @@ function renderQuestion(){
     const input=document.getElementById('fillAnswer');
     input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();checkFillAnswer()}});
     setTimeout(()=>input.focus(),50);
+  }else if(x.multi){
+    renderMultiAnswer(x,ans);
   }else if(x.type==='rearrange'){
     renderRearrangeQuestion(x,ans);
   }else{
@@ -2298,7 +2325,7 @@ function checkRearrangeAnswer(){
   document.querySelectorAll('#rearrangeBank .rearrange-word,#rearrangeAnswer .rearrange-word,.rearrange-actions .btn').forEach(b=>b.disabled=true);
   const box=document.getElementById('rearrangeAnswer'),f=document.getElementById('feedback');
   if(box)box.classList.add(isCorrect?'rearrange-correct':'rearrange-wrong');
-  const correctSentence=expected.join('');
+  const correctSentence=expected.join(currentLevel==='Stage 9'?' → ':'');
   const translation=x.translation?`<div class="rearrange-translation">${x.translation}</div>`:'';
   if(isCorrect){
     correctCount++;mastery=Math.min(100,mastery+8);f.className='feedback show good';
@@ -2313,6 +2340,10 @@ function checkRearrangeAnswer(){
   saveContinueQuizSnapshot();
 }
 
+function renderMultiAnswer(x,ans){
+ const selected=new Set();x.a.forEach((t,i)=>{const b=document.createElement('button');b.type='button';b.className='answer';b.textContent=String.fromCharCode(65+i)+'. '+t;b.setAttribute('aria-pressed','false');b.onclick=()=>{if(answered)return;if(selected.has(i))selected.delete(i);else selected.add(i);b.setAttribute('aria-pressed',String(selected.has(i)));b.style.outline=selected.has(i)?'2px solid #3977a8':'';};ans.appendChild(b)});
+ const check=document.createElement('button');check.type='button';check.className='btn primary';check.textContent='Check selected answers';check.onclick=()=>{if(answered||selected.size!==x.multi.length){if(!answered)alert('Select '+x.multi.length+' answers.');return}answered=true;const ok=x.multi.every(i=>selected.has(i));[...ans.querySelectorAll('.answer')].forEach((b,i)=>{b.disabled=true;b.style.outline='';if(x.multi.includes(i))b.classList.add('correct');else if(selected.has(i))b.classList.add('wrong')});check.disabled=true;const f=document.getElementById('feedback');if(ok){correctCount++;mastery=Math.min(100,mastery+8);lastAnswerWasWrong=false;}else{wrongCount++;mastery=Math.max(0,mastery-3);lastAnswerWasWrong=true;sessionWrongIds.add(questionIdentity(x));}f.className='feedback show '+(ok?'good':'bad');f.innerHTML='<strong>'+(ok?'Correct!':'Not quite.')+'</strong><br>'+escapeHtml(x.e);recordQuestionResult(x,ok,[...selected].sort((a,b)=>a-b).map(i=>x.a[i]).join(' / '));document.getElementById('mastery').textContent='Mastery '+mastery;saveContinueQuizSnapshot();};ans.appendChild(check);
+}
 function chooseAnswer(i,b){
   if(answered)return; answered=true;
   const x=getQs()[qIndex],isCorrect=i===x.c;
@@ -2544,7 +2575,7 @@ function teacherActivityTable(rows){
 }
 
 /* Detailed teacher mistake review: browser-only demo, no cross-device sync. */
-function isLocalQuizImagePath(src){return /^quiz-images\/[A-Za-z0-9._-]+\.webp$/.test(src)||/^hsk3-lesson1-images\/HSK3_L1_\d{2}\.jpg$/.test(src)||/^hsk3-lesson-images\/HSK3_L[2-6]_\d{2}\.jpg$/.test(src)}
+function isLocalQuizImagePath(src){return /^https:\/\/pub-fe82210b20a742d49fc246361eb0add7\.r2\.dev\/TEQ_Cam_Y9_Science_Chapter1_Img\/[A-Za-z0-9._-]+\.png$/.test(src)||/^quiz-images\/[A-Za-z0-9._-]+\.webp$/.test(src)||/^hsk3-lesson1-images\/HSK3_L1_\d{2}\.jpg$/.test(src)||/^hsk3-lesson-images\/HSK3_L[2-6]_\d{2}\.jpg$/.test(src)}
 function captureTeacherQuizAnswer(x,isCorrect,userAnswer){
   if(!Array.isArray(sessionQuizAnswers))sessionQuizAnswers=[];
   const image=String(x&&x.image||'');
@@ -2787,11 +2818,11 @@ function getStreak(p=loadProgress()){const days=[...new Set(p.practiceDays||[])]
 function getQuestionMeta(x){return x&&x._meta?x._meta:{curriculum:currentSubject==='Chinese Language'?'Chinese Language':currentProgram==='Myanmar Curriculum'?'Myanmar Curriculum':'Cambridge-aligned',programme:currentProgram,stage:currentLevel,subject:currentSubject,category:currentCategory,topic:currentTopic,code:currentCode,key:currentTopicKey||currentTopic}}
 function classifyQuestionSkill(x){const q=String((x&&x.q)||'').toLowerCase();if(x&&x.photoQuiz)return 'Exam Style';if(/investigat|variable|hypothesis|fair test|method|experiment|conclusion/.test(q))return 'Scientific Investigation';if(/graph|table|chart|data|calculate|calculation|measure|reading/.test(q))return 'Data Analysis';if(/why|explain|compare|difference|describe how|reason/.test(q))return 'Understanding';if(/if |scenario|predict|most likely|what happens|would happen|use this/.test(q))return 'Application';return 'Knowledge'}
 function questionIdentity(x){const m=getQuestionMeta(x);return `${m.key}|${x.q}`}
-function getCorrectAnswer(x){if(x.type==='fill')return String(x.answer||'');if(x.type==='rearrange')return Array.isArray(x.answer)?x.answer.join(''):String(x.answer||'');return x.a&&x.c>=0?String(x.a[x.c]):''}
+function getCorrectAnswer(x){if(x.multi)return x.multi.map(i=>x.a[i]).join(' / ');if(x.type==='fill')return String(x.answer||'');if(x.type==='rearrange')return Array.isArray(x.answer)?x.answer.join(currentLevel==='Stage 9'?' → ':''):String(x.answer||'');return x.a&&x.c>=0?String(x.a[x.c]):''}
 function getTopicStat(key){const p=loadProgress();return p.topicStats[key]||{attempts:0,correct:0}}
 function recordQuestionResult(x,isCorrect,userAnswer){
   captureTeacherQuizAnswer(x,isCorrect,userAnswer);
-  if(currentLevel!=='Stage 7'||currentSubject!=='Science')return;
+  if(!['Stage 7','Stage 9'].includes(currentLevel)||currentSubject!=='Science')return;
   const p=loadProgress(),m=getQuestionMeta(x),key=m.key||m.topic,skill=classifyQuestionSkill(x),id=questionIdentity(x);
   p.topicStats[key]=p.topicStats[key]||{attempts:0,correct:0,topic:m.topic,category:m.category,code:m.code};p.topicStats[key].attempts++;if(isCorrect)p.topicStats[key].correct++;
   p.skillStats[skill]=p.skillStats[skill]||{attempts:0,correct:0};p.skillStats[skill].attempts++;if(isCorrect)p.skillStats[skill].correct++;
@@ -2863,7 +2894,7 @@ function startChapterReview(chapterId){
 function flattenStage7Questions(){const out=[];allStage7Topics().forEach(t=>(stage7ScienceQuestions[t.key]||[]).forEach(q=>out.push(Object.assign({},q,{_meta:{curriculum:t.curriculum,programme:t.programme,stage:t.stage,subject:t.subject,category:t.category,chapter:t.chapter,chapterId:t.chapterId,topic:t.topic,code:t.code,key:t.key}}))));return out}
 function seededDailyFive(){const all=flattenStage7Questions(),seed=Number(localDateKey().replace(/-/g,''));const p=loadProgress(),weakKeys=new Set(Object.entries(p.topicStats||{}).sort((a,b)=>((a[1].correct||0)/Math.max(1,a[1].attempts))-((b[1].correct||0)/Math.max(1,b[1].attempts))).slice(0,5).map(x=>x[0]));let preferred=all.filter(q=>weakKeys.has(q._meta.key));let pool=preferred.length>=5?preferred:all;const chosen=[],used=new Set();for(let i=0;i<pool.length&&chosen.length<5;i++){const idx=(seed*31+i*97)%pool.length;if(!used.has(idx)){used.add(idx);chosen.push(pool[idx])}}for(let i=0;chosen.length<5&&i<all.length;i++){const idx=(seed+i*53)%all.length;if(!chosen.some(q=>questionIdentity(q)===questionIdentity(all[idx])))chosen.push(all[idx])}return chosen}
 function startDailyChallenge(){currentLevel='Stage 7';currentProgram='Lower Secondary';currentSubject='Science';currentCategory='Mixed skills';currentCode='Daily';currentTopic="Today's Challenge";currentTopicKey='daily';quizMode='daily';quizOverride=seededDailyFive();resetQuizSession()}
-function startMistakeReview(encodedId){const id=decodeURIComponent(encodedId),p=loadProgress(),m=(p.mistakes||[]).find(x=>x.id===id);if(!m)return;const source=(stage7ScienceQuestions[m.meta.key]||[]).find(q=>`${m.meta.key}|${q.q}`===id);if(!source)return;currentLevel='Stage 7';currentSubject='Science';currentCategory=m.meta.category;currentCode=m.meta.code;currentTopic=m.meta.topic;currentTopicKey=m.meta.key;quizMode='mistake';quizOverride=[Object.assign({},source,{_meta:m.meta})];resetQuizSession()}
+function startMistakeReview(encodedId){const id=decodeURIComponent(encodedId),p=loadProgress(),m=(p.mistakes||[]).find(x=>x.id===id);if(!m)return;const source=((m.meta.stage==='Stage 9'?window.STAGE9_UNIT1_QUESTIONS:stage7ScienceQuestions)[m.meta.key]||[]).find(q=>`${m.meta.key}|${q.q}`===id);if(!source)return;currentLevel=m.meta.stage||'Stage 7';currentProgram='Lower Secondary';currentSubject='Science';currentCategory=m.meta.category;currentCode=m.meta.code;currentTopic=m.meta.topic;currentTopicKey=m.meta.key;quizMode='mistake';quizOverride=[Object.assign({},source,{_meta:m.meta})];resetQuizSession()}
 function showComingSoon(level){alert(level+' is coming soon. TopicalExamQuiz is focusing first on a strong Stage 7 Science experience.')}
 
 renderDashboard();
