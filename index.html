@@ -1792,13 +1792,13 @@ function openStage9Science(){
  const box=document.getElementById('unitList');box.innerHTML='';
  window.STAGE9_UNITS.forEach((title,i)=>{
   const unit=document.createElement('div');unit.className='unit';
-  const head=document.createElement('button');head.type='button';head.className='unit-head';head.innerHTML=`<span class="unit-title"><span>Unit ${i+1}</span><span>${escapeHtml(title)}</span></span><span>${i===0?'⌃':'Coming soon'}</span>`; unit.appendChild(head);
-  if(i===0){const body=document.createElement('div');body.className='unit-body';Object.entries(window.STAGE9_TOPICS).forEach(([key,[code,name]])=>{const b=document.createElement('button');b.type='button';b.className='lesson';b.innerHTML=`<span class="lesson-label"><span class="num">${code}</span><span>${escapeHtml(name)} · ${window.STAGE9_UNIT1_QUESTIONS[key].length} questions</span></span><span class="arrow">›</span>`;b.onclick=()=>openStage9Topic(code,name,key);body.appendChild(b)});unit.appendChild(body);head.onclick=()=>unit.classList.toggle('collapsed');}else{head.disabled=true;}box.appendChild(unit);
+  const head=document.createElement('button');head.type='button';head.className='unit-head';head.innerHTML=`<span class="unit-title"><span>Unit ${i+1}</span><span>${escapeHtml(title)}</span></span><span>⌃</span>`; unit.appendChild(head);
+  {const body=document.createElement('div');body.className='unit-body';Object.entries(window.STAGE9_TOPICS).filter(([key,[code]])=>Number(code.split('.')[0])===i+1).forEach(([key,[code,name]])=>{const b=document.createElement('button');b.type='button';b.className='lesson';b.innerHTML=`<span class="lesson-label"><span class="num">${code}</span><span>${escapeHtml(name)} · ${window.STAGE9_QUESTIONS[key].length} questions</span></span><span class="arrow">›</span>`;b.onclick=()=>openStage9Topic(code,name,key);body.appendChild(b)});unit.appendChild(body);head.onclick=()=>unit.classList.toggle('collapsed');}box.appendChild(unit);
  });showView('curriculumView');
 }
 function openStage9Topic(code,name,key){
- currentProgrammeKey='stage9';currentLevel='Stage 9';currentProgram='Lower Secondary';currentSubject='Science';currentCategory='Biology';currentChapterId='1';currentCode=code;currentTopic=name;currentTopicKey=key;
- openMixedPracticeParts(window.STAGE9_UNIT1_QUESTIONS[key]||[],'stage9',false);
+ currentProgrammeKey='stage9';currentLevel='Stage 9';currentProgram='Lower Secondary';currentSubject='Science';currentCategory=window.STAGE9_QUESTIONS[key]?.[0]?._meta.category||'Science';currentChapterId=String(code).split('.')[0];currentCode=code;currentTopic=name;currentTopicKey=key;
+ openMixedPracticeParts(window.STAGE9_QUESTIONS[key]||[],'stage9',false);
 }
 function openSubject(subject){
   const subjectCategories=getSubjectCategories(subject);
@@ -1948,11 +1948,12 @@ function renderQuestionPhoto(x){
   const card=document.createElement('div');
   card.className='question-photo-card';
   const img=document.createElement('img');
-  img.src=x.image;
+  img.src=x.localImage||x.image;
   img.alt=x.imageAlt||'Quiz illustration';
   img.loading='eager';
   img.referrerPolicy='no-referrer';
   img.onerror=function(){
+    if(x.localImage&&!img.dataset.remoteTried){img.dataset.remoteTried='1';img.src=x.image;return;}
     card.innerHTML=`<div class="question-photo-fallback"><div><div style="font-size:34px;margin-bottom:8px">📷</div>Photo prompt for ${currentTopic}</div></div>`;
   };
   const badge=document.createElement('div');
@@ -1976,8 +1977,8 @@ function genericQuestions(name){return [
 ]}
 function partProgressStorageKey(){return 'topicalExamQuizPartProgressV1'}
 function loadPartProgress(){try{return JSON.parse(localStorage.getItem(partProgressStorageKey())||'{}')}catch(e){return{}}}
-function savePartCompletion(topicKey,part,total,correct){try{const all=loadPartProgress();all[topicKey]=all[topicKey]||{};all[topicKey]['part'+part]={completed:true,total:total,correct:correct,score:total?Math.round(correct/total*100):0,updatedAt:Date.now()};localStorage.setItem(partProgressStorageKey(),JSON.stringify(all))}catch(e){}}
-function getPartStatus(topicKey,part){const all=loadPartProgress();return all[topicKey]&&all[topicKey]['part'+part]?all[topicKey]['part'+part]:null}
+function savePartCompletion(topicKey,part,total,correct){try{const all=loadPartProgress();all[topicKey]=all[topicKey]||{};all[topicKey][(topicKey.startsWith('stage9|')?'difficultyV1-':'part')+part]={completed:true,total:total,correct:correct,score:total?Math.round(correct/total*100):0,updatedAt:Date.now()};localStorage.setItem(partProgressStorageKey(),JSON.stringify(all))}catch(e){}}
+function getPartStatus(topicKey,part){const all=loadPartProgress();const k=(topicKey.startsWith('stage9|')?'difficultyV1-':'part')+part;return all[topicKey]?.[k]||null}
 function completedPartQuestionCount(topicKey){let n=0;for(let i=1;i<=3;i++){const s=getPartStatus(topicKey,i);if(s&&s.completed)n+=s.total||20}return n}
 function allThreePartsComplete(topicKey){return [1,2,3].every(i=>{const s=getPartStatus(topicKey,i);return !!(s&&s.completed)})}
 
@@ -2054,7 +2055,7 @@ function refreshContinueLearningCard(){
  if(title)title.textContent=(v.level||'Learning')+' · '+(v.subject||'')+' · '+(v.topic||'');
  if(detail){
   const isPart=Number.isInteger(v.part)&&v.part>0;
-  const partLabel=isPart?'Part '+v.part:'All three Parts completed — revisit your lesson or try Review';
+  const partLabel=isPart?practiceLabel(v.part,v.back==='stage9'):(v.back==='stage9'?'All three difficulty levels completed':'All three Parts completed')+' — revisit your lesson or try Review';
   const progress=v.session&&v.session.total>0?' · Question '+Math.min(v.session.total,Math.max(1,(v.session.answers||[]).length+1))+'/'+v.session.total:'';
   detail.textContent=partLabel+progress+' · Continue without selecting your curriculum and grade again.';
  }
@@ -2068,7 +2069,7 @@ function continueLearning(){
   else if(Number.isInteger(saved.hskIndex)&&Array.isArray(hskChapterOutlines[saved.level]))startHskChapterQuiz(saved.level,saved.hskIndex);
   else {goToTopicalExamQuizHome();return}
  }else if(saved.back==='stage9'){
-  if(!window.STAGE9_UNIT1_QUESTIONS[saved.key]){goToTopicalExamQuizHome();return}
+  if(!window.STAGE9_QUESTIONS[saved.key]){goToTopicalExamQuizHome();return}
   openStage9Topic(saved.code,saved.topic,saved.key);
  }else if(saved.back==='stage7'){
   if(!stage7ScienceQuestions[saved.key]){goToTopicalExamQuizHome();return}
@@ -2084,7 +2085,7 @@ function continueLearning(){
  const parts=currentPracticeParts;
  const incomplete=nextContinuePart(saved.key,parts);
  if(!incomplete){renderTopicParts();showView('topicPartsView');return}
- if(!part||part<1||part>3||getPartStatus(saved.key,part)?.completed)part=incomplete;
+ if(!part||part<1||part>3||(getPartStatus(saved.key,part)?.completed&&getPartStatus(saved.key,part)?.total===parts[part-1]?.length))part=incomplete;
  const qs=parts[part-1]||[];
  if(!qs.length){renderTopicParts();showView('topicPartsView');return}
  const snapshot=saved.session;
@@ -2137,7 +2138,7 @@ function mixQuestionsIntoThreeParts(source,stage7Layout=false){
  let offset=0;return sizes.map(size=>{const part=interleaved.slice(offset,offset+size);offset+=size;return part});
 }
 function openMixedPracticeParts(pool,backType,isSample){
- currentPracticePool=(pool||[]).map(q=>({...q}));currentPracticeParts=mixQuestionsIntoThreeParts(currentPracticePool,backType==='stage7');
+ currentPracticePool=(pool||[]).map(q=>({...q}));currentPracticeParts=backType==='stage9'?[1,2,3].map(p=>currentPracticePool.filter(q=>q.chapterPart===p).sort((a,b)=>a.position-b.position)):mixQuestionsIntoThreeParts(currentPracticePool,backType==='stage7');
  currentPracticeKey=currentTopicKey;currentPracticeBack=backType;currentPracticeSample=!!isSample;
  currentPartNumber=0;currentPartTopicKey='';currentPartBaseCode=currentCode;currentPartBaseTopic=currentTopic;
  quizOverride=null;quizMode='topic';renderTopicParts();showView('topicPartsView');
@@ -2159,8 +2160,10 @@ function backFromTopicParts(){
 }
 function topicPartQuestions(topicKey,part){
  if(topicKey===currentPracticeKey&&currentPracticeParts[part-1])return currentPracticeParts[part-1];
+ if(window.STAGE9_QUESTIONS[topicKey])return window.STAGE9_QUESTIONS[topicKey].filter(q=>q.chapterPart===part);
  return mixQuestionsIntoThreeParts(stage7ScienceQuestions[topicKey]||[],true)[part-1]||[];
 }
+function practiceLabel(part,stage9=currentPracticeBack==='stage9'){return stage9?(['Easy','Medium','Difficult'][part-1]||'Difficulty'):'Part '+part;}
 function renderTopicParts(){
  const key=currentTopicKey,base=key===currentPracticeKey?currentPracticePool:(stage7ScienceQuestions[key]||[]);
  const meta=currentPracticeBack==='stage7'?allStage7Topics().find(t=>t.key===key):null;
@@ -2173,10 +2176,10 @@ function renderTopicParts(){
  if(back)back.textContent=currentPracticeBack==='myanmar'?'← Back to topics':currentPracticeBack==='hsk-chapters'?'← Back to HSK lessons':currentPracticeBack==='chinese-levels'?'← Back to Chinese levels':'← Back to chapter';
  if(progressLabel)progressLabel.textContent=['stage7','stage9'].includes(currentPracticeBack)?'Subtopic progress':currentPracticeBack==='myanmar'?'Topic progress':'Lesson progress';
  if(title)title.textContent=currentPartBaseTopic||currentTopic;
- if(eye)eye.textContent=currentPracticeBack==='stage9'?`STAGE 9 · UNIT 1 · TOPIC ${currentPartBaseCode||currentCode}`:currentPracticeBack==='stage7'?`CHAPTER ${meta?meta.chapterId:(currentChapterId||'')} · TOPIC ${currentPartBaseCode||currentCode}`:
+ if(eye)eye.textContent=currentPracticeBack==='stage9'?`STAGE 9 · UNIT ${currentChapterId} · TOPIC ${currentPartBaseCode||currentCode}`:currentPracticeBack==='stage7'?`CHAPTER ${meta?meta.chapterId:(currentChapterId||'')} · TOPIC ${currentPartBaseCode||currentCode}`:
   currentPracticeBack==='myanmar'?`MYANMAR CURRICULUM · ${currentLevel} · ${currentSubject}`:
   `CHINESE LANGUAGE · ${currentLevel} · ${currentPartBaseCode||currentCode}`;
- if(desc)desc.textContent=currentPracticeSample?
+ if(desc)desc.textContent=currentPracticeBack==='stage9'?'Select Easy, Medium or Difficult. Each level mixes question formats according to your learning needs.':currentPracticeSample?
   'Sample question bank: practise in three short sessions with mixed question types. More lesson-specific questions are being prepared.':
   'Complete this lesson in three shorter practice sessions. Question types are mixed within each part.';
  if(txt)txt.textContent=`${completed} / ${total} questions completed`;
@@ -2186,7 +2189,7 @@ function renderTopicParts(){
    const st=getPartStatus(key,part),done=donePart(part);
    const label=qs.length?`Questions ${from}–${offset}`:'Questions being prepared';
    const status=done?`✓ Completed · ${st.correct}/${st.total}`:(qs.length?`${qs.length} questions`:'Coming soon');
-   return `<button type="button" class="topic-part-card" onclick="startTopicPart(${part})" ${qs.length?'':'disabled'}><span><strong>Part ${part}</strong><small>${label}</small></span><span class="topic-part-status ${done?'done':''}">${status} ›</span></button>`;
+   return `<button type="button" class="topic-part-card" onclick="startTopicPart(${part})" ${qs.length?'':'disabled'}><span><strong>${practiceLabel(part)}</strong><small>${currentPracticeBack==='stage9'?['Basic knowledge and understanding','Application and interpretation','Checkpoint-style challenges'][part-1]:label}</small></span><span class="topic-part-status ${done?'done':''}">${status} ›</span></button>`;
  }).join('')}
  const demo=document.getElementById('imageQuizTopicEntry');
  if(demo)demo.style.display=currentPracticeBack==='stage7'&&currentCode==='1.1'?'flex':'none';
@@ -2194,13 +2197,13 @@ function renderTopicParts(){
  const label=document.getElementById('topicReviewTitle'),sub=document.getElementById('topicReviewDescription');
  const unlocked=total>0&&[1,2,3].every(donePart);
  if(label)label.textContent=`Review ${currentPartBaseTopic||currentTopic}`;
- if(sub)sub.textContent='Mixed practice from all three parts.';
- if(btn){btn.disabled=!unlocked;btn.textContent=unlocked?'Review lesson':'Complete Parts 1–3';btn.onclick=startTopicReview}
+ if(sub)sub.textContent=currentPracticeBack==='stage9'?'Mixed practice from all three difficulty levels.':'Mixed practice from all three parts.';
+ if(btn){btn.disabled=!unlocked;btn.textContent=unlocked?'Review lesson':currentPracticeBack==='stage9'?'Complete all difficulty levels':'Complete Parts 1–3';btn.onclick=startTopicReview}
  if(card)card.classList.toggle('locked',!unlocked);
 }
 function startTopicPart(part){
  const key=currentTopicKey,qs=topicPartQuestions(key,part);
- if(!qs.length){alert('Questions for this part are being prepared.');return}
+ if(!qs.length){alert(currentPracticeBack==='stage9'?'Questions for this difficulty level are being prepared.':'Questions for this part are being prepared.');return}
  currentPartNumber=part;currentPartTopicKey=key;
  currentCode=currentPartBaseCode||currentCode;currentTopic=currentPartBaseTopic||currentTopic;
  quizMode='part';quizOverride=qs.map(q=>({...q}));resetQuizSession();
@@ -2209,7 +2212,7 @@ function startTopicPart(part){
 function startTopicReview(){
  const key=currentTopicKey,parts=[1,2,3].map(part=>topicPartQuestions(key,part));
  const unlocked=parts.every((qs,i)=>{const st=getPartStatus(key,i+1);return qs.length>0&&!!(st&&st.completed&&st.total===qs.length)});
- if(!unlocked){alert('Complete Parts 1, 2 and 3 first.');return}
+ if(!unlocked){alert(currentPracticeBack==='stage9'?'Complete Easy, Medium and Difficult first.':'Complete Parts 1, 2 and 3 first.');return}
  const pool=parts.flat();if(!pool.length)return;
  currentPartNumber=0;currentPartTopicKey=key;currentCode=currentPartBaseCode||currentCode;
  currentTopic=currentPartBaseTopic||currentTopic;quizMode='topic-review';
@@ -2222,16 +2225,16 @@ function getQs(){if(quizOverride)return quizOverride;const base=(currentLevel===
 function renderQuestion(){
   answered=false;
   const qs=getQs(),x=qs[qIndex];
-  document.getElementById('quizTitle').textContent=currentTopic+(quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':'');
+  document.getElementById('quizTitle').textContent=currentTopic+(quizMode==='part'?` · ${practiceLabel(currentPartNumber,currentLevel==='Stage 9'&&currentSubject==='Science')}`:quizMode==='topic-review'?' · Topic Review':'');
   const meta=getQuestionMeta(x);
-  document.getElementById('quizCrumb').textContent=currentSubject==='Chinese Language'?`${chinesePath==='HSK'?'HSK':'Singapore Syllabus'} · ${currentLevel} · ${activeHskChapter!==null&&chinesePath==='HSK'?currentCode:'Mixed Practice'}`:(quizMode==='topic'||quizMode==='part'||quizMode==='topic-review')?`${currentSubject} · ${currentCategory} · ${currentCode}${quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':''}`:`${meta.category} · ${meta.topic}`;
+  document.getElementById('quizCrumb').textContent=currentSubject==='Chinese Language'?`${chinesePath==='HSK'?'HSK':'Singapore Syllabus'} · ${currentLevel} · ${activeHskChapter!==null&&chinesePath==='HSK'?currentCode:'Mixed Practice'}`:(quizMode==='topic'||quizMode==='part'||quizMode==='topic-review')?`${currentSubject} · ${currentCategory} · ${currentCode}${quizMode==='part'?` · ${practiceLabel(currentPartNumber,currentLevel==='Stage 9'&&currentSubject==='Science')}`:quizMode==='topic-review'?' · Topic Review':''}`:`${meta.category} · ${meta.topic}`;
   const skill=currentSubject==='Chinese Language'?(x.photoQuiz?'Picture Question':x.type==='fill'?'Fill in the Blank':x.type==='rearrange'?'Sentence Rearrangement':'Multiple Choice'):classifyQuestionSkill(x); const skillBadge=document.getElementById('qSkillBadge'); if(skillBadge)skillBadge.textContent=skill;
   document.getElementById('mastery').textContent='Mastery '+mastery;
   document.getElementById('questionNo').textContent=(x.photoQuiz?'PHOTO QUESTION • ':'')+`QUESTION ${qIndex+1} OF ${qs.length}`;const qp=document.getElementById('quizSessionProgressBar');if(qp)qp.style.width=Math.round(((qIndex+1)/Math.max(1,qs.length))*100)+'%';
   renderQuestionPhoto(x);
   document.getElementById('questionText').textContent=x.q;
   const quizBack=document.getElementById('quizBackBtn');
-  if(quizBack)quizBack.textContent=(quizMode==='part'||quizMode==='topic-review')?'← Back to Parts 1–3':currentProgram==='Myanmar Curriculum'?'← Back to Myanmar topics':currentSubject==='Chinese Language'?`← Back to ${chinesePath==='HSK'&&activeHskChapter!==null?'HSK chapters':chinesePath==='HSK'?'HSK levels':'Singapore levels'}`:'← Back to topics';
+  if(quizBack)quizBack.textContent=(quizMode==='part'||quizMode==='topic-review')?(currentLevel==='Stage 9'?'← Back to difficulty levels':'← Back to Parts 1–3'):currentProgram==='Myanmar Curriculum'?'← Back to Myanmar topics':currentSubject==='Chinese Language'?`← Back to ${chinesePath==='HSK'&&activeHskChapter!==null?'HSK chapters':chinesePath==='HSK'?'HSK levels':'Singapore levels'}`:'← Back to topics';
   const ans=document.getElementById('answers');
   ans.innerHTML='';
   if(x.type==='fill'){
@@ -2367,7 +2370,7 @@ function checkFillAnswer(){
   const x=getQs()[qIndex];
   const expectedAnswers=String(x.answer||'').split(/\s*(?:\/|;|\bor\b)\s*/i).map(normalizeAnswer).filter(Boolean);
   const actual=normalizeAnswer(typed);
-  const isCorrect=expectedAnswers.includes(actual);
+  const isCorrect=expectedAnswers.includes(actual)||normalizeAnswer(x.answer)===actual;
   answered=true;
   input.disabled=true;
   const checkBtn=document.querySelector('.fill-check-btn');
@@ -2442,7 +2445,7 @@ function saveStudentActivity(report){
 }
 function buildStudyReport(){
   const total=getQs().length,pct=total?Math.round(correctCount/total*100):0;
-  const grp=chapterGroups().find(g=>String(g.id)===String(currentChapterId||String(currentCode||'').split('.')[0]));const report={id:generateReportId(),student:currentStudentName(),studentId:ensureStudentId(),level:currentLevel,program:currentProgram,subject:currentSubject,category:currentCategory,chapterId:grp?String(grp.id):String(currentChapterId||String(currentCode||'').split('.')[0]||''),chapter:grp?grp.title:'',activityType:quizMode==='chapter'?'Chapter review':quizMode==='part'?`Part ${currentPartNumber}`:quizMode==='topic-review'?'Topic review':'Topic practice',part:quizMode==='part'?currentPartNumber:null,topic:currentTopic,code:currentCode,startAt:quizStartedAt,endAt:quizEndedAt||Date.now(),seconds:quizElapsedSeconds,total,correct:correctCount,score:pct,correctionsReviewed:sessionReviewedIds.size,correctionsTotal:sessionWrongIds.size,mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,masteryAfter:topicMasteryNow(),answers:sessionQuizAnswers.map(a=>({...a})),createdAt:Date.now()};
+  const grp=chapterGroups().find(g=>String(g.id)===String(currentChapterId||String(currentCode||'').split('.')[0]));const report={id:generateReportId(),student:currentStudentName(),studentId:ensureStudentId(),level:currentLevel,program:currentProgram,subject:currentSubject,category:currentCategory,chapterId:grp?String(grp.id):String(currentChapterId||String(currentCode||'').split('.')[0]||''),chapter:currentLevel==='Stage 9'?(window.STAGE9_UNITS[Number(currentChapterId)-1]||''):grp?grp.title:'',activityType:quizMode==='chapter'?'Chapter review':quizMode==='part'?practiceLabel(currentPartNumber,currentLevel==='Stage 9'&&currentSubject==='Science'):quizMode==='topic-review'?'Topic review':'Topic practice',part:quizMode==='part'?currentPartNumber:null,topic:currentTopic,code:currentCode,startAt:quizStartedAt,endAt:quizEndedAt||Date.now(),seconds:quizElapsedSeconds,total,correct:correctCount,score:pct,correctionsReviewed:sessionReviewedIds.size,correctionsTotal:sessionWrongIds.size,mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,masteryAfter:topicMasteryNow(),answers:sessionQuizAnswers.map(a=>({...a})),createdAt:Date.now()};
   saveStudyReport(report);saveStudentActivity(report);lastStudyReport=report;return report;
 }
 function reportShareText(r){
@@ -2462,7 +2465,7 @@ function copyVerifiedReport(){const r=lastStudyReport||buildStudyReport(),text=r
 function shareSummary(){openVerifiedStudyReport()}
 function openReportFromHash(){const m=location.hash.match(/^#study-report=([^&]+)/);if(!m)return;const id=decodeURIComponent(m[1]),r=loadStudyReport(id);if(r){lastStudyReport=r;renderVerifiedStudyReport(r);document.getElementById('verifiedStudyReportModal').classList.add('show')}else if(location.protocol!=='file:'){alert('This study record is not available on this device yet. Connect TopicalExamQuiz to a database for cross-device verification.')}}
 window.addEventListener('hashchange',openReportFromHash);
-function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);if(quizMode==='part'&&currentPartTopicKey&&currentPartNumber)savePartCompletion(currentPartTopicKey,currentPartNumber,total,correctCount);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+(quizMode==='part'?` · Part ${currentPartNumber}`:quizMode==='topic-review'?' · Topic Review':'')+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView');completeContinueQuizSession()}
+function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);if(quizMode==='part'&&currentPartTopicKey&&currentPartNumber)savePartCompletion(currentPartTopicKey,currentPartNumber,total,correctCount);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+(quizMode==='part'?` · ${practiceLabel(currentPartNumber,currentLevel==='Stage 9'&&currentSubject==='Science')}`:quizMode==='topic-review'?' · Topic Review':'')+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount*10;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView');completeContinueQuizSession()}
 function restartQuiz(){if(quizMode==='part'||quizMode==='topic-review'){resetQuizSession();return}if(currentProgram==='Myanmar Curriculum'){launchMyanmarQuiz(currentLevel,currentSubject,activeMyanmarTopic);return}if(currentSubject==='Chinese Language'&&quizOverride){resetQuizSession();return}if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{sessionQuizAnswers=[];qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;showView('quizView');renderQuestion()}}
 function showReview(){showView('reviewView')}
 document.querySelectorAll('.stage').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stage').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
@@ -2575,10 +2578,10 @@ function teacherActivityTable(rows){
 }
 
 /* Detailed teacher mistake review: browser-only demo, no cross-device sync. */
-function isLocalQuizImagePath(src){return /^https:\/\/pub-fe82210b20a742d49fc246361eb0add7\.r2\.dev\/TEQ_Cam_Y9_Science_Chapter1_Img\/[A-Za-z0-9._-]+\.png$/.test(src)||/^quiz-images\/[A-Za-z0-9._-]+\.webp$/.test(src)||/^hsk3-lesson1-images\/HSK3_L1_\d{2}\.jpg$/.test(src)||/^hsk3-lesson-images\/HSK3_L[2-6]_\d{2}\.jpg$/.test(src)}
+function isLocalQuizImagePath(src){return /^stage9-images\/TEQ_Cam_Y9_Science_Chapter[1-9]_Img\/[A-Za-z0-9._-]+\.png$/.test(src)||/^https:\/\/pub-fe82210b20a742d49fc246361eb0add7\.r2\.dev\/TEQ_Cam_Y9_Science_Chapter[1-9]_Img\/[A-Za-z0-9._-]+\.png$/.test(src)||/^quiz-images\/[A-Za-z0-9._-]+\.webp$/.test(src)||/^hsk3-lesson1-images\/HSK3_L1_\d{2}\.jpg$/.test(src)||/^hsk3-lesson-images\/HSK3_L[2-6]_\d{2}\.jpg$/.test(src)}
 function captureTeacherQuizAnswer(x,isCorrect,userAnswer){
   if(!Array.isArray(sessionQuizAnswers))sessionQuizAnswers=[];
-  const image=String(x&&x.image||'');
+  const image=String(x&&(x.localImage||x.image)||'');
   sessionQuizAnswers.push({
     questionNumber:qIndex+1,
     question:String(x&&x.q||''),
@@ -2894,7 +2897,7 @@ function startChapterReview(chapterId){
 function flattenStage7Questions(){const out=[];allStage7Topics().forEach(t=>(stage7ScienceQuestions[t.key]||[]).forEach(q=>out.push(Object.assign({},q,{_meta:{curriculum:t.curriculum,programme:t.programme,stage:t.stage,subject:t.subject,category:t.category,chapter:t.chapter,chapterId:t.chapterId,topic:t.topic,code:t.code,key:t.key}}))));return out}
 function seededDailyFive(){const all=flattenStage7Questions(),seed=Number(localDateKey().replace(/-/g,''));const p=loadProgress(),weakKeys=new Set(Object.entries(p.topicStats||{}).sort((a,b)=>((a[1].correct||0)/Math.max(1,a[1].attempts))-((b[1].correct||0)/Math.max(1,b[1].attempts))).slice(0,5).map(x=>x[0]));let preferred=all.filter(q=>weakKeys.has(q._meta.key));let pool=preferred.length>=5?preferred:all;const chosen=[],used=new Set();for(let i=0;i<pool.length&&chosen.length<5;i++){const idx=(seed*31+i*97)%pool.length;if(!used.has(idx)){used.add(idx);chosen.push(pool[idx])}}for(let i=0;chosen.length<5&&i<all.length;i++){const idx=(seed+i*53)%all.length;if(!chosen.some(q=>questionIdentity(q)===questionIdentity(all[idx])))chosen.push(all[idx])}return chosen}
 function startDailyChallenge(){currentLevel='Stage 7';currentProgram='Lower Secondary';currentSubject='Science';currentCategory='Mixed skills';currentCode='Daily';currentTopic="Today's Challenge";currentTopicKey='daily';quizMode='daily';quizOverride=seededDailyFive();resetQuizSession()}
-function startMistakeReview(encodedId){const id=decodeURIComponent(encodedId),p=loadProgress(),m=(p.mistakes||[]).find(x=>x.id===id);if(!m)return;const source=((m.meta.stage==='Stage 9'?window.STAGE9_UNIT1_QUESTIONS:stage7ScienceQuestions)[m.meta.key]||[]).find(q=>`${m.meta.key}|${q.q}`===id);if(!source)return;currentLevel=m.meta.stage||'Stage 7';currentProgram='Lower Secondary';currentSubject='Science';currentCategory=m.meta.category;currentCode=m.meta.code;currentTopic=m.meta.topic;currentTopicKey=m.meta.key;quizMode='mistake';quizOverride=[Object.assign({},source,{_meta:m.meta})];resetQuizSession()}
+function startMistakeReview(encodedId){const id=decodeURIComponent(encodedId),p=loadProgress(),m=(p.mistakes||[]).find(x=>x.id===id);if(!m)return;const source=((m.meta.stage==='Stage 9'?window.STAGE9_QUESTIONS:stage7ScienceQuestions)[m.meta.key]||[]).find(q=>`${m.meta.key}|${q.q}`===id);if(!source)return;currentLevel=m.meta.stage||'Stage 7';currentProgram='Lower Secondary';currentSubject='Science';currentCategory=m.meta.category;currentCode=m.meta.code;currentTopic=m.meta.topic;currentTopicKey=m.meta.key;quizMode='mistake';quizOverride=[Object.assign({},source,{_meta:m.meta})];resetQuizSession()}
 function showComingSoon(level){alert(level+' is coming soon. TopicalExamQuiz is focusing first on a strong Stage 7 Science experience.')}
 
 renderDashboard();
