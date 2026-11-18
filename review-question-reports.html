@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Question reports · Topical Exam Quiz</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#f0f5fc;color:#173353;font:1rem/1.55 system-ui,sans-serif}
+    main{max-width:850px;margin:0 auto;padding:2rem 1rem 4rem}
+    h1{margin:.75rem 0 .25rem;font-size:clamp(1.8rem,5vw,2.6rem)}
+    p{margin:.45rem 0}
+    a{color:#1756a4}
+    form,.report{padding:1.1rem;border-radius:12px;background:#fff;border:1px solid #d3dfed;margin:1rem 0}
+    .controls{display:flex;gap:.6rem;align-items:end;flex-wrap:wrap}
+    label{display:block;font-weight:700;font-size:.9rem}
+    input,select,button{font:inherit;border-radius:7px;min-height:42px;padding:.45rem .7rem}
+    input,select{background:#fff;color:#173353;border:1px solid #aebfd5}
+    input{width:min(100%,24rem)}
+    .access{flex:1 1 17rem}
+    button{background:#164e91;color:white;border:1px solid #164e91;cursor:pointer}
+    button:disabled{opacity:.6;cursor:wait}
+    .report h2{font-size:1.1rem;margin:0 0 .35rem}
+    .report p,.report li{overflow-wrap:anywhere;white-space:pre-wrap}
+    .meta{color:#52677e;font-size:.88rem}
+    .report-actions{margin-top:.85rem}
+    #inboxStatus[data-error=true]{color:#a92134}
+  </style>
+  <script src="review-question-reports.js" defer></script>
+</head>
+<body>
+  <main>
+    <a href="./">← Topical Exam Quiz</a>
+    <h1>Question reports</h1>
+    <p>Review reports from students across all quizzes.</p>
+    <form id="reviewForm">
+      <div class="controls">
+        <div class="access">
+          <label for="reviewToken">Review access key</label>
+          <input id="reviewToken" type="password" required autocomplete="off">
+        </div>
+        <div>
+          <label for="reviewStatus">Report status</label>
+          <select id="reviewStatus"><option value="open">Open</option><option value="resolved">Resolved</option></select>
+        </div>
+        <button type="submit">Load reports</button>
+      </div>
+    </form>
+    <p id="inboxStatus" role="status" aria-live="polite"></p>
+    <section id="reportList" aria-label="Question reports"></section>
+    <button id="loadMore" type="button" hidden>Load more</button>
+  </main>
+</body>
+</html>

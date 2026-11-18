@@ -1,0 +1,28 @@
+.quiz-tools { display: flex; justify-content: flex-end; margin-top: .75rem; }
+.quiz-tools .report-question-btn { margin: 0; min-height: 44px; padding: .45rem .65rem; }
+#reportModal {
+  width: min(540px, calc(100% - 28px));
+  max-height: calc(100dvh - 28px);
+  padding: 1.4rem;
+  border: 1px solid #d3dfed;
+  border-radius: 18px;
+  box-shadow: 0 18px 60px #12223842;
+  color: #173353;
+  background: #fff;
+  overflow: auto;
+}
+#reportModal::backdrop { background: #10213890; }
+#reportModal h2 { margin: 0 0 .5rem; }
+#reportModal p { margin: .4rem 0; }
+#reportQuestionPreview { font-size: .9rem; padding: .75rem; background: #f1f6fc; border-radius: 8px; overflow-wrap: anywhere; }
+#questionReportForm fieldset { border: 0; padding: 0; margin: 1rem 0 0; min-width: 0; }
+#questionReportForm label { display: block; font-weight: 700; margin: .65rem 0 .3rem; }
+#questionReportForm select, #questionReportForm textarea {
+  width: 100%; border: 1px solid #b5c6da; padding: .65rem; border-radius: 8px;
+  background: white; color: #173353; font: inherit; box-sizing: border-box;
+}
+#questionReportForm textarea { min-height: 85px; resize: vertical; }
+.report-form-actions { display: flex; flex-wrap: wrap; gap: .65rem; justify-content: flex-end; margin-top: .85rem; }
+#reportStatus { min-height: 1.3em; margin-top: .7rem; font-size: .9rem; }
+#reportStatus[data-state=success] { color: #146337; }
+#reportStatus[data-state=error] { color: #a92134; }
