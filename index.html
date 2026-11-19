@@ -843,7 +843,14 @@ input, textarea, select {
 @media(max-width:620px){.continue-learning-card{flex-direction:column;align-items:stretch;padding:17px}.continue-learning-button{width:100%}.continue-learning-copy h2{font-size:19px}}
 </style>
 <link rel="stylesheet" href="question-reports.css"/>
-</head>
+<style>
+#englishReading{border:1px solid #cadbd6;border-radius:12px;background:#f4faf7;color:#182f30;margin:1rem 0}
+#englishReading summary{cursor:pointer;padding:.85rem 1rem;font-weight:700}
+#englishPassageTitle{font-weight:500;margin-left:.5em}
+#englishLines{margin:0 1rem 1rem;padding:0;list-style:none;line-height:1.65;font-size:1rem}
+#englishLines li{display:grid;grid-template-columns:2rem 1fr;align-items:baseline;padding:.22rem 0}
+#englishLines .line-no{font-variant-numeric:tabular-nums;color:#46635c;font-size:.88em}
+</style></head>
 <body>
 <header class="top platform-top">
 <a aria-label="TopicalExamQuiz home" class="brand edubridge-brand logo-home-link" href="#" onclick="goToTopicalExamQuizHome();return false"><span class="topicalexamquiz-wordmark"><span>Topical</span><span>Exam</span><span>Quiz</span></span></a>
@@ -1102,7 +1109,7 @@ input, textarea, select {
 <button class="back back-left" id="quizBackBtn" onclick="backFromQuiz()" type="button">← Back to topics</button>
 <div class="quiz-card">
 <div class="quiz-head"><div><strong id="quizTitle">Topic quiz</strong><div class="crumb" id="quizCrumb"></div><span class="q-skill-badge" id="qSkillBadge">Knowledge</span></div><strong id="mastery">Mastery 40</strong></div>
-<div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="quiz-session-progress"><span id="quizSessionProgressBar" style="width:0%"></span></div><div aria-live="polite" class="question-media" id="questionMedia"></div><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-tools"><button type="button" class="report-question-btn" id="reportQuestionButton">⚑ Report this question</button></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
+<div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="quiz-session-progress"><span id="quizSessionProgressBar" style="width:0%"></span></div><div aria-live="polite" class="question-media" id="questionMedia"></div><details id="englishReading" hidden><summary>Read passage <span id="englishPassageTitle"></span></summary><ol id="englishLines"></ol></details><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-tools"><button type="button" class="report-question-btn" id="reportQuestionButton">⚑ Report this question</button></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
 </div>
 <div class="note">
 
@@ -2005,7 +2012,7 @@ function nextContinuePart(key,parts){
 }
 function continueQuestionFingerprint(qs){
  let h=2166136261;
- (qs||[]).forEach(x=>{const t=String(x.q||'')+'|'+(x.a||[]).join('|')+'|'+(x.words||[]).join('|');for(let i=0;i<t.length;i++){h=Math.imul(h^t.charCodeAt(i),16777619)}});
+ (qs||[]).forEach(x=>{const t=String(originalPrompt(x)||'')+'|'+(x.a||[]).join('|')+'|'+(x.words||[]).join('|');for(let i=0;i<t.length;i++){h=Math.imul(h^t.charCodeAt(i),16777619)}});
  return String(h>>>0);
 }
 function rememberLearningLocation(){
@@ -2223,6 +2230,33 @@ let sessionQuizAnswers=[];
 function resetQuizSession(){sessionQuizAnswers=[];qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;const beforeStat=(currentTopicKey&&currentTopicKey!=='daily')?getTopicStat(currentTopicKey):{attempts:0,correct:0};sessionTopicMasteryBefore=beforeStat.attempts?Math.round(beforeStat.correct/beforeStat.attempts*100):null;if(!quizTrackingReady){document.addEventListener('visibilitychange',function(){if(document.getElementById('quizView')&&document.getElementById('quizView').classList.contains('active')&&document.hidden){tabSwitchCount++}});quizTrackingReady=true}showView('quizView');renderQuestion()}
 function quickQuiz(subject,category,code,name){currentSubject=subject;currentCategory=category;startQuiz(code,name)}
 function getQs(){if(quizOverride)return quizOverride;const base=(currentLevel==='Stage 7'&&currentSubject==='Science'&&stage7ScienceQuestions[currentTopicKey])?stage7ScienceQuestions[currentTopicKey]:(topicQuestions[currentTopic]||genericQuestions(currentTopic));return addPhotoToQuestions(base,currentTopic)}
+function passageFor(question){
+  return question.passageId && window.STAGE9_ENGLISH.passages[question.passageId];
+}
+function originalPrompt(question){
+  const passage=passageFor(question);
+  return passage ? passage.title+'\n'+passage.lines.join(' ')+'\n\n'+question.q : question.q;
+}
+function renderEnglishPassage(question){
+  const panel=document.getElementById('englishReading');
+  const passage=passageFor(question);
+  panel.hidden=!passage;
+  if(!passage){panel.open=false;delete panel.dataset.passage;return;}
+  if(panel.dataset.passage===question.passageId)return;
+  panel.dataset.passage=question.passageId;
+  panel.open=false;
+  document.getElementById('englishPassageTitle').textContent=passage.title;
+  const lines=passage.lines.map((text,i)=>{
+    const row=document.createElement('li'),number=document.createElement('span'),words=document.createElement('span');
+    number.className='line-no';
+    number.setAttribute('aria-label','Line '+(i+1));
+    number.textContent=i+1;
+    words.textContent=text;
+    row.append(number,words);
+    return row;
+  });
+  document.getElementById('englishLines').replaceChildren(...lines);
+}
 function renderQuestion(){
   answered=false;
   const qs=getQs(),x=qs[qIndex];
@@ -2235,6 +2269,7 @@ function renderQuestion(){
   renderQuestionPhoto(x);
   const questionText=document.getElementById('questionText');
   questionText.style.whiteSpace=currentSubject==='English'?'pre-line':'';
+  renderEnglishPassage(x);
   questionText.textContent=x.q;
   const quizBack=document.getElementById('quizBackBtn');
   if(quizBack)quizBack.textContent=(quizMode==='part'||quizMode==='topic-review')?(currentLevel==='Stage 9'?'← Back to difficulty levels':'← Back to Parts 1–3'):currentProgram==='Myanmar Curriculum'?'← Back to Myanmar topics':currentSubject==='Chinese Language'?`← Back to ${chinesePath==='HSK'&&activeHskChapter!==null?'HSK chapters':chinesePath==='HSK'?'HSK levels':'Singapore levels'}`:'← Back to topics';
@@ -2802,7 +2837,7 @@ function localDateKey(d=new Date()){const y=d.getFullYear(),m=String(d.getMonth(
 function getStreak(p=loadProgress()){const days=[...new Set(p.practiceDays||[])].sort().reverse();if(!days.length)return 0;let streak=0,cursor=new Date();for(let offset=0;offset<2;offset++){const k=localDateKey(cursor);if(days.includes(k))break;cursor.setDate(cursor.getDate()-1)}for(;;){const k=localDateKey(cursor);if(!days.includes(k))break;streak++;cursor.setDate(cursor.getDate()-1)}return streak}
 function getQuestionMeta(x){return x&&x._meta?x._meta:{curriculum:currentSubject==='Chinese Language'?'Chinese Language':currentProgram==='Myanmar Curriculum'?'Myanmar Curriculum':'Cambridge-aligned',programme:currentProgram,stage:currentLevel,subject:currentSubject,category:currentCategory,topic:currentTopic,code:currentCode,key:currentTopicKey||currentTopic}}
 function classifyQuestionSkill(x){const q=String((x&&x.q)||'').toLowerCase();if(x&&x.photoQuiz)return 'Exam Style';if(/investigat|variable|hypothesis|fair test|method|experiment|conclusion/.test(q))return 'Scientific Investigation';if(/graph|table|chart|data|calculate|calculation|measure|reading/.test(q))return 'Data Analysis';if(/why|explain|compare|difference|describe how|reason/.test(q))return 'Understanding';if(/if |scenario|predict|most likely|what happens|would happen|use this/.test(q))return 'Application';return 'Knowledge'}
-function questionIdentity(x){const m=getQuestionMeta(x);return `${m.key}|${x.q}`}
+function questionIdentity(x){const m=getQuestionMeta(x);return `${m.key}|${originalPrompt(x)}`}
 function getCorrectAnswer(x){if(x.multi)return x.multi.map(i=>x.a[i]).join(' / ');if(x.type==='fill')return String(x.answer||'');if(x.type==='rearrange')return Array.isArray(x.answer)?x.answer.join(currentLevel==='Stage 9'?' → ':''):String(x.answer||'');return x.a&&x.c>=0?String(x.a[x.c]):''}
 function getTopicStat(key){const p=loadProgress();return p.topicStats[key]||{attempts:0,correct:0}}
 function recordQuestionResult(x,isCorrect,userAnswer){
@@ -2995,6 +3030,12 @@ function createDemoTeacherAccount(){
 }
 // Legacy signup entry points should use the new student form.
 function demoSignup(){createDemoStudentAccount()}
+</script>
+<script>
+if(location.hash==='#unit1-reading'){
+  openStage9Topic('1','Checkpoint Skills Practice','stage9|english|unit1|checkpoint','English');
+  startTopicPart(2);
+}
 </script>
 </body>
 </html>

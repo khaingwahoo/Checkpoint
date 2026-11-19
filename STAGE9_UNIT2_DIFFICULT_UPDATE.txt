@@ -1,0 +1,11 @@
+TEQ Stage 9 Science – Unit 2 difficult expansion
+60 new original difficult questions, 15 per subtopic. Stage 9 total: 2,543.
+Existing questions and their per-difficulty positions are unchanged. New items are appended to Part 3 (Difficult).
+
+For Cloudflare: upload the four supplied DIF PNGs into the existing folder
+cambridgeninescience/TEQ_Cam_Y9_Science_Chapter2_Img/
+Do not nest that folder inside itself. Excel already includes the public URLs.
+
+For the website: upload/replace stage9-science-unit1-questions.js (legacy filename, all nine units) and add the four new PNGs to stage9-images/TEQ_Cam_Y9_Science_Chapter2_Img/.
+The complete website ZIP includes the previous site, updated question bank and local copies of these images.
+No live deployment or public R2 upload was performed. Browser behavior and live image accessibility require testing.

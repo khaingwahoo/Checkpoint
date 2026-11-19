@@ -1,0 +1,9 @@
+TEQ STAGE 9 SCIENCE — UNIT 3 DIFFICULT UPDATE
+Uses the previous Unit 2 Difficult website package as its base.
+Stage 9 total: 2,633 questions (90 new in Unit 3).
+Unit 3 total: 444 questions: 162 Easy, 175 Medium, 107 Difficult.
+15 new Difficult questions per subtopic, with 79 MCQs and 11 numerical fill blanks.
+All six subtopics remain active. All prior Stage 9 question entries and other site source files are retained.
+To deploy: extract this ZIP, replace stage9-science-unit1-questions.js in the same repository location, and upload the six DIF PNGs in the included stage9-images/TEQ_Cam_Y9_Science_Chapter3_Img/ folder. If deploying from an older package, use the full updated website contents, preserving repository settings.
+Cloudflare: upload the same six PNGs to cambridgeninescience/TEQ_Cam_Y9_Science_Chapter3_Img/. Public URLs are in Excel; the website contains local copies too.
+Validation: JS syntax and data counts/positions checked; full browser testing and Cloudflare public accessibility not verified. No live deployment was performed.

@@ -1,0 +1,6 @@
+TEQ STAGE 9 SCIENCE — UNIT 4 DIFFICULT UPDATE
+Uses previous cumulative Unit 3 Difficult website as base.
+Stage 9 total: 2,693 questions (60 new in Unit 4). Unit 4: 306 questions: 126 Easy, 107 Medium, 73 Difficult. 15 new Difficult questions each in 4.1–4.4. Original constructed illustrative data, not clinical results.
+To deploy from Unit 3: replace stage9-science-unit1-questions.js and upload four new DIF PNG files in stage9-images/TEQ_Cam_Y9_Science_Chapter4_Img/. If deploying from an earlier version, use the full current source package. Preserve all directory paths.
+Cloudflare: upload the same four PNGs into cambridgeninescience/TEQ_Cam_Y9_Science_Chapter4_Img/. Existing image references retained. The website contains local copies.
+Validation: JS syntax, counts and positions checked. Full browser and Cloudflare public accessibility unverified. No live deployment performed.

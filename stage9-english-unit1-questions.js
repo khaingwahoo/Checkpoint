@@ -1,4 +1,4 @@
-// Cambridge Stage 9 English, Unit 1. Source: TEQ_Year9_English_Unit1_350.xlsx.
+// Cambridge Stage 9 English, Unit 1.
 window.STAGE9_ENGLISH = {
   "units": [
     "Going underground"
@@ -7713,8 +7713,8 @@ window.STAGE9_ENGLISH = {
     "stage9|english|unit1|checkpoint": [
       {
         "id": "stage9-english-unit1-51",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nWhat first challenges Nell’s understanding of her father’s words?",
-        "e": "The key already turning contradicts her assumption before the photograph appears.",
+        "q": "What first challenges Nell’s understanding of her father’s words?",
+        "e": "The key already turning contradicts her assumption before the photograph appears. See line 1.",
         "chapterPart": 2,
         "position": 1,
         "_meta": {
@@ -7735,12 +7735,13 @@ window.STAGE9_ENGLISH = {
           "The caretaker calls her by name.",
           "The locker is in the wrong station."
         ],
-        "c": 1
+        "c": 1,
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-52",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nWhy use the past perfect in “had pressed”?",
-        "e": "The completed earlier action supplies the basis for Nell’s expectation.",
+        "q": "Why use the past perfect in “had pressed”?",
+        "e": "The completed earlier action supplies the basis for Nell’s expectation. See lines 1–2.",
         "chapterPart": 2,
         "position": 2,
         "_meta": {
@@ -7761,12 +7762,13 @@ window.STAGE9_ENGLISH = {
           "To show the gift is repeated daily",
           "To make the gift seem imaginary"
         ],
-        "c": 1
+        "c": 1,
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-53",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nWhat does “only one” come to suggest most strongly?",
-        "e": "The paired faces and the later word “left” invite an interpretation about loss.",
+        "q": "What does “only one” come to suggest most strongly?",
+        "e": "The paired faces and the later word “left” invite an interpretation about loss. See lines 3–7.",
         "chapterPart": 3,
         "position": 1,
         "_meta": {
@@ -7787,12 +7789,13 @@ window.STAGE9_ENGLISH = {
           "Only one photograph was ever printed.",
           "The locker holds only one object by law."
         ],
-        "c": 0
+        "c": 0,
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-54",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nWhich detail most strongly suggests private grief?",
-        "e": "The selective gesture follows the sight of two boys and precedes the remark about loss.",
+        "q": "Which detail most strongly suggests private grief?",
+        "e": "The selective gesture follows the sight of two boys and precedes the remark about loss. See lines 6–7.",
         "chapterPart": 3,
         "position": 2,
         "_meta": {
@@ -7813,12 +7816,13 @@ window.STAGE9_ENGLISH = {
           "The brass material",
           "The station location"
         ],
-        "c": 0
+        "c": 0,
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-55",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nLanguage focus — Suppose the caretaker said “Only one … left” as he covered the face. What would the pause before “left” add?",
-        "e": "The pause falls just before the word that hints at a loss. Covering the face gives the hesitation emotional weight.",
+        "q": "Language focus — Suppose the caretaker said “Only one … left” as he covered the face. What would the pause before “left” add?",
+        "e": "The pause falls just before the word that hints at a loss. Covering the face gives the hesitation emotional weight. See line 7.",
         "chapterPart": 3,
         "position": 3,
         "_meta": {
@@ -7839,12 +7843,13 @@ window.STAGE9_ENGLISH = {
           "It would suggest that finishing the thought costs him an effort.",
           "It would signal that Nell interrupted to ask about the photograph."
         ],
-        "c": 2
+        "c": 2,
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-56",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nWhich ending would preserve the restraint of the final sentence?",
-        "e": "Waiting lets the gesture carry the emotion without forcing disclosure.",
+        "q": "Which ending would preserve the restraint of the final sentence?",
+        "e": "Waiting lets the gesture carry the emotion without forcing disclosure. See lines 7–9.",
         "chapterPart": 3,
         "position": 4,
         "_meta": {
@@ -7865,12 +7870,13 @@ window.STAGE9_ENGLISH = {
           "She waited beside him until he lowered his hand.",
           "She announced that the whole mystery was solved."
         ],
-        "c": 2
+        "c": 2,
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-57",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nCopy the single verb that shows the father applied pressure when giving the key: ____.",
-        "e": "Pressed suggests deliberate physical contact.",
+        "q": "Copy the single verb that shows the father applied pressure when giving the key: ____.",
+        "e": "Pressed suggests deliberate physical contact. See line 2.",
         "chapterPart": 2,
         "position": 3,
         "_meta": {
@@ -7886,12 +7892,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "pressed"
+        "answer": "pressed",
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-58",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nCopy the two words after “question” that turn size into a measure of emotional tact: ____.",
-        "e": "Nell feels that any ordinary question might intrude.",
+        "q": "Copy the two words after “question” that turn size into a measure of emotional tact: ____.",
+        "e": "Nell feels that any ordinary question might intrude. See line 9.",
         "chapterPart": 2,
         "position": 4,
         "_meta": {
@@ -7907,12 +7914,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "small enough"
+        "answer": "small enough",
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-59",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nOrder the events by story time.",
-        "e": "The flashback occurs earliest in story time.",
+        "q": "Order the events by story time.",
+        "e": "The flashback occurs earliest in story time. See lines 1–9.",
         "chapterPart": 3,
         "position": 5,
         "_meta": {
@@ -7939,12 +7947,13 @@ window.STAGE9_ENGLISH = {
           "Nell discovers another key in use.",
           "The caretaker shields a face.",
           "Nell pockets her key."
-        ]
+        ],
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-60",
-        "q": "The spare key\nUnder the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock. Yesterday he had pressed a brass key into her palm. “There’s only one,” he had said. She had understood that to mean one key. Now the caretaker lifted out a dented lunch tin. Inside lay a photograph of two boys, their faces almost touching. He covered one face with his thumb. “Only one left,” he said. Nell put her key back in her pocket. For once, she could think of no question small enough to ask.\n\nBuild the interpretation beginning with What.",
-        "e": "The key initially seems at stake, but the photograph redirects attention.",
+        "q": "Build the interpretation beginning with What.",
+        "e": "The key initially seems at stake, but the photograph redirects attention. See lines 1–7.",
         "chapterPart": 3,
         "position": 6,
         "_meta": {
@@ -7971,12 +7980,13 @@ window.STAGE9_ENGLISH = {
           "as a puzzle about possession",
           "becomes a question",
           "about loss."
-        ]
+        ],
+        "passageId": "U1-P01"
       },
       {
         "id": "stage9-english-unit1-61",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nWhich expectation shapes the first night?",
-        "e": "Gold letters and the extra charge turn silence into a purchased promise.",
+        "q": "Which expectation shapes the first night?",
+        "e": "Gold letters and the extra charge turn silence into a purchased promise. See lines 1–4.",
         "chapterPart": 2,
         "position": 5,
         "_meta": {
@@ -7997,12 +8007,13 @@ window.STAGE9_ENGLISH = {
           "The owner will serve breakfast at midnight.",
           "Paying a premium should guarantee literal silence."
         ],
-        "c": 3
+        "c": 3,
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-62",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nWhat does repeating “no” do?",
-        "e": "The list isolates the surviving sound.",
+        "q": "What does repeating “no” do?",
+        "e": "The list isolates the surviving sound. See lines 2–3.",
         "chapterPart": 2,
         "position": 6,
         "_meta": {
@@ -8023,12 +8034,13 @@ window.STAGE9_ENGLISH = {
           "Shows the narrator misses each individual sound equally",
           "Suggests the owner has hidden a clock"
         ],
-        "c": 1
+        "c": 1,
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-63",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nLanguage focus — An editor changes the first night’s description to “The drip kept a ledger. By midnight it had entered another hour of lost sleep.” What do the linked images add?",
-        "e": "“Ledger” and “entered” sustain a bookkeeping comparison. The cost recorded here is the guest’s lost sleep.",
+        "q": "Language focus — An editor changes the first night’s description to “The drip kept a ledger. By midnight it had entered another hour of lost sleep.” What do the linked images add?",
+        "e": "“Ledger” and “entered” sustain a bookkeeping comparison. The cost recorded here is the guest’s lost sleep. See lines 3–4.",
         "chapterPart": 3,
         "position": 7,
         "_meta": {
@@ -8049,12 +8061,13 @@ window.STAGE9_ENGLISH = {
           "The water seems reassuring because its intervals are predictable.",
           "Each drop seems to record another small cost to the guest."
         ],
-        "c": 3
+        "c": 3,
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-64",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nWhat is gained by repeating “same” after breakfast?",
-        "e": "The external sound stays constant while the response changes.",
+        "q": "What is gained by repeating “same” after breakfast?",
+        "e": "The external sound stays constant while the response changes. See lines 5–7.",
         "chapterPart": 3,
         "position": 8,
         "_meta": {
@@ -8075,12 +8088,13 @@ window.STAGE9_ENGLISH = {
           "It isolates perception as the thing that changed.",
           "It shows the guest counted all night again."
         ],
-        "c": 2
+        "c": 2,
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-65",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nWhich conclusion is most precise?",
-        "e": "The last sentence separates a factual objection from satisfaction.",
+        "q": "Which conclusion is most precise?",
+        "e": "The last sentence separates a factual objection from satisfaction. See line 8.",
         "chapterPart": 3,
         "position": 9,
         "_meta": {
@@ -8101,12 +8115,13 @@ window.STAGE9_ENGLISH = {
           "The guest regrets drinking the water.",
           "The guest now believes the room was literally silent."
         ],
-        "c": 0
+        "c": 0,
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-66",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nLanguage focus — Which comparison best fits the guest’s changed attitude on the second night while keeping the sound itself the same?",
-        "e": "A familiar clock suggests a steady sound the guest can sleep through. The change belongs to the listener.",
+        "q": "Language focus — Which comparison best fits the guest’s changed attitude on the second night while keeping the sound itself the same?",
+        "e": "A familiar clock suggests a steady sound the guest can sleep through. The change belongs to the listener. See lines 6–8.",
         "chapterPart": 3,
         "position": 10,
         "_meta": {
@@ -8127,12 +8142,13 @@ window.STAGE9_ENGLISH = {
           "The drip kept time like a familiar clock beside my bed.",
           "The drip struck like a hammer against the inside of my skull."
         ],
-        "c": 2
+        "c": 2,
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-67",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nCopy the adjective that makes the drip sound wilfully persistent: ____.",
-        "e": "Obstinate usually describes someone refusing to give way.",
+        "q": "Copy the adjective that makes the drip sound wilfully persistent: ____.",
+        "e": "Obstinate usually describes someone refusing to give way. See line 3.",
         "chapterPart": 2,
         "position": 7,
         "_meta": {
@@ -8148,12 +8164,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "obstinate"
+        "answer": "obstinate",
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-68",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nCopy the single conjunction that allows the final reservation and the new satisfaction to coexist: ____.",
-        "e": "Though introduces a concession.",
+        "q": "Copy the single conjunction that allows the final reservation and the new satisfaction to coexist: ____.",
+        "e": "Though introduces a concession. See line 8.",
         "chapterPart": 2,
         "position": 8,
         "_meta": {
@@ -8169,12 +8186,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "though"
+        "answer": "though",
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-69",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nOrder the stages of the guest’s reassessment.",
-        "e": "The breakfast conversation accounts for the second-night change.",
+        "q": "Order the stages of the guest’s reassessment.",
+        "e": "The breakfast conversation accounts for the second-night change. See lines 1–8.",
         "chapterPart": 3,
         "position": 11,
         "_meta": {
@@ -8201,12 +8219,13 @@ window.STAGE9_ENGLISH = {
           "Counting magnifies the irritation.",
           "Breakfast gives the sound a purpose.",
           "The unchanged sound becomes bearable."
-        ]
+        ],
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-70",
-        "q": "A quiet room\nAt the hill hostel I paid extra for silence. The brochure promised it in gold letters. Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales. It did have a slow, obstinate drip. By midnight I had counted more drops than I cared to admit. At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.” On the second night I heard the same drip at the same interval. I slept before the tenth drop. The brochure still seemed inaccurate, though I no longer wanted my money back.\n\nBuild a sentence beginning with Had.",
-        "e": "The counterfactual shows why the unchanged interval matters.",
+        "q": "Build a sentence beginning with Had.",
+        "e": "The counterfactual shows why the unchanged interval matters. See lines 5–8.",
         "chapterPart": 3,
         "position": 12,
         "_meta": {
@@ -8233,12 +8252,13 @@ window.STAGE9_ENGLISH = {
           "the reader might have credited",
           "the guest’s better sleep",
           "to a repair."
-        ]
+        ],
+        "passageId": "U1-P02"
       },
       {
         "id": "stage9-english-unit1-71",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nWhat makes Kit’s first assurance doubtful?",
-        "e": "Keeping the lamp makes the transfer of the card ineffective.",
+        "q": "What makes Kit’s first assurance doubtful?",
+        "e": "Keeping the lamp makes the transfer of the card ineffective. See lines 2–4.",
         "chapterPart": 2,
         "position": 9,
         "_meta": {
@@ -8259,12 +8279,13 @@ window.STAGE9_ENGLISH = {
           "He refuses to let an audience watch.",
           "He has memorised the words on the card."
         ],
-        "c": 0
+        "c": 0,
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-72",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nWhy can the audience hear irony in the rule about the light?",
-        "e": "Ada now holds the reader’s card and so qualifies for the light.",
+        "q": "Why can the audience hear irony in the rule about the light?",
+        "e": "Ada now holds the reader’s card and so qualifies for the light. See lines 4–6.",
         "chapterPart": 2,
         "position": 10,
         "_meta": {
@@ -8285,12 +8306,13 @@ window.STAGE9_ENGLISH = {
           "Kit admits that the rule is a joke.",
           "The tunnel has plenty of daylight."
         ],
-        "c": 1
+        "c": 1,
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-73",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nWhich staging would best preserve the ambiguity of the laugh?",
-        "e": "The script records a sound without assigning a motive or revealing its source.",
+        "q": "Which staging would best preserve the ambiguity of the laugh?",
+        "e": "The script records a sound without assigning a motive or revealing its source. See line 7.",
         "chapterPart": 3,
         "position": 13,
         "_meta": {
@@ -8311,12 +8333,13 @@ window.STAGE9_ENGLISH = {
           "A chorus pointing and shouting at Kit",
           "Ada laughing before asking for light"
         ],
-        "c": 1
+        "c": 1,
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-74",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nWhich moment best shows Kit rethinking his position?",
-        "e": "He attends to who now occupies the reader’s role immediately before moving the lamp.",
+        "q": "Which moment best shows Kit rethinking his position?",
+        "e": "He attends to who now occupies the reader’s role immediately before moving the lamp. See lines 7–8.",
         "chapterPart": 3,
         "position": 14,
         "_meta": {
@@ -8337,12 +8360,13 @@ window.STAGE9_ENGLISH = {
           "He looks at the card in Ada’s hand.",
           "Ada asks her first question."
         ],
-        "c": 2
+        "c": 2,
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-75",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nWhy put the lamp between them?",
-        "e": "Placement resolves the practical obstacle while leaving the relationship open.",
+        "q": "Why put the lamp between them?",
+        "e": "Placement resolves the practical obstacle while leaving the relationship open. See lines 4–9.",
         "chapterPart": 3,
         "position": 15,
         "_meta": {
@@ -8363,12 +8387,13 @@ window.STAGE9_ENGLISH = {
           "It makes Ada read in complete darkness.",
           "It proves Kit gives up all authority permanently."
         ],
-        "c": 0
+        "c": 0,
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-76",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nHow does repetition shape the ending?",
-        "e": "Ada can now deliver the words herself.",
+        "q": "How does repetition shape the ending?",
+        "e": "Ada can now deliver the words herself. See lines 2 and 9.",
         "chapterPart": 3,
         "position": 16,
         "_meta": {
@@ -8389,12 +8414,13 @@ window.STAGE9_ENGLISH = {
           "The final line cancels the opening promise.",
           "A principle becomes something the audience actually sees enacted."
         ],
-        "c": 3
+        "c": 3,
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-77",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nCopy the verb that explicitly marks Kit’s retention of control during the first handover: ____.",
-        "e": "Giving the card is counterbalanced by keeping the lamp.",
+        "q": "Copy the verb that explicitly marks Kit’s retention of control during the first handover: ____.",
+        "e": "Giving the card is counterbalanced by keeping the lamp. See line 4.",
         "chapterPart": 2,
         "position": 11,
         "_meta": {
@@ -8410,12 +8436,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "keeps"
+        "answer": "keeps",
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-78",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nComplete in the past perfect using hand. By the time Kit moved the lamp, he ____ Ada the card.",
-        "e": "The transfer is complete before the later action.",
+        "q": "Complete in the past perfect using hand. By the time Kit moved the lamp, he ____ Ada the card.",
+        "e": "The transfer is complete before the later action. See lines 4 and 8.",
         "chapterPart": 2,
         "position": 12,
         "_meta": {
@@ -8431,12 +8458,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "had handed"
+        "answer": "had handed",
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-79",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nOrder the shifts in control.",
-        "e": "Each physical change alters who can speak as reader.",
+        "q": "Order the shifts in control.",
+        "e": "Each physical change alters who can speak as reader. See lines 2–9.",
         "chapterPart": 3,
         "position": 17,
         "_meta": {
@@ -8463,12 +8491,13 @@ window.STAGE9_ENGLISH = {
           "Ada receives a role she cannot yet perform.",
           "Kit places the necessary resource within reach.",
           "Ada voices the rule herself."
-        ]
+        ],
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-80",
-        "q": "The rehearsal\n[A storage tunnel. Ada holds a lamp. Kit reads from a card.] KIT: Everybody gets a turn. ADA: Including me? KIT: Everybody. [He hands her the card but keeps the lamp. In the dark she cannot read.] ADA: Could I have the light as well? KIT: The light stays with the reader. [A pause. Someone at the back laughs. Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.] ADA [reading]: Everybody gets a turn.\n\nLanguage focus — Arrange the analysis of Ada’s second question. Begin with “Although”.",
-        "e": "The opening clause establishes Ada’s practical need. The main clause explains her polite delivery, and the final clauses reveal the challenge underneath it.",
+        "q": "Language focus — Arrange the analysis of Ada’s second question. Begin with “Although”.",
+        "e": "The opening clause establishes Ada’s practical need. The main clause explains her polite delivery, and the final clauses reveal the challenge underneath it. See lines 4–6.",
         "chapterPart": 3,
         "position": 18,
         "_meta": {
@@ -8495,12 +8524,13 @@ window.STAGE9_ENGLISH = {
           "its question mark keeps it sounding like a request,",
           "even as it exposes",
           "the contradiction in Kit’s rule."
-        ]
+        ],
+        "passageId": "U1-P03"
       },
       {
         "id": "stage9-english-unit1-81",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nWhich claim do the figures alone support?",
-        "e": "Subtraction measures extra entries. Neither identity nor residence was recorded.",
+        "q": "Which claim do the figures alone support?",
+        "e": "Subtraction measures extra entries. Neither identity nor residence was recorded. See lines 1–3.",
         "chapterPart": 2,
         "position": 13,
         "_meta": {
@@ -8521,12 +8551,13 @@ window.STAGE9_ENGLISH = {
           "Every pass was used four times.",
           "There were 120 more admissions in May."
         ],
-        "c": 3
+        "c": 3,
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-82",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nWhy introduce Mr Vale immediately after the poster?",
-        "e": "Repeat scans show how counts can rise without an equivalent rise in individuals.",
+        "q": "Why introduce Mr Vale immediately after the poster?",
+        "e": "Repeat scans show how counts can rise without an equivalent rise in individuals. See lines 2–4.",
         "chapterPart": 2,
         "position": 14,
         "_meta": {
@@ -8547,12 +8578,13 @@ window.STAGE9_ENGLISH = {
           "His visits explain the entire increase.",
           "He proves no new visitors arrived."
         ],
-        "c": 0
+        "c": 0,
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-83",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nWhat is the effect of “faithfully”?",
-        "e": "The instrument does exactly the limited job of counting entries.",
+        "q": "What is the effect of “faithfully”?",
+        "e": "The instrument does exactly the limited job of counting entries. See line 4.",
         "chapterPart": 3,
         "position": 19,
         "_meta": {
@@ -8573,12 +8605,13 @@ window.STAGE9_ENGLISH = {
           "It suggests the machine identifies everyone reliably.",
           "It locates the error in the interpretation of an accurate count."
         ],
-        "c": 3
+        "c": 3,
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-84",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nWhy keep the numbers after removing the poster?",
-        "e": "Admissions remain informative even when a claim about distinct people fails.",
+        "q": "Why keep the numbers after removing the poster?",
+        "e": "Admissions remain informative even when a claim about distinct people fails. See lines 1–6.",
         "chapterPart": 3,
         "position": 20,
         "_meta": {
@@ -8599,12 +8632,13 @@ window.STAGE9_ENGLISH = {
           "They allow the manager to exclude Mr Vale’s entries.",
           "They identify the home addresses of visitors."
         ],
-        "c": 0
+        "c": 0,
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-85",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nWhat does the final proposed column preserve?",
-        "e": "Silence cannot establish whether a visit was the first.",
+        "q": "What does the final proposed column preserve?",
+        "e": "Silence cannot establish whether a visit was the first. See lines 7–8.",
         "chapterPart": 3,
         "position": 21,
         "_meta": {
@@ -8625,12 +8659,13 @@ window.STAGE9_ENGLISH = {
           "A distinction between an unanswered question and a negative answer",
           "The exact number of unique guests"
         ],
-        "c": 2
+        "c": 2,
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-86",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nWhich title would best capture the writer’s argument?",
-        "e": "The issue is the unit counted and how to interpret it.",
+        "q": "Which title would best capture the writer’s argument?",
+        "e": "The issue is the unit counted and how to interpret it. See lines 1–8.",
         "chapterPart": 3,
         "position": 22,
         "_meta": {
@@ -8651,12 +8686,13 @@ window.STAGE9_ENGLISH = {
           "What Does One Entry Count?",
           "The Machine That Lost 120 Tickets"
         ],
-        "c": 2
+        "c": 2,
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-87",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nCopy the single adjective describing the question beside the numbers: ____.",
-        "e": "The modest question contrasts with the poster’s confident announcement.",
+        "q": "Copy the single adjective describing the question beside the numbers: ____.",
+        "e": "The modest question contrasts with the poster’s confident announcement. See line 6.",
         "chapterPart": 2,
         "position": 15,
         "_meta": {
@@ -8672,12 +8708,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "smaller"
+        "answer": "smaller",
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-88",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nComplete using the present perfect of come. How many different people ____ so far this month?",
-        "e": "The plural subject takes have, and the unfinished period connects past visits to now.",
+        "q": "Complete using the present perfect of come. How many different people ____ so far this month?",
+        "e": "The plural subject takes have, and the unfinished period connects past visits to now. See lines 6–7.",
         "chapterPart": 2,
         "position": 16,
         "_meta": {
@@ -8693,12 +8730,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "have come"
+        "answer": "have come",
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-89",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nOrder the reasoning from observation to improved reporting.",
-        "e": "The revised method follows the discovery of a gap in the original claim.",
+        "q": "Order the reasoning from observation to improved reporting.",
+        "e": "The revised method follows the discovery of a gap in the original claim. See lines 1–8.",
         "chapterPart": 3,
         "position": 23,
         "_meta": {
@@ -8725,12 +8763,13 @@ window.STAGE9_ENGLISH = {
           "A repeat pass exposes a possible double count of people.",
           "The manager narrows the claim.",
           "A new column will preserve unknown responses."
-        ]
+        ],
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-90",
-        "q": "Counting visitors\nOur underground gallery counted 480 admissions in April and 600 in May. A poster announced: “A hundred and twenty new neighbours discovered us!” At the desk, I watched Mr Vale scan his pass for the fourth time that week. The machine counted faithfully. It had never promised to recognise a face. Our manager took down the poster but kept both numbers in the report. Beside them she wrote a smaller question: how many different people had come? Next month we will count visits as before and invite guests to say whether this is their first. Some will walk past the question. That blank deserves a column too.\n\nBuild a sentence beginning with Counting.",
-        "e": "The sentence distinguishes two meanings of an increase.",
+        "q": "Build a sentence beginning with Counting.",
+        "e": "The sentence distinguishes two meanings of an increase. See lines 1–4.",
         "chapterPart": 3,
         "position": 24,
         "_meta": {
@@ -8757,12 +8796,13 @@ window.STAGE9_ENGLISH = {
           "can show a rise in visits",
           "without establishing a rise",
           "in the number of individual visitors."
-        ]
+        ],
+        "passageId": "U1-P04"
       },
       {
         "id": "stage9-english-unit1-91",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nWhat tension is established by Mum’s first request?",
-        "e": "Scrubbing restores the appearance while removing the flood line.",
+        "q": "What tension is established by Mum’s first request?",
+        "e": "Scrubbing restores the appearance while removing the flood line. See lines 1–3.",
         "chapterPart": 2,
         "position": 17,
         "_meta": {
@@ -8783,12 +8823,13 @@ window.STAGE9_ENGLISH = {
           "Opening the shop will cause more flooding.",
           "The child wants the shop to remain permanently closed."
         ],
-        "c": 0
+        "c": 0,
+        "passageId": "U1-P05"
       },
       {
         "id": "stage9-english-unit1-92",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nWhich detail best suggests deliberate preservation by the narrator?",
-        "e": "The small concealed section is deliberately excluded from the scrubbing.",
+        "q": "Which detail best suggests deliberate preservation by the narrator?",
+        "e": "The small concealed section is deliberately excluded from the scrubbing. See lines 3 and 6.",
         "chapterPart": 2,
         "position": 18,
         "_meta": {
@@ -8809,12 +8850,13 @@ window.STAGE9_ENGLISH = {
           "The customer leans across the counter.",
           "A hand-width is left behind the bin."
         ],
-        "c": 3
+        "c": 3,
+        "passageId": "U1-P05"
       },
       {
         "id": "stage9-english-unit1-93",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nWhy does the customer’s question come after the cleaning?",
-        "e": "The white wall no longer answers the question until the hidden mark appears.",
+        "q": "Why does the customer’s question come after the cleaning?",
+        "e": "The white wall no longer answers the question until the hidden mark appears. See lines 3–6.",
         "chapterPart": 3,
         "position": 25,
         "_meta": {
@@ -8835,12 +8877,13 @@ window.STAGE9_ENGLISH = {
           "It reveals who first put the bin there.",
           "It makes the loss of evidence immediately matter."
         ],
-        "c": 3
+        "c": 3,
+        "passageId": "U1-P05"
       },
       {
         "id": "stage9-english-unit1-94",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nWhat does the moment with the bucket invite us to expect?",
-        "e": "The bucket recalls her original instruction and briefly delays the reversal.",
+        "q": "What does the moment with the bucket invite us to expect?",
+        "e": "The bucket recalls her original instruction and briefly delays the reversal. See lines 2 and 7–8.",
         "chapterPart": 3,
         "position": 26,
         "_meta": {
@@ -8861,12 +8904,13 @@ window.STAGE9_ENGLISH = {
           "Mum is about to rescue the customer.",
           "Mum may insist that the remaining stripe be removed."
         ],
-        "c": 3
+        "c": 3,
+        "passageId": "U1-P05"
       },
       {
         "id": "stage9-english-unit1-95",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nWhy end with shopping-list handwriting?",
-        "e": "The ordinary script unites daily life with the choice to preserve a record.",
+        "q": "Why end with shopping-list handwriting?",
+        "e": "The ordinary script unites daily life with the choice to preserve a record. See line 9.",
         "chapterPart": 3,
         "position": 27,
         "_meta": {
@@ -8887,12 +8931,13 @@ window.STAGE9_ENGLISH = {
           "It presents an act of remembrance through a familiar everyday habit.",
           "It proves the date was copied from a shopping list."
         ],
-        "c": 2
+        "c": 2,
+        "passageId": "U1-P05"
       },
       {
         "id": "stage9-english-unit1-96",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nLanguage focus — Suppose the customer said “It was really so high!” instead of asking the question in the passage. What would Mum’s glance at the white wall then follow?",
-        "e": "The revised line declares surprise. The original question leaves room for Mum or the narrator to confirm the height.",
+        "q": "Language focus — Suppose the customer said “It was really so high!” instead of asking the question in the passage. What would Mum’s glance at the white wall then follow?",
+        "e": "The revised line declares surprise. The original question leaves room for Mum or the narrator to confirm the height. See lines 4–5.",
         "chapterPart": 3,
         "position": 28,
         "_meta": {
@@ -8913,12 +8958,13 @@ window.STAGE9_ENGLISH = {
           "A request for a precise measurement of the highest water mark",
           "A suggestion that the pale stripe pre-dated the flood"
         ],
-        "c": 0
+        "c": 0,
+        "passageId": "U1-P05"
       },
       {
         "id": "stage9-english-unit1-97",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nCopy two words that show how briefly Mum hesitates. Complete: For ____ she held the bucket out.",
-        "e": "The short pause lets the reader anticipate an instruction that never comes.",
+        "q": "Copy two words that show how briefly Mum hesitates. Complete: For ____ she held the bucket out.",
+        "e": "The short pause lets the reader anticipate an instruction that never comes. See lines 7–8.",
         "chapterPart": 2,
         "position": 19,
         "_meta": {
@@ -8934,12 +8980,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "a moment"
+        "answer": "a moment",
+        "passageId": "U1-P05"
       },
       {
         "id": "stage9-english-unit1-98",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nComplete the passive sentence with the past participle of leave. A narrow stripe had been ____ behind the bin.",
-        "e": "Had been left places the focus on surviving evidence.",
+        "q": "Complete the passive sentence with the past participle of leave. A narrow stripe had been ____ behind the bin.",
+        "e": "Had been left places the focus on surviving evidence. See lines 3 and 6.",
         "chapterPart": 2,
         "position": 20,
         "_meta": {
@@ -8955,12 +9002,13 @@ window.STAGE9_ENGLISH = {
           "key": "stage9|english|unit1|checkpoint"
         },
         "type": "fill",
-        "answer": "left"
+        "answer": "left",
+        "passageId": "U1-P05"
       },
       {
         "id": "stage9-english-unit1-99",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nOrder the transformations of the mark.",
-        "e": "Each action changes how the stripe can be seen or understood.",
+        "q": "Order the transformations of the mark.",
+        "e": "Each action changes how the stripe can be seen or understood. See lines 1–9.",
         "chapterPart": 3,
         "position": 29,
         "_meta": {
@@ -8987,12 +9035,13 @@ window.STAGE9_ENGLISH = {
           "Cleaning reduces it to a hidden fragment.",
           "Moving the bin makes the fragment visible.",
           "A written date turns it into a record."
-        ]
+        ],
+        "passageId": "U1-P05"
       },
       {
         "id": "stage9-english-unit1-100",
-        "q": "The chalk line\nWhen the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder. Mum gave me a bucket. “Make it look like a shop again.” I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin. At noon a customer leaned across the counter. “Was it really so high?” Mum glanced at the newly white wall. I slid the bin aside. For a moment she held the bucket out to me. Then she put it down and fetched a pencil. On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting.\n\nBuild the interpretation beginning with By setting.",
-        "e": "The two objects dramatise a change of intention.",
+        "q": "Build the interpretation beginning with By setting.",
+        "e": "The two objects dramatise a change of intention. See lines 7–9.",
         "chapterPart": 3,
         "position": 30,
         "_meta": {
@@ -9019,8 +9068,79 @@ window.STAGE9_ENGLISH = {
           "before picking up the pencil,",
           "Mum exchanges the means of erasure",
           "for the means of recording."
-        ]
+        ],
+        "passageId": "U1-P05"
       }
     ]
+  },
+  "passages": {
+    "U1-P01": {
+      "title": "The spare key",
+      "lines": [
+        "Under the station, Nell found the locker exactly as her father had described it, except for the key already turning in its lock.",
+        "Yesterday he had pressed a brass key into her palm.",
+        "“There’s only one,” he had said.",
+        "She had understood that to mean one key.",
+        "Now the caretaker lifted out a dented lunch tin.",
+        "Inside lay a photograph of two boys, their faces almost touching.",
+        "He covered one face with his thumb. “Only one left,” he said.",
+        "Nell put her key back in her pocket.",
+        "For once, she could think of no question small enough to ask."
+      ]
+    },
+    "U1-P02": {
+      "title": "A quiet room",
+      "lines": [
+        "At the hill hostel I paid extra for silence. The brochure promised it in gold letters.",
+        "Below ground my room had no traffic noise, no ticking clock, no neighbour practising scales.",
+        "It did have a slow, obstinate drip.",
+        "By midnight I had counted more drops than I cared to admit.",
+        "At breakfast the owner handed me a glass. “Spring water,” she said. “You heard tomorrow’s tea arriving.”",
+        "On the second night I heard the same drip at the same interval.",
+        "I slept before the tenth drop.",
+        "The brochure still seemed inaccurate, though I no longer wanted my money back."
+      ]
+    },
+    "U1-P03": {
+      "title": "The rehearsal",
+      "lines": [
+        "[A storage tunnel. Ada holds a lamp. Kit reads from a card.]",
+        "KIT: Everybody gets a turn.",
+        "ADA: Including me? KIT: Everybody.",
+        "[He hands her the card but keeps the lamp. In the dark she cannot read.]",
+        "ADA: Could I have the light as well?",
+        "KIT: The light stays with the reader.",
+        "[A pause. Someone at the back laughs.",
+        "Kit looks at the card in Ada’s hand. He sets the lamp on the floor between them.]",
+        "ADA [reading]: Everybody gets a turn."
+      ]
+    },
+    "U1-P04": {
+      "title": "Counting visitors",
+      "lines": [
+        "Our underground gallery counted 480 admissions in April and 600 in May.",
+        "A poster announced: “A hundred and twenty new neighbours discovered us!”",
+        "At the desk, I watched Mr Vale scan his pass for the fourth time that week.",
+        "The machine counted faithfully. It had never promised to recognise a face.",
+        "Our manager took down the poster but kept both numbers in the report.",
+        "Beside them she wrote a smaller question: how many different people had come?",
+        "Next month we will count visits as before and invite guests to say whether this is their first.",
+        "Some will walk past the question. That blank deserves a column too."
+      ]
+    },
+    "U1-P05": {
+      "title": "The chalk line",
+      "lines": [
+        "When the floodwater withdrew, a pale stripe crossed the bakery wall at my shoulder.",
+        "Mum gave me a bucket. “Make it look like a shop again.”",
+        "I scrubbed from the door to the till, leaving a stripe the width of my hand behind the flour bin.",
+        "At noon a customer leaned across the counter. “Was it really so high?”",
+        "Mum glanced at the newly white wall.",
+        "I slid the bin aside.",
+        "For a moment she held the bucket out to me.",
+        "Then she put it down and fetched a pencil.",
+        "On the dry plaster beside the stripe she wrote the date in her careful, ordinary shopping-list handwriting."
+      ]
+    }
   }
 };

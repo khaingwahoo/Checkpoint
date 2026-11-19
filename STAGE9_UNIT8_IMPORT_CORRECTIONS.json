@@ -1,0 +1,137 @@
+[
+  {
+    "topic": "8.1",
+    "part": 3,
+    "position": 7,
+    "original": "Which trial produces the smallest final volume of gas?",
+    "revised_question": "Which trial has collected the smallest volume of gas at 60 s?",
+    "options": [
+      "Trial A",
+      "Trial B",
+      "Trial C",
+      "Trial D"
+    ],
+    "answer": "B",
+    "explanation": "Trial B has collected 30 cm³ at 60 s, less than any other trial."
+  },
+  {
+    "topic": "8.1",
+    "part": 3,
+    "position": 8,
+    "original": "Which two trials end with the same total gas volume?",
+    "revised_question": "Which two trials have collected the same volume of gas by 60 s?",
+    "options": [
+      "A and B",
+      "A and C",
+      "B and D",
+      "C and D"
+    ],
+    "answer": "B",
+    "explanation": "Trials A and C have both collected 36 cm³ at 60 s."
+  },
+  {
+    "topic": "8.1",
+    "part": 3,
+    "position": 9,
+    "original": "Which trial takes the longest time to stop producing gas?",
+    "revised_question": "Which trial is still producing additional gas between 50 s and 60 s?",
+    "options": [
+      "Trial A",
+      "Trial B",
+      "Trial C",
+      "Trial D"
+    ],
+    "answer": "C",
+    "explanation": "Trial C rises from 34 to 36 cm³, while the other three curves are horizontal in this interval."
+  },
+  {
+    "topic": "8.1",
+    "part": 3,
+    "position": 10,
+    "original": "A student wants the highest total amount of gas, regardless of speed. Which trial should be chosen?",
+    "revised_question": "A student wants the greatest amount of gas collected within 60 s. Which trial should be chosen?",
+    "options": [
+      "Trial A",
+      "Trial B",
+      "Trial C",
+      "Trial D"
+    ],
+    "answer": "D",
+    "explanation": "Trial D has collected the largest volume at 60 s: 40 cm³."
+  },
+  {
+    "topic": "8.1",
+    "part": 3,
+    "position": 11,
+    "original": "If Trial C and Trial A have the same final volume but Trial C reaches it sooner, what is the best conclusion?",
+    "revised_question": "Two other trials produce the same final gas volume. Trial X reaches this volume before Trial Y. What can be concluded?",
+    "options": [
+      "Trial X has a greater average rate over the full reaction",
+      "Trial X must have used less reactant",
+      "Trial Y must have been hotter throughout",
+      "Trial Y must have produced a different gas"
+    ],
+    "answer": "A",
+    "explanation": "For the same volume, a shorter reaction time gives a greater average rate."
+  },
+  {
+    "topic": "8.1",
+    "part": 3,
+    "position": 15,
+    "original": "Two groups obtain the same final gas volume, but one group starts timing 5 seconds late. How will their graph compare?",
+    "revised_question": "Two groups start identical reactions together. One starts its stopwatch 5 s late. What error occurs when they record the volume at a stopwatch reading of 10 s?",
+    "options": [
+      "It is actually the volume at 15 s after mixing",
+      "It is actually the volume at 5 s after mixing",
+      "It must equal the final volume",
+      "It proves the reaction is endothermic"
+    ],
+    "answer": "A",
+    "explanation": "The recorded time is 5 s too small: 10 s on the late stopwatch corresponds to 15 s after mixing."
+  },
+  {
+    "topic": "8.2",
+    "part": 3,
+    "position": 7,
+    "original": "Compared with large chips, how does using powder affect the time to collect 40 cm³ of gas?",
+    "revised_question": "Compared with large chips, how does using powder affect the time to collect 40 cm³ of gas?",
+    "options": [
+      "It increases the time",
+      "It reduces the time by about 71%",
+      "It makes no difference",
+      "It stops the reaction"
+    ],
+    "answer": "B",
+    "explanation": "The time falls from 96 s to 28 s. The percentage decrease is (96 − 28) ÷ 96 × 100 ≈ 71%."
+  },
+  {
+    "topic": "8.3",
+    "part": 3,
+    "position": 6,
+    "original": "Between which two temperatures is the greatest drop in reaction time shown?",
+    "revised_question": "Between which two temperatures is the greatest drop in reaction time shown?",
+    "options": [
+      "20 °C to 25 °C",
+      "25 °C to 30 °C",
+      "30 °C to 35 °C",
+      "40 °C to 45 °C"
+    ],
+    "answer": "A",
+    "explanation": "The greatest fall is from 120 s to 88 s between 20 °C and 25 °C (32 s)."
+  },
+  {
+    "topic": "8.3",
+    "part": 3,
+    "position": 16,
+    "original": "Using the graph, estimate the reaction time at 32 °C as ____ s.",
+    "revised_question": "Using straight-line interpolation between 30 °C (63 s) and 35 °C (44 s), estimate the reaction time at 32 °C. Round to the nearest whole second. ____ s.",
+    "options": [
+      null,
+      null,
+      null,
+      null
+    ],
+    "answer": "55",
+    "explanation": "63 − (2/5 × 19) = 55.4 s, which rounds to 55 s."
+  }
+]
