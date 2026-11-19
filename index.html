@@ -1109,7 +1109,7 @@ input, textarea, select {
 <button class="back back-left" id="quizBackBtn" onclick="backFromQuiz()" type="button">← Back to topics</button>
 <div class="quiz-card">
 <div class="quiz-head"><div><strong id="quizTitle">Topic quiz</strong><div class="crumb" id="quizCrumb"></div><span class="q-skill-badge" id="qSkillBadge">Knowledge</span></div><strong id="mastery">Mastery 40</strong></div>
-<div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="quiz-session-progress"><span id="quizSessionProgressBar" style="width:0%"></span></div><div aria-live="polite" class="question-media" id="questionMedia"></div><details id="englishReading" hidden><summary>Read passage <span id="englishPassageTitle"></span></summary><ol id="englishLines"></ol></details><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-tools"><button type="button" class="report-question-btn" id="reportQuestionButton">⚑ Report this question</button></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
+<div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="quiz-session-progress"><span id="quizSessionProgressBar" style="width:0%"></span></div><div aria-live="polite" class="question-media" id="questionMedia"></div><details id="englishReading" hidden><summary>Read insert · <span id="englishPassageTitle"></span></summary><ol id="englishLines"></ol></details><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-tools"><button type="button" class="report-question-btn" id="reportQuestionButton">⚑ Report this question</button></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
 </div>
 <div class="note">
 
@@ -1798,7 +1798,15 @@ function openStage9Subject(subject){
  bank.units.forEach((title,i)=>{
   const unit=document.createElement('div');unit.className='unit';
   const head=document.createElement('button');head.type='button';head.className='unit-head';head.innerHTML=`<span class="unit-title"><span>Unit ${i+1}</span><span>${escapeHtml(title)}</span></span><span>⌃</span>`; unit.appendChild(head);
-  {const body=document.createElement('div');body.className='unit-body';Object.entries(bank.topics).filter(([key,[code]])=>Number(code.split('.')[0])===i+1).forEach(([key,[code,name]])=>{const b=document.createElement('button');b.type='button';b.className='lesson';b.innerHTML=`<span class="lesson-label"><span class="num">${code.includes('.')?code:sectionLabel(code)}</span><span>${escapeHtml(name)} · ${bank.questions[key].length} questions</span></span><span class="arrow">›</span>`;b.onclick=()=>openStage9Topic(code,name,key,subject);body.appendChild(b)});unit.appendChild(body);head.onclick=()=>unit.classList.toggle('collapsed');}box.appendChild(unit);
+  {const body=document.createElement('div');body.className='unit-body';Object.entries(bank.topics).filter(([key,[code]])=>Number(code.split('.')[0])===i+1).forEach(([key,[code,name]])=>{const b=document.createElement('button');b.type='button';b.className='lesson';b.innerHTML=`<span class="lesson-label"><span class="num">${code.includes('.')?code:sectionLabel(code)}</span><span>${escapeHtml(name)} · ${bank.questions[key].length} questions</span></span><span class="arrow">›</span>`;b.onclick=()=>openStage9Topic(code,name,key,subject);body.appendChild(b);
+    if(subject==='English' && key==='stage9|english|unit1|checkpoint'){
+      const shortcut=document.createElement('button');
+      shortcut.type='button';shortcut.className='lesson';
+      shortcut.textContent='The spare key · Read passage';
+      shortcut.onclick=openSpareKey;
+      body.appendChild(shortcut);
+    }
+  });unit.appendChild(body);head.onclick=()=>unit.classList.toggle('collapsed');}box.appendChild(unit);
  });showView('curriculumView');
 }
 function openStage9Topic(code,name,key,subject='Science'){
@@ -2235,7 +2243,7 @@ function passageFor(question){
 }
 function originalPrompt(question){
   const passage=passageFor(question);
-  return passage ? passage.title+'\n'+passage.lines.join(' ')+'\n\n'+question.q : question.q;
+  return passage && question._meta?.key==='stage9|english|unit1|checkpoint' ? passage.title+'\n'+passage.lines.join(' ')+'\n\n'+question.q : question.q;
 }
 function renderEnglishPassage(question){
   const panel=document.getElementById('englishReading');
@@ -3032,9 +3040,17 @@ function createDemoTeacherAccount(){
 function demoSignup(){createDemoStudentAccount()}
 </script>
 <script>
-if(location.hash==='#unit1-reading'){
+function openSpareKey(){
   openStage9Topic('1','Checkpoint Skills Practice','stage9|english|unit1|checkpoint','English');
   startTopicPart(2);
+  const passage=document.getElementById('englishReading');
+  passage.open=true;
+}
+if(location.hash==='#unit1-reading')openSpareKey();
+if(location.hash==='#unit1-second-test'){
+  openStage9Topic('1.4','The second test','stage9|english|unit1|1.4','English');
+  startTopicPart(1);
+  document.getElementById('englishReading').open=true;
 }
 </script>
 </body>
