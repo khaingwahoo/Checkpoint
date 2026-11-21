@@ -847,12 +847,9 @@ input, textarea, select {
 #englishReading{border:1px solid #cadbd6;border-radius:12px;background:#f4faf7;color:#182f30;margin:1rem 0}
 #englishReading summary{cursor:pointer;padding:.85rem 1rem;font-weight:700}
 #englishPassageTitle{font-weight:500;margin-left:.5em}
-#englishPassages ol{margin:0 1rem 1rem;padding:0;list-style:none;line-height:1.65;font-size:1rem}
-#englishPassages ol li{display:grid;grid-template-columns:2rem 1fr;align-items:baseline;padding:.22rem 0}
-#englishPassages h3{margin:.5rem 1rem;font-size:1rem}
-#englishPassages .passage-credit{margin:0 1rem .5rem;font-size:.875rem;color:#46635c}
-#englishPassages .stanza-break{margin-top:.65rem}
-#englishPassages .line-no{font-variant-numeric:tabular-nums;color:#46635c;font-size:.88em}
+#englishLines{margin:0 1rem 1rem;padding:0;list-style:none;line-height:1.65;font-size:1rem}
+#englishLines li{display:grid;grid-template-columns:2rem 1fr;align-items:baseline;padding:.22rem 0}
+#englishLines .line-no{font-variant-numeric:tabular-nums;color:#46635c;font-size:.88em}
 </style></head>
 <body>
 <header class="top platform-top">
@@ -895,7 +892,7 @@ input, textarea, select {
  <button type="button" class="btn primary continue-learning-button" onclick="continueLearning()">Continue Learning →</button>
 </section>
 <section class="platform-section">
-<div class="platform-section-heading"><div><div class="eyebrow">LEARN</div><h2>What are you studying?</h2><p>Choose a learning path. Science and English practice is available for Stages 7 and 9; the other programmes show where TopicalExamQuiz is growing next.</p></div></div>
+<div class="platform-section-heading"><div><div class="eyebrow">LEARN</div><h2>What are you studying?</h2><p>Choose a learning path. Stage 7 Science, Stage 7 Mathematics, Stage 9 Science and Stage 9 English are available now; the other programmes show where TopicalExamQuiz is growing next.</p></div></div>
 <div class="programme-card-grid">
 <button class="programme-card" onclick="openCambridgeSubjects('Stage 6','Primary')" type="button"><span class="programme-icon">🎒</span><strong>Primary</strong><small>Cambridge-aligned · Stage 6 · Free</small><span class="programme-status soon">Coming soon</span></button>
 <button class="programme-card available" onclick="openProgrammeChooser()" type="button"><span class="programme-icon">🔬</span><strong>Lower Secondary</strong><small>Cambridge-aligned · Stages 7–9 · Free</small><span class="programme-status live">Stages 7 &amp; 9 live →</span></button>
@@ -907,7 +904,6 @@ input, textarea, select {
 <button class="demo-quiz-card image-demo-card" onclick="startImageQuizDemo()" type="button"><span class="demo-quiz-icon">🖼️</span><strong>Image Quiz · Science</strong><small>12 picture questions · Plant and animal cells · All images under 100 KB</small><span class="demo-quiz-action">Start image quiz now →</span></button>
 
 <button class="demo-quiz-card" onclick="startStage7Science();openSubject('Science');openCurriculum('Biology')" type="button"><span class="demo-quiz-icon">🔬</span><strong>Stage 7 · Science</strong><small>Browse Biology topics and start a practice quiz</small><span class="demo-quiz-action">Explore science quizzes →</span></button>
-<button class="demo-quiz-card" onclick="openStage7English()" type="button"><span class="demo-quiz-icon" aria-hidden="true">📖</span><strong>Stage 7 · English</strong><small>Units 1–9 · 2,700 questions with reading inserts</small><span class="demo-quiz-action">Explore English quizzes</span></button>
 <button class="demo-quiz-card" onclick="openHskChapters('HSK 1')" type="button"><span class="demo-quiz-icon">🇨🇳</span><strong>Chinese · HSK 1</strong><small>Choose a chapter for MCQ, fill-in and rearrangement questions</small><span class="demo-quiz-action">Choose a sample chapter →</span></button>
 <button class="demo-quiz-card" onclick="openHskChapters('HSK 3')" type="button"><span class="demo-quiz-icon">🇨🇳</span><strong>Chinese · HSK 3 Lessons 1–6</strong><small>720 questions · 3 mixed parts per lesson · picture questions included</small><span class="demo-quiz-action">Choose an HSK 3 lesson →</span></button>
 <button class="demo-quiz-card" onclick="openMyanmarSubjectMockup('Year 7','Science')" type="button"><span class="demo-quiz-icon">🇲🇲</span><strong>Myanmar · Year 7 Science</strong><small>Test sample Cells, Matter and Forces quizzes</small><span class="demo-quiz-action">Explore Myanmar quizzes →</span></button>
@@ -965,7 +961,7 @@ input, textarea, select {
 <div class="level-intro">
 <div class="eyebrow">CAMBRIDGE-ALIGNED · SCHOOL LEARNING</div>
 <h1>Choose your programme</h1>
-<p>Use stage names so learners can clearly identify the intended curriculum level. Science and English practice is available for Stages 7 and 9.</p>
+<p>Use stage names so learners can clearly identify the intended curriculum level. Stage 7 Science, Stage 7 Mathematics, Stage 9 Science and Stage 9 English are available now.</p>
 </div>
 <div class="level-group">
 <div class="level-group-head"><h2>Primary</h2><span>Stage 6</span></div>
@@ -1113,7 +1109,7 @@ input, textarea, select {
 <button class="back back-left" id="quizBackBtn" onclick="backFromQuiz()" type="button">← Back to topics</button>
 <div class="quiz-card">
 <div class="quiz-head"><div><strong id="quizTitle">Topic quiz</strong><div class="crumb" id="quizCrumb"></div><span class="q-skill-badge" id="qSkillBadge">Knowledge</span></div><strong id="mastery">Mastery 40</strong></div>
-<div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="quiz-session-progress"><span id="quizSessionProgressBar" style="width:0%"></span></div><div aria-live="polite" class="question-media" id="questionMedia"></div><details id="englishReading" hidden><summary>Read insert · <span id="englishPassageTitle"></span></summary><div id="englishPassages"></div></details><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-tools"><button type="button" class="report-question-btn" id="reportQuestionButton">⚑ Report this question</button></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
+<div class="quiz-body"><div class="qmeta" id="questionNo">QUESTION 1 OF 5</div><div class="quiz-session-progress"><span id="quizSessionProgressBar" style="width:0%"></span></div><div aria-live="polite" class="question-media" id="questionMedia"></div><details id="englishReading" hidden><summary>Read insert · <span id="englishPassageTitle"></span></summary><ol id="englishLines"></ol></details><div class="question" id="questionText"></div><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><div class="quiz-tools"><button type="button" class="report-question-btn" id="reportQuestionButton">⚑ Report this question</button></div><div class="quiz-actions"><button class="btn primary" onclick="nextQuestion()">Next question</button></div></div>
 </div>
 <div class="note">
 
@@ -1312,9 +1308,9 @@ TopicalExamQuiz offers original practice activities. Myanmar sample quizzes are 
 <script src="hsk3-lesson1-questions.js"></script>
 <script src="hsk3-lessons2-6-questions.js"></script>
 <script src="stage7-science-questions.js"></script>
+<script src="stage7-mathematics-unit1-questions.js"></script>
 <script src="stage9-science-unit1-questions.js"></script>
 <script src="stage9-english-unit1-questions.js"></script>
-<script src="stage7-english-questions.js"></script>
 <script>
 function closeAnyModal(){
   document.querySelectorAll('.modal.show').forEach(function(modal){
@@ -1494,7 +1490,7 @@ function openCambridgeSubjects(level,programme){
   const back=document.getElementById('subjectChooserBack');
   if(title)title.textContent=`${level} — Choose a subject`;
   if(eyebrow)eyebrow.textContent='CAMBRIDGE-ALIGNED · FREE';
-  const liveSubjects=level==='Stage 9'?['Science','English']:level==='Stage 7'?['Science','English']:[];
+  const liveSubjects=level==='Stage 9'?['Science','English']:level==='Stage 7'?['Science','Mathematics']:[];
   if(desc)desc.textContent=liveSubjects.length?'Available now: '+liveSubjects.join(' and ')+'.':'Choose a subject to see its availability.';
   if(price)price.style.display='none';
   if(back){back.textContent='← Back to programmes';back.setAttribute('onclick',"openProgrammeChooser()")}
@@ -1508,7 +1504,7 @@ function renderProgrammeSubjects(subjects,options){
       return `<button type="button" class="subject-choice-card myanmar-open" onclick="openMyanmarSubjectMockup('${options.level}','${subject}')"><strong>${subject}</strong><small>Sample quizzes + upcoming premium topics</small><span class="status">OPEN MOCKUP</span></button>`;
     }
     const live=options.liveSubjects?.includes(subject);
-    const action=live?(options.level==='Stage 9'?`openStage9Subject('${subject}')`:subject==='English'?'openStage7English()':'startSelectedStage7Science()'):`showSubjectComingSoon('${options.programme}','${options.level}','${subject}')`;
+    const action=live?(options.level==='Stage 9'?`openStage9Subject('${subject}')`:subject==='Mathematics'?'startSelectedStage7Maths()':'startSelectedStage7Science()'):`showSubjectComingSoon('${options.programme}','${options.level}','${subject}')`;
     return `<button type="button" class="subject-choice-card ${live?'live':''}" onclick="${action}"><strong>${subject}</strong><small>${live?'Question bank available now':'Question bank coming soon'}</small><span class="status">${live?'AVAILABLE NOW':'COMING SOON'}</span></button>`;
   }).join('');
   showView('programmeSubjectView');
@@ -1785,8 +1781,31 @@ function showView(id){
   if(id==='homeView'||id==='profileView'||id==='reviewView')setTimeout(renderDashboard,0);
   window.scrollTo({top:0,behavior:'smooth'});
 }
-function getSubjectCategories(subject){return subject==='Science'?stage7ScienceCategories:[]}
-function getSubjectCurriculum(subject){return subject==='Science'?stage7ScienceCurriculum:{}}
+
+// Stage 7 Mathematics, Unit 1 — original TEQ question bank (540 questions).
+const stage7MathsQuestions=window.STAGE7_MATHS_UNIT1_QUESTIONS||{};
+const stage7MathsCategories=[['➕','Number','Unit 1 · Integers · 540 practice questions']];
+const stage7MathsCurriculum={Number:[{unit:'Unit 1',title:'Integers',items:[
+ ['1.1','Adding and subtracting integers','stage7|mathematics|unit1|1.1'],
+ ['1.2','Multiplying and dividing integers','stage7|mathematics|unit1|1.2'],
+ ['1.3','Lowest common multiples','stage7|mathematics|unit1|1.3'],
+ ['1.4','Highest common factors','stage7|mathematics|unit1|1.4'],
+ ['1.5','Tests for divisibility','stage7|mathematics|unit1|1.5'],
+ ['1.6','Square roots and cube roots','stage7|mathematics|unit1|1.6']
+]}]};
+function startSelectedStage7Maths(){
+ currentProgrammeKey='stage7'; currentLevel='Stage 7';currentProgram='Lower Secondary';currentSubject='Mathematics';currentCategory='Number';currentChapterId='';quizOverride=null;quizMode='topic';
+ openSubject('Mathematics');
+}
+function openStage7MathsTopic(code,name,key){
+ currentProgrammeKey='stage7';currentLevel='Stage 7';currentProgram='Lower Secondary';currentSubject='Mathematics';currentCategory='Number';currentChapterId='';
+ currentCode=code;currentTopic=name;currentTopicKey=key;
+ currentPartBaseCode=code;currentPartBaseTopic=name;
+ openMixedPracticeParts(stage7MathsQuestions[key]||[],'stage7-maths',false);
+}
+
+function getSubjectCategories(subject){return subject==='Science'?stage7ScienceCategories:subject==='Mathematics'?stage7MathsCategories:[]}
+function getSubjectCurriculum(subject){return subject==='Science'?stage7ScienceCurriculum:subject==='Mathematics'?stage7MathsCurriculum:{}}
 function sectionLabel(code){return 'Unit '+code}
 function stage9Bank(subject){
  return subject==='English'?window.STAGE9_ENGLISH:{
@@ -1794,22 +1813,16 @@ function stage9Bank(subject){
  };
 }
 function openStage9Subject(subject){
- openCambridgeBank('Stage 9',subject,stage9Bank(subject),1,subject==='English'?'English · Unit 1':'Science · Units 1–9',openStage9Topic);
-}
-function openStage7English(selectedUnit=1){
- openCambridgeBank('Stage 7','English',window.STAGE7_ENGLISH,1,'English · Units 1–9',openStage7EnglishTopic,selectedUnit);
-}
-function openCambridgeBank(level,subject,bank,firstUnit,section,openTopic,selectedUnit=null){
- currentProgrammeKey=level==='Stage 9'?'stage9':'stage7';currentLevel=level;currentProgram='Lower Secondary';currentSubject=subject;currentCategory=subject==='English'?(bank.units[(selectedUnit ?? firstUnit)-firstUnit]||bank.units[0]):'Biology';currentChapterId='';quizOverride=null;quizMode='topic';
- document.getElementById('backToSubjectBtn').textContent=`← Back to ${level} subjects`;
- document.getElementById('curriculumTitle').textContent=`${level} ${subject} — Choose a topic`;
- document.getElementById('curriculumSection').textContent=section;
+ currentProgrammeKey='stage9';currentLevel='Stage 9';currentProgram='Lower Secondary';currentSubject=subject;currentCategory=subject==='English'?'Going underground':'Biology';currentChapterId='';quizOverride=null;quizMode='topic';
+ const bank=stage9Bank(subject);
+ document.getElementById('backToSubjectBtn').textContent='← Back to Stage 9 subjects';
+ document.getElementById('curriculumTitle').textContent=`Stage 9 ${subject} — Choose a topic`;
+ document.getElementById('curriculumSection').textContent=subject==='English'?'English · Unit 1':'Science · Units 1–9';
  const box=document.getElementById('unitList');box.innerHTML='';
  bank.units.forEach((title,i)=>{
-  const unitNumber=firstUnit+i;
   const unit=document.createElement('div');unit.className='unit';
-  const head=document.createElement('button');head.type='button';head.className='unit-head';head.innerHTML=`<span class="unit-title"><span>Unit ${unitNumber}</span><span>${escapeHtml(title)}</span></span><span>⌃</span>`; unit.appendChild(head);
-  {const body=document.createElement('div');body.className='unit-body';Object.entries(bank.topics).filter(([key,[code]])=>Number(code.split('.')[0])===unitNumber).forEach(([key,[code,name]])=>{const b=document.createElement('button');b.type='button';b.className='lesson';b.innerHTML=`<span class="lesson-label"><span class="num">${code.includes('.')?code:sectionLabel(code)}</span><span>${escapeHtml(name)} · ${bank.questions[key].length} questions</span></span><span class="arrow">›</span>`;b.onclick=()=>openTopic(code,name,key,subject);body.appendChild(b);
+  const head=document.createElement('button');head.type='button';head.className='unit-head';head.innerHTML=`<span class="unit-title"><span>Unit ${i+1}</span><span>${escapeHtml(title)}</span></span><span>⌃</span>`; unit.appendChild(head);
+  {const body=document.createElement('div');body.className='unit-body';Object.entries(bank.topics).filter(([key,[code]])=>Number(code.split('.')[0])===i+1).forEach(([key,[code,name]])=>{const b=document.createElement('button');b.type='button';b.className='lesson';b.innerHTML=`<span class="lesson-label"><span class="num">${code.includes('.')?code:sectionLabel(code)}</span><span>${escapeHtml(name)} · ${bank.questions[key].length} questions</span></span><span class="arrow">›</span>`;b.onclick=()=>openStage9Topic(code,name,key,subject);body.appendChild(b);
     if(subject==='English' && key==='stage9|english|unit1|checkpoint'){
       const shortcut=document.createElement('button');
       shortcut.type='button';shortcut.className='lesson';
@@ -1817,15 +1830,7 @@ function openCambridgeBank(level,subject,bank,firstUnit,section,openTopic,select
       shortcut.onclick=openSpareKey;
       body.appendChild(shortcut);
     }
-  });
-    unit.appendChild(body);
-    unit.classList.toggle('collapsed', selectedUnit!==null && unitNumber!==selectedUnit);
-    head.setAttribute('aria-expanded', String(!unit.classList.contains('collapsed')));
-    head.onclick=()=>{
-      const collapsed=unit.classList.toggle('collapsed');
-      head.setAttribute('aria-expanded', String(!collapsed));
-    };
-  }box.appendChild(unit);
+  });unit.appendChild(body);head.onclick=()=>unit.classList.toggle('collapsed');}box.appendChild(unit);
  });showView('curriculumView');
 }
 function openStage9Topic(code,name,key,subject='Science'){
@@ -1833,13 +1838,6 @@ function openStage9Topic(code,name,key,subject='Science'){
  if(!questions?.length)return;
  currentProgrammeKey='stage9';currentLevel='Stage 9';currentProgram='Lower Secondary';currentSubject=subject;currentCategory=questions[0]._meta.category;currentChapterId=String(code).split('.')[0];currentCode=code;currentTopic=name;currentTopicKey=key;
  openMixedPracticeParts(questions,'stage9',false);
-}
-function openStage7EnglishTopic(code,name,key){
- const questions=window.STAGE7_ENGLISH.questions[key];
- if(!questions?.length)return;
- currentProgrammeKey='stage7';currentLevel='Stage 7';currentProgram='Lower Secondary';currentSubject='English';
- currentCategory=questions[0]._meta.category;currentChapterId=questions[0]._meta.chapterId;currentCode=code;currentTopic=name;currentTopicKey=key;
- openMixedPracticeParts(questions,'stage7-english',false);
 }
 function openSubject(subject){
   const subjectCategories=getSubjectCategories(subject);
@@ -1862,7 +1860,7 @@ function openSubject(subject){
   });
   showView('subjectView');
 }
-function backToSubject(){if(currentLevel==='Stage 9'||(currentLevel==='Stage 7'&&currentSubject==='English')){openCambridgeSubjects(currentLevel,'Lower Secondary');return}openSubject(currentSubject)}
+function backToSubject(){if(currentLevel==='Stage 9'){openCambridgeSubjects('Stage 9','Lower Secondary');return}openSubject(currentSubject)}
 function openCurriculum(category){
   currentCategory=category;
   const subjectData=getSubjectCurriculum(currentSubject);
@@ -1889,7 +1887,7 @@ function openCurriculum(category){
       lesson.type='button';
       lesson.className='lesson';
       const stat=getTopicStat(key||name); const pct=stat.attempts?Math.round(stat.correct/stat.attempts*100):null; lesson.innerHTML=`<span class="lesson-label"><span class="num">${code}</span><span>${name}${pct===null?'':`<span class="photo-topic-badge">${pct}% mastered</span>`}</span></span><span class="arrow">›</span>`;
-      const goLesson=()=>currentLevel==='Stage 7'&&currentSubject==='Science'&&stage7ScienceQuestions[key]?openTopicParts(code,name,key):startQuiz(code,name,key);
+      const goLesson=()=>currentLevel==='Stage 7'&&currentSubject==='Mathematics'&&stage7MathsQuestions[key]?openStage7MathsTopic(code,name,key):currentLevel==='Stage 7'&&currentSubject==='Science'&&stage7ScienceQuestions[key]?openTopicParts(code,name,key):startQuiz(code,name,key);
       lesson.addEventListener('click',goLesson);
       lesson.addEventListener('touchend',(e)=>{e.preventDefault();goLesson()},{passive:false});
       body.appendChild(lesson);
@@ -1917,7 +1915,6 @@ function backToCurriculum(){
   }
   if(currentProgram==='Myanmar Curriculum'){returnToMyanmarTopicList();return}
   if(currentLevel==='Stage 9'){openStage9Subject(currentSubject);return}
-  if(currentLevel==='Stage 7'&&currentSubject==='English'){openStage7English();return}
   if(currentChapterId){quizOverride=null;quizMode='topic';openChapterFromSkillMap(encodeURIComponent(currentChapterId));return}
   if(quizMode!=='topic'){quizOverride=null;quizMode='topic';showView('homeView');return}
   openCurriculum(currentCategory);
@@ -2031,7 +2028,7 @@ const continueLearningKey='topicalExamQuizContinueLearningV1';
 function loadContinueLearning(){
  try{
   const v=JSON.parse(localStorage.getItem(continueLearningKey)||'null');
-  return v&&v.version===1&&typeof v.key==='string'&&v.key.length<300&&['stage7','stage7-english','stage9','hsk-chapters','myanmar','chinese-levels'].includes(v.back)?v:null;
+  return v&&v.version===1&&typeof v.key==='string'&&v.key.length<300&&['stage7','stage9','hsk-chapters','myanmar','chinese-levels'].includes(v.back)?v:null;
  }catch(e){return null}
 }
 function writeContinueLearning(v){
@@ -2097,7 +2094,7 @@ function refreshContinueLearningCard(){
  if(title)title.textContent=(v.level||'Learning')+' · '+(v.subject||'')+' · '+(v.topic||'');
  if(detail){
   const isPart=Number.isInteger(v.part)&&v.part>0;
-  const partLabel=isPart?practiceLabel(v.part,v.back):(usesPracticeDifficulty(v.back)?'All three difficulty levels completed':'All three Parts completed')+' — revisit your lesson or try Review';
+  const partLabel=isPart?practiceLabel(v.part,v.back==='stage9'):(v.back==='stage9'?'All three difficulty levels completed':'All three Parts completed')+' — revisit your lesson or try Review';
   const progress=v.session&&v.session.total>0?' · Question '+Math.min(v.session.total,Math.max(1,(v.session.answers||[]).length+1))+'/'+v.session.total:'';
   detail.textContent=partLabel+progress+' · Continue without selecting your curriculum and grade again.';
  }
@@ -2113,9 +2110,6 @@ function continueLearning(){
  }else if(saved.back==='stage9'){
   if(!stage9Bank(saved.subject).questions[saved.key]){goToTopicalExamQuizHome();return}
   openStage9Topic(saved.code,saved.topic,saved.key,saved.subject);
- }else if(saved.back==='stage7-english'){
-  if(!window.STAGE7_ENGLISH.questions[saved.key]){goToTopicalExamQuizHome();return}
-  openStage7EnglishTopic(saved.code,saved.topic,saved.key);
  }else if(saved.back==='stage7'){
   if(!stage7ScienceQuestions[saved.key]){goToTopicalExamQuizHome();return}
   currentProgram='Lower Secondary';currentLevel='Stage 7';currentSubject='Science';currentCategory=saved.category||'Biology';
@@ -2182,11 +2176,8 @@ function mixQuestionsIntoThreeParts(source,stage7Layout=false){
  const sizes=stage7Layout?[Math.min(20,n),Math.min(20,Math.max(0,n-20)),Math.max(0,n-40)]:[0,1,2].map(i=>base+(i<extras?1:0));
  let offset=0;return sizes.map(size=>{const part=interleaved.slice(offset,offset+size);offset+=size;return part});
 }
-function usesPracticeDifficulty(backType=currentPracticeBack){
- return backType==='stage9'||backType==='stage7-english';
-}
 function openMixedPracticeParts(pool,backType,isSample){
- currentPracticePool=(pool||[]).map(q=>({...q}));currentPracticeParts=usesPracticeDifficulty(backType)?[1,2,3].map(p=>currentPracticePool.filter(q=>q.chapterPart===p).sort((a,b)=>a.position-b.position)):mixQuestionsIntoThreeParts(currentPracticePool,backType==='stage7');
+ currentPracticePool=(pool||[]).map(q=>({...q}));currentPracticeParts=['stage9','stage7-maths'].includes(backType)?[1,2,3].map(p=>currentPracticePool.filter(q=>q.chapterPart===p).sort((a,b)=>a.position-b.position)):mixQuestionsIntoThreeParts(currentPracticePool,backType==='stage7');
  currentPracticeKey=currentTopicKey;currentPracticeBack=backType;currentPracticeSample=!!isSample;
  currentPartNumber=0;currentPartTopicKey='';currentPartBaseCode=currentCode;currentPartBaseTopic=currentTopic;
  quizOverride=null;quizMode='topic';renderTopicParts();showView('topicPartsView');
@@ -2200,7 +2191,6 @@ function openTopicParts(code,name,key){
 }
 function backFromTopicParts(){
  if(currentPracticeBack==='stage9'){openStage9Subject(currentSubject);return}
- if(currentPracticeBack==='stage7-english'){openStage7English(Number(currentChapterId)||1);return}
  if(currentPracticeBack==='hsk-chapters'){openHskChapters(chineseSelectedLevel);return}
  if(currentPracticeBack==='chinese-levels'){openChineseLevels(chinesePath);return}
  if(currentPracticeBack==='myanmar'){openMyanmarSubjectMockup(currentLevel,currentSubject);return}
@@ -2213,7 +2203,7 @@ function topicPartQuestions(topicKey,part){
  if(stage9Questions)return stage9Questions.filter(q=>q.chapterPart===part);
  return mixQuestionsIntoThreeParts(stage7ScienceQuestions[topicKey]||[],true)[part-1]||[];
 }
-function practiceLabel(part,backType){return usesPracticeDifficulty(backType)?(['Easy','Medium','Difficult'][part-1]||'Difficulty'):'Part '+part;}
+function practiceLabel(part,stage9=currentPracticeBack==='stage9'){return stage9?(['Easy','Medium','Difficult'][part-1]||'Difficulty'):'Part '+part;}
 function renderTopicParts(){
  const key=currentTopicKey,base=key===currentPracticeKey?currentPracticePool:(stage7ScienceQuestions[key]||[]);
  const meta=currentPracticeBack==='stage7'?allStage7Topics().find(t=>t.key===key):null;
@@ -2224,12 +2214,12 @@ function renderTopicParts(){
  const bar=document.getElementById('topicPartProgressBar'),list=document.getElementById('topicPartsList');
  const back=document.getElementById('topicPartsBackBtn'),progressLabel=document.getElementById('topicProgressLabel');
  if(back)back.textContent=currentPracticeBack==='myanmar'?'← Back to topics':currentPracticeBack==='hsk-chapters'?'← Back to HSK lessons':currentPracticeBack==='chinese-levels'?'← Back to Chinese levels':'← Back to chapter';
- if(progressLabel)progressLabel.textContent=['stage7','stage7-english','stage9'].includes(currentPracticeBack)?'Subtopic progress':currentPracticeBack==='myanmar'?'Topic progress':'Lesson progress';
+ if(progressLabel)progressLabel.textContent=['stage7','stage9'].includes(currentPracticeBack)?'Subtopic progress':currentPracticeBack==='myanmar'?'Topic progress':'Lesson progress';
  if(title)title.textContent=currentPartBaseTopic||currentTopic;
- if(eye)eye.textContent=usesPracticeDifficulty()?`${currentLevel.toUpperCase()} · UNIT ${currentChapterId} · TOPIC ${currentPartBaseCode||currentCode}`:currentPracticeBack==='stage7'?`CHAPTER ${meta?meta.chapterId:(currentChapterId||'')} · TOPIC ${currentPartBaseCode||currentCode}`:
+ if(eye)eye.textContent=currentPracticeBack==='stage9'?`STAGE 9 · UNIT ${currentChapterId} · TOPIC ${currentPartBaseCode||currentCode}`:['stage7','stage7-maths'].includes(currentPracticeBack)?`CHAPTER ${meta?meta.chapterId:(currentChapterId||'1')} · TOPIC ${currentPartBaseCode||currentCode}`:
   currentPracticeBack==='myanmar'?`MYANMAR CURRICULUM · ${currentLevel} · ${currentSubject}`:
   `CHINESE LANGUAGE · ${currentLevel} · ${currentPartBaseCode||currentCode}`;
- if(desc)desc.textContent=usesPracticeDifficulty()?'Select Easy, Medium or Difficult. Each level mixes question formats according to your learning needs.':currentPracticeSample?
+ if(desc)desc.textContent=currentPracticeBack==='stage9'?'Select Easy, Medium or Difficult. Each level mixes question formats according to your learning needs.':currentPracticeSample?
   'Sample question bank: practise in three short sessions with mixed question types. More lesson-specific questions are being prepared.':
   'Complete this lesson in three shorter practice sessions. Question types are mixed within each part.';
  if(txt)txt.textContent=`${completed} / ${total} questions completed`;
@@ -2239,7 +2229,7 @@ function renderTopicParts(){
    const st=getPartStatus(key,part),done=donePart(part);
    const label=qs.length?`Questions ${from}–${offset}`:'Questions being prepared';
    const status=done?`✓ Completed · ${st.correct}/${st.total}`:(qs.length?`${qs.length} questions`:'Coming soon');
-   return `<button type="button" class="topic-part-card" onclick="startTopicPart(${part})" ${qs.length?'':'disabled'}><span><strong>${practiceLabel(part)}</strong><small>${usesPracticeDifficulty()?['Basic knowledge and understanding','Application and interpretation','Checkpoint-style challenges'][part-1]:label}</small></span><span class="topic-part-status ${done?'done':''}">${status} ›</span></button>`;
+   return `<button type="button" class="topic-part-card" onclick="startTopicPart(${part})" ${qs.length?'':'disabled'}><span><strong>${practiceLabel(part)}</strong><small>${currentPracticeBack==='stage9'?['Basic knowledge and understanding','Application and interpretation','Checkpoint-style challenges'][part-1]:label}</small></span><span class="topic-part-status ${done?'done':''}">${status} ›</span></button>`;
  }).join('')}
  const demo=document.getElementById('imageQuizTopicEntry');
  if(demo)demo.style.display=currentPracticeBack==='stage7'&&currentCode==='1.1'?'flex':'none';
@@ -2247,13 +2237,13 @@ function renderTopicParts(){
  const label=document.getElementById('topicReviewTitle'),sub=document.getElementById('topicReviewDescription');
  const unlocked=total>0&&[1,2,3].every(donePart);
  if(label)label.textContent=`Review ${currentPartBaseTopic||currentTopic}`;
- if(sub)sub.textContent=usesPracticeDifficulty()?'Mixed practice from all three difficulty levels.':'Mixed practice from all three parts.';
- if(btn){btn.disabled=!unlocked;btn.textContent=unlocked?'Review lesson':usesPracticeDifficulty()?'Complete all difficulty levels':'Complete Parts 1–3';btn.onclick=startTopicReview}
+ if(sub)sub.textContent=currentPracticeBack==='stage9'?'Mixed practice from all three difficulty levels.':'Mixed practice from all three parts.';
+ if(btn){btn.disabled=!unlocked;btn.textContent=unlocked?'Review lesson':currentPracticeBack==='stage9'?'Complete all difficulty levels':'Complete Parts 1–3';btn.onclick=startTopicReview}
  if(card)card.classList.toggle('locked',!unlocked);
 }
 function startTopicPart(part){
  const key=currentTopicKey,qs=topicPartQuestions(key,part);
- if(!qs.length){alert(usesPracticeDifficulty()?'Questions for this difficulty level are being prepared.':'Questions for this part are being prepared.');return}
+ if(!qs.length){alert(currentPracticeBack==='stage9'?'Questions for this difficulty level are being prepared.':'Questions for this part are being prepared.');return}
  currentPartNumber=part;currentPartTopicKey=key;
  currentCode=currentPartBaseCode||currentCode;currentTopic=currentPartBaseTopic||currentTopic;
  quizMode='part';quizOverride=qs.map(q=>({...q}));resetQuizSession();
@@ -2262,7 +2252,7 @@ function startTopicPart(part){
 function startTopicReview(){
  const key=currentTopicKey,parts=[1,2,3].map(part=>topicPartQuestions(key,part));
  const unlocked=parts.every((qs,i)=>{const st=getPartStatus(key,i+1);return qs.length>0&&!!(st&&st.completed&&st.total===qs.length)});
- if(!unlocked){alert(usesPracticeDifficulty()?'Complete Easy, Medium and Difficult first.':'Complete Parts 1, 2 and 3 first.');return}
+ if(!unlocked){alert(currentPracticeBack==='stage9'?'Complete Easy, Medium and Difficult first.':'Complete Parts 1, 2 and 3 first.');return}
  const pool=parts.flat();if(!pool.length)return;
  currentPartNumber=0;currentPartTopicKey=key;currentCode=currentPartBaseCode||currentCode;
  currentTopic=currentPartBaseTopic||currentTopic;quizMode='topic-review';
@@ -2280,52 +2270,32 @@ function originalPrompt(question){
   return passage && question._meta?.key==='stage9|english|unit1|checkpoint' ? passage.title+'\n'+passage.lines.join(' ')+'\n\n'+question.q : question.q;
 }
 function renderEnglishPassage(question){
- const panel=document.getElementById('englishReading');
- const ids=question.passageIds || (question.passageId?[question.passageId]:[]);
- const bank=question.passageIds?window.STAGE7_ENGLISH:window.STAGE9_ENGLISH;
- const passages=ids.map(id=>bank.passages[id]).filter(Boolean);
- const signature=ids.join('|');
- panel.hidden=!passages.length;
- if(!passages.length){panel.open=false;delete panel.dataset.passage;return}
- if(panel.dataset.passage===signature)return;
- panel.dataset.passage=signature;
- panel.open=Boolean(question.passageIds);
- document.getElementById('englishPassageTitle').textContent=passages.map(p=>p.title).join(' / ');
- const groups=passages.map(passage=>{
-  const section=document.createElement('section'),list=document.createElement('ol');
-  if(passages.length>1){
-   const title=document.createElement('h3');
-   title.textContent=passage.title;
-   section.append(title);
-  }
-  if(passage.credit){
-   const credit=document.createElement('p');
-   credit.className='passage-credit';
-   credit.textContent=passage.credit;
-   section.append(credit);
-  }
-  passage.lines.forEach((text,i)=>{
-   const row=document.createElement('li'),number=document.createElement('span'),words=document.createElement('span');
-   if(passage.stanzaBreaks?.includes(i))row.className='stanza-break';
-   number.className='line-no';
-   number.setAttribute('aria-label','Line '+(i+1));
-   number.textContent=i+1;
-   words.textContent=text;
-   row.append(number,words);
-   list.append(row);
+  const panel=document.getElementById('englishReading');
+  const passage=passageFor(question);
+  panel.hidden=!passage;
+  if(!passage){panel.open=false;delete panel.dataset.passage;return;}
+  if(panel.dataset.passage===question.passageId)return;
+  panel.dataset.passage=question.passageId;
+  panel.open=false;
+  document.getElementById('englishPassageTitle').textContent=passage.title;
+  const lines=passage.lines.map((text,i)=>{
+    const row=document.createElement('li'),number=document.createElement('span'),words=document.createElement('span');
+    number.className='line-no';
+    number.setAttribute('aria-label','Line '+(i+1));
+    number.textContent=i+1;
+    words.textContent=text;
+    row.append(number,words);
+    return row;
   });
-  section.append(list);
-  return section;
- });
- document.getElementById('englishPassages').replaceChildren(...groups);
+  document.getElementById('englishLines').replaceChildren(...lines);
 }
 function renderQuestion(){
   answered=false;
   const qs=getQs(),x=qs[qIndex];
-  document.getElementById('quizTitle').textContent=currentTopic+(quizMode==='part'?` · ${practiceLabel(currentPartNumber)}`:quizMode==='topic-review'?' · Topic Review':'');
+  document.getElementById('quizTitle').textContent=currentTopic+(quizMode==='part'?` · ${practiceLabel(currentPartNumber,currentLevel==='Stage 9')}`:quizMode==='topic-review'?' · Topic Review':'');
   const meta=getQuestionMeta(x);
-  document.getElementById('quizCrumb').textContent=currentSubject==='Chinese Language'?`${chinesePath==='HSK'?'HSK':'Singapore Syllabus'} · ${currentLevel} · ${activeHskChapter!==null&&chinesePath==='HSK'?currentCode:'Mixed Practice'}`:(quizMode==='topic'||quizMode==='part'||quizMode==='topic-review')?`${currentSubject} · ${currentCategory} · ${currentCode}${quizMode==='part'?` · ${practiceLabel(currentPartNumber)}`:quizMode==='topic-review'?' · Topic Review':''}`:`${meta.category} · ${meta.topic}`;
-  const skill=currentSubject==='English'&&currentLevel==='Stage 7'?(x.type==='fill'?'Fill in the Blank':x.type==='rearrange'?'Rearrangement':'Multiple Choice'):currentSubject==='Chinese Language'?(x.photoQuiz?'Picture Question':x.type==='fill'?'Fill in the Blank':x.type==='rearrange'?'Sentence Rearrangement':'Multiple Choice'):classifyQuestionSkill(x); const skillBadge=document.getElementById('qSkillBadge'); if(skillBadge)skillBadge.textContent=skill;
+  document.getElementById('quizCrumb').textContent=currentSubject==='Chinese Language'?`${chinesePath==='HSK'?'HSK':'Singapore Syllabus'} · ${currentLevel} · ${activeHskChapter!==null&&chinesePath==='HSK'?currentCode:'Mixed Practice'}`:(quizMode==='topic'||quizMode==='part'||quizMode==='topic-review')?`${currentSubject} · ${currentCategory} · ${currentCode}${quizMode==='part'?` · ${practiceLabel(currentPartNumber,currentLevel==='Stage 9')}`:quizMode==='topic-review'?' · Topic Review':''}`:`${meta.category} · ${meta.topic}`;
+  const skill=currentSubject==='Chinese Language'?(x.photoQuiz?'Picture Question':x.type==='fill'?'Fill in the Blank':x.type==='rearrange'?'Sentence Rearrangement':'Multiple Choice'):classifyQuestionSkill(x); const skillBadge=document.getElementById('qSkillBadge'); if(skillBadge)skillBadge.textContent=skill;
   document.getElementById('mastery').textContent='Mastery '+mastery;
   document.getElementById('questionNo').textContent=(x.photoQuiz?'PHOTO QUESTION • ':'')+`QUESTION ${qIndex+1} OF ${qs.length}`;const qp=document.getElementById('quizSessionProgressBar');if(qp)qp.style.width=Math.round(((qIndex+1)/Math.max(1,qs.length))*100)+'%';
   renderQuestionPhoto(x);
@@ -2334,7 +2304,7 @@ function renderQuestion(){
   renderEnglishPassage(x);
   questionText.textContent=x.q;
   const quizBack=document.getElementById('quizBackBtn');
-  if(quizBack)quizBack.textContent=(quizMode==='part'||quizMode==='topic-review')?(usesPracticeDifficulty()?'← Back to difficulty levels':'← Back to Parts 1–3'):currentProgram==='Myanmar Curriculum'?'← Back to Myanmar topics':currentSubject==='Chinese Language'?`← Back to ${chinesePath==='HSK'&&activeHskChapter!==null?'HSK chapters':chinesePath==='HSK'?'HSK levels':'Singapore levels'}`:'← Back to topics';
+  if(quizBack)quizBack.textContent=(quizMode==='part'||quizMode==='topic-review')?(currentLevel==='Stage 9'?'← Back to difficulty levels':'← Back to Parts 1–3'):currentProgram==='Myanmar Curriculum'?'← Back to Myanmar topics':currentSubject==='Chinese Language'?`← Back to ${chinesePath==='HSK'&&activeHskChapter!==null?'HSK chapters':chinesePath==='HSK'?'HSK levels':'Singapore levels'}`:'← Back to topics';
   const ans=document.getElementById('answers');
   ans.innerHTML='';
   if(x.type==='fill'){
@@ -2370,13 +2340,11 @@ let rearrangeSelected=[];
 function renderRearrangeQuestion(x,ans){
   rearrangeSelected=[];
   const words=(x.words||[]).map((word,index)=>({word,index}));
-  const english=x._meta?.subject==='English';
-  const orderHint=english?'Tap the items above in the correct order.':'Tap the words above in the correct order.';
   ans.innerHTML=`<div class="rearrange-wrap">
-    <div class="rearrange-label">${english?'ITEMS TO ORDER':'WORDS TO USE'}</div>
+    <div class="rearrange-label">WORDS TO USE</div>
     <div class="rearrange-bank" id="rearrangeBank"></div>
-    <div class="rearrange-label">${english?'YOUR ORDER':'YOUR SENTENCE'}</div>
-    <div class="rearrange-answer" id="rearrangeAnswer"><span class="rearrange-placeholder">${orderHint}</span></div>
+    <div class="rearrange-label">YOUR SENTENCE</div>
+    <div class="rearrange-answer" id="rearrangeAnswer"><span class="rearrange-placeholder">Tap the words above in the correct order.</span></div>
     <div class="rearrange-actions">
       <button type="button" class="btn" onclick="resetRearrange()">Reset</button>
       <button type="button" class="btn primary rearrange-check-btn" onclick="checkRearrangeAnswer()">Check answer</button>
@@ -2399,7 +2367,7 @@ function selectRearrangeWord(index,word,button){
 function refreshRearrangeAnswer(){
   const box=document.getElementById('rearrangeAnswer');if(!box)return;
   box.innerHTML='';
-  if(!rearrangeSelected.length){box.innerHTML='<span class="rearrange-placeholder">'+(getQs()[qIndex]._meta?.subject==='English'?'Tap the items above in the correct order.':'Tap the words above in the correct order.')+'</span>';return}
+  if(!rearrangeSelected.length){box.innerHTML='<span class="rearrange-placeholder">Tap the words above in the correct order.</span>';return}
   rearrangeSelected.forEach((item,pos)=>{
     const b=document.createElement('button');b.type='button';b.className='rearrange-word';b.textContent=item.word;
     b.title='Tap to return this word';b.onclick=()=>removeRearrangeWord(pos);box.appendChild(b);
@@ -2430,14 +2398,14 @@ function checkRearrangeAnswer(){
   document.querySelectorAll('#rearrangeBank .rearrange-word,#rearrangeAnswer .rearrange-word,.rearrange-actions .btn').forEach(b=>b.disabled=true);
   const box=document.getElementById('rearrangeAnswer'),f=document.getElementById('feedback');
   if(box)box.classList.add(isCorrect?'rearrange-correct':'rearrange-wrong');
-  const correctSentence=escapeHtml(expected.join(x._meta?.subject==='English'||currentLevel==='Stage 9'?' → ':''));
+  const correctSentence=expected.join(currentLevel==='Stage 9'?' → ':'');
   const translation=x.translation?`<div class="rearrange-translation">${x.translation}</div>`:'';
   if(isCorrect){
     correctCount++;mastery=Math.min(100,mastery+8);f.className='feedback show good';
     f.innerHTML='<strong>Correct!</strong><br>'+correctSentence+translation+(x.e?'<br>'+x.e:'');lastAnswerWasWrong=false;
   }else{
     wrongCount++;mastery=Math.max(0,mastery-3);f.className='feedback show bad';
-    f.innerHTML='<strong>Not quite.</strong><br>'+ (x._meta?.subject==='English'?'Correct order':'Correct sentence') + ': <strong>'+correctSentence+'</strong>'+translation+(x.e?'<br>'+x.e:'');
+    f.innerHTML='<strong>Not quite.</strong><br>Correct sentence: <strong>'+correctSentence+'</strong>'+translation+(x.e?'<br>'+x.e:'');
     lastAnswerWasWrong=true;sessionWrongIds.add(questionIdentity(x));
   }
   recordQuestionResult(x,isCorrect,userWords.join(' / '));
@@ -2517,7 +2485,7 @@ function saveStudentActivity(report){
 }
 function buildStudyReport(){
   const total=getQs().length,pct=total?Math.round(correctCount/total*100):0;
-  const grp=(currentLevel==='Stage 9'||currentPracticeBack==='stage7-english')?null:chapterGroups().find(g=>String(g.id)===String(currentChapterId||String(currentCode||'').split('.')[0]));const report={id:generateReportId(),student:currentStudentName(),studentId:ensureStudentId(),level:currentLevel,program:currentProgram,subject:currentSubject,category:currentCategory,chapterId:grp?String(grp.id):String(currentChapterId||String(currentCode||'').split('.')[0]||''),chapter:currentPracticeBack==='stage7-english'?currentCategory:currentLevel==='Stage 9'?(stage9Bank(currentSubject).units[Number(currentChapterId)-1]||''):grp?grp.title:'',activityType:quizMode==='chapter'?'Chapter review':quizMode==='part'?practiceLabel(currentPartNumber):quizMode==='topic-review'?'Topic review':'Topic practice',part:quizMode==='part'?currentPartNumber:null,topic:currentTopic,code:currentCode,startAt:quizStartedAt,endAt:quizEndedAt||Date.now(),seconds:quizElapsedSeconds,total,correct:correctCount,score:pct,correctionsReviewed:sessionReviewedIds.size,correctionsTotal:sessionWrongIds.size,mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,masteryAfter:topicMasteryNow(),answers:sessionQuizAnswers.map(a=>({...a})),createdAt:Date.now()};
+  const grp=currentLevel==='Stage 9'?null:chapterGroups().find(g=>String(g.id)===String(currentChapterId||String(currentCode||'').split('.')[0]));const report={id:generateReportId(),student:currentStudentName(),studentId:ensureStudentId(),level:currentLevel,program:currentProgram,subject:currentSubject,category:currentCategory,chapterId:grp?String(grp.id):String(currentChapterId||String(currentCode||'').split('.')[0]||''),chapter:currentLevel==='Stage 9'?(stage9Bank(currentSubject).units[Number(currentChapterId)-1]||''):grp?grp.title:'',activityType:quizMode==='chapter'?'Chapter review':quizMode==='part'?practiceLabel(currentPartNumber,currentLevel==='Stage 9'):quizMode==='topic-review'?'Topic review':'Topic practice',part:quizMode==='part'?currentPartNumber:null,topic:currentTopic,code:currentCode,startAt:quizStartedAt,endAt:quizEndedAt||Date.now(),seconds:quizElapsedSeconds,total,correct:correctCount,score:pct,correctionsReviewed:sessionReviewedIds.size,correctionsTotal:sessionWrongIds.size,mistakesFixed:sessionMistakesFixed,masteryBefore:sessionTopicMasteryBefore,masteryAfter:topicMasteryNow(),answers:sessionQuizAnswers.map(a=>({...a})),createdAt:Date.now()};
   saveStudyReport(report);saveStudentActivity(report);lastStudyReport=report;return report;
 }
 function reportShareText(r){
@@ -2537,7 +2505,7 @@ function copyVerifiedReport(){const r=lastStudyReport||buildStudyReport(),text=r
 function shareSummary(){openVerifiedStudyReport()}
 function openReportFromHash(){const m=location.hash.match(/^#study-report=([^&]+)/);if(!m)return;const id=decodeURIComponent(m[1]),r=loadStudyReport(id);if(r){lastStudyReport=r;renderVerifiedStudyReport(r);document.getElementById('verifiedStudyReportModal').classList.add('show')}else if(location.protocol!=='file:'){alert('This study record is not available on this device yet. Connect TopicalExamQuiz to a database for cross-device verification.')}}
 window.addEventListener('hashchange',openReportFromHash);
-function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);if(quizMode==='part'&&currentPartTopicKey&&currentPartNumber)savePartCompletion(currentPartTopicKey,currentPartNumber,total,correctCount);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+(quizMode==='part'?` · ${practiceLabel(currentPartNumber)}`:quizMode==='topic-review'?' · Topic Review':'')+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView');completeContinueQuizSession()}
+function showSummary(){const total=getQs().length;quizEndedAt=Date.now();quizElapsedSeconds=Math.max(0,Math.round((quizEndedAt-quizStartedAt)/1000));const pct=Math.round(correctCount/total*100);if(quizMode==='part'&&currentPartTopicKey&&currentPartNumber)savePartCompletion(currentPartTopicKey,currentPartNumber,total,correctCount);document.getElementById('summaryPercent').textContent=pct+'%';document.getElementById('summaryTitle').textContent=currentTopic+(quizMode==='part'?` · ${practiceLabel(currentPartNumber,currentLevel==='Stage 9')}`:quizMode==='topic-review'?' · Topic Review':'')+' summary';document.getElementById('summaryCrumb').textContent=`${currentSubject} · ${currentCategory} · ${currentCode}`;document.getElementById('summaryCorrect').textContent=correctCount+'/'+total;document.getElementById('summaryMastery').textContent=mastery;document.getElementById('summaryPoints').textContent=correctCount;document.getElementById('summaryTime').textContent=formatQuizTime(quizElapsedSeconds);document.getElementById('summaryAccuracy').textContent=pct+'%';document.getElementById('summaryTabSwitches').textContent=tabSwitchCount;const summaryQuestionCount=document.getElementById('summaryQuestionCount');if(summaryQuestionCount)summaryQuestionCount.textContent=total;const msg=document.getElementById('summaryMessage');msg.className='feedback show '+(pct>=60?'good':'bad');msg.innerHTML=pct>=80?'<strong>Strong work!</strong><br>This topic is moving toward mastery. Keep practising to make it stick.':pct>=60?'<strong>Good progress.</strong><br>Your Mistake Book has captured anything you missed. Fix those next.':'<strong>This topic needs practice.</strong><br>Use your Mistake Book, then retry to improve your readiness.';lastStudyReport=buildStudyReport();showView('summaryView');completeContinueQuizSession()}
 function restartQuiz(){if(quizMode==='part'||quizMode==='topic-review'){resetQuizSession();return}if(currentProgram==='Myanmar Curriculum'){launchMyanmarQuiz(currentLevel,currentSubject,activeMyanmarTopic);return}if(currentSubject==='Chinese Language'&&quizOverride){resetQuizSession();return}if(quizMode==='topic')startQuiz(currentCode,currentTopic,currentTopicKey);else{sessionQuizAnswers=[];qIndex=0;mastery=40;correctCount=0;wrongCount=0;quizStartedAt=Date.now();quizEndedAt=0;quizElapsedSeconds=0;tabSwitchCount=0;sessionWrongIds=new Set();sessionReviewedIds=new Set();sessionMistakesFixed=0;lastAnswerWasWrong=false;lastStudyReport=null;showView('quizView');renderQuestion()}}
 function showReview(){showView('reviewView')}
 document.querySelectorAll('.stage').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stage').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
@@ -2902,7 +2870,7 @@ function getStreak(p=loadProgress()){const days=[...new Set(p.practiceDays||[])]
 function getQuestionMeta(x){return x&&x._meta?x._meta:{curriculum:currentSubject==='Chinese Language'?'Chinese Language':currentProgram==='Myanmar Curriculum'?'Myanmar Curriculum':'Cambridge-aligned',programme:currentProgram,stage:currentLevel,subject:currentSubject,category:currentCategory,topic:currentTopic,code:currentCode,key:currentTopicKey||currentTopic}}
 function classifyQuestionSkill(x){const q=String((x&&x.q)||'').toLowerCase();if(x&&x.photoQuiz)return 'Exam Style';if(/investigat|variable|hypothesis|fair test|method|experiment|conclusion/.test(q))return 'Scientific Investigation';if(/graph|table|chart|data|calculate|calculation|measure|reading/.test(q))return 'Data Analysis';if(/why|explain|compare|difference|describe how|reason/.test(q))return 'Understanding';if(/if |scenario|predict|most likely|what happens|would happen|use this/.test(q))return 'Application';return 'Knowledge'}
 function questionIdentity(x){const m=getQuestionMeta(x);return `${m.key}|${originalPrompt(x)}`}
-function getCorrectAnswer(x){if(x.multi)return x.multi.map(i=>x.a[i]).join(' / ');if(x.type==='fill')return String(x.answer||'');if(x.type==='rearrange')return Array.isArray(x.answer)?x.answer.join(x._meta?.subject==='English'||currentLevel==='Stage 9'?' → ':''):String(x.answer||'');return x.a&&x.c>=0?String(x.a[x.c]):''}
+function getCorrectAnswer(x){if(x.multi)return x.multi.map(i=>x.a[i]).join(' / ');if(x.type==='fill')return String(x.answer||'');if(x.type==='rearrange')return Array.isArray(x.answer)?x.answer.join(currentLevel==='Stage 9'?' → ':''):String(x.answer||'');return x.a&&x.c>=0?String(x.a[x.c]):''}
 function getTopicStat(key){const p=loadProgress();return p.topicStats[key]||{attempts:0,correct:0}}
 function recordQuestionResult(x,isCorrect,userAnswer){
   captureTeacherQuizAnswer(x,isCorrect,userAnswer);
@@ -3102,8 +3070,6 @@ function openSpareKey(){
   const passage=document.getElementById('englishReading');
   passage.open=true;
 }
-const stage7EnglishLink=location.hash.match(/^#stage7-english(?:-unit([1-9]))?$/);
-if(stage7EnglishLink)openStage7English(Number(stage7EnglishLink[1]||1));
 if(location.hash==='#unit1-reading')openSpareKey();
 if(location.hash==='#unit1-second-test'){
   openStage9Topic('1.4','The second test','stage9|english|unit1|1.4','English');
